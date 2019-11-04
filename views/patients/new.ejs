@@ -1,0 +1,16 @@
+<% include ../partials/header %>
+
+<h1>New Patient Form</h1>
+
+<form action="/patients" method="POST">
+    <input type="text" name="patient[firstname]" placeholder="First Name">
+    <input type="text" name="patient[surname]" placeholder="Surname">
+    <input type="date" name="patient[dob]" placeholder="Date of Birth">
+    <input type="text" name="patient[address]" placeholder="Address">
+    <input type="text" name="patient[postcode]" placeholder="Postcode">
+    <input type="tel" name="patient[phonenumber]" placeholder="Phone Number">
+    <input type="email" name="patient[email]" placeholder="email">
+    <input type="submit">
+</form>
+
+<% include ../partials/footer %>

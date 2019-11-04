@@ -1,0 +1,18 @@
+<% include ../partials/header %>
+
+<h1>Show Interview for <%= patient.firstname + " " + patient.surname %> on <%= interview.date_created %></h1>
+
+<div><%= interview.CO %></div>
+<div><%= interview.onset_num_intervals %></div>
+<div><%= interview.onset_interval %></div>
+<div><%= interview.onset_reason %></div>
+<div><%= interview.agg %></div>
+<div><%= interview.rel %></div>
+<div><%= interview.dp %></div>
+<div><%= interview.ph %></div>
+<div><%= interview.invest %></div>
+<a href="/patients/<%= patient._id%>/interviews/<%= interview._id %>/edit">Edit Interview<a>
+<a href="/patients/<%= patient._id%>">Back to Show Patient</a>
+
+
+<% include ../partials/footer %>

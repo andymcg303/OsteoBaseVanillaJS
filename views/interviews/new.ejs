@@ -1,0 +1,18 @@
+<% include ../partials/header %>
+
+<h1>New Interview for <%= patient.firstname + " " + patient.surname %></h1>
+
+<form action="/patients/<%= patient._id %>/interviews" method="post">
+    <input name="interview[CO]" type="text" placeholder="C/O">
+    <input name="interview[onset_num_intervals]" type="number" placeholder=1>
+    <input name="interview[onset_interval]" type="number" placeholder=1>
+    <input name="interview[onset_reason]" type="text" placeholder="Reason">
+    <input name="interview[agg]" type="text" placeholder="Worse For">
+    <input name="interview[rel]" type="text" placeholder="Better For">
+    <input name="interview[dp]" type="text" placeholder="Daily Pattern">
+    <input name="interview[ph]" type="text" placeholder="Previous History">
+    <input name="interview[invest]" type="text" placeholder="Prev Invest">
+    <input type="submit">
+</form>
+
+<% include ../partials/footer %>

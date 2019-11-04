@@ -1,0 +1,19 @@
+<% include ../partials/header %>
+
+<h1>Show Medical History for <%= patient.firstname + " " + patient.surname %>  on <%= medhist.date_created %></h1>
+
+<div><%= medhist.meds %></div>
+<div><%= medhist.ops %></div>
+<div><%= medhist.fracs %></div>
+<div><%= medhist.accs %></div>
+<div><%= medhist.ill %></div>
+<div><%= medhist.resp %></div>
+<div><%= medhist.cvs %></div>
+<div><%= medhist.gu %></div>
+<div><%= medhist.git %></div>
+<div><%= medhist.gynae %></div>
+<div><%= medhist.msk %></div>
+<a href="/patients/<%= patient._id%>/medhists/<%= medhist._id %>/edit">Edit Medical History</a>
+<a href="/patients/<%= patient._id%>">Back to Show Patient</a>
+
+<% include ../partials/footer %>

@@ -1,0 +1,14 @@
+<% include ../partials/header %>
+
+<h1>Patients Page</h1>
+
+<% patients.forEach(function(patient){ %>
+    <div>
+        <%= patient.firstname + " " + patient.surname %>
+        <a href="/patients/<%= patient._id%>">More Details</a>
+    </div> 
+<% }); %>
+
+<a href="./patients/new" class="btn btn-large">Add New Patient</a>
+
+<% include ../partials/footer %>

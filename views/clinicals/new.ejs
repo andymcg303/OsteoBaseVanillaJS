@@ -1,0 +1,36 @@
+<% include ../partials/header %>
+
+<h1>New Clinical Session for <%= patient.firstname + " " + patient.surname %></h1>
+
+<form action="/patients/<%= patient._id %>/clinicals" method="POST">
+    <div>
+        <label for="OE-text">Objective Findings</label>
+    </div>
+    <div>
+        <textarea name="clinical[OE]" id="OE-text" placeholder="Objective Findings"></textarea>
+    </div>
+    <div>
+        <label for="diag-checkbox">Diagnosis?</label>
+    </div>
+    <div>
+        <input type="checkbox" id="diag-checkbox">
+    </div>
+    <input name="clinical[diag_bool]" type="hidden" value="false" id="diag-boolean">
+    <div>
+        <label for="diag-text">Diagnosis</label>
+    </div>
+    <div>
+        <textarea name="clinical[diag]" id="diag-text" placeholder="Diagnosis" disabled="true" class="text-input"></textarea>
+    </div>
+    <div>
+        <label for="TTT-text">Treatment</label>
+    </div>
+    <div>
+        <textarea name="clinical[TTT]" id="TTT-text "placeholder="Treatment"></textarea>
+    </div>
+    <input type="submit">    
+</form>
+
+<script type="text/javascript" src="/js/new.js"></script>
+
+<% include ../partials/footer %>

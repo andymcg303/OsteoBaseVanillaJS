@@ -1,0 +1,40 @@
+<% include ../partials/header %>
+
+<h1>Show Patient</h1>
+
+<div><%= patient.firstname %></div>
+<div><%= patient.surname %></div>
+<div><%= patient.dob %></div>
+<div><%= patient.address %></div>
+<div><%= patient.postcode %></div>
+<div><%= patient.phonenumber %></div>
+<div><%= patient.email %></div>
+<a href="/patients/<%= patient._id%>/edit">Edit Patient Details</a>
+
+<!-- Show Med Hists -->
+<% patient.medhists.forEach(function(medhist){ %>
+    <div><%= medhist.date_created %><a href="/patients/<%= patient._id%>/medhists/<%= medhist._id %>">Show Med Hist</a></div>
+<% }); %>
+
+<a href="/patients/<%= patient._id%>/medhists/new">New Patient Medical History</a>
+
+<!-- Show Interviews -->
+<% patient.interviews.forEach(function(interview){ %>
+    <div><%= interview.date_created + " " + interview.CO %><a href="/patients/<%= patient._id%>/interviews/<%= interview._id %>">Show Interview</a></div>
+<% }); %>
+
+<a href="/patients/<%= patient._id%>/interviews/new">New Patient Interview</a>
+
+<!-- Show Clinicals -->
+<% patient.clinicals.forEach(function(clinical){ %>
+    <div><%= clinical.date_created %><a href="/patients/<%= patient._id%>/clinicals/<%= clinical._id %>">Show Clinical Session</a></div>
+<% }); %>
+
+<a href="/patients/<%= patient._id%>/clinicals/new">New Clinical Session</a>
+
+<div>
+    <a href="/patients">Back to Patient Index</a>
+</div>
+
+<% include ../partials/footer %>
+ 

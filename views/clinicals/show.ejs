@@ -1,0 +1,12 @@
+<% include ../partials/header %>
+
+<h1>Show Clinical Details for <%= patient.firstname + " " + patient.surname %>  on <%= clinical.date_created %></h1>
+
+<div><%= clinical.OE %></div>
+<div><%= clinical.diag %></div>
+<div><%= clinical.TTT %></div>
+
+<a href="/patients/<%= patient._id%>/clinicals/<%= clinical._id %>/edit">Edit Clinical Details</a>
+<a href="/patients/<%= patient._id%>">Back to Show Patient</a>
+
+<% include ../partials/footer %>
