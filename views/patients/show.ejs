@@ -24,7 +24,9 @@
 <!-- Show Interviews -->
 <h3>New Consultation Interviews</h3>
 <% patient.interviews.forEach(function(interview){ %>
-    <div><%= interview.date_created + " " + interview.CO %><a href="/patients/<%= patient._id%>/interviews/<%= interview._id %>">Show Interview</a></div>
+    <div>
+        <%= interview.date_created + " " + interview.CO %><a class="btn btn-sm btn-info" href="/patients/<%= patient._id%>/interviews/<%= interview._id %>">Show Interview</a>
+    </div>
 <% }); %>
 
 <a class="btn btn-lg btn-primary" href="/patients/<%= patient._id%>/interviews/new">New Interview</a>

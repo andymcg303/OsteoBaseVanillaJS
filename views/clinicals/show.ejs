@@ -6,7 +6,7 @@
 <div><%= clinical.diag %></div>
 <div><%= clinical.TTT %></div>
 
-<a href="/patients/<%= patient._id%>/clinicals/<%= clinical._id %>/edit">Edit Clinical Details</a>
-<a href="/patients/<%= patient._id%>">Back to Show Patient</a>
+<a class="btn btn-info" href="/patients/<%= patient._id%>/clinicals/<%= clinical._id %>/edit">Edit</a>
+<a class="btn btn-warning" href="/patients/<%= patient._id%>">Back to Patient</a>
 
 <% include ../partials/footer %>

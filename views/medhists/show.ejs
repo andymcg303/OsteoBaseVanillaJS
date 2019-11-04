@@ -13,7 +13,7 @@
 <div><%= medhist.git %></div>
 <div><%= medhist.gynae %></div>
 <div><%= medhist.msk %></div>
-<a href="/patients/<%= patient._id%>/medhists/<%= medhist._id %>/edit">Edit Medical History</a>
-<a href="/patients/<%= patient._id%>">Back to Show Patient</a>
+<a class="btn btn-info" href="/patients/<%= patient._id%>/medhists/<%= medhist._id %>/edit">Edit</a>
+<a class="btn btn-warning" href="/patients/<%= patient._id%>">Back to Patient</a>
 
 <% include ../partials/footer %>
