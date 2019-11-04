@@ -36,7 +36,7 @@ router.get("/:id", (req, res) => {
         .populate("interviews")
         .populate("medhists")
         .populate("clinicals")
-        .exec(function(err, foundPatient){
+        .exec((err, foundPatient) => {
         if (err){
             console.log(err);
         } else {
@@ -51,7 +51,6 @@ router.get("/:id/edit", (req, res) => {
         if (err){
             console.log(err);
         } else {
-            console.log("Patient Shown for Edit");
             res.render("./patients/edit", {patient: foundPatient});
         }
     });
@@ -63,7 +62,6 @@ router.put("/:id", (req, res) => {
         if (err){
             console.log(err); 
         } else {
-            console.log("Patient Updated");
             res.redirect("/patients/" + req.params.id);
         }    
     });
