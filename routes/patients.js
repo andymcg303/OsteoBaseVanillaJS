@@ -1,6 +1,7 @@
 const express = require("express"),
       router  = express.Router({mergeParams: true}),
-      Patient = require("../models/patient");
+      Patient = require("../models/patient"),
+      moment  = require("moment");
 
 // ROUTES   
 // INDEX - List all patients      
@@ -40,7 +41,7 @@ router.get("/:id", (req, res) => {
         if (err){
             console.log(err);
         } else {
-            res.render("./patients/show", {patient: foundPatient});
+            res.render("./patients/show", {patient: foundPatient, moment: moment});
         }
     });
 });

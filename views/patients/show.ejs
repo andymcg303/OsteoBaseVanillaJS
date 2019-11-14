@@ -4,7 +4,7 @@
 
 <div><%= patient.firstname %></div>
 <div><%= patient.surname %></div>
-<div><%= patient.dob %></div>
+<div><%= moment(patient.dob).format('DD/MM/YYYY') %></div>
 <div><%= patient.address %></div>
 <div><%= patient.postcode %></div>
 <div><%= patient.phonenumber %></div>
@@ -15,7 +15,7 @@
 <h3>Medical Histories</h3>
 <% patient.medhists.forEach(function(medhist){ %>
     <div>
-        <%= medhist.date_created %><a class="btn btn-sm btn-info" href="/patients/<%= patient._id%>/medhists/<%= medhist._id %>">Show Med Hist</a>
+        <%= moment(medhist.date_created).format('DD/MM/YYYY') %><a class="btn btn-sm btn-info" href="/patients/<%= patient._id%>/medhists/<%= medhist._id %>">Show Med Hist</a>
     </div>
 <% }); %>
 
@@ -25,7 +25,7 @@
 <h3>New Consultation Interviews</h3>
 <% patient.interviews.forEach(function(interview){ %>
     <div>
-        <%= interview.date_created + " " + interview.CO %><a class="btn btn-sm btn-info" href="/patients/<%= patient._id%>/interviews/<%= interview._id %>">Show Interview</a>
+        <%= moment(interview.date_created).format('DD/MM/YYYY') + " " + interview.CO %><a class="btn btn-sm btn-info" href="/patients/<%= patient._id%>/interviews/<%= interview._id %>">Show Interview</a>
     </div>
 <% }); %>
 
@@ -33,7 +33,7 @@
 
 <!-- Show Clinicals -->
 <% patient.clinicals.forEach(function(clinical){ %>
-    <div><%= clinical.date_created %><a class="btn btn-sm btn-info" href="/patients/<%= patient._id%>/clinicals/<%= clinical._id %>">Show Clinical Session</a></div>
+    <div><%= moment(clinical.date_created).format('DD/MM/YYYY') %><a class="btn btn-sm btn-info" href="/patients/<%= patient._id%>/clinicals/<%= clinical._id %>">Show Clinical Session</a></div>
 <% }); %>
 
 <a  class="btn btn-lg btn-primary" href="/patients/<%= patient._id%>/clinicals/new">New Clinical Session</a>
