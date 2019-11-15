@@ -1,14 +1,19 @@
 <% include ../partials/header %>
 
-<h1>Patient Index</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            <h1>Patient Index</h1>
 
-<% patients.forEach(function(patient){ %>
-    <div>
-        <%= patient.firstname + " " + patient.surname %>
-        <a class="btn btn-sm btn-info" href="/patients/<%= patient._id%>">Patient Details</a>
-    </div> 
-<% }); %>
+            <% patients.forEach(function(patient){ %>
+                <div>
+                    <a href="/patients/<%= patient._id%>"><%= patient.firstname + " " + patient.surname %></a>
+                </div> 
+            <% }); %>
 
-<a class="btn btn-lg btn-primary" href="./patients/new">Add New Patient</a>
+            <a class="btn btn-primary" href="./patients/new">Add New Patient</a>
+        </div>
+    </div>        
+</div>
 
 <% include ../partials/footer %>
