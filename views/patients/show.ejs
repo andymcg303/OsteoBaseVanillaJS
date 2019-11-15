@@ -1,22 +1,33 @@
 <% include ../partials/header %>
 
 <div class="container">
+    <h1>Patient Details</h1>
     <div class="row">
-        <div class="col">
+        <div class="col-2">
 
-            <h1>Patient Details</h1>
-
-            <div>First Name: <%= patient.firstname %></div>
-            <div>Surname: <%= patient.surname %></div>
-            <div>DOB: <%= moment(patient.dob).format('DD/MM/YYYY') %></div>
-            <div>Address: <%= patient.address %></div>
-            <div>Postcode: <%= patient.postcode %></div>
-            <div>Phone: <%= patient.phonenumber %></div>
-            <div>email: <%= patient.email %></div>
-            <a class="btn btn-lg btn-primary" href="/patients/<%= patient._id%>/edit">Edit Patient Details</a>
+            <div>First Name: </div>
+            <div>Surname: </div>
+            <div>DOB: </div>
+            <div>Address: </div>
+            <div>Postcode: </div>
+            <div>Phone: </div>
+            <div>email: </div>
         
         </div><!-- col -->
+        <div class="col-10">
+            <div><%= patient.firstname %></div>
+            <div><%= patient.surname %></div>
+            <div><%= moment(patient.dob).format('DD/MM/YYYY') %></div>
+            <div><%= patient.address %></div>
+            <div><%= patient.postcode %></div>
+            <div><%= patient.phonenumber %></div>
+            <div><%= patient.email %></div>
+        </div>
+
     </div><!-- row -->
+
+    <a class="btn btn-primary" href="/patients/<%= patient._id%>/edit">Edit Patient Details</a>
+
     <div class="row">
         <div class="col-lg">
             <!-- Show Med Hists -->

@@ -10,7 +10,7 @@ router.get("/", (req, res) => {
         if (err){
             console.log(err);
         } else {
-            res.render("./patients/index", {patients: allPatients});
+            res.render("./patients/index", {patients: allPatients, moment: moment});
         }
     });
 });
