@@ -1,7 +1,7 @@
 const express = require("express"),
       router  = express.Router({mergeParams: true}),
-      Patient = require("../models/patient"),
-      moment  = require("moment");
+      moment  = require("moment"),
+      Patient = require("../models/patient");
 
 // ROUTES   
 // INDEX - List all patients      

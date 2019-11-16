@@ -1,5 +1,6 @@
 const express   = require("express"),
-      router	= express.Router({mergeParams: true}),
+	  router	= express.Router({mergeParams: true}),
+	  moment  = require("moment"),
       Patient   = require("../models/patient"),
 	  MedHist = require("../models/medhist");
 
@@ -46,7 +47,7 @@ router.get("/:medhist_id", (req, res) => {
 				if(err){
 					res.redirect("back");
 				} else {
-					res.render("./medhists/show", {patient: foundPatient, medhist: foundMedHist});		
+					res.render("./medhists/show", {patient: foundPatient, medhist: foundMedHist, moment: moment});		
 				}
 			});
 		}

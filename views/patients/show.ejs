@@ -32,37 +32,44 @@
         <div class="col-lg">
             <!-- Show Med Hists -->
             <h3>Medical Histories</h3>
-            <% patient.medhists.forEach(function(medhist){ %>
-                <div>
-                    <%= moment(medhist.date_created).format('DD/MM/YYYY') %><a class="btn btn-sm btn-info" href="/patients/<%= patient._id%>/medhists/<%= medhist._id %>">Show Med Hist</a>
-                </div>
-            <% }); %>
-            <a class="btn btn-lg btn-primary" href="/patients/<%= patient._id%>/medhists/new">New Patient Medical History</a>
+            <div class="list-group">
+                <% patient.medhists.forEach(function(medhist){ %>
+                    <a class="list-group-item list-group-item-action list-group-item-light" href="/patients/<%= patient._id%>/medhists/<%= medhist._id %>"><%= moment(medhist.date_created).format('DD/MM/YYYY') %></a>
+                <% }); %>
+            </div>
+            <a class="btn btn-primary" href="/patients/<%= patient._id%>/medhists/new">New Patient Medical History</a>
         </div>        
 
         <div class="col-lg">
             <!-- Show Interviews -->
-            <h3>New Consultations</h3>
-            <% patient.interviews.forEach(function(interview){ %>
-                <div>
-                    <%= moment(interview.date_created).format('DD/MM/YYYY') + " " + interview.CO %><a class="btn btn-sm btn-info" href="/patients/<%= patient._id%>/interviews/<%= interview._id %>">Show Interview</a>
-                </div>
-            <% }); %>
-            <a class="btn btn-lg btn-primary" href="/patients/<%= patient._id%>/interviews/new">New Interview</a>
+            <h3>Consultations</h3>
+            <div class="list-group">
+                <% patient.interviews.forEach(function(interview){ %>
+                    <a class="list-group-item list-group-item-action list-group-item-light" href="/patients/<%= patient._id%>/interviews/<%= interview._id %>"><%= moment(interview.date_created).format('DD/MM/YYYY') + " " + interview.CO %></a>
+                <% }); %>
+            </div>
+            <a class="btn btn-primary" href="/patients/<%= patient._id%>/interviews/new">New Consultation</a>
         </div>        
 
         <div class="col-lg">
             <!-- Show Clinicals -->
-            <h3>Clinical Session</h3>
-            <% patient.clinicals.forEach(function(clinical){ %>
-                <div><%= moment(clinical.date_created).format('DD/MM/YYYY') %><a class="btn btn-sm btn-info" href="/patients/<%= patient._id%>/clinicals/<%= clinical._id %>">Show Clinical Session</a></div>
-            <% }); %>
-            <a  class="btn btn-lg btn-primary" href="/patients/<%= patient._id%>/clinicals/new">New Clinical Session</a>
+            <h3>Clinical Sessions</h3>
+            <div class="list-group">    
+                <% patient.clinicals.forEach(function(clinical){ %>
+                    <a class="list-group-item list-group-item-action list-group-item-light" 
+                        href="/patients/<%= patient._id%>/clinicals/<%= clinical._id %>"><%= moment(clinical.date_created).format('DD/MM/YYYY') %>
+                        <% if(clinical.diag_bool){ %>
+                                <%= clinical.diag %>
+                        <% } %>    
+                    </a>
+                <% }); %>
+            </div>
+            <a  class="btn btn-primary" href="/patients/<%= patient._id%>/clinicals/new">New Clinical Session</a>
         </div>        
     </div><!-- row -->
 
     <div>
-        <a  class="btn btn-lg btn-warning" href="/patients">Back to Patient Index</a>
+        <a  class="btn btn-warning" href="/patients">Back to Patient Index</a>
     </div>
 
 </div><!-- container -->

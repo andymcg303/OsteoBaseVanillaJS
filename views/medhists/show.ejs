@@ -1,19 +1,107 @@
 <% include ../partials/header %>
 
-<h1>Show Medical History for <%= patient.firstname + " " + patient.surname %>  on <%= medhist.date_created %></h1>
+<div class="container">
 
-<div><%= medhist.meds %></div>
-<div><%= medhist.ops %></div>
-<div><%= medhist.fracs %></div>
-<div><%= medhist.accs %></div>
-<div><%= medhist.ill %></div>
-<div><%= medhist.resp %></div>
-<div><%= medhist.cvs %></div>
-<div><%= medhist.gu %></div>
-<div><%= medhist.git %></div>
-<div><%= medhist.gynae %></div>
-<div><%= medhist.msk %></div>
-<a class="btn btn-info" href="/patients/<%= patient._id%>/medhists/<%= medhist._id %>/edit">Edit</a>
-<a class="btn btn-warning" href="/patients/<%= patient._id%>">Back to Patient</a>
+    <h3><%= patient.firstname + " " + patient.surname %>'s Medical History on <%= moment(medhist.date_created).format('DD/MM/YYYY') %></h3>    
+
+    <div class="row">
+        <div class="col-1">
+            <div>Meds:</div>
+            <div>Ops:</div>
+            <div>#:</div>
+            <div>Acc:</div>
+            <div>Ill:</div>
+            <div>Resp:</div>
+            <div>CVS:</div>
+            <div>GU:</div>
+            <div>GIT:</div>
+            <div>Gynae:</div>
+            <div>MSk:</div>
+        </div>
+        <div class="col-11">
+            <div>
+                <% if(medhist.meds){ %>
+                    <%= medhist.meds %>
+                <% } else { %>
+                    <br>
+                <% } %>
+            </div>
+            <div>
+                <% if(medhist.ops){ %>
+                    <%= medhist.ops %>
+                <% } else { %>
+                    <br>
+                <% } %>
+            </div>            
+            <div>
+                <% if(medhist.fracs){ %>
+                    <%= medhist.fracs %>
+                <% } else { %>
+                    <br>
+                <% } %>
+            </div>
+            <div>
+                <% if(medhist.accs){ %>
+                    <%= medhist.accs %>
+                <% } else { %>
+                    <br>
+                <% } %>
+            </div>
+            <div>
+                <% if(medhist.ill){ %>
+                    <%= medhist.ill %>
+                <% } else { %>
+                    <br>
+                <% } %>
+            </div>
+            <div>
+                <% if(medhist.resp){ %>
+                    <%= medhist.resp %>
+                <% } else { %>
+                    <br>
+                <% } %>
+            </div>
+            <div>
+                <% if(medhist.cvs){ %>
+                    <%= medhist.cvs %>
+                <% } else { %>
+                    <br>
+                <% } %>
+            </div>
+            <div>
+                <% if(medhist.gu){ %>
+                    <%= medhist.gu %>
+                <% } else { %>
+                    <br>
+                <% } %>
+            </div>
+            <div>
+                <% if(medhist.git){ %>
+                    <%= medhist.git %>
+                <% } else { %>
+                    <br>
+                <% } %>
+            </div>
+            <div>
+                <% if(medhist.gynae){ %>
+                    <%= medhist.gynae %>
+                <% } else { %>
+                    <br>
+                <% } %>
+            </div>
+            <div>
+                <% if(medhist.msk){ %>
+                    <%= medhist.msk %>
+                <% } else { %>
+                    <br>
+                <% } %>
+            </div>            
+        </div>
+    </div>
+    <a class="btn btn-info" href="/patients/<%= patient._id%>/medhists/<%= medhist._id %>/edit">Edit</a>
+    <a class="btn btn-warning" href="/patients/<%= patient._id%>">Back to Patient</a>
+
+    </div>
+</div>
 
 <% include ../partials/footer %>
