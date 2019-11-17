@@ -1,18 +1,87 @@
 <% include ../partials/header %>
 
-<h1>Show Interview for <%= patient.firstname + " " + patient.surname %> on <%= interview.date_created %></h1>
+<div class="container">
+    
+    <h3><%= patient.firstname + " " + patient.surname %>'s Consultation on <%= moment(interview.date_created).format('DD/MM/YYYY') %></h3>
 
-<div><%= interview.CO %></div>
-<div><%= interview.onset_num_intervals %></div>
-<div><%= interview.onset_interval %></div>
-<div><%= interview.onset_reason %></div>
-<div><%= interview.agg %></div>
-<div><%= interview.rel %></div>
-<div><%= interview.dp %></div>
-<div><%= interview.ph %></div>
-<div><%= interview.invest %></div>
-<a class="btn btn-info" href="/patients/<%= patient._id%>/interviews/<%= interview._id %>/edit">Edit<a>
-<a class="btn btn-warning" href="/patients/<%= patient._id%>">Back to Patient</a>
+    <div class="row">
+        <div class="col-1">
+            
+            <div>C/O:</div>
+            <div>Onset:</div>
+            <div>Reason:</div>
+            <div>Agg:</div>
+            <div>Rel:</div>
+            <div>DP:</div>
+            <div>PH:</div>
+            <div>Invest:</div>
 
+        </div>    
+        <div class="col-11">
+
+            <div>
+                <% if(interview.CO){ %>
+                    <%= interview.CO %>
+                <% } else { %>
+                    <br>
+                <% } %>
+            </div>
+            <div>
+                <% if(interview.onset_num_intervals && interview.onset_interval){ %>
+                    <%= interview.onset_num_intervals + "/" + interview.onset_interval %>
+                <% } else { %>
+                    <br>
+                <% } %>
+            </div>            
+            <div>
+                <% if(interview.onset_reason){ %>
+                    <%= interview.onset_reason %>
+                <% } else { %>
+                    <br>
+                <% } %>
+            </div>
+            <div>
+                <% if(interview.agg){ %>
+                    <%= interview.agg %>
+                <% } else { %>
+                    <br>
+                <% } %>
+            </div>
+            <div>
+                <% if(interview.rel){ %>
+                    <%= interview.rel %>
+                <% } else { %>
+                    <br>
+                <% } %>
+            </div>
+            <div>
+                <% if(interview.dp){ %>
+                    <%= interview.dp %>
+                <% } else { %>
+                    <br>
+                <% } %>
+            </div>
+            <div>
+                <% if(interview.ph){ %>
+                    <%= interview.ph %>
+                <% } else { %>
+                    <br>
+                <% } %>
+            </div>
+            <div>
+                <% if(interview.invest){ %>
+                    <%= interview.invest %>
+                <% } else { %>
+                    <br>
+                <% } %>
+            </div>            
+
+        </div>
+    </div>
+
+    <a class="btn btn-info" href="/patients/<%= patient._id%>/interviews/<%= interview._id %>/edit">Edit<a>
+    <a class="btn btn-warning" href="/patients/<%= patient._id%>">Back to Patient</a>
+
+</div>
 
 <% include ../partials/footer %>

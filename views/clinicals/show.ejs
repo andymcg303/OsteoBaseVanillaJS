@@ -1,12 +1,42 @@
 <% include ../partials/header %>
 
-<h1>Show Clinical Details for <%= patient.firstname + " " + patient.surname %>  on <%= clinical.date_created %></h1>
+<div class="container">
+    
+    <h3><%= patient.firstname + " " + patient.surname %>'s Clinical Details on <%= moment(clinical.date_created).format('DD/MM/YYYY') %></h1>
 
-<div><%= clinical.OE %></div>
-<div><%= clinical.diag %></div>
-<div><%= clinical.TTT %></div>
+    <div class="row">
+        <div class="col-1">
+            <div>O/E:</div>
+            <div>
+            <% if(clinical.diag){ %>
+                Diagnosis:
+            <% } %>    
+            </div>
+            <div>TTT:</div>
+
+        </div>
+        <div class="col-11">
+            <div>
+            <% if(clinical.OE){ %>
+                <%= clinical.OE %>
+            <% } else { %>
+                <br>
+            <% } %>
+            </div>
+            <div><%= clinical.diag %></div>
+            <% if(clinical.TTT){ %>
+                <%= clinical.TTT %>
+            <% } else { %>
+                <br>
+            <% } %>
+        
+        </div>
+
+    </div>
 
 <a class="btn btn-info" href="/patients/<%= patient._id%>/clinicals/<%= clinical._id %>/edit">Edit</a>
 <a class="btn btn-warning" href="/patients/<%= patient._id%>">Back to Patient</a>
+
+</div>
 
 <% include ../partials/footer %>

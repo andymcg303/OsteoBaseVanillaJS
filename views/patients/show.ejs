@@ -26,7 +26,7 @@
 
     </div><!-- row -->
 
-    <a class="btn btn-primary" href="/patients/<%= patient._id%>/edit">Edit Patient Details</a>
+    <a class="btn btn-info" href="/patients/<%= patient._id%>/edit">Edit Patient Details</a>
 
     <div class="row">
         <div class="col-lg">
@@ -37,7 +37,7 @@
                     <a class="list-group-item list-group-item-action list-group-item-light" href="/patients/<%= patient._id%>/medhists/<%= medhist._id %>"><%= moment(medhist.date_created).format('DD/MM/YYYY') %></a>
                 <% }); %>
             </div>
-            <a class="btn btn-primary" href="/patients/<%= patient._id%>/medhists/new">New Patient Medical History</a>
+            <a class="btn btn-primary" href="/patients/<%= patient._id%>/medhists/new">New Medical History</a>
         </div>        
 
         <div class="col-lg">
