@@ -1,19 +1,34 @@
 <% include ../partials/header %>
 
 <div class="container">
-    <div class="row">
-        <div class="col-12">
-            <h1>Patient Index</h1>
 
-            <div class="list-group">
-                <% patients.forEach(function(patient){ %>
-                    <a class="list-group-item list-group-item-action list-group-item-light" href="/patients/<%= patient._id%>"><%= patient.firstname + " " + patient.surname %><span class="float-right"><%= moment(patient.dob).format('DD/MM/YYYY') %></span></a>
-                <% }); %>
-            </div>
+    <div class="row">
+        <div class="col-12 d-flex justify-content-between align-items-center">
+            <h1>Patient Index</h1>
+            <button class="btn btn-primary" id="new-patient-button">Add New Patient</button>
+        </div>
+        <div class=" col-12 list-group">
+            <% patients.forEach(function(patient){ %>
+                <a class="list-group-item list-group-item-action list-group-item-light" href="/patients/<%= patient._id%>"><%= patient.firstname + " " + patient.surname %><span class="float-right"><%= moment(patient.dob).format('DD/MM/YYYY') %></span></a>
+            <% }); %>
+        </div>
 
         </div>
-    </div>   
-    <a class="btn btn-primary" href="./patients/new">Add New Patient</a>
+        <div class="col-md-6">
+            <form action="/patients" method="POST" id="new-patient-form">
+                <input type="text" name="patient[firstname]" placeholder="First Name">
+                <input type="text" name="patient[surname]" placeholder="Surname">
+                <input type="date" name="patient[dob]" placeholder="Date of Birth">
+                <input type="text" name="patient[address]" placeholder="Address">
+                <input type="text" name="patient[postcode]" placeholder="Postcode">
+                <input type="tel" name="patient[phonenumber]" placeholder="Phone Number">
+                <input type="email" name="patient[email]" placeholder="email">
+                <input class="btn btn-success" type="submit">
+                <a class="btn btn-warning" href="/patients">Cancel</a>
+            </form>
+        </div>
+    </div>
+
 </div>
 
 <% include ../partials/footer %>
