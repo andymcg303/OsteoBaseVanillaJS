@@ -22,11 +22,10 @@ router.get("/new", (req, res) => res.render("./patients/new"));
 router.post("/", (req, res) => {
 
     Patient.create(req.body.patient, (err, newPatient) => {
-        if (err){
-            console.log(err)
+        if(err){
+            console.log(err);
         } else {
-            console.log("New Patient Added");
-            res.redirect("/patients");
+            res.json(newPatient);
         }
     });
 });
