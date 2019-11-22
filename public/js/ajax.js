@@ -17,7 +17,7 @@ newPatientForm.submit(function(e){
     let newPatientData = $(this).serialize();
     $.post('/patients', newPatientData, function(data){
         debugger;
-        $('patient-list').append(
+        $('#patient-list').append(
             `<a class="list-group-item list-group-item-action list-group-item-light" href="/patients/${data._id}">${data.firstname} + " " + ${data.surname}<span class="float-right">${data.dob}</span></a>`
         );    
     });
