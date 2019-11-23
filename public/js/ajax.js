@@ -34,6 +34,8 @@ let editPatientButton = $('#edit-patient-button');
 let submitNewPatientButton = $('#submit-new-patient-button');
 let cancelNewPatientButton = $('#cancel-new-patient-button');
 
+editPatientButton.prop('disabled',false);
+
 // Enable Edit Patient form and buttons
 editPatientButton.click(function(){
     $(this).toggle();
