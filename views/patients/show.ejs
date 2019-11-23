@@ -2,31 +2,55 @@
 
 <div class="container">
     <h1>Patient Details</h1>
-    <div class="row">
-        <div class="col-2">
 
-            <div>First Name: </div>
-            <div>Surname: </div>
-            <div>DOB: </div>
-            <div>Address: </div>
-            <div>Postcode: </div>
-            <div>Phone: </div>
-            <div>email: </div>
-        
-        </div><!-- col -->
-        <div class="col-10">
-            <div><%= patient.firstname %></div>
-            <div><%= patient.surname %></div>
-            <div><%= moment(patient.dob).format('DD/MM/YYYY') %></div>
-            <div><%= patient.address %></div>
-            <div><%= patient.postcode %></div>
-            <div><%= patient.phonenumber %></div>
-            <div><%= patient.email %></div>
+    <!-- <form action="/patients" method="POST" id="edit-patient-form"> -->
+        <form id="edit-patient-form"></form>
+
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label for="firstnameEdit">First Name</label>
+                <input type="text" class="form-control" name="patient[firstname]" id="firstnameEdit" value="<%= patient.firstname %>">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="surnameEdit">Surname</label>
+                <input type="text" class="form-control" name="patient[surname]" id="surnameEdit" value="<%= patient.surname %>">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="dobEdit">Date of Birth</label>
+                <input type="date" class="form-control" name="patient[dob]" id="dobEdit" value="<%= moment(patient.dob).format('YYYY-MM-DD') %>">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="phonenumberEdit">Phone</label>
+                <input type="tel" class="form-control" name="patient[phonenumber]" id="phonenumberEdit" value="<%= patient.phonenumber %>">
+            </div>
         </div>
+        
+        <div class="form-group">
+            <label for="address">Address</label>
+            <input type="text" class="form-control" name="patient[address]" id="address" value="<%= patient.address %>">
+        </div>    
 
-    </div><!-- row -->
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label for="postcode">Postcode</label>
+                <input type="text" class="form-control" name="patient[postcode]" id="postcode" value="<%= patient.postcode %>">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="surname">Surname</label>
+                <input type="email" class="form-control" name="patient[email]" id="email" value="<%= patient.email %>">
+            </div>
+            <div class="form-group col-md-3 align-self-end">
+                <button class="btn btn-info" id="edit-patient-button">Edit Patient Details</button>
+                <input class="btn btn-success" id="submit-new-patient-button" type="submit">
+                <button class="btn btn-warning" id="cancel-new-patient-button">Cancel</button>
+                <!-- <a class="btn btn-info" href="/patients/<%= patient._id%>/edit">Edit Patient Details</a> -->
+                <!-- <input class="btn btn-success" id="submit-new-patient" type="submit"> -->
+                <!-- <a class="btn btn-warning" id="cancel-new-patient">Cancel</a>  -->
+            </div>    
+        </div>
+    </form>   
 
-    <a class="btn btn-info" href="/patients/<%= patient._id%>/edit">Edit Patient Details</a>
+
 
     <div class="row">
         <div class="col-lg">
