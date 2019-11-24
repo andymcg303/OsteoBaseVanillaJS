@@ -3,8 +3,7 @@
 <div class="container">
     <h1>Patient Details</h1>
 
-    <!-- <form action="/patients" method="POST" id="edit-patient-form"> -->
-    <form id="edit-patient-form">
+    <form id="edit-patient-form" action="/patients/<%= patient._id %>?_method=PUT" method="POST">    
         <div class="form-row">
             <div class="form-group col-md-3">
                 <label for="firstnameEdit">First Name</label>
@@ -38,18 +37,13 @@
                 <label for="surname">Surname</label>
                 <input type="email" class="form-control" name="patient[email]" id="email" value="<%= patient.email %>" disabled>
             </div>
-            <div class="form-group col-md-3 align-self-end">
-                <button class="btn btn-info" id="edit-patient-button">Edit Patient Details</button>
-                <button class="btn btn-success" id="submit-new-patient-button">Submit</button>
-                <button class="btn btn-warning" id="cancel-new-patient-button">Cancel</button>
-                <!-- <a class="btn btn-info" href="/patients/<%= patient._id%>/edit">Edit Patient Details</a> -->
-                <!-- <input class="btn btn-success" id="submit-new-patient" type="submit"> -->
-                <!-- <a class="btn btn-warning" id="cancel-new-patient">Cancel</a>  -->
-            </div>    
+            <div class="form-group col-md-4 align-self-end">
+                <div class="btn btn-info" id="edit-patient-button">Edit Patient Details</div>
+                <input class="btn btn-success" id="submit-new-patient-button" type="submit">
+                <a class="btn btn-warning" id="cancel-new-patient-button">Cancel</a>
+            </div>   
         </div>
-    </form>   
-
-
+    </form>
 
     <div class="row">
         <div class="col-lg">

@@ -19,7 +19,6 @@ newPatientForm.submit(function(e){
     e.preventDefault();
     let newPatientData = $(this).serialize();
     $.post('/patients', newPatientData, function(data){
-        debugger;
         $('#patient-list').append(
             `<a class="list-group-item list-group-item-action list-group-item-light" href="/patients/${data._id}">${data.firstname} ${data.surname}<span class="float-right">${moment(data.dob).format('DD/MM/YYYY')}</span></a>`
         );
@@ -31,14 +30,22 @@ newPatientForm.submit(function(e){
 
 // SHOW/EDIT PATIENT
 let editPatientButton = $('#edit-patient-button');
+let editPatientFormControls = $('#edit-patient-form .form-control');
 let submitNewPatientButton = $('#submit-new-patient-button');
 let cancelNewPatientButton = $('#cancel-new-patient-button');
-
-editPatientButton.prop('disabled',false);
 
 // Enable Edit Patient form and buttons
 editPatientButton.click(function(){
     $(this).toggle();
     submitNewPatientButton.toggle();
     cancelNewPatientButton.toggle();
+    editPatientFormControls.prop('disabled',false);
+});
+
+// Hide new patient form
+cancelNewPatientButton.click(function(){
+    submitNewPatientButton.toggle();
+    $(this).toggle();
+    editPatientButton.toggle();
+    editPatientFormControls.prop('disabled',true);
 });
