@@ -62,7 +62,7 @@ router.put("/:id", (req, res) => {
         if (err){
             console.log(err); 
         } else {
-            res.redirect("/patients/" + req.params.id);
+            res.json(updatedPatient);
         }    
     });
 });

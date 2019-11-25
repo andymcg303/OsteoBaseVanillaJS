@@ -12,6 +12,7 @@ $newPatientButton.click(function(){
 $('#cancel-new-patient').click(function(){
     $newPatientButton.prop('disabled',false);
     $newPatientForm.toggle();
+    $newPatientForm.find('.form-control').val('');
 });
 
 // Post new patient
@@ -29,7 +30,7 @@ $newPatientForm.submit(function(e){
 });
 
 // SHOW/EDIT PATIENT
-let $editPatientForm = $('edit-patientiform');
+let $editPatientForm = $('#edit-patient-form');
 let $editPatientButton = $('#edit-patient-button');
 let $editPatientFormControls = $('#edit-patient-form .form-control');
 let $submitEditPatientButton = $('#submit-edit-patient-button');
@@ -52,6 +53,9 @@ function disableEditForm(){
 
 // Disable Edit Patient functionaity
 $cancelEditPatientButton.click(function(){
+    $editPatientFormControls.each(function(){
+        $(this).val($(this).prop('defaultValue'));
+    }); 
     disableEditForm();
 });
 
@@ -59,12 +63,12 @@ $cancelEditPatientButton.click(function(){
 $editPatientForm.submit(function(e){
     e.preventDefault();
     let $patientData = $(this).serialize();
-    let formAction =$(this).attr('action');
+    let $formAction = $(this).attr('action');
     $.ajax({
-        url: formAction,
+        url: $formAction,
         data: $patientData,
-        type: 'PUT',
-        success: (data) => {
+        method: 'PUT',
+        complete: function(){  
             disableEditForm();
         }
     });    
