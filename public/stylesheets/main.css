@@ -2,7 +2,7 @@
     display: none;
 }
 
-#submit-new-patient-button, #cancel-new-patient-button{
+#submit-edit-patient-button, #cancel-edit-patient-button{
     display: none;
 }
 

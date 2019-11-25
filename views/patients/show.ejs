@@ -3,7 +3,7 @@
 <div class="container">
     <h1>Patient Details</h1>
 
-    <form id="edit-patient-form" action="/patients/<%= patient._id %>?_method=PUT" method="POST">    
+    <form id="edit-patient-form" action="/patients/<%= patient._id %> method="POST">    
         <div class="form-row">
             <div class="form-group col-md-3">
                 <label for="firstnameEdit">First Name</label>
@@ -37,10 +37,10 @@
                 <label for="surname">Surname</label>
                 <input type="email" class="form-control" name="patient[email]" id="email" value="<%= patient.email %>" disabled>
             </div>
-            <div class="form-group col-md-4 align-self-end">
+            <div class="form-group col-md-3 align-self-end">
                 <div class="btn btn-info" id="edit-patient-button">Edit Patient Details</div>
-                <input class="btn btn-success" id="submit-new-patient-button" type="submit">
-                <a class="btn btn-warning" id="cancel-new-patient-button">Cancel</a>
+                <button class="btn btn-success" id="submit-edit-patient-button">Submit</button>
+                <div class="btn btn-warning" id="cancel-edit-patient-button">Cancel</div>
             </div>   
         </div>
     </form>

@@ -1,51 +1,71 @@
 // PATIENT INDEX
-let newPatientButton = $('#new-patient-button');
-let newPatientForm = $('#new-patient-form');
+let $newPatientButton = $('#new-patient-button');
+let $newPatientForm = $('#new-patient-form');
 
 // Show New Patient form
-newPatientButton.click(function(){
-    newPatientForm.toggle();
+$newPatientButton.click(function(){
+    $newPatientForm.toggle();
     $(this).prop('disabled',true);
 });
 
 // Hide new patient form
 $('#cancel-new-patient').click(function(){
-    newPatientButton.prop('disabled',false);
-    newPatientForm.toggle();
+    $newPatientButton.prop('disabled',false);
+    $newPatientForm.toggle();
 });
 
-// Submit new patient
-newPatientForm.submit(function(e){
+// Post new patient
+$newPatientForm.submit(function(e){
     e.preventDefault();
-    let newPatientData = $(this).serialize();
-    $.post('/patients', newPatientData, function(data){
+    let $newPatientData = $(this).serialize();
+    $.post('/patients', $newPatientData, function(data){
         $('#patient-list').append(
             `<a class="list-group-item list-group-item-action list-group-item-light" href="/patients/${data._id}">${data.firstname} ${data.surname}<span class="float-right">${moment(data.dob).format('DD/MM/YYYY')}</span></a>`
         );
-        newPatientForm.find('.form-control').val('');
-        newPatientButton.prop('disabled',false);
-        newPatientForm.toggle();    
+        $newPatientForm.find('.form-control').val('');
+        $newPatientButton.prop('disabled',false);
+        $newPatientForm.toggle();    
     });
 });
 
 // SHOW/EDIT PATIENT
-let editPatientButton = $('#edit-patient-button');
-let editPatientFormControls = $('#edit-patient-form .form-control');
-let submitNewPatientButton = $('#submit-new-patient-button');
-let cancelNewPatientButton = $('#cancel-new-patient-button');
+let $editPatientForm = $('edit-patientiform');
+let $editPatientButton = $('#edit-patient-button');
+let $editPatientFormControls = $('#edit-patient-form .form-control');
+let $submitEditPatientButton = $('#submit-edit-patient-button');
+let $cancelEditPatientButton = $('#cancel-edit-patient-button');
 
 // Enable Edit Patient form and buttons
-editPatientButton.click(function(){
+$editPatientButton.click(function(){
     $(this).toggle();
-    submitNewPatientButton.toggle();
-    cancelNewPatientButton.toggle();
-    editPatientFormControls.prop('disabled',false);
+    $submitEditPatientButton.toggle();
+    $cancelEditPatientButton.css('display', 'inline-block');
+    $editPatientFormControls.prop('disabled',false);
 });
 
-// Hide new patient form
-cancelNewPatientButton.click(function(){
-    submitNewPatientButton.toggle();
-    $(this).toggle();
-    editPatientButton.toggle();
-    editPatientFormControls.prop('disabled',true);
+function disableEditForm(){
+    $submitEditPatientButton.toggle();
+    $cancelEditPatientButton.toggle();
+    $editPatientButton.toggle();
+    $editPatientFormControls.prop('disabled',true);
+}
+
+// Disable Edit Patient functionaity
+$cancelEditPatientButton.click(function(){
+    disableEditForm();
+});
+
+// Edit Patient Details
+$editPatientForm.submit(function(e){
+    e.preventDefault();
+    let $patientData = $(this).serialize();
+    let formAction =$(this).attr('action');
+    $.ajax({
+        url: formAction,
+        data: $patientData,
+        type: 'PUT',
+        success: (data) => {
+            disableEditForm();
+        }
+    });    
 });
