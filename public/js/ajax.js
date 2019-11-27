@@ -1,6 +1,6 @@
 // PATIENT INDEX
-let $newPatientButton = $('#new-patient-button');
-let $newPatientForm = $('#new-patient-form');
+let $newPatientButton = $('#new-patient-button'),
+    $newPatientForm = $('#new-patient-form');
 
 // Show New Patient form
 $newPatientButton.click(function(){
@@ -30,17 +30,19 @@ $newPatientForm.submit(function(e){
 });
 
 // SHOW/EDIT PATIENT
-let $editPatientForm = $('#edit-patient-form');
-let $editPatientButton = $('#edit-patient-button');
-let $editPatientFormControls = $('#edit-patient-form .form-control');
-let $submitEditPatientButton = $('#submit-edit-patient-button');
-let $cancelEditPatientButton = $('#cancel-edit-patient-button');
+let $editPatientForm = $('#edit-patient-form'),
+    $editPatientButton = $('#edit-patient-button'),
+    $editPatientFormControls = $('#edit-patient-form .form-control'),
+    $submitEditPatientButton = $('#submit-edit-patient-button'),
+    $cancelEditPatientButton = $('#cancel-edit-patient-button'),
+    $deletePatientButton = $('#delete-patient-button');
 
 // Enable Edit Patient form and buttons
 $editPatientButton.click(function(){
     $(this).toggle();
     $submitEditPatientButton.toggle();
     $cancelEditPatientButton.css('display', 'inline-block');
+    $deletePatientButton.css('display', 'inline-block');
     $editPatientFormControls.prop('disabled',false);
 });
 
@@ -48,6 +50,7 @@ function disableEditForm(){
     $submitEditPatientButton.toggle();
     $cancelEditPatientButton.toggle();
     $editPatientButton.toggle();
+    $deletePatientButton.toggle();
     $editPatientFormControls.prop('disabled',true);
 }
 
@@ -73,3 +76,5 @@ $editPatientForm.submit(function(e){
         }
     });    
 });
+
+// Delete Patient Details
