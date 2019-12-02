@@ -29,47 +29,47 @@ $newPatientForm.submit(function(e){
     });
 });
 
-// SHOW/EDIT PATIENT
-let $editPatientForm = $('#edit-patient-form'),
-    $editPatientButton = $('#edit-patient-button'),
-    $editPatientFormControls = $('#edit-patient-form .form-control'),
-    $submitEditPatientButton = $('#submit-edit-patient-button'),
-    $cancelEditPatientButton = $('#cancel-edit-patient-button'),
-    $deletePatientButton = $('#delete-patient-button');
+// SHOW/EDIT FUNCTIONALITY
+let $editForm = $('.edit-form'),
+    $editButton = $('.edit-button'),
+    $editFormControls = $('.edit-form .form-control'),
+    $submitEditButton = $('.submit-edit-button'),
+    $cancelEditButton = $('.cancel-edit-button'),
+    $deleteButton = $('.delete-button');
 
-// Enable Edit Patient form and buttons
-$editPatientButton.click(function(){
+// Enable Edit form and buttons
+$editButton.click(function(){
     $(this).toggle();
-    $submitEditPatientButton.toggle();
-    $cancelEditPatientButton.css('display', 'inline-block');
-    $deletePatientButton.css('display', 'inline-block');
-    $editPatientFormControls.prop('disabled',false);
+    $submitEditButton.toggle();
+    $cancelEditButton.css('display', 'inline-block');
+    $deleteButton.css('display', 'inline-block');
+    $editFormControls.prop('disabled',false);
 });
 
 function disableEditForm(){
-    $submitEditPatientButton.toggle();
-    $cancelEditPatientButton.toggle();
-    $editPatientButton.toggle();
-    $deletePatientButton.toggle();
-    $editPatientFormControls.prop('disabled',true);
+    $submitEditButton.toggle();
+    $cancelEditButton.toggle();
+    $editButton.toggle();
+    $deleteButton.toggle();
+    $editFormControls.prop('disabled',true);
 }
 
-// Disable Edit Patient functionaity
-$cancelEditPatientButton.click(function(){
-    $editPatientFormControls.each(function(){
+// Disable Edit functionaity
+$cancelEditButton.click(function(){
+    $editFormControls.each(function(){
         $(this).val($(this).prop('defaultValue'));
     }); 
     disableEditForm();
 });
 
-// Edit Patient Details
-$editPatientForm.submit(function(e){
+// Submit Edit Details
+$editForm.submit(function(e){
     e.preventDefault();
-    let $patientData = $(this).serialize();
+    let $data = $(this).serialize();
     let $formAction = $(this).attr('action');
     $.ajax({
         url: $formAction,
-        data: $patientData,
+        data: $data,
         method: 'PUT',
         complete: function(){  
             disableEditForm();
@@ -77,4 +77,4 @@ $editPatientForm.submit(function(e){
     });    
 });
 
-// Delete Patient Details
+

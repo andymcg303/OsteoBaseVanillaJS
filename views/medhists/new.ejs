@@ -7,85 +7,63 @@
     <form id="new-medhist-form" action="/patients/<%= patient._id %>/medhists" method="POST">
         <div class="form-row">
             <div class="form-group col-lg-6">
-                <label for="meds-checkbox">Medications?</label>
-                <input type="checkbox" id="meds-checkbox">
-                <input name="medhist[meds_bool]" type="hidden" value="false">
-                <input name="medhist[meds]" type="text" class="text-input form-control" placeholder="Medications" disabled="true">
+                <label for="meds-text">Medications?</label>
+                <input id="meds-text" name="medhist[meds]" type="text" class="text-input form-control">
             </div>    
 
             <div class="form-group col-lg-6">            
-                <label for="ops-checkbox">Operations?</label>
-                <input type="checkbox" id="ops-checkbox">
-                <input name="medhist[ops_bool]" type="hidden" value="false">
-                <input name="medhist[ops]" type="text" class="text-input form-control" placeholder="Operations" disabled="true">
+                <label for="ops-text">Operations?</label>
+                <input id="ops-text" name="medhist[ops]" type="text" class="text-input form-control">
             </div>    
 
             <div class="form-group col-lg-6">                        
-                <label for="fracs-checkbox">Fractures?</label>
-                <input type="checkbox" id="fracs-checkbox">
-                <input name="medhist[fracs_bool]" type="hidden" value="false">
-                <input name="medhist[fracs]" type="text" class="text-input form-control" placeholder="Fractures" disabled="true">
+                <label for="fracs-text">Fractures?</label>
+                <input id="fracs-text" name="medhist[fracs]" type="text" class="text-input form-control">
             </div>    
 
             <div class="form-group col-lg-6">                        
-                <label for="accs-checkbox">Accidents?</label>
-                <input type="checkbox" id="accs-checkbox">
-                <input name="medhist[accs_bool]" type="hidden" value="false">
-                <input name="medhist[accs]" type="text" class="text-input form-control" placeholder="Accidents" disabled="true">
+                <label for="accs-text">Accidents?</label>
+                <input id="accs-text" name="medhist[accs]" type="text" class="text-input form-control">
             </div>
 
             <div class="form-group col-lg-6">                        
-                <label for="ill-checkbox">Illnesses?</label>
-                <input type="checkbox" id="ill-checkbox">
-                <input name="medhist[ill_bool]" type="hidden" value="false">
-                <input name="medhist[ill]" type="text" class="text-input form-control" placeholder="Illnesses" disabled="true">
+                <label for="ill-text">Illnesses?</label>
+                <input id="ill-text" name="medhist[ill]" type="text" class="text-input form-control">
             </div>    
 
             <div class="form-group col-lg-6">                        
-                <label for="resp-checkbox">Respiratory?</label>
-                <input type="checkbox" id="resp-checkbox">
-                <input name="medhist[resp_bool]" type="hidden" value="false">
-                <input name="medhist[resp]" type="text" class="text-input form-control" placeholder="Resipiratory" disabled="true">
+                <label for="resp-text">Respiratory?</label>
+                <input id="resp-text" name="medhist[resp]" type="text" class="text-input form-control">
             </div>    
 
             <div class="form-group col-lg-6">                        
-                <label for="cvs-checkbox">Cardiovascular?</label>
-                <input type="checkbox" id="cvs-checkbox">
-                <input name="medhist[cvs_bool]" type="hidden" value="false">
-                <input name="medhist[cvs]" type="text" class="text-input form-control" placeholder="Cardiovascluar" disabled="true">
+                <label for="cvs-text">Cardiovascular?</label>
+                <input id="cvs-text" name="medhist[cvs]" type="text" class="text-input form-control">
             </div>    
 
             <div class="form-group col-lg-6">                                    
-                <label for="gu-checkbox">Genitourinary?</label>
-                <input type="checkbox" id="gu-checkbox">
-                <input name="medhist[gu_bool]" type="hidden" value="false">
-                <input name="medhist[gu]" type="text" class="text-input form-control" placeholder="Genitourinary" disabled="true">
+                <label for="gu-text">Genitourinary?</label>
+                <input id="gu-text" name="medhist[gu]" type="text" class="text-input form-control">
             </div>    
 
             <div class="form-group col-lg-6">                                    
-                <label for="git-checkbox">Gastrointestinal?</label>
-                <input type="checkbox" id="git-checkbox">
-                <input name="medhist[git_bool]" type="hidden" value="false">
-                <input name="medhist[git]" type="text" class="text-input form-control" placeholder="Gastrointestinal" disabled="true">
+                <label for="git-text">Gastrointestinal?</label>
+                <input id="git-text" name="medhist[git]" type="text" class="text-input form-control">
             </div>    
 
             <div class="form-group col-lg-6">                                    
-                <label for="gynae-checkbox">Gynaecological?</label>
-                <input type="checkbox" id="gynae-checkbox">
-                <input name="medhist[gynae_bool]" type="hidden" value="false">
-                <input name="medhist[gynae]" type="text" class="text-input form-control" placeholder="Gynaecological" disabled="true">
+                <label for="gynae-text">Gynaecological?</label>
+                <input id="gynae-text" name="medhist[gynae]" type="text" class="text-input form-control">
             </div>    
 
             <div class="form-group col-lg-6">                                    
-                <label for="msk-checkbox">Musculoskeletal?</label>
-                <input type="checkbox" id="msk-checkbox">
-                <input name="medhist[msk_bool]" type="hidden" value="false">
-                <input name="medhist[msk]" type="text" class="text-input form-control" placeholder="Musculoskeletal" disabled="true">
+                <label for="msk-text">Musculoskeletal?</label>
+                <input id="msk-text" name="medhist[msk]" type="text" class="text-input form-control">
             </div>    
 
             <div class="form-group align-self-end">
                 <button class="btn btn-success" id="submit-new-medhist-button">Submit</button>
-                <button class="btn btn-warning" id="cancel-new-medhist-button">Cancel</button>
+                <a href="/patients/<%= patient._id %>" class="btn btn-warning" id="cancel-new-medhist-button">Cancel</a>
             </div>
 
         </div>

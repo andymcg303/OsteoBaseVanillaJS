@@ -9,6 +9,10 @@ checkBoxes.forEach((checkBox, i) => {
         hiddenBooleans[i].value = checkBox.checked;
         // set status of associated text input
         textInputs[i].disabled = !checkBox.checked;
+        // clear text from textinput if disabled
+        if (textInputs[i].disabled){
+            textInputs[i].value = "";
+        }
 
     });
 });
