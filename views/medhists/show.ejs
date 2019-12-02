@@ -4,101 +4,60 @@
 
     <h3><%= patient.firstname + " " + patient.surname %>'s Medical History on <%= moment(medhist.date_created).format('DD/MM/YYYY') %></h3>    
 
-    <div class="row">
-        <div class="col-1">
-            <div>Meds:</div>
-            <div>Ops:</div>
-            <div>#:</div>
-            <div>Acc:</div>
-            <div>Ill:</div>
-            <div>Resp:</div>
-            <div>CVS:</div>
-            <div>GU:</div>
-            <div>GIT:</div>
-            <div>Gynae:</div>
-            <div>MSk:</div>
-        </div>
-        <div class="col-11">
-            <div>
-                <% if(medhist.meds){ %>
-                    <%= medhist.meds %>
-                <% } else { %>
-                    <br>
-                <% } %>
+    <!-- old school action will prob get rid of ?_method PUT -->
+    <form id="edit-medhist-form" action="/patients/<%= patient._id %>/medhists/<%= medhist.id %>?_method=PUT" method="POST">
+        <div class="form-row">
+
+            <div class="form-group col-lg-6">
+                <label for="medsEdit">Medications</label>
+                <input  type="text" class="form-control" name="medhist[meds]" id="medsEdit" value="<%= medhist.meds %>"disabled> 
             </div>
-            <div>
-                <% if(medhist.ops){ %>
-                    <%= medhist.ops %>
-                <% } else { %>
-                    <br>
-                <% } %>
-            </div>            
-            <div>
-                <% if(medhist.fracs){ %>
-                    <%= medhist.fracs %>
-                <% } else { %>
-                    <br>
-                <% } %>
+            <div class="form-group col-lg-6">
+                <label for="opsEdit">Operations</label>
+                <input  type="text" class="form-control" name="medhist[ops]" id="opsEdit" value="<%= medhist.ops %>" disabled> 
             </div>
-            <div>
-                <% if(medhist.accs){ %>
-                    <%= medhist.accs %>
-                <% } else { %>
-                    <br>
-                <% } %>
+            <div class="form-group col-lg-6">
+                <label for="fracsEdit">Fractures</label>
+                <input  type="text" class="form-control" name="medhist[fracs]" id="fracsEdit" value="<%= medhist.fracs %>"disabled> 
             </div>
-            <div>
-                <% if(medhist.ill){ %>
-                    <%= medhist.ill %>
-                <% } else { %>
-                    <br>
-                <% } %>
+
+            <div class="form-group col-lg-6">
+                <label for="accsEdit">Accidents</label>
+                <input  type="text" class="form-control" name="medhist[accs]" id="accsEdit" value="<%= medhist.accs %>"disabled> 
             </div>
-            <div>
-                <% if(medhist.resp){ %>
-                    <%= medhist.resp %>
-                <% } else { %>
-                    <br>
-                <% } %>
+            <div class="form-group col-lg-6">
+                <label for="opsEdit">Illneses</label>
+                <input  type="text" class="form-control" name="medhist[ill]" id="illEdit" value="<%= medhist.ill %>" disabled> 
             </div>
-            <div>
-                <% if(medhist.cvs){ %>
-                    <%= medhist.cvs %>
-                <% } else { %>
-                    <br>
-                <% } %>
+            <div class="form-group col-lg-6">
+                <label for="respEdit">Respiratory</label>
+                <input  type="text" class="form-control" name="medhist[resp]" id="respEdit" value="<%= medhist.resp %>" disabled> 
             </div>
-            <div>
-                <% if(medhist.gu){ %>
-                    <%= medhist.gu %>
-                <% } else { %>
-                    <br>
-                <% } %>
+            
+            <div class="form-group col-lg-6">
+                <label for="cvsEdit">Cardiovascular</label>
+                <input  type="text" class="form-control" name="medhist[cvs]" id="cvsEdit" value="<%= medhist.cvs %>" disabled> 
             </div>
-            <div>
-                <% if(medhist.git){ %>
-                    <%= medhist.git %>
-                <% } else { %>
-                    <br>
-                <% } %>
+            <div class="form-group col-lg-6">
+                <label for="guEdit">Genitourinary</label>
+                <input  type="text" class="form-control" name="medhist[gu]" id="guEdit" value="<%= medhist.gu %>" disabled> 
             </div>
-            <div>
-                <% if(medhist.gynae){ %>
-                    <%= medhist.gynae %>
-                <% } else { %>
-                    <br>
-                <% } %>
+            <div class="form-group col-lg-6">
+                <label for="gitEdit">Gastrointestinal</label>
+                <input  type="text" class="form-control" name="medhist[git]" id="gitEdit" value="<%= medhist.git %>" disabled> 
             </div>
-            <div>
-                <% if(medhist.msk){ %>
-                    <%= medhist.msk %>
-                <% } else { %>
-                    <br>
-                <% } %>
-            </div>            
-        </div>
-    </div>
-   
+            
+            <div class="form-group col-lg-6">
+                <label for="gynaeEdit">Gynaecological</label>
+                <input  type="text" class="form-control" name="medhist[gynae]" id="gynaeEdit" value="<%= medhist.gynae %>" disabled> 
+            </div>
+            <div class="form-group col-lg-6">
+                <label for="mskEdit">Musculoskeletal</label>
+                <input  type="text" class="form-control" name="medhist[msk]" id="mskEdit" value="<%= medhist.msk %>" disabled> 
+            </div>
+        </div>            
+    </form>
+            
     <a class="btn btn-info" href="/patients/<%= patient._id%>/medhists/<%= medhist._id %>/edit">Edit</a>
     <a class="btn btn-warning" href="/patients/<%= patient._id%>">Back to Patient</a>
 

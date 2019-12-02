@@ -55,7 +55,7 @@
                     <a class="list-group-item list-group-item-action list-group-item-light" href="/patients/<%= patient._id%>/medhists/<%= medhist._id %>"><%= moment(medhist.date_created).format('DD/MM/YYYY') %></a>
                 <% }); %>
             </div>
-            <a class="btn btn-primary" href="/patients/<%= patient._id%>/medhists/new">New Medical History</a>
+            <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/medhists/new">New Medical History</a>
         </div>        
 
         <div class="col-lg">
@@ -66,7 +66,7 @@
                     <a class="list-group-item list-group-item-action list-group-item-light" href="/patients/<%= patient._id%>/interviews/<%= interview._id %>"><%= moment(interview.date_created).format('DD/MM/YYYY') + " " + interview.CO %></a>
                 <% }); %>
             </div>
-            <a class="btn btn-primary" href="/patients/<%= patient._id%>/interviews/new">New Consultation</a>
+            <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/interviews/new">New Consultation</a>
         </div>        
 
         <div class="col-lg">
@@ -82,7 +82,7 @@
                     </a>
                 <% }); %>
             </div>
-            <a  class="btn btn-primary" href="/patients/<%= patient._id%>/clinicals/new">New Clinical Session</a>
+            <a  class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/clinicals/new">New Clinical Session</a>
         </div>        
     </div><!-- row -->
 
