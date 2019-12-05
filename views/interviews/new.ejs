@@ -6,68 +6,51 @@
 
     <form action="/patients/<%= patient._id %>/interviews" method="post">
         <div class="form-row">
-            <div class="form-group">
+            
+            <div class="form-group col-12">
                 <label for="CO-text">C/O:</label>
                 <input id="CO-text" name="interview[CO]" type="text" class="text-input form-control">
             </div>    
         
-        <div class="form-row">
             <div class="form-group">
-                <label for="onset_num_intervals_number">Onset:</label>    
-                <input id="onset_num_intervals_number" name="interview[onset_num_intervals]" type="number" placeholder=1>
+                <label for="onset-text">Onset:</label>    
+                <input id="onset-text" name="interview[onset]" type="text" class="text-input form-control">
             </div>
 
-        <div class="form-row">
             <div class="form-group">        
-                <label for="onset_interval_number">Onset:</label>
-                <input id="onset_interval_number" name="interview[onset_interval]" type="number" placeholder=7>
+                <label for="reason-text">Reason:</label>
+                <input id="reason-text" name="interview[reason]" type="text" class="text-input form-control">
             </div>
-        </div>    
 
-        <div class="form-row">
-            <div class="form-group">        
-                <label for="onset_reason_text">Reason:</label>l
-                <input id="onset_reason_text" name="interview[onset_reason]" type="text">
-            </div>
-        </div>    
-
-        <div class="form-row">
             <div class="form-group">
-                <label for="agg_text">Worse For:</label>        
-                <input id="agg_text" name="interview[agg]" type="text">
+                <label for="agg-text">Worse For:</label>        
+                <input id="agg-text" name="interview[agg]" type="text" class="text-input form-control">
             </div>
-        </div>
         
-        <div class="form-row">
             <div class="form-group">        
-                <label for="rel_text">Better For:</label>
-                <input id="rel_text" name="interview[rel]" type="text">
+                <label for="rel-text">Better For:</label>
+                <input id="rel-text" name="interview[rel]" type="text" class="text-input form-control">
             </div>
-        </div>
         
-        <div class="form-row">
             <div class="form-group">        
-                <label for="dp_text">Daily Pattern:</label>
-                <input id="dp_text" name="interview[dp]" type="text">
+                <label for="dp-text">Daily Pattern:</label>
+                <input id="dp-text" name="interview[dp]" type="text" class="text-input form-control">
             </div>
-        </div>
 
-        <div class="form-row">
             <div class="form-group">        
-                <label for="ph_text">Previous History:</label>
-                <input id="ph_text" name="interview[ph]" type="text">
+                <label for="ph-text">Previous History:</label>
+                <input id="ph-text" name="interview[ph]" type="text" class="text-input form-control">
             </div>
-        </div>    
 
-        <div class="form-row">
             <div class="form-group">    
-                <label for="invest_text">Investigations:</label>
-                <input name="interview[invest]" type="text">
-            </div>
+                <label for="invest-text">Investigations:</label>
+                <input name="interview[invest]" type="text" class="text-input form-control">
+            </div>        
+                    
+            <input type="submit">
+        
         </div>
-        
-        
-        <input type="submit">
+    
     </form>
 
 </div>    
