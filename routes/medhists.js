@@ -54,31 +54,34 @@ router.get("/:medhist_id", (req, res) => {
 	});
 });
 
-// EDIT MedHist - Show edit form for one medhist
-router.get("/:medhist_id/edit", (req, res) => {
-	Patient.findById(req.params.id, (err, foundPatient) => {
-		if(err){
-			console.log(err);
-		} else {
-			MedHist.findById(req.params.medhist_id, (err, foundMedhist) => {
-				if(err){
-					res.redirect("back");
-				} else {
-					res.render("./medhists/edit", {patient: foundPatient, medhist: foundMedhist});		
-				}
-			});
-		}
-	});
-});
+// SUPRECEEDED BY AJAX
+// // EDIT MedHist - Show edit form for one medhist
+// router.get("/:medhist_id/edit", (req, res) => {
+// 	Patient.findById(req.params.id, (err, foundPatient) => {
+// 		if(err){
+// 			console.log(err);
+// 		} else {
+// 			MedHist.findById(req.params.medhist_id, (err, foundMedhist) => {
+// 				if(err){
+// 					res.redirect("back");
+// 				} else {
+// 					res.render("./medhists/edit", {patient: foundPatient, medhist: foundMedhist});		
+// 				}
+// 			});
+// 		}
+// 	});
+// });
 			
 
-// UPDATE MedHist - Update one comment, the redirect
-router.put("/:medhist_id", (req, res) => {
+// UPDATE MedHist - Update one medhist
+router.put("/:medhist_id", (req, res, next) => {
 	MedHist.findByIdAndUpdate(req.params.medhist_id, req.body.medhist, (err, updatedMedhist) => {
 		if(err){
 			res.redirect("back");
 		} else {
-			res.redirect("/patients/" + req.params.id + "/medhists/" + req.params.medhist_id);
+			next();
+			// the json is redundant as not repainting DOM
+			// res.json(updatedMedhist);
 		}
 	});
 });

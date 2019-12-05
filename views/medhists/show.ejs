@@ -5,7 +5,9 @@
     <h3><%= patient.firstname + " " + patient.surname %>'s Medical History on <%= moment(medhist.date_created).format('DD/MM/YYYY') %></h3>    
 
     <!-- old school action will prob get rid of ?_method PUT -->
-    <form class="edit-form" id="edit-medhist-form" action="/patients/<%= patient._id %>/medhists/<%= medhist.id %>?_method=PUT" method="POST">
+    <form class="edit-form" id="edit-medhist-form" action="/patients/<%= patient._id %>/medhists/<%= medhist.id %>" method="POST" autocomplete="off">
+        <!-- <input autocomplete="false" name="hidden" type="text" style="display:none;"> -->
+            
         <div class="form-row">
 
             <div class="form-group col-lg-6">

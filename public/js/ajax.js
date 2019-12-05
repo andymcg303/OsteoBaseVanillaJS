@@ -47,11 +47,13 @@ $editButton.click(function(){
 });
 
 function disableEditForm(){
+    debugger;
     $submitEditButton.toggle();
     $cancelEditButton.toggle();
     $editButton.toggle();
     $deleteButton.toggle();
     $editFormControls.prop('disabled',true);
+
 }
 
 // Disable Edit functionaity

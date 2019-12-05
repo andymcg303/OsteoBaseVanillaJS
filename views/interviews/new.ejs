@@ -1,18 +1,75 @@
 <% include ../partials/header %>
 
-<h1>New Interview for <%= patient.firstname + " " + patient.surname %></h1>
+<div class="container">
 
-<form action="/patients/<%= patient._id %>/interviews" method="post">
-    <input name="interview[CO]" type="text" placeholder="C/O">
-    <input name="interview[onset_num_intervals]" type="number" placeholder=1>
-    <input name="interview[onset_interval]" type="number" placeholder=1>
-    <input name="interview[onset_reason]" type="text" placeholder="Reason">
-    <input name="interview[agg]" type="text" placeholder="Worse For">
-    <input name="interview[rel]" type="text" placeholder="Better For">
-    <input name="interview[dp]" type="text" placeholder="Daily Pattern">
-    <input name="interview[ph]" type="text" placeholder="Previous History">
-    <input name="interview[invest]" type="text" placeholder="Prev Invest">
-    <input type="submit">
-</form>
+    <h1>New Interview for <%= patient.firstname + " " + patient.surname %></h1>
+
+    <form action="/patients/<%= patient._id %>/interviews" method="post">
+        <div class="form-row">
+            <div class="form-group">
+                <label for="CO-text">C/O:</label>
+                <input id="CO-text" name="interview[CO]" type="text" class="text-input form-control">
+            </div>    
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label for="onset_num_intervals_number">Onset:</label>    
+                <input id="onset_num_intervals_number" name="interview[onset_num_intervals]" type="number" placeholder=1>
+            </div>
+
+        <div class="form-row">
+            <div class="form-group">        
+                <label for="onset_interval_number">Onset:</label>
+                <input id="onset_interval_number" name="interview[onset_interval]" type="number" placeholder=7>
+            </div>
+        </div>    
+
+        <div class="form-row">
+            <div class="form-group">        
+                <label for="onset_reason_text">Reason:</label>l
+                <input id="onset_reason_text" name="interview[onset_reason]" type="text">
+            </div>
+        </div>    
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="agg_text">Worse For:</label>        
+                <input id="agg_text" name="interview[agg]" type="text">
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group">        
+                <label for="rel_text">Better For:</label>
+                <input id="rel_text" name="interview[rel]" type="text">
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group">        
+                <label for="dp_text">Daily Pattern:</label>
+                <input id="dp_text" name="interview[dp]" type="text">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">        
+                <label for="ph_text">Previous History:</label>
+                <input id="ph_text" name="interview[ph]" type="text">
+            </div>
+        </div>    
+
+        <div class="form-row">
+            <div class="form-group">    
+                <label for="invest_text">Investigations:</label>
+                <input name="interview[invest]" type="text">
+            </div>
+        </div>
+        
+        
+        <input type="submit">
+    </form>
+
+</div>    
 
 <% include ../partials/footer %>

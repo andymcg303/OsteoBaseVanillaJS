@@ -45,24 +45,27 @@ router.get("/:id", (req, res) => {
     });
 });
 
-// EDIT - Show Edit Form for selected patient
-router.get("/:id/edit", (req, res) => {
-    Patient.findById(req.params.id, (err, foundPatient) => {
-        if (err){
-            console.log(err);
-        } else {
-            res.render("./patients/edit", {patient: foundPatient});
-        }
-    });
-});
+// SUPRECEEDED BY AJAX
+// // EDIT - Show Edit Form for selected patient
+// router.get("/:id/edit", (req, res) => {
+//     Patient.findById(req.params.id, (err, foundPatient) => {
+//         if (err){
+//             console.log(err);
+//         } else {
+//             res.render("./patients/edit", {patient: foundPatient});
+//         }
+//     });
+// });
 
 // UPDATE - Update selected patient, then redirect
-router.put("/:id", (req, res) => {
+router.put("/:id", (req, res, next) => {
     Patient.findByIdAndUpdate(req.params.id, req.body.patient, (err, updatedPatient) => {
         if (err){
             console.log(err); 
         } else {
-            res.json(updatedPatient);
+            next();
+            //json is redundant as not repainting DOM
+            //res.json(updatedPatient);
         }    
     });
 });
