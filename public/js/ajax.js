@@ -47,7 +47,6 @@ $editButton.click(function(){
 });
 
 function disableEditForm(){
-    debugger;
     $submitEditButton.toggle();
     $cancelEditButton.toggle();
     $editButton.toggle();

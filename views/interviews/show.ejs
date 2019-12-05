@@ -4,83 +4,63 @@
     
     <h3><%= patient.firstname + " " + patient.surname %>'s Consultation on <%= moment(interview.date_created).format('DD/MM/YYYY') %></h3>
 
-    <div class="row">
-        <div class="col-1">
+    <form class="edit-form" id="edit-interview-form" action="/patients/<%= patient.id %>/interviews/<%= interview.id %>" method="POST" autocomplete="off">
+        <div class="form-row">
             
-            <div>C/O:</div>
-            <div>Onset:</div>
-            <div>Reason:</div>
-            <div>Agg:</div>
-            <div>Rel:</div>
-            <div>DP:</div>
-            <div>PH:</div>
-            <div>Invest:</div>
+            <div class="form-group col-12">
+                <label for="CO-edit">C/O:</label>
+                <input id="CO-edit" name="interview[CO]" type="text" class="form-control" value="<%= interview.CO %>" disabled>
+            </div>    
+        
+            <div class="form-group col-md-2">
+                <label for="onset-edit">Onset:</label>    
+                <input id="onset-edit" name="interview[onset]" type="text" class="form-control" value="<%= interview.onset %>" disabled>
+            </div>
 
-        </div>    
-        <div class="col-11">
+            <div class="form-group col-md-10">        
+                <label for="reason-edit">Reason:</label>
+                <input id="reason-edit" name="interview[reason]" type="text" class="form-control" value="<%= interview.reason %>" disabled>
+            </div>
 
-            <div>
-                <% if(interview.CO){ %>
-                    <%= interview.CO %>
-                <% } else { %>
-                    <br>
-                <% } %>
+            <div class="form-group col-lg-4">
+                <label for="agg-edit">Worse For:</label>        
+                <input id="agg-edit" name="interview[agg]" type="text" class="form-control" value="<%= interview.agg %>" disabled>
             </div>
-            <div>
-                <% if(interview.onset_num_intervals && interview.onset_interval){ %>
-                    <%= interview.onset_num_intervals + "/" + interview.onset_interval %>
-                <% } else { %>
-                    <br>
-                <% } %>
-            </div>            
-            <div>
-                <% if(interview.onset_reason){ %>
-                    <%= interview.onset_reason %>
-                <% } else { %>
-                    <br>
-                <% } %>
+        
+            <div class="form-group col-lg-4">        
+                <label for="rel-edit">Better For:</label>
+                <input id="rel-edit" name="interview[rel]" type="text" class="form-control" value="<%= interview.rel %>" disabled>
             </div>
-            <div>
-                <% if(interview.agg){ %>
-                    <%= interview.agg %>
-                <% } else { %>
-                    <br>
-                <% } %>
+        
+            <div class="form-group col-lg-4">        
+                <label for="dp-edit">Daily Pattern:</label>
+                <input id="dp-edit" name="interview[dp]" type="text" class="form-control" value="<%= interview.dp %>" disabled>
             </div>
-            <div>
-                <% if(interview.rel){ %>
-                    <%= interview.rel %>
-                <% } else { %>
-                    <br>
-                <% } %>
-            </div>
-            <div>
-                <% if(interview.dp){ %>
-                    <%= interview.dp %>
-                <% } else { %>
-                    <br>
-                <% } %>
-            </div>
-            <div>
-                <% if(interview.ph){ %>
-                    <%= interview.ph %>
-                <% } else { %>
-                    <br>
-                <% } %>
-            </div>
-            <div>
-                <% if(interview.invest){ %>
-                    <%= interview.invest %>
-                <% } else { %>
-                    <br>
-                <% } %>
-            </div>            
 
+            <div class="form-group col-lg-6">        
+                <label for="ph-edit">Previous History:</label>
+                <input id="ph-edit" name="interview[ph]" type="text" class="form-control" value="<%= interview.ph %>" disabled>
+            </div>
+
+            <div class="form-group col-lg-6">    
+                <label for="invest-edit">Investigations:</label>
+                <input id="invest-edit" name="interview[invest]" type="text" class="form-control" value="<%= interview.invest %>" disabled>
+            </div>        
+                    
+            <div class="form-group col-lg-6 align-self-end">
+                <div class="btn btn-info edit-button" id="edit-interview-button">Edit Medical History</div>
+                <button class="btn btn-success submit-edit-button" id="submit-edit-interview-button">Submit</button>
+                <div class="btn btn-warning cancel-edit-button" id="cancel-edit-interview-button">Cancel</div>
+                <div class="btn btn-danger delete-button" id="delete-interview-button">Delete</div>
+            </div>
+        
         </div>
-    </div>
+    
+    </form>
 
-    <a class="btn btn-info" href="/patients/<%= patient._id%>/interviews/<%= interview._id %>/edit">Edit<a>
-    <a class="btn btn-warning" href="/patients/<%= patient._id%>">Back to Patient</a>
+    <div>
+        <a class="btn btn-warning mt-2" href="/patients/<%= patient.id %>">Back to Patient Details</a>
+    </div>
 
 </div>
 

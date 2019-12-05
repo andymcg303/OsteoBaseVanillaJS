@@ -20,6 +20,7 @@ router.get("/new", (req, res) => {
 
 // CREATE Interview - Create New Interview then redirect to Show Patient
 router.post("/", (req, res) => {
+	debugger;
 	Patient.findById(req.params.id, (err, foundPatient) => {
 		if(err){
 			console.log(err);		
