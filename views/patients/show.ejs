@@ -4,7 +4,6 @@
     <h1>Patient Details</h1>
 
     <form id="edit-patient-form" class="edit-form" action="/patients/<%= patient._id %>" method="POST" autocomplete="off">
-        <!-- <input autocomplete="false" name="hidden" type="text" style="display:none;"> -->
 
         <div class="form-row">
             <div class="form-group col-md-3">
@@ -77,10 +76,8 @@
             <div class="list-group">    
                 <% patient.clinicals.forEach(function(clinical){ %>
                     <a class="list-group-item list-group-item-action list-group-item-light" 
-                        href="/patients/<%= patient._id%>/clinicals/<%= clinical._id %>"><%= moment(clinical.date_created).format('DD/MM/YYYY') %>
-                        <% if(clinical.diag_bool){ %>
-                                <%= clinical.diag %>
-                        <% } %>    
+                        href="/patients/<%= patient._id%>/clinicals/<%= clinical._id %>"><%= moment(clinical.date_created).format('DD/MM/YYYY') + " " + clinical.diag %>
+                                <!-- <%= clinical.diag %>     -->
                     </a>
                 <% }); %>
             </div>

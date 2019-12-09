@@ -1,36 +1,35 @@
 <% include ../partials/header %>
 
+<div class="container">
+
 <h1>New Clinical Session for <%= patient.firstname + " " + patient.surname %></h1>
 
-<form action="/patients/<%= patient._id %>/clinicals" method="POST">
-    <div>
-        <label for="OE-text">Objective Findings</label>
-    </div>
-    <div>
-        <textarea name="clinical[OE]" id="OE-text" placeholder="Objective Findings"></textarea>
-    </div>
-    <div>
-        <label for="diag-checkbox">Diagnosis?</label>
-    </div>
-    <div>
-        <input type="checkbox" id="diag-checkbox">
-    </div>
-    <input name="clinical[diag_bool]" type="hidden" value="false" id="diag-boolean">
-    <div>
-        <label for="diag-text">Diagnosis</label>
-    </div>
-    <div>
-        <textarea name="clinical[diag]" id="diag-text" placeholder="Diagnosis" disabled="true" class="text-input"></textarea>
-    </div>
-    <div>
-        <label for="TTT-text">Treatment</label>
-    </div>
-    <div>
-        <textarea name="clinical[TTT]" id="TTT-text "placeholder="Treatment"></textarea>
-    </div>
-    <input type="submit">    
-</form>
+    <form action="/patients/<%= patient._id %>/clinicals" method="POST">
 
-<script type="text/javascript" src="/js/new.js"></script>
+        <div class="form-row">
+            <div class="form-group col-12">
+                <label for="OE-text">Objective Findings:</label>
+                <textarea name="clinical[OE]" id="OE-text" class="text-input form-control"></textarea>
+            </div>
+    
+            <div class="form-group col-12">    
+                <label for="diag-text">Diagnosis:</label>
+                <textarea name="clinical[diag]" id="diag-text" class="text-input form-control"></textarea>    
+            </div>
+
+            <div class="form-group col-12">
+                <label for="TTT-text">Treatment:</label>
+                <textarea name="clinical[TTT]" id="TTT-text" class="text-input form-control"></textarea>
+            </div>
+
+            <div class="form-group align-self-end">
+                <button class="btn btn-success" id="submit-new-clinical-button">Submit</button>
+                <a href="/patients/<%= patient._id %>" class="btn btn-warning" id="cancel-new-clinical-button">Cancel</a>
+            </div>
+
+        </div>    
+    </form>
+
+</div>
 
 <% include ../partials/footer %>
