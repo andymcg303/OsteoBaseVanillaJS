@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const clinicalSchema = new mongoose.Schema({
     date_created: {type: Date, default: Date.now},
+    problem: String,
     OE: String,
     diag: String,
     TTT: String

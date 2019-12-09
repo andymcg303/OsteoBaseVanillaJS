@@ -53,31 +53,16 @@ router.get("/:clinical_id", (req, res) => {
 		}
 	});
 });
-
-// EDIT Clinical - Show edit form for one clinical
-router.get("/:clinical_id/edit", (req, res) => {
-	Patient.findById(req.params.id, (err, foundPatient) => {
-		if(err){
-			console.log(err);
-		} else {
-			Clinical.findById(req.params.clinical_id, (err, foundClinical) => {
-				if(err){
-					res.redirect("back");
-				} else {
-					res.render("./clinicals/edit", {patient: foundPatient, clinical: foundClinical});		
-				}
-			});
-		}
-	});
-});
-			
+		
 // UPDATE MedHist - Update one comment, the redirect
-router.put("/:clinical_id", (req, res) => {
+router.put("/:clinical_id", (req, res, next) => {
 	Clinical.findByIdAndUpdate(req.params.clinical_id, req.body.clinical, (err, updatedClinical) => {
 		if(err){
 			res.redirect("back");
 		} else {
-			res.redirect("/patients/" + req.params.id + "/clinicals/" + req.params.clinical_id);
+			next();
+			// the json is redundant as not repainting DOM
+			// res.json(updatedClinical);
 		}
 	});
 });

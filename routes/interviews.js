@@ -55,31 +55,15 @@ router.get("/:interview_id", (req, res) => {
 	});
 });
 
-// EDIT Interview - Show edit form for one interview
-router.get("/:interview_id/edit", (req, res) => {
-	Patient.findById(req.params.id, (err, foundPatient) => {
-		if(err){
-			console.log(err);
-		} else {
-			Interview.findById(req.params.interview_id, (err, foundInterview) => {
-				if(err){
-					res.redirect("back");
-				} else {
-					res.render("./interviews/edit", {patient: foundPatient, interview: foundInterview});		
-				}
-			});
-		}
-	});
-});
-			
-
 // UPDATE Interview - Update one interview, the redirect
-router.put("/:interview_id", (req, res) => {
+router.put("/:interview_id", (req, res, next) => {
 	Interview.findByIdAndUpdate(req.params.interview_id, req.body.interview, (err, updatedInterview) => {
 		if(err){
 			res.redirect("back");
 		} else {
-			res.redirect("/patients/" + req.params.id + "/interviews/" + req.params.interview_id);
+			next();
+			// the json is redundant as not repainting DOM
+			// res.json(updatedInterview);
 		}
 	});
 });

@@ -9,6 +9,11 @@
         <div class="form-row">
 
             <div class="form-group col-12">
+                <label for="OE-edit">Problem:</label>
+                <textarea name="clinical[problem]" id="OE-problem" class="form-control" disabled><%= clinical.problem %></textarea>
+            </div>
+
+            <div class="form-group col-12">
                 <label for="OE-edit">Objective Findings:</label>
                 <textarea name="clinical[OE]" id="OE-edit" class="form-control" rows="6" disabled><%= clinical.OE %></textarea>
             </div>

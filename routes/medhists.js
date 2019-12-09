@@ -53,26 +53,7 @@ router.get("/:medhist_id", (req, res) => {
 		}
 	});
 });
-
-// SUPRECEEDED BY AJAX
-// // EDIT MedHist - Show edit form for one medhist
-// router.get("/:medhist_id/edit", (req, res) => {
-// 	Patient.findById(req.params.id, (err, foundPatient) => {
-// 		if(err){
-// 			console.log(err);
-// 		} else {
-// 			MedHist.findById(req.params.medhist_id, (err, foundMedhist) => {
-// 				if(err){
-// 					res.redirect("back");
-// 				} else {
-// 					res.render("./medhists/edit", {patient: foundPatient, medhist: foundMedhist});		
-// 				}
-// 			});
-// 		}
-// 	});
-// });
 			
-
 // UPDATE MedHist - Update one medhist
 router.put("/:medhist_id", (req, res, next) => {
 	MedHist.findByIdAndUpdate(req.params.medhist_id, req.body.medhist, (err, updatedMedhist) => {
