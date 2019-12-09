@@ -77,7 +77,6 @@
                 <% patient.clinicals.forEach(function(clinical){ %>
                     <a class="list-group-item list-group-item-action list-group-item-light" 
                         href="/patients/<%= patient._id%>/clinicals/<%= clinical._id %>"><%= moment(clinical.date_created).format('DD/MM/YYYY') + " " + clinical.diag %>
-                                <!-- <%= clinical.diag %>     -->
                     </a>
                 <% }); %>
             </div>
