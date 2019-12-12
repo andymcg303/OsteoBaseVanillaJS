@@ -56,14 +56,12 @@ router.get("/:interview_id", (req, res) => {
 });
 
 // UPDATE Interview - Update one interview, the redirect
-router.put("/:interview_id", (req, res, next) => {
+router.put("/:interview_id", (req, res) => {
 	Interview.findByIdAndUpdate(req.params.interview_id, req.body.interview, (err, updatedInterview) => {
 		if(err){
 			res.redirect("back");
 		} else {
-			next();
-			// the json is redundant as not repainting DOM
-			// res.json(updatedInterview);
+			res.json(updatedInterview);
 		}
 	});
 });

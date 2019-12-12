@@ -55,15 +55,13 @@ router.get("/:medhist_id", (req, res) => {
 });
 			
 // UPDATE MedHist - Update one medhist
-router.put("/:medhist_id", (req, res, next) => {
+router.put("/:medhist_id", (req, res) => {
 	MedHist.findByIdAndUpdate(req.params.medhist_id, req.body.medhist, (err, updatedMedhist) => {
 		if(err){
 			res.redirect("back");
-		} else {
-			next();
-			// the json is redundant as not repainting DOM
-			// res.json(updatedMedhist);
-		}
+		} else { 
+			res.json(updatedMedhist);
+		}		
 	});
 });
 

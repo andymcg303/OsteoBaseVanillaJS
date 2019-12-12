@@ -55,14 +55,12 @@ router.get("/:clinical_id", (req, res) => {
 });
 		
 // UPDATE MedHist - Update one comment, the redirect
-router.put("/:clinical_id", (req, res, next) => {
+router.put("/:clinical_id", (req, res) => {
 	Clinical.findByIdAndUpdate(req.params.clinical_id, req.body.clinical, (err, updatedClinical) => {
 		if(err){
 			res.redirect("back");
 		} else {
-			next();
-			// the json is redundant as not repainting DOM
-			// res.json(updatedClinical);
+			res.json(updatedClinical);
 		}
 	});
 });

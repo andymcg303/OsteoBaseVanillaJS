@@ -35,7 +35,8 @@ let $editForm = $('.edit-form'),
     $editFormControls = $('.edit-form .form-control'),
     $submitEditButton = $('.submit-edit-button'),
     $cancelEditButton = $('.cancel-edit-button'),
-    $deleteButton = $('.delete-button');
+    $deleteButton = $('.delete-button'),
+    $deleteForm = $('.delete-form');
 
 // Enable Edit form and buttons
 $editButton.click(function(){
@@ -52,7 +53,6 @@ function disableEditForm(){
     $editButton.toggle();
     $deleteButton.toggle();
     $editFormControls.prop('disabled',true);
-
 }
 
 // Disable Edit functionaity
@@ -65,6 +65,7 @@ $cancelEditButton.click(function(){
 
 // Submit Edit Details
 $editForm.submit(function(e){
+    debugger;
     e.preventDefault();
     let $data = $(this).serialize();
     let $formAction = $(this).attr('action');
@@ -78,4 +79,23 @@ $editForm.submit(function(e){
     });    
 });
 
-
+// DELETE FUNCTIONALITY
+$deleteForm.submit(function(e){
+    debugger;
+	e.preventDefault();
+	var confirmResponse = confirm('Are you sure?');
+	// if (confirmResponse) {
+	// 	var actionUrl = $(this).attr('action');
+	// 	var $itemToDelete = $(this).closest('.list-group-item');
+	// 	$.ajax({
+	// 		url: actionUrl,
+	// 		type: 'DELETE',
+	// 		itemToDelete: $itemToDelete,
+	// 		success: function success(data) {
+	// 			this.itemToDelete.remove();
+	// 		}
+	// 	});
+	// } else {
+	// 	$(this).find('button').blur();
+	// }
+});

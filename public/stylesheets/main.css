@@ -3,7 +3,7 @@
 }
 
 .submit-edit-button, 
-.cancel-edit-button, 
+.cancel-edit-button,
 .delete-button{
     display: none;
 }
