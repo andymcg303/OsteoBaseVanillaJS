@@ -55,7 +55,7 @@ router.get("/:interview_id", (req, res) => {
 	});
 });
 
-// UPDATE Interview - Update one interview, the redirect
+// UPDATE Interview - Update one interview, then disable controls
 router.put("/:interview_id", (req, res) => {
 	Interview.findByIdAndUpdate(req.params.interview_id, req.body.interview, (err, updatedInterview) => {
 		if(err){
@@ -66,6 +66,16 @@ router.put("/:interview_id", (req, res) => {
 	});
 });
 
-// DESTROY Interview - N/A, not allowed to delete
+// DESTROY Interview
+router.delete("/:interview_id", (req, res) => {
+	let patientId = req.params.id;
+	Interview.findByIdAndRemove(req.params.interview_id, function(err){
+		if(err){
+			res.redirect("back");
+		} else {
+			res.json(patientId);
+		}
+	});
+});
 
 module.exports = router;

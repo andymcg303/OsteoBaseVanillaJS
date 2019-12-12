@@ -65,7 +65,6 @@ $cancelEditButton.click(function(){
 
 // Submit Edit Details
 $editForm.submit(function(e){
-    debugger;
     e.preventDefault();
     let $data = $(this).serialize();
     let $formAction = $(this).attr('action');
@@ -73,29 +72,23 @@ $editForm.submit(function(e){
         url: $formAction,
         data: $data,
         method: 'PUT',
-        complete: function(){  
-            disableEditForm();
-        }
+        complete: disableEditForm()
     });    
 });
 
-// DELETE FUNCTIONALITY
+// DELETE FUNCTIONALITY --- Only use AJAX for a confirm prompt 
 $deleteForm.submit(function(e){
-    debugger;
-	e.preventDefault();
-	var confirmResponse = confirm('Are you sure?');
-	// if (confirmResponse) {
-	// 	var actionUrl = $(this).attr('action');
-	// 	var $itemToDelete = $(this).closest('.list-group-item');
-	// 	$.ajax({
-	// 		url: actionUrl,
-	// 		type: 'DELETE',
-	// 		itemToDelete: $itemToDelete,
-	// 		success: function success(data) {
-	// 			this.itemToDelete.remove();
-	// 		}
-	// 	});
-	// } else {
-	// 	$(this).find('button').blur();
-	// }
+    e.preventDefault();
+    var confirmResponse = confirm('Are you sure?');
+    if (confirmResponse) {
+        var actionUrl = $(this).attr('action');
+        $.ajax({
+            url: actionUrl,
+            type: 'DELETE',
+            complete: function(data){
+                window.location.assign('/patients/' + data.responseJSON)
+            }
+        });
+    }
 });
+

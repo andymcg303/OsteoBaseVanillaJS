@@ -65,6 +65,16 @@ router.put("/:clinical_id", (req, res) => {
 	});
 });
 
-// DESTROY - N/A, not allowed to delete
+// DESTROY Clinical
+router.delete("/:clinical_id", (req, res) => {
+	let patientId = req.params.id;
+	Clinical.findByIdAndRemove(req.params.clinical_id, function(err){
+		if(err){
+			res.redirect("back");
+		} else {
+			res.json(patientId);
+		}
+	});
+});
 
 module.exports = router;

@@ -6,8 +6,7 @@
 
     <form method="POST" action="/patients/<%= patient._id %>/medhists/<%= medhist.id %>" id="delete-medhist-form" class="delete-form"></form>
 
-    <!-- <form class="edit-form" id="edit-medhist-form" action="/patients/<%= patient._id %>/medhists/<%= medhist.id %>" method="POST" autocomplete="off"> -->
-    <form class="edit-form" id="edit-medhist-form" action="/patients/<%= patient._id %>/medhists/<%= medhist.id %>?_method=PUT" method="POST" autocomplete="off">
+    <form class="edit-form" id="edit-medhist-form" action="/patients/<%= patient._id %>/medhists/<%= medhist.id %>" method="POST" autocomplete="off">
         <div class="form-row">
 
             <div class="form-group col-lg-6">
