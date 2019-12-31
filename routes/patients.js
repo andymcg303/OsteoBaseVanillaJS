@@ -3,16 +3,33 @@ const express = require("express"),
       moment  = require("moment"),
       Patient = require("../models/patient");
 
+function escapeRegex(text){
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
+
 // ROUTES   
 // INDEX - List all patients      
 router.get("/", (req, res) => {
-    Patient.find({}, (err, allPatients) => {
-        if (err){
-            console.log(err);
-        } else {
-            res.render("./patients/index", {patients: allPatients, moment: moment});
-        }
-    });
+    if(req.query.keyword) {
+        const regex = new RegExp(escapeRegex(req.query.keyword), 'gi');
+        Patient.find({text: regex}, (err, allPatients) => {
+            if (err){
+                console.log(err);
+            } else {
+                // res.json(todos);
+                res.render("./patients/index", {patients: allPatients, moment: moment});
+            }
+        });
+    } else {
+        // if there wasn't any query string keyword then..
+        Patient.find({}, (err, allPatients) => {
+            if (err){
+                console.log(err);
+            } else {
+                res.render("./patients/index", {patients: allPatients, moment: moment});
+            }
+        });
+    }
 });
 
 // NEW - Show New Patient Form
