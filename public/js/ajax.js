@@ -95,9 +95,9 @@ $deleteForm.submit(function(e){
 $('#search').submit(function(e){
     debugger;
 	e.preventDefault();
-	$.get('/patients?keyword=' + encodeURIComponent(e.target.value), function (data) {
+	$.get('/patients?keyword=' + encodeURIComponent($('#search-text').val()), function (data) {
 		// $('#patient-list').html('');
-		data.forEach(function (patients) {
+		data.forEach(function (patient) {
             alert("found a match");
 			// $('#todo-list').append('\n\t\t\t\t<li class="list-group-item">\n\t\t\t\t\t<form action="/todos/' + todo._id + '" method="POST" class="edit-item-form">\n\t\t\t\t\t\t<div class="form-group">\n\t\t\t\t\t\t\t<label for="' + todo._id + '">Item Text</label>\n\t\t\t\t\t\t\t<input type="text" value="' + todo.text + '" name="todo[text]" class="form-control" id="' + todo._id + '">\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<button class="btn btn-primary">Update Item</button>\n\t\t\t\t\t</form>\n\t\t\t\t\t<span class="lead">\n\t\t\t\t\t\t' + todo.text + '\n\t\t\t\t\t</span>\n\t\t\t\t\t<div class="pull-right">\n\t\t\t\t\t\t<button class="btn btn-sm btn-warning edit-button">Edit</button>\n\t\t\t\t\t\t<form style="display: inline" method="POST" action="/todos/' + todo._id + '" class="delete-item-form">\n\t\t\t\t\t\t\t<button type="submit" class="btn btn-sm btn-danger">Delete</button>\n\t\t\t\t\t\t</form>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class="clearfix"></div>\n\t\t\t\t</li>\n\t\t\t\t');
 		});
