@@ -92,6 +92,7 @@ $deleteForm.submit(function(e){
     }
 });
 
+// Search on patients surname functionality
 $('#search').submit(function(e){
 	e.preventDefault();
 	$.get('/patients?keyword=' + encodeURIComponent($('#search-text').val()), function (data) {
