@@ -12,12 +12,11 @@ function escapeRegex(text){
 router.get("/", (req, res) => {
     if(req.query.keyword) {
         const regex = new RegExp(escapeRegex(req.query.keyword), 'gi');
-        Patient.find({text: regex}, (err, allPatients) => {
+        Patient.find({surname: regex}, function(err, foundPatients){
             if (err){
                 console.log(err);
             } else {
-                // res.json(todos);
-                res.render("./patients/index", {patients: allPatients, moment: moment});
+                res.json(foundPatients);
             }
         });
     } else {
@@ -26,7 +25,11 @@ router.get("/", (req, res) => {
             if (err){
                 console.log(err);
             } else {
-                res.render("./patients/index", {patients: allPatients, moment: moment});
+                if(req.xhr) {
+                    res.json(allPatients);
+                } else {
+                    res.render("./patients/index", {patients: allPatients, moment: moment});
+                }
             }
         });
     }
