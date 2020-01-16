@@ -36,7 +36,8 @@ let $editForm = $('.edit-form'),
     $submitEditButton = $('.submit-edit-button'),
     $cancelEditButton = $('.cancel-edit-button'),
     $deleteButton = $('.delete-button'),
-    $deleteForm = $('.delete-form');
+    $deleteForm = $('.delete-form'),
+    $deletePatientForm = $('#delete-patient-form');
 
 // Enable Edit form and buttons
 $editButton.click(function(){
@@ -78,17 +79,17 @@ $editForm.submit(function(e){
 
 // DELETE FUNCTIONALITY --- Only use AJAX for a confirm prompt 
 $deleteForm.submit(function(e){
-    e.preventDefault();
-    var confirmResponse = confirm('Are you sure?');
-    if (confirmResponse) {
-        var actionUrl = $(this).attr('action');
-        $.ajax({
-            url: actionUrl,
-            type: 'DELETE',
-            complete: function(data){
-                window.location.assign('/patients/' + data.responseJSON)
-            }
-        });
+    let confirmResponse = confirm('Are you sure?');
+    if (!confirmResponse) {
+        e.preventDefault();
+    }
+});
+
+// Deleting patients is a special case
+$deletePatientForm.submit(function(e){
+    let confirmResponse = confirm('This will delete all the patients details including clinical details which by law you are required to keep for 6 years. Are you sure?');
+    if (!confirmResponse) {
+        e.preventDefault();
     }
 });
 

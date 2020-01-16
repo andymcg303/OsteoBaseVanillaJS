@@ -3,7 +3,7 @@
 <div class="container">
     <h1>Patient Details</h1>
 
-    <form method="POST" action="/patients/<%= patient._id %>" id="delete-patient-form" class="delete-form"></form>
+    <form method="POST" action="/patients/<%= patient._id %>?_method=DELETE" id="delete-patient-form"></form>
 
     <form id="edit-patient-form" class="edit-form" action="/patients/<%= patient._id %>" method="POST" autocomplete="off">
 
@@ -45,7 +45,6 @@
                 <button class="btn btn-success submit-edit-button" id="submit-edit-patient-button">Submit</button>
                 <div class="btn btn-warning cancel-edit-button" id="cancel-edit-patient-button">Cancel</div>
                 <input type="submit" class="btn btn-danger delete-button" id="delete-patient-button" value="Delete" form="delete-patient-form">
-                <!-- <div class="btn btn-danger delete-button" id="delete-patient-button">Delete</div> -->
             </div>   
         </div>
     </form>
@@ -88,7 +87,7 @@
     </div><!-- row -->
 
     <div>
-        <a class="btn btn-warning mt-2" href="/patients">Back to Patient Index</a>
+        <a class="btn btn-secondary mt-2" href="/patients">Back to Patient Index</a>
     </div>
 
 </div><!-- container -->

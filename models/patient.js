@@ -1,4 +1,7 @@
 const mongoose = require("mongoose");
+const MedHist = require("./medhist");
+const Interview = require("./interview");
+const Clinical = require("./clinical");
 
 const patientSchema = new mongoose.Schema({
     date_created: {type: Date, default: Date.now},
@@ -27,6 +30,45 @@ const patientSchema = new mongoose.Schema({
         ref: "Clinical"	
       }
     ]
+});
+
+patientSchema.pre('remove', async function(next){
+  try {
+    await MedHist.deleteMany({
+      "_id": {
+      $in: this.medhists  
+      }
+    });
+    next();
+  } catch(err) {
+    next(err);
+  }
+});
+
+patientSchema.pre('remove', async function(next){
+  try {
+    await Interview.deleteMany({
+      "_id": {
+      $in: this.interviews  
+      }
+    });
+    next();
+  } catch(err) {
+    next(err);
+  }
+});
+
+patientSchema.pre('remove', async function(next){
+  try {
+    await Clinical.deleteMany({
+      "_id": {
+      $in: this.clinicals  
+      }
+    });
+    next();
+  } catch(err) {
+    next(err);
+  }
 });
 
 module.exports = mongoose.model("Patient", patientSchema);

@@ -4,7 +4,7 @@
     
     <h3><%= patient.firstname + " " + patient.surname %>'s Consultation on <%= moment(interview.date_created).format('DD/MM/YYYY') %></h3>
 
-    <form method="POST" action="/patients/<%= patient._id %>/interviews/<%= interview.id %>" id="delete-interview-form" class="delete-form"></form>
+    <form method="POST" action="/patients/<%= patient._id %>/interviews/<%= interview.id %>?_method=DELETE" id="delete-interview-form" class="delete-form"></form>
 
     <form class="edit-form" id="edit-interview-form" action="/patients/<%= patient.id %>/interviews/<%= interview.id %>" method="POST" autocomplete="off">
         <div class="form-row">
@@ -61,7 +61,7 @@
     </form>
 
     <div>
-        <a class="btn btn-warning mt-2" href="/patients/<%= patient.id %>">Back to Patient Details</a>
+        <a class="btn btn-secondary mt-2" href="/patients/<%= patient.id %>">Back to Patient Details</a>
     </div>
 
 </div>

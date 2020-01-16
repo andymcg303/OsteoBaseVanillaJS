@@ -2,7 +2,7 @@ const express = require("express"),
       router  = express.Router({mergeParams: true}),
       moment  = require("moment"),
       Patient = require("../models/patient");
-
+ 
 function escapeRegex(text){
     return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 };
@@ -90,6 +90,20 @@ router.put("/:id", (req, res, next) => {
     });
 });
 
-// DESTROY - Delete Patient (use with an abundance of caution!)
+router.delete("/:id", function(req, res){
+    Patient.findById(req.params.id, function(err, foundPatient){
+        if (err){
+            console.log(err);
+        } else {
+            foundPatient.remove(function(err){
+                if (err) {
+                    console.log(err)
+                } else {
+                    res.redirect("/patients");
+                }
+            });
+        }
+    });
+});
 
 module.exports = router;

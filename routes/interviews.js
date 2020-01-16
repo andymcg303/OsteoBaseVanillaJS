@@ -20,7 +20,6 @@ router.get("/new", (req, res) => {
 
 // CREATE Interview - Create New Interview then redirect to Show Patient
 router.post("/", (req, res) => {
-	debugger;
 	Patient.findById(req.params.id, (err, foundPatient) => {
 		if(err){
 			console.log(err);		
@@ -73,7 +72,7 @@ router.delete("/:interview_id", (req, res) => {
 		if(err){
 			res.redirect("back");
 		} else {
-			res.json(patientId);
+			res.redirect("/patients/" + patientId);
 		}
 	});
 });

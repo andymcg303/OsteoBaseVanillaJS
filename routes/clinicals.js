@@ -72,7 +72,7 @@ router.delete("/:clinical_id", (req, res) => {
 		if(err){
 			res.redirect("back");
 		} else {
-			res.json(patientId);
+			res.redirect("/patients/" + patientId);
 		}
 	});
 });
