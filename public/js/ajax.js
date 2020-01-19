@@ -29,6 +29,19 @@ $newPatientForm.submit(function(e){
     });
 });
 
+// Search on patients surname functionality
+$('#search').submit(function(e){
+	e.preventDefault();
+	$.get('/patients?keyword=' + encodeURIComponent($('#search-text').val()), function (data) {
+		$('#patient-list').html('');
+		data.forEach(function (patient) {
+            $('#patient-list').append(
+                `<a class="list-group-item list-group-item-action list-group-item-light" href="/patients/${patient._id}">${patient.firstname} ${patient.surname}<span class="float-right">${moment(patient.dob).format('DD/MM/YYYY')}</span></a>`
+            );
+        });    
+    });
+});
+
 // SHOW/EDIT FUNCTIONALITY
 let $editForm = $('.edit-form'),
     $editButton = $('.edit-button'),
@@ -93,15 +106,13 @@ $deletePatientForm.submit(function(e){
     }
 });
 
-// Search on patients surname functionality
-$('#search').submit(function(e){
-	e.preventDefault();
-	$.get('/patients?keyword=' + encodeURIComponent($('#search-text').val()), function (data) {
-		$('#patient-list').html('');
-		data.forEach(function (patient) {
-            $('#patient-list').append(
-                `<a class="list-group-item list-group-item-action list-group-item-light" href="/patients/${patient._id}">${patient.firstname} ${patient.surname}<span class="float-right">${moment(patient.dob).format('DD/MM/YYYY')}</span></a>`
-            );
-        });    
-    });
+// // add signoff icon
+$('.signoff-item .signed-off').each(function(){
+    debugger;
+    if ($(this).text() === "false"){
+        $(this).parent().append('<svg class="bi bi-unlock-fill text-warning" width="1.3em" height="1.3em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 10a2 2 0 012-2h7a2 2 0 012 2v5a2 2 0 01-2 2h-7a2 2 0 01-2-2v-5z"></path><path fill-rule="evenodd" d="M10.5 5a3.5 3.5 0 117 0v3h-1V5a2.5 2.5 0 00-5 0v3h-1V5z" clip-rule="evenodd"></path></svg>');
+    } else {
+        $(this).parent().append('<svg class="bi bi-lock-fill text-success" width="1.3em" height="1.3em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><rect width="11" height="9" x="4.5" y="8" rx="2"></rect><path fill-rule="evenodd" d="M6.5 5a3.5 3.5 0 117 0v3h-1V5a2.5 2.5 0 00-5 0v3h-1V5z" clip-rule="evenodd"></path></svg>');
+    }
 });
+

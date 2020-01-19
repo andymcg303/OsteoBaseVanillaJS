@@ -66,7 +66,10 @@
             <h3>Consultations</h3>
             <div class="list-group">
                 <% patient.interviews.forEach(function(interview){ %>
-                    <a class="list-group-item list-group-item-action list-group-item-light" href="/patients/<%= patient._id%>/interviews/<%= interview._id %>"><%= moment(interview.date_created).format('DD/MM/YYYY') + " " + interview.CO %></a>
+                    <a class="list-group-item list-group-item-action list-group-item-light signoff-item" 
+                        href="/patients/<%= patient._id%>/interviews/<%= interview._id %>"><%= moment(interview.date_created).format('DD/MM/YYYY') + " " + interview.CO %>
+                        <div class="signed-off" style="display: none;"><%= interview.signed_off %></div>
+                    </a>
                 <% }); %>
             </div>
             <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/interviews/new">New Consultation</a>
@@ -77,13 +80,15 @@
             <h3>Clinical Sessions</h3>
             <div class="list-group">    
                 <% patient.clinicals.forEach(function(clinical){ %>
-                    <a class="list-group-item list-group-item-action list-group-item-light" 
+                    <a class="list-group-item list-group-item-action list-group-item-light signoff-item" 
                         href="/patients/<%= patient._id%>/clinicals/<%= clinical._id %>"><%= moment(clinical.date_created).format('DD/MM/YYYY') + " " + clinical.diag %>
+                        <div class="signed-off" style="display: none;"><%= clinical.signed_off %></div>
                     </a>
                 <% }); %>
             </div>
             <a  class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/clinicals/new">New Clinical Session</a>
-        </div>        
+        </div>
+
     </div><!-- row -->
 
     <div>

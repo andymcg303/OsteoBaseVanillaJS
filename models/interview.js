@@ -9,7 +9,8 @@ const interviewSchema = new mongoose.Schema({
     rel: String,
     dp: String,
     ph: String,
-    invest: String
+    invest: String,
+    signed_off: Boolean
 });
 
 module.exports = mongoose.model("Interview", interviewSchema);

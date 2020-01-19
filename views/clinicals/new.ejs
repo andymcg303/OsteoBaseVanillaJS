@@ -27,6 +27,8 @@
                 <textarea name="clinical[TTT]" id="TTT-text" class="text-input form-control" rows="6"></textarea>
             </div>
 
+            <input name="clinical[signed_off]" type="hidden" value="false">
+
             <div class="form-group align-self-end">
                 <button class="btn btn-success" id="submit-new-clinical-button">Submit</button>
                 <a href="/patients/<%= patient._id %>" class="btn btn-warning" id="cancel-new-clinical-button">Cancel</a>
