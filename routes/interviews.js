@@ -72,7 +72,20 @@ router.delete("/:interview_id", (req, res) => {
 		if(err){
 			res.redirect("back");
 		} else {
-			res.redirect("/patients/" + patientId);
+			Patient.findByIdAndUpdate(patientId,
+				{
+					$pull: {
+						interviews: req.params.interview_id
+					}
+				}, function(err){
+					if (err){
+						console.log(err);
+					} else {
+						res.redirect("/patients/" + patientId);
+					}
+
+				}
+			)
 		}
 	});
 });

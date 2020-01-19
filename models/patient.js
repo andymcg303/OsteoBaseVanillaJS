@@ -32,6 +32,7 @@ const patientSchema = new mongoose.Schema({
     ]
 });
 
+// remove assoc medhists
 patientSchema.pre('remove', async function(next){
   try {
     await MedHist.deleteMany({
@@ -45,6 +46,7 @@ patientSchema.pre('remove', async function(next){
   }
 });
 
+// remove assoc interviews
 patientSchema.pre('remove', async function(next){
   try {
     await Interview.deleteMany({
@@ -58,6 +60,7 @@ patientSchema.pre('remove', async function(next){
   }
 });
 
+// remove assoc clinicals
 patientSchema.pre('remove', async function(next){
   try {
     await Clinical.deleteMany({

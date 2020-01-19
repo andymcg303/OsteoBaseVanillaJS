@@ -78,14 +78,13 @@ router.get("/:id", (req, res) => {
 // });
 
 // UPDATE - Update selected patient, then redirect
-router.put("/:id", (req, res, next) => {
-    Patient.findByIdAndUpdate(req.params.id, req.body.patient, (err, updatedPatient) => {
+router.put("/:id", (req, res) => {
+    Patient.findByIdAndUpdate(req.params.id, req.body.patient, {new: true}, (err, updatedPatient) => {
         if (err){
             console.log(err); 
         } else {
-            next();
             //json is redundant as not repainting DOM
-            //res.json(updatedPatient);
+            res.json(updatedPatient);
         }    
     });
 });

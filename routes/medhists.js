@@ -72,7 +72,21 @@ router.delete("/:medhist_id", (req, res) => {
 		if(err){
 			res.redirect("back");
 		} else {
-			res.redirect("/patients/" + patientId);
+			Patient.findByIdAndUpdate(patientId,
+				{
+					$pull: {
+						medhists: req.params.medhist_id
+					}
+				}, function(err){
+					if (err){
+						console.log(err);
+					} else {
+						res.redirect("/patients/" + patientId);
+					}
+
+				}
+
+			)
 		}
 	});
 });
