@@ -47,10 +47,13 @@
             <div class="form-group col-lg-6">    
                 <label for="invest-edit">Investigations:</label>
                 <input id="invest-edit" name="interview[invest]" type="text" class="form-control" value="<%= interview.invest %>" disabled>
-            </div>        
+            </div>
+            
+            <!-- Hidden div for signoff -->
+            <div class="signed-off" style="display: none;"><%= interview.signed_off %></div>
                     
             <div class="form-group col-lg-6 align-self-end">
-                <div class="btn btn-info edit-button" id="edit-interview-button">Edit Consultation</div>
+                <div class="btn btn-info edit-button signoff-edit-button" id="edit-interview-button">Edit Consultation</div>
                 <button class="btn btn-success submit-edit-button" id="submit-edit-interview-button">Submit</button>
                 <div class="btn btn-warning cancel-edit-button" id="cancel-edit-interview-button">Cancel</div>
                 <input type="submit" class="btn btn-danger delete-button" id="delete-interview-button" value="Delete" form="delete-interview-form">
