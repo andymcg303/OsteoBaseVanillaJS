@@ -64,11 +64,11 @@ $editButton.click(function(){
 });
 
 function disableEditForm(){
-    $submitEditButton.toggle();
-    $cancelEditButton.toggle();
     $editButton.toggle();
-    $deleteButton.toggle();
     $signoffButton.toggle();
+    $submitEditButton.hide();
+    $cancelEditButton.hide();
+    $deleteButton.hide();
     $editFormControls.prop('disabled',true);
 }
 
@@ -82,7 +82,6 @@ $cancelEditButton.click(function(){
 
 // Submit Edit Details
 $editForm.submit(function(e){
-    debugger;
     e.preventDefault();
     let $data = $(this).serialize();
     let $formAction = $(this).attr('action');
@@ -90,8 +89,8 @@ $editForm.submit(function(e){
         url: $formAction,
         data: $data,
         method: 'PUT',
-        complete: disableEditForm()
-    });    
+    });
+    disableEditForm();    
 });
 
 // DELETE FUNCTIONALITY --- Only use AJAX for a confirm prompt 
@@ -119,7 +118,6 @@ if ($('.edit-form .hidden-signed-off').val() === "false"){
 
 // Perform signoff 
 $signoffButton.click(function(){
-    debugger;
     let confirmResponse = confirm('This will permanently lock this item. Are you sure?');
     if (confirmResponse) {
         $('.hidden-signed-off').val(true);
