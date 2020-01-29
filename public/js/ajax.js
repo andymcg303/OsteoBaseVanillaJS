@@ -50,12 +50,14 @@ let $editForm = $('.edit-form'),
     $cancelEditButton = $('.cancel-edit-button'),
     $deleteButton = $('.delete-button'),
     $deleteForm = $('.delete-form'),
-    $deletePatientForm = $('#delete-patient-form');
+    $deletePatientForm = $('#delete-patient-form'),
+    $signoffButton = $('.signoff-button');
 
 // Enable Edit form and buttons
 $editButton.click(function(){
     $(this).toggle();
     $submitEditButton.toggle();
+    $signoffButton.toggle();
     $cancelEditButton.css('display', 'inline-block');
     $deleteButton.css('display', 'inline-block');
     $editFormControls.prop('disabled',false);
@@ -66,6 +68,7 @@ function disableEditForm(){
     $cancelEditButton.toggle();
     $editButton.toggle();
     $deleteButton.toggle();
+    $signoffButton.toggle();
     $editFormControls.prop('disabled',true);
 }
 
@@ -79,6 +82,7 @@ $cancelEditButton.click(function(){
 
 // Submit Edit Details
 $editForm.submit(function(e){
+    debugger;
     e.preventDefault();
     let $data = $(this).serialize();
     let $formAction = $(this).attr('action');
@@ -107,10 +111,22 @@ $deletePatientForm.submit(function(e){
 });
 
 // SIGNOFF FUNCTIONALITY
-// Show Edit button if not signed off
-if ($('.edit-form .signed-off').text() === "false"){
+// Show Edit button and Signoff button if not signed off
+if ($('.edit-form .hidden-signed-off').text() === "false"){
     $('.signoff-edit-button').css('display', 'inline-block');
+    $signoffButton.css('display', 'inline-block');
 }
+
+// Perform signoff 
+$signoffButton.click(function(){
+    debugger;
+    let confirmResponse = confirm('This will permanently lock this item. Are you sure?');
+    if (confirmResponse) {
+        $('.hidden-signed-off').text("true");
+        // trigger edit form submission ie update
+        $editForm.trigger('submit');
+    }
+});
 
 // add signoff icon to signoff items
 $('.signoff-item .signed-off').each(function(){

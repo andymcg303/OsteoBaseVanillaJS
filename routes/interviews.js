@@ -30,7 +30,8 @@ router.post("/", (req, res) => {
 				} else {
 					foundPatient.interviews.push(newInterview);
 					foundPatient.save();
-					res.redirect("/patients/" + foundPatient._id);
+					res.render("./interviews/show", {patient: foundPatient, interview: newInterview, moment: moment});
+					// res.redirect("/patients/" + foundPatient._id);
 				}
 			});
 		}

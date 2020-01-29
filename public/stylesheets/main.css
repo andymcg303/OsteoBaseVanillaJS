@@ -5,7 +5,8 @@
 .submit-edit-button, 
 .cancel-edit-button,
 .delete-button,
- .signoff-edit-button{
+.signoff-edit-button,
+.signoff-button{
     display: none;
 }
 

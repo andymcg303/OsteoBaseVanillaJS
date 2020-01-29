@@ -50,13 +50,14 @@
             </div>
             
             <!-- Hidden div for signoff -->
-            <div class="signed-off" style="display: none;"><%= interview.signed_off %></div>
+            <div class="hidden-signed-off" style="display: none;"><%= interview.signed_off %></div>
                     
             <div class="form-group col-lg-6 align-self-end">
                 <div class="btn btn-info edit-button signoff-edit-button" id="edit-interview-button">Edit Consultation</div>
-                <button class="btn btn-success submit-edit-button" id="submit-edit-interview-button">Submit</button>
+                <button class="btn btn-success submit-edit-button" id="submit-edit-interview-button">Save</button>
                 <div class="btn btn-warning cancel-edit-button" id="cancel-edit-interview-button">Cancel</div>
                 <input type="submit" class="btn btn-danger delete-button" id="delete-interview-button" value="Delete" form="delete-interview-form">
+                <div class="btn btn-dark signoff-button" id="signoff-interview-button">Sign Off</div>
             </div>
         
         </div>
