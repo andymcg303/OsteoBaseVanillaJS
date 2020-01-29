@@ -49,8 +49,8 @@
                 <input id="invest-edit" name="interview[invest]" type="text" class="form-control" value="<%= interview.invest %>" disabled>
             </div>
             
-            <!-- Hidden div for signoff -->
-            <div class="hidden-signed-off" style="display: none;"><%= interview.signed_off %></div>
+            <!-- Hidden input for signoff -->
+            <input class="hidden-signed-off" type="text" name="interview[signed_off]" style="display: none" value="<%= interview.signed_off %>">
                     
             <div class="form-group col-lg-6 align-self-end">
                 <div class="btn btn-info edit-button signoff-edit-button" id="edit-interview-button">Edit Consultation</div>

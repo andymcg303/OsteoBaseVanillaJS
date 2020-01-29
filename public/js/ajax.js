@@ -112,7 +112,7 @@ $deletePatientForm.submit(function(e){
 
 // SIGNOFF FUNCTIONALITY
 // Show Edit button and Signoff button if not signed off
-if ($('.edit-form .hidden-signed-off').text() === "false"){
+if ($('.edit-form .hidden-signed-off').val() === "false"){
     $('.signoff-edit-button').css('display', 'inline-block');
     $signoffButton.css('display', 'inline-block');
 }
@@ -122,7 +122,7 @@ $signoffButton.click(function(){
     debugger;
     let confirmResponse = confirm('This will permanently lock this item. Are you sure?');
     if (confirmResponse) {
-        $('.hidden-signed-off').text("true");
+        $('.hidden-signed-off').val(true);
         // trigger edit form submission ie update
         $editForm.trigger('submit');
     }
