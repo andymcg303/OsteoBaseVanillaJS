@@ -68,7 +68,7 @@ router.put("/:clinical_id", (req, res) => {
 // DESTROY Clinical
 router.delete("/:clinical_id", (req, res) => {
 	let patientId = req.params.id;
-	Clinical.findByIdAndRemove(req.params.clinical_id, function(err){
+	Clinical.findByIdAndRemove(req.params.clinical_id, (err) => {
 		if(err){
 			res.redirect("back");
 		} else {

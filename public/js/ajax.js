@@ -121,7 +121,7 @@ $signoffButton.click(function(){
     let confirmResponse = confirm('This will permanently lock this item from further editing. Are you sure?');
     if (confirmResponse) {
         $('.hidden-signed-off').val(true);
-        // trigger edit form submission ie update
+        // trigger edit form submission ie update with signed off value
         $editForm.trigger('submit');
     }
 });

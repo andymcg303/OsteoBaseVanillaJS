@@ -12,7 +12,7 @@ function escapeRegex(text){
 router.get("/", (req, res) => {
     if(req.query.keyword) {
         const regex = new RegExp(escapeRegex(req.query.keyword), 'gi');
-        Patient.find({surname: regex}, function(err, foundPatients){
+        Patient.find({surname: regex}, (err, foundPatients) => {
             if (err){
                 console.log(err);
             } else {
@@ -67,15 +67,6 @@ router.get("/:id", (req, res) => {
 
 // SUPRECEEDED BY AJAX
 // // EDIT - Show Edit Form for selected patient
-// router.get("/:id/edit", (req, res) => {
-//     Patient.findById(req.params.id, (err, foundPatient) => {
-//         if (err){
-//             console.log(err);
-//         } else {
-//             res.render("./patients/edit", {patient: foundPatient});
-//         }
-//     });
-// });
 
 // UPDATE - Update selected patient, then redirect
 router.put("/:id", (req, res) => {
@@ -89,12 +80,14 @@ router.put("/:id", (req, res) => {
     });
 });
 
-router.delete("/:id", function(req, res){
-    Patient.findById(req.params.id, function(err, foundPatient){
+
+// DESTROY - Delete patient. Deleting child data handled in model
+router.delete("/:id", (req, res) => {
+    Patient.findById(req.params.id, (err, foundPatient) => {
         if (err){
             console.log(err);
         } else {
-            foundPatient.remove(function(err){
+            foundPatient.remove((err) => {
                 if (err) {
                     console.log(err)
                 } else {

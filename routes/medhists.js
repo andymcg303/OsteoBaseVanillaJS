@@ -43,7 +43,7 @@ router.get("/:medhist_id", (req, res) => {
 		if(err){
 			console.log(err);
 		} else {
-			MedHist.findById(req.params.medhist_id, function(err, foundMedHist){
+			MedHist.findById(req.params.medhist_id, (err, foundMedHist) => {
 				if(err){
 					res.redirect("back");
 				} else {
@@ -68,7 +68,7 @@ router.put("/:medhist_id", (req, res) => {
 // DESTROY
 router.delete("/:medhist_id", (req, res) => {
 	let patientId = req.params.id;
-	MedHist.findByIdAndRemove(req.params.medhist_id, function(err){
+	MedHist.findByIdAndRemove(req.params.medhist_id, (err) => {
 		if(err){
 			res.redirect("back");
 		} else {

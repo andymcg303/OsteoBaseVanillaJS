@@ -43,7 +43,7 @@ router.get("/:interview_id", (req, res) => {
 		if(err){
 			console.log(err);
 		} else {
-			Interview.findById(req.params.interview_id, function(err, foundInterview){
+			Interview.findById(req.params.interview_id, (err, foundInterview) => {
 				if(err){
 					res.redirect("back");
 				} else {
@@ -68,7 +68,7 @@ router.put("/:interview_id", (req, res) => {
 // DESTROY Interview
 router.delete("/:interview_id", (req, res) => {
 	let patientId = req.params.id;
-	Interview.findByIdAndRemove(req.params.interview_id, function(err){
+	Interview.findByIdAndRemove(req.params.interview_id, (err) => {
 		if(err){
 			res.redirect("back");
 		} else {
