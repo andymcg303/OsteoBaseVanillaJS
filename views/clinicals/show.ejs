@@ -30,13 +30,15 @@
                 <textarea name="clinical[TTT]" id="TTT-edit" class="form-control" rows="6" disabled><%= clinical.TTT %></textarea>
             </div>
 
-            <div class="signed-off" style="display: none;"><%= clinical.signed_off %></div>
+            <!-- Hidden input for signoff -->
+            <input class="hidden-signed-off" type="text" name="clinical[signed_off]" style="display: none" value="<%= clinical.signed_off %>">
 
             <div class="form-group col-lg-6 align-self-end">
                 <div class="btn btn-info edit-button signoff-edit-button" id="edit-clinical-button">Edit Clinical Session</div>
                 <button class="btn btn-success submit-edit-button" id="submit-edit-clinical-button">Submit</button>
                 <div class="btn btn-warning cancel-edit-button" id="cancel-edit-clinical-button">Cancel</div>
                 <input type="submit" class="btn btn-danger delete-button" id="delete-clinical-button" value="Delete" form="delete-clinical-form">
+                <div class="btn btn-dark signoff-button" id="signoff-clinical-button">Sign Off</div>
             </div>
 
         </div>    

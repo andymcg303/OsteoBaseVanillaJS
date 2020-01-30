@@ -30,7 +30,7 @@ router.post("/", (req, res) => {
 				} else {
 					foundPatient.clinicals.push(newClinical);
 					foundPatient.save();
-					res.redirect("/patients/" + foundPatient._id);
+					res.redirect("/patients/" + foundPatient._id + "/clinicals/" + newClinical._id);
 				}
 			});
 		}
@@ -54,7 +54,7 @@ router.get("/:clinical_id", (req, res) => {
 	});
 });
 		
-// UPDATE MedHist - Update one comment, the redirect
+// UPDATE MedHist - Update one clinical, then disable controls
 router.put("/:clinical_id", (req, res) => {
 	Clinical.findByIdAndUpdate(req.params.clinical_id, req.body.clinical, (err, updatedClinical) => {
 		if(err){

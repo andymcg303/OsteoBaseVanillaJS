@@ -18,7 +18,7 @@ router.get("/new", (req, res) => {
 	});
 });
 
-// CREATE Interview - Create New Interview then redirect to Show Patient
+// CREATE Interview - Create New Interview then redirect to Edit Interview Form
 router.post("/", (req, res) => {
 	Patient.findById(req.params.id, (err, foundPatient) => {
 		if(err){
@@ -30,8 +30,7 @@ router.post("/", (req, res) => {
 				} else {
 					foundPatient.interviews.push(newInterview);
 					foundPatient.save();
-					res.render("./interviews/show", {patient: foundPatient, interview: newInterview, moment: moment});
-					// res.redirect("/patients/" + foundPatient._id);
+					res.redirect("/patients/" + foundPatient._id + "/interviews/" + newInterview._id);
 				}
 			});
 		}
