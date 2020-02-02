@@ -1,20 +1,26 @@
-<!DOCTYPE html>
-<html>
-    <head>
-		<title>OsteoBase</title>
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-		<link rel="stylesheet" href="/stylesheets/main.css">
-	</head>
-	<body>
+<% include ./partials/header %>
 
+<div class="container">
 	<h1 id="login-text">Please Log In</h1>
 	
 	<form action="/login" method="POST">
-		<input type="text" name="username" placeholder="username">
-		<input type="password" name="password" placeholder="password">
-		<input id="signup-login-button" class="btn btn-lg btn-primary" type="submit" value="Login">	
+		<div class="form-row">
+			<div class="form-group col-md-3">
+				<label for="login-username">User Name</label>
+				<input type="text" class="form-control" name="username" placeholder="username">
+			</div>	
+			<div class="form-group col-md-3">
+				<label for="login-password">Password</label>
+				<input type="password" class="form-control" name="password" placeholder="password">
+			</div>	
+			<div class="form-group col-md-3 align-self-end">
+				<input id="signup-login-button" class="btn btn-primary" type="submit" value="Login">	
+			</div>
+		</div>	
 	</form>
 
 	<a href="/signup">Do you need to sign up?</a>
+
+</div>
 
 <% include ./partials/footer %>

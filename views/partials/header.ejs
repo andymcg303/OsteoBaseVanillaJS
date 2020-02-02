@@ -8,9 +8,17 @@
 	<body>
 
 	<nav class="navbar navbar-dark bg-dark">
-		<a class="navbar-brand" href="/">OsteoBase</a>
-		<form class="form-inline" id="search">
-			<input class="form-control mr-sm-2" type="search" placeholder="Surname" name="keyword" id="search-text" aria-label="Search">
-			<button class="btn btn-outline-light my-2 my-sm-0" type="submit">Find Patients</button>
-		</form>
+		<!-- <div class="container-fluid"> -->
+			<!-- <div class="navbar-header"> -->
+				<a class="navbar-brand" href="/">OsteoBase</a>
+			<!-- </div> -->
+			<% if (currentUser) { %>
+				<a href="#">Signed In As <%= currentUser.username %></a>
+				<a href="/logout">Logout</a>
+			<% } %>
+			<form class="form-inline" id="search">
+				<input class="form-control mr-sm-2" type="search" placeholder="Surname" name="keyword" id="search-text" aria-label="Search">
+				<button class="btn btn-outline-light my-2 my-sm-0" type="submit">Find Patients</button>
+			</form>
+		<!-- </div> -->
 	</nav>

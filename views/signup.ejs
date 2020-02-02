@@ -1,1 +1,27 @@
-what a plonker
+<% include ./partials/header %>
+	
+    <div class="container">
+
+        <h1 id="signup-text">Please Create a new User</h1>
+        
+        <form action="/signup" method="POST">
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="signup-username">User Name</label>
+                    <input type="text" class="form-control" name="username" placeholder="username">
+                </div>	
+                <div class="form-group col-md-3">
+                    <label for="signup-password">Password</label>
+                    <input type="password" class="form-control" name="password" placeholder="password">
+                </div>	
+                <div class="form-group col-md-3 align-self-end">
+                    <input id="signup-button" class="btn btn-secondary" type="submit" value="Sign Up">	
+                </div>
+            </div>	
+        </form>
+    
+        <a href="/login">Back to Log In?</a>
+    
+    </div>    
+
+<% include ./partials/footer %>
