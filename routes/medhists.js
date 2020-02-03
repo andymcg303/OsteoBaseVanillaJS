@@ -1,14 +1,15 @@
-const express   = require("express"),
-	  router	= express.Router({mergeParams: true}),
-	  moment  = require("moment"),
-      Patient   = require("../models/patient"),
-	  MedHist = require("../models/medhist");
+const express   	= require("express"),
+	  router		= express.Router({mergeParams: true}),
+	  moment  		= require("moment"),
+      Patient   	= require("../models/patient"),
+	  MedHist 		= require("../models/medhist"),
+	  middleware	= require("../middleware");
 
 // ROUTES   
 // INDEX - N/A as listed on patient show page     
 
 // NEW - Show New MedHist Form
-router.get("/new", (req, res) => {
+router.get("/new", middleware.isLoggedIn, (req, res) => {
 	Patient.findById(req.params.id, (err, foundPatient) => {
 		if(err){
 		   console.log(err);
@@ -19,7 +20,7 @@ router.get("/new", (req, res) => {
 });
 
 // CREATE MedHist - Create New MedHist then redirect to Show Patient
-router.post("/", (req, res) => {
+router.post("/", middleware.isLoggedIn, (req, res) => {
 	Patient.findById(req.params.id, (err, foundPatient) => {
 		if(err){
 			console.log(err);		
@@ -38,7 +39,7 @@ router.post("/", (req, res) => {
 });
 
 // SHOW - Show one medhist
-router.get("/:medhist_id", (req, res) => {
+router.get("/:medhist_id", middleware.isLoggedIn, (req, res) => {
 	Patient.findById(req.params.id, (err, foundPatient) => {
 		if(err){
 			console.log(err);
@@ -55,7 +56,7 @@ router.get("/:medhist_id", (req, res) => {
 });
 			
 // UPDATE MedHist - Update one medhist
-router.put("/:medhist_id", (req, res) => {
+router.put("/:medhist_id", middleware.isLoggedIn, (req, res) => {
 	MedHist.findByIdAndUpdate(req.params.medhist_id, req.body.medhist, (err, updatedMedhist) => {
 		if(err){
 			res.redirect("back");
@@ -66,7 +67,7 @@ router.put("/:medhist_id", (req, res) => {
 });
 
 // DESTROY
-router.delete("/:medhist_id", (req, res) => {
+router.delete("/:medhist_id", middleware.isLoggedIn, (req, res) => {
 	let patientId = req.params.id;
 	MedHist.findByIdAndRemove(req.params.medhist_id, (err) => {
 		if(err){

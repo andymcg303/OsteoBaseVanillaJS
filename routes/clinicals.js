@@ -1,14 +1,15 @@
-const express   = require("express"),
-	  router	= express.Router({mergeParams: true}),
-	  moment	= require("moment"),
-      Patient   = require("../models/patient"),
-	  Clinical = require("../models/clinical");
+const express   	= require("express"),
+	  router		= express.Router({mergeParams: true}),
+	  moment		= require("moment"),
+      Patient   	= require("../models/patient"),
+	  Clinical 		= require("../models/clinical"),
+	  middleware	= require("../middleware");
 
 // ROUTES   
 // INDEX - N/A as listed on patient show page     
 
 // NEW - Show New Clinicals Form
-router.get("/new", (req, res) => {
+router.get("/new", middleware.isLoggedIn, (req, res) => {
 	Patient.findById(req.params.id, (err, foundPatient) => {
 		if(err){
 		   console.log(err);
@@ -19,7 +20,7 @@ router.get("/new", (req, res) => {
 });
 
 // CREATE Clinical - Create New Clinical then redirect to Show Patient
-router.post("/", (req, res) => {
+router.post("/", middleware.isLoggedIn, (req, res) => {
 	Patient.findById(req.params.id, (err, foundPatient) => {
 		if(err){
 			console.log(err);		
@@ -38,7 +39,7 @@ router.post("/", (req, res) => {
 });
 
 // SHOW - Show one clinical
-router.get("/:clinical_id", (req, res) => {
+router.get("/:clinical_id", middleware.isLoggedIn, (req, res) => {
 	Patient.findById(req.params.id, (err, foundPatient) => {
 		if(err){
 			console.log(err);
@@ -55,7 +56,7 @@ router.get("/:clinical_id", (req, res) => {
 });
 		
 // UPDATE MedHist - Update one clinical, then disable controls
-router.put("/:clinical_id", (req, res) => {
+router.put("/:clinical_id", middleware.isLoggedIn, (req, res) => {
 	Clinical.findByIdAndUpdate(req.params.clinical_id, req.body.clinical, (err, updatedClinical) => {
 		if(err){
 			res.redirect("back");
@@ -66,7 +67,7 @@ router.put("/:clinical_id", (req, res) => {
 });
 
 // DESTROY Clinical
-router.delete("/:clinical_id", (req, res) => {
+router.delete("/:clinical_id", middleware.isLoggedIn, (req, res) => {
 	let patientId = req.params.id;
 	Clinical.findByIdAndRemove(req.params.clinical_id, (err) => {
 		if(err){
