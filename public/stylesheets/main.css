@@ -1,7 +1,5 @@
-#new-patient-form {
-    display: none;
-}
 
+#new-patient-form,
 .submit-edit-button, 
 .cancel-edit-button,
 .delete-button,
