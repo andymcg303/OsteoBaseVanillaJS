@@ -10,7 +10,6 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
-    "dotenv": "^8.2.0",
     "ejs": "^2.7.1",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
@@ -28,5 +27,11 @@
   "bugs": {
     "url": "https://github.com/andymcg303/OsteoBase/issues"
   },
-  "homepage": "https://github.com/andymcg303/OsteoBase#readme"
+  "homepage": "https://github.com/andymcg303/OsteoBase#readme",
+  "devDependencies": {
+    "dotenv": "^8.2.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.20.1"
+  }
 }
