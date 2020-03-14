@@ -2,7 +2,7 @@ const express       = require("express"),
       router        = express.Router({mergeParams: true}),
       moment        = require("moment"),
       Patient       = require("../models/patient"),
-      middleware    = require("../middleware");
+      { isLoggedIn }    = require("../middleware");
  
 function escapeRegex(text){
     return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
@@ -10,7 +10,7 @@ function escapeRegex(text){
 
 // ROUTES   
 // INDEX - List all patients      
-router.get("/", middleware.isLoggedIn, (req, res) => {
+router.get("/", isLoggedIn, (req, res) => {
     if(req.query.keyword) {
         const regex = new RegExp(escapeRegex(req.query.keyword), 'gi');
         Patient.find({surname: regex}, (err, foundPatients) => {
@@ -37,10 +37,10 @@ router.get("/", middleware.isLoggedIn, (req, res) => {
 });
 
 // NEW - Show New Patient Form
-router.get("/new",  middleware.isLoggedIn, (req, res) => res.render("./patients/new"));
+router.get("/new",  isLoggedIn, (req, res) => res.render("./patients/new"));
 
 // CREATE - Create New Patient then redirect to patients
-router.post("/",  middleware.isLoggedIn, (req, res) => {
+router.post("/",  isLoggedIn, (req, res) => {
 
     Patient.create(req.body.patient, (err, newPatient) => {
         if(err){
@@ -52,7 +52,7 @@ router.post("/",  middleware.isLoggedIn, (req, res) => {
 });
 
 // SHOW - Show info about 1 patient
-router.get("/:id", middleware.isLoggedIn, (req, res) => {
+router.get("/:id", isLoggedIn, (req, res) => {
     Patient.findById(req.params.id)
         .populate("interviews")
         .populate("medhists")
@@ -70,7 +70,7 @@ router.get("/:id", middleware.isLoggedIn, (req, res) => {
 // // EDIT - Show Edit Form for selected patient
 
 // UPDATE - Update selected patient, then redirect
-router.put("/:id",  middleware.isLoggedIn, (req, res) => {
+router.put("/:id",  isLoggedIn, (req, res) => {
     Patient.findByIdAndUpdate(req.params.id, req.body.patient, {new: true}, (err, updatedPatient) => {
         if (err){
             console.log(err); 
@@ -83,7 +83,7 @@ router.put("/:id",  middleware.isLoggedIn, (req, res) => {
 
 
 // DESTROY - Delete patient. Deleting child data handled in model
-router.delete("/:id",  middleware.isLoggedIn, (req, res) => {
+router.delete("/:id",  isLoggedIn, (req, res) => {
     Patient.findById(req.params.id, (err, foundPatient) => {
         if (err){
             console.log(err);

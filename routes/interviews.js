@@ -3,13 +3,13 @@ const express   	= require("express"),
 	  moment		= require("moment"),
       Patient   	= require("../models/patient"),
 	  Interview 	= require("../models/interview"),
-	  middleware	= require("../middleware");
+	  { isLoggedIn }	= require("../middleware");
 
 // ROUTES   
 // INDEX - N/A as listed on patient show page     
 
 // NEW - Show New Interview Form
-router.get("/new", middleware.isLoggedIn, (req, res) => {
+router.get("/new", isLoggedIn, (req, res) => {
 	Patient.findById(req.params.id, (err, foundPatient) => {
 		if(err){
 		   console.log(err);
@@ -20,7 +20,7 @@ router.get("/new", middleware.isLoggedIn, (req, res) => {
 });
 
 // CREATE Interview - Create New Interview then redirect to Edit Interview Form
-router.post("/", middleware.isLoggedIn, (req, res) => {
+router.post("/", isLoggedIn, (req, res) => {
 	Patient.findById(req.params.id, (err, foundPatient) => {
 		if(err){
 			console.log(err);		
@@ -39,7 +39,7 @@ router.post("/", middleware.isLoggedIn, (req, res) => {
 });
 
 // SHOW - Show one interview
-router.get("/:interview_id", middleware.isLoggedIn, (req, res) => {
+router.get("/:interview_id", isLoggedIn, (req, res) => {
 	Patient.findById(req.params.id, (err, foundPatient) => {
 		if(err){
 			console.log(err);
@@ -56,7 +56,7 @@ router.get("/:interview_id", middleware.isLoggedIn, (req, res) => {
 });
 
 // UPDATE Interview - Update one interview, then disable controls
-router.put("/:interview_id", middleware.isLoggedIn, (req, res) => {
+router.put("/:interview_id", isLoggedIn, (req, res) => {
 	Interview.findByIdAndUpdate(req.params.interview_id, req.body.interview, (err, updatedInterview) => {
 		if(err){
 			res.redirect("back");
@@ -67,7 +67,7 @@ router.put("/:interview_id", middleware.isLoggedIn, (req, res) => {
 });
 
 // DESTROY Interview
-router.delete("/:interview_id", middleware.isLoggedIn, (req, res) => {
+router.delete("/:interview_id", isLoggedIn, (req, res) => {
 	let patientId = req.params.id;
 	Interview.findByIdAndRemove(req.params.interview_id, (err) => {
 		if(err){

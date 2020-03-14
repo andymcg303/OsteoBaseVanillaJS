@@ -3,13 +3,13 @@ const express   	= require("express"),
 	  moment  		= require("moment"),
       Patient   	= require("../models/patient"),
 	  MedHist 		= require("../models/medhist"),
-	  middleware	= require("../middleware");
+	  { isLoggedIn }	= require("../middleware");
 
 // ROUTES   
 // INDEX - N/A as listed on patient show page     
 
 // NEW - Show New MedHist Form
-router.get("/new", middleware.isLoggedIn, (req, res) => {
+router.get("/new", isLoggedIn, (req, res) => {
 	Patient.findById(req.params.id, (err, foundPatient) => {
 		if(err){
 		   console.log(err);
@@ -20,7 +20,7 @@ router.get("/new", middleware.isLoggedIn, (req, res) => {
 });
 
 // CREATE MedHist - Create New MedHist then redirect to Show Patient
-router.post("/", middleware.isLoggedIn, (req, res) => {
+router.post("/", isLoggedIn, (req, res) => {
 	Patient.findById(req.params.id, (err, foundPatient) => {
 		if(err){
 			console.log(err);		
@@ -39,7 +39,7 @@ router.post("/", middleware.isLoggedIn, (req, res) => {
 });
 
 // SHOW - Show one medhist
-router.get("/:medhist_id", middleware.isLoggedIn, (req, res) => {
+router.get("/:medhist_id", isLoggedIn, (req, res) => {
 	Patient.findById(req.params.id, (err, foundPatient) => {
 		if(err){
 			console.log(err);
@@ -56,7 +56,7 @@ router.get("/:medhist_id", middleware.isLoggedIn, (req, res) => {
 });
 			
 // UPDATE MedHist - Update one medhist
-router.put("/:medhist_id", middleware.isLoggedIn, (req, res) => {
+router.put("/:medhist_id", isLoggedIn, (req, res) => {
 	MedHist.findByIdAndUpdate(req.params.medhist_id, req.body.medhist, (err, updatedMedhist) => {
 		if(err){
 			res.redirect("back");
@@ -67,7 +67,7 @@ router.put("/:medhist_id", middleware.isLoggedIn, (req, res) => {
 });
 
 // DESTROY
-router.delete("/:medhist_id", middleware.isLoggedIn, (req, res) => {
+router.delete("/:medhist_id", isLoggedIn, (req, res) => {
 	let patientId = req.params.id;
 	MedHist.findByIdAndRemove(req.params.medhist_id, (err) => {
 		if(err){

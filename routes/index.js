@@ -1,6 +1,8 @@
 const express = require('express');
 const passport = require('passport');
 const User = require('../models/user');
+const { errorHandler } = require('../middleware');
+const { postRegister } = require('../controllers');
 
 const router = express.Router();
 
@@ -14,19 +16,21 @@ router.get('/login', (req, res) => res.render('login'));
 router.get('/signup', (req, res) => res.render('signup'));
 
 // Handle Signup Logic
-router.post('/signup', (req, res) => {
-  const newUser = new User({ username: req.body.username });
-  User.register(newUser, req.body.password, (err) => {
-    if (err) {
-      // req.flash("error", err.message);
-      return res.redirect('/signup');
-    }
-    passport.authenticate('local')(req, res, () => {
-      // req.flash("success", "Welcome to OsteoBase" + user.username);
-      res.redirect('/patients');
-    });
-  });
-});
+router.post('/signup', errorHandler(postRegister));
+
+// router.post('/signup', (req, res) => {
+//   const newUser = new User({ username: req.body.username });
+//   User.register(newUser, req.body.password, (err) => {
+//     if (err) {
+//       // req.flash("error", err.message);
+//       return res.redirect('/signup');
+//     }
+//     passport.authenticate('local')(req, res, () => {
+//       // req.flash("success", "Welcome to OsteoBase" + user.username);
+//       res.redirect('/patients');
+//     });
+//   });
+// });
 
 // Handle Login Logic
 router.post('/login', (req, res, next) => {
