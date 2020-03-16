@@ -18,30 +18,15 @@ router.get('/signup', (req, res) => res.render('signup'));
 // Handle Signup Logic
 router.post('/signup', errorHandler(postRegister));
 
-// router.post('/signup', (req, res) => {
-//   const newUser = new User({ username: req.body.username });
-//   User.register(newUser, req.body.password, (err) => {
-//     if (err) {
-//       // req.flash("error", err.message);
-//       return res.redirect('/signup');
-//     }
-//     passport.authenticate('local')(req, res, () => {
-//       // req.flash("success", "Welcome to OsteoBase" + user.username);
-//       res.redirect('/patients');
-//     });
-//   });
-// });
-
-// Handle Login Logic
-router.post('/login', (req, res, next) => {
-  passport.authenticate('local',
+// // Handle Login Logic
+router.post('/login', passport.authenticate('local',
     {
       successRedirect: '/patients',
       failureRedirect: '/login',
       // failureFlash: true,
       // successFlash: "Welcome to YelpCamp, " + req.body.username + "!"
-    })(req, res);
-});
+    }
+));
 
 // Logout
 router.get('/logout', (req, res) => {
