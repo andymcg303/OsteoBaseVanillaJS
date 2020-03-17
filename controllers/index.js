@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const passport = require('passport');
 
 module.exports = {
     async postRegister(req, res, next){
@@ -12,5 +13,21 @@ module.exports = {
         await User.register(newUser, req.body.password);
         
         res.redirect('/patients');
+    },
+
+    postLogin(req, res, next){
+        passport.authenticate('local',
+            {
+                successRedirect: '/patients',
+                failureRedirect: '/login',
+                // failureFlash: true,
+                // successFlash: "Welcome to YelpCamp, " + req.body.username + "!"
+            }
+        )(req, res, next);
+    },
+
+    getLogout(req, res, next){
+        req.logout();
+        res.redirect('/login');
     }
 }

@@ -2,7 +2,7 @@ const express = require('express');
 const passport = require('passport');
 const User = require('../models/user');
 const { errorHandler } = require('../middleware');
-const { postRegister } = require('../controllers');
+const { postRegister, postLogin, getLogout } = require('../controllers');
 
 const router = express.Router();
 
@@ -19,19 +19,9 @@ router.get('/signup', (req, res) => res.render('signup'));
 router.post('/signup', errorHandler(postRegister));
 
 // // Handle Login Logic
-router.post('/login', passport.authenticate('local',
-    {
-      successRedirect: '/patients',
-      failureRedirect: '/login',
-      // failureFlash: true,
-      // successFlash: "Welcome to YelpCamp, " + req.body.username + "!"
-    }
-));
+router.post('/login', postLogin);
 
 // Logout
-router.get('/logout', (req, res) => {
-  req.logout();
-  res.redirect('/login');
-});
+router.get('/logout', getLogout);
 
 module.exports = router;

@@ -92,6 +92,11 @@ $(function(){
             data: $data,
             method: 'PUT',
         });
+    
+        // Make default values the updated values
+        $editFormControls.each(function(){
+            $(this).prop('defaultValue', $(this).val());
+        }); 
         disableEditForm();    
     });
 
