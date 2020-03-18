@@ -1,14 +1,11 @@
 const Patient = require('../models/patient');
 const moment  = require("moment");
 
-function escapeRegex(text){
-    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
-};
-
 module.exports = {
     // Patients Index
     async getPatients(req, res, next){
         if(req.query.keyword) {
+            let escapeRegex = (text) => text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
             const regex = new RegExp(escapeRegex(req.query.keyword), 'gi');
             let foundPatients = await Patient.find({surname: regex});
             res.json(foundPatients);
@@ -48,5 +45,12 @@ module.exports = {
     async updatePatient(req, res, next){
         let updatedPatient = await Patient.findByIdAndUpdate(req.params.id, req.body.patient, {new: true});
         res.json(updatedPatient);
+    },
+
+    // Patient Delete
+    async deletePatient(req, res, next){
+        let foundPatient = await Patient.findById(req.params.id);
+        await foundPatient.remove();
+        res.redirect("/patients");
     }
 }

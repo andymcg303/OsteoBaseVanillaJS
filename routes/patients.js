@@ -7,7 +7,8 @@ const express       = require("express"),
           newPatient, 
           createPatient, 
           showPatient, 
-          updatePatient 
+          updatePatient,
+          deletePatient
     } = require('../controllers/patients');
 
 // ROUTES   
@@ -30,20 +31,6 @@ router.get("/:id", isLoggedIn, errorHandler(showPatient));
 router.put("/:id",  isLoggedIn, errorHandler(updatePatient));
 
 // DESTROY - Delete patient. Deleting child data handled in model
-router.delete("/:id",  isLoggedIn, (req, res) => {
-    Patient.findById(req.params.id, (err, foundPatient) => {
-        if (err){
-            console.log(err);
-        } else {
-            foundPatient.remove((err) => {
-                if (err) {
-                    console.log(err)
-                } else {
-                    res.redirect("/patients");
-                }
-            });
-        }
-    });
-});
+router.delete("/:id",  isLoggedIn, errorHandler(deletePatient));
 
 module.exports = router;
