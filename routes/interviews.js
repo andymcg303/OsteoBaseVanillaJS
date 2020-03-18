@@ -3,40 +3,19 @@ const express   	= require("express"),
 	  moment		= require("moment"),
       Patient   	= require("../models/patient"),
 	  Interview 	= require("../models/interview"),
-	  { isLoggedIn }	= require("../middleware");
+	  { isLoggedIn,
+		errorHandler }	= require("../middleware"),
+	  { newInterview,
+		createInterview } = require('../controllers/interviews');
 
 // ROUTES   
 // INDEX - N/A as listed on patient show page     
 
 // NEW - Show New Interview Form
-router.get("/new", isLoggedIn, (req, res) => {
-	Patient.findById(req.params.id, (err, foundPatient) => {
-		if(err){
-		   console.log(err);
-		} else {
-			res.render("./interviews/new", {patient: foundPatient});	
-		}
-	});
-});
+router.get("/new", isLoggedIn, errorHandler(newInterview));
 
 // CREATE Interview - Create New Interview then redirect to Edit Interview Form
-router.post("/", isLoggedIn, (req, res) => {
-	Patient.findById(req.params.id, (err, foundPatient) => {
-		if(err){
-			console.log(err);		
-		} else {	
-			Interview.create(req.body.interview, (err, newInterview) => {
-				if(err){
-					console.log(err);
-				} else {
-					foundPatient.interviews.push(newInterview);
-					foundPatient.save();
-					res.redirect("/patients/" + foundPatient._id + "/interviews/" + newInterview._id);
-				}
-			});
-		}
-	});
-});
+router.post("/", isLoggedIn, errorHandler(createInterview));
 
 // SHOW - Show one interview
 router.get("/:interview_id", isLoggedIn, (req, res) => {

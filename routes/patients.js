@@ -1,15 +1,13 @@
 const express       = require("express"),
       router        = express.Router({mergeParams: true}),
-      Patient       = require("../models/patient"),
-      { isLoggedIn, errorHandler }    = require("../middleware"),
-      { 
-          getPatients, 
-          newPatient, 
-          createPatient, 
-          showPatient, 
-          updatePatient,
-          deletePatient
-    } = require('../controllers/patients');
+      { isLoggedIn, 
+        errorHandler }    = require("../middleware"),
+      { getPatients, 
+        newPatient, 
+        createPatient, 
+        showPatient, 
+        updatePatient,
+        deletePatient } = require('../controllers/patients');
 
 // ROUTES   
 // INDEX - List all patients      
