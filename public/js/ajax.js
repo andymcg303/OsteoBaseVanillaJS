@@ -20,6 +20,7 @@ $(function(){
     // Post new patient
     $newPatientForm.submit(function(e){
         e.preventDefault();
+        debugger;
         let $newPatientData = $(this).serialize();
         $.post('/patients', $newPatientData, function(data){
             $('#patient-list').append(
@@ -30,6 +31,30 @@ $(function(){
             $newPatientForm.toggle();    
         });
     });
+
+    // $newPatientForm.submit(function(e){
+    //     debugger;
+    //     e.preventDefault();
+    //     let data = new FormData();
+    //     data.append('body', $(this).serialize());
+    //     data.append(files);
+    //     let $newPatientData = $(this).serialize();
+    //     $.ajax({
+    //         type: "POST",
+    //         url: "/patients",
+    //         data: $newPatientData,
+    //         contentType: false,
+    //         success: function(data){
+    //             $('#patient-list').append(
+    //                 `<a class="list-group-item list-group-item-action list-group-item-light" href="/patients/${data._id}">${data.firstname} ${data.surname}<span class="float-right">${moment(data.dob).format('DD/MM/YYYY')}</span></a>`
+    //             );
+    //             $newPatientForm.find('.form-control').val('');
+    //             $newPatientButton.prop('disabled',false);
+    //             $newPatientForm.toggle();    
+    //         } 
+    //     });
+
+    // });
 
     // Search on patients surname functionality
     $('#search').submit(function(e){
@@ -53,11 +78,13 @@ $(function(){
         $deleteButton = $('.delete-button'),
         $deleteForm = $('.delete-form'),
         $deletePatientForm = $('#delete-patient-form'),
-        $signoffButton = $('.signoff-button');
+        $signoffButton = $('.signoff-button'),
+        $viewDocumentsButton = $('#view-documents-button');
 
     // Enable Edit form and buttons
     $editButton.click(function(){
         $(this).toggle();
+        $viewDocumentsButton.toggle();
         $submitEditButton.toggle();
         $signoffButton.toggle();
         $cancelEditButton.css('display', 'inline-block');
@@ -67,6 +94,7 @@ $(function(){
 
     function disableEditForm(){
         $editButton.toggle();
+        $viewDocumentsButton.toggle();
         $signoffButton.toggle();
         $submitEditButton.hide();
         $cancelEditButton.hide();

@@ -1,0 +1,23 @@
+<% include ../partials/header %>
+
+<div class="container">
+    
+    <h3><%= patient.firstname + " " + patient.surname %>'s Uploaded Documents</h3>
+
+    <form action="/patients/<%= patient._id %>/documents" method="POST" enctype="multipart/form-data">
+        <div>
+            <input type="file" accept="images/*" name="images" multiple>
+        </div>
+        <div>
+            <input class="btn btn-success" type="submit" value="Upload">
+        </div>
+        
+    </form>
+
+    <div>
+        <a class="btn btn-secondary mt-2" href="/patients/<%= patient.id %>">Back to Patient Details</a>
+    </div>
+
+</div>
+
+<% include ../partials/footer %>

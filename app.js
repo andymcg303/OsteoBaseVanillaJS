@@ -16,6 +16,7 @@ const patientsRoutes = require('./routes/patients');
 const interviewsRoutes = require('./routes/interviews');
 const medhistsRoutes = require('./routes/medhists');
 const clinicalsRoutes = require('./routes/clinicals');
+const documentsRoutes = require('./routes/documents');
 
 mongoose.connect(process.env.DATABASEURL, {
   useNewUrlParser: true,
@@ -62,6 +63,7 @@ app.use('/patients', patientsRoutes);
 app.use('/patients/:id/interviews', interviewsRoutes);
 app.use('/patients/:id/medhists', medhistsRoutes);
 app.use('/patients/:id/clinicals', clinicalsRoutes);
+app.use('/patients/:id/documents', documentsRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

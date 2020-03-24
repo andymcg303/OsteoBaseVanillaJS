@@ -27,7 +27,7 @@
         </div>
     </div>
 
-    <form action="/patients" method="POST" id="new-patient-form">
+    <form action="/patients" method="POST" id="new-patient-form" enctype="multipart/form-data">
 
         <div class="form-row">
             <div class="form-group col-md-3">
@@ -62,9 +62,9 @@
                 <label for="emailIndex">email</label>
                 <input type="email" class="form-control" name="patient[email]" id="emailIndex" placeholder="email">
             </div>
-            <div class="form-group col-md-3 align-self-end">
+            <div class="form-group col-md-6 align-self-end">    
                 <button class="btn btn-success" id="add-new-patient">Add</button>                    
-                <div class="btn btn-warning" id="cancel-new-patient">Cancel</div>    
+                <div class="btn btn-warning" id="cancel-new-patient">Cancel</div>
             </div>    
         </div>
     </form>   
@@ -73,7 +73,7 @@
             
         <div class="col-12 list-group" id="patient-list">
             <% patients.forEach(function(patient){ %>
-                <a class="list-group-item list-group-item-action list-group-item-light" href="/patients/<%= patient._id%>"><%= patient.firstname + " " + patient.surname %><span class="float-right"><%= moment(patient.dob).format('DD/MM/YYYY') %></span></a>
+                <a class="list-group-item list-group-item-action list-group-item-light" href="/patients/<%= patient._id %>"><%= patient.firstname + " " + patient.surname %><span class="float-right"><%= moment(patient.dob).format('DD/MM/YYYY') %></span></a>
             <% }); %>
         </div>
 

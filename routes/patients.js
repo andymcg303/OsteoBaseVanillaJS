@@ -17,13 +17,10 @@ router.get("/", isLoggedIn, errorHandler(getPatients));
 router.get("/new",  isLoggedIn, newPatient);
 
 // CREATE - Create New Patient then redirect to patients
-router.post("/",  isLoggedIn, errorHandler(createPatient));
+router.post("/", isLoggedIn, errorHandler(createPatient));
 
 // SHOW - Show info about 1 patient
 router.get("/:id", isLoggedIn, errorHandler(showPatient));
-
-// SUPRECEEDED BY AJAX
-// // EDIT - Show Edit Form for selected patient
 
 // UPDATE - Update selected patient, then redirect
 router.put("/:id",  isLoggedIn, errorHandler(updatePatient));

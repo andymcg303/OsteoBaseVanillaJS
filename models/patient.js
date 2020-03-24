@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const MedHist = require("./medhist");
 const Interview = require("./interview");
 const Clinical = require("./clinical");
+const Document = require("./document");
 
 const patientSchema = new mongoose.Schema({
     date_created: {type: Date, default: Date.now},
@@ -28,6 +29,12 @@ const patientSchema = new mongoose.Schema({
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Clinical"	
+      }
+    ],
+    documents: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Document"
       }
     ]
 });
@@ -66,6 +73,20 @@ patientSchema.pre('remove', async function(next){
     await Clinical.deleteMany({
       "_id": {
       $in: this.clinicals  
+      }
+    });
+    next();
+  } catch(err) {
+    next(err);
+  }
+});
+
+// remove assoc documents
+patientSchema.pre('remove', async function(next){
+  try {
+    await Document.deleteMany({
+      "_id": {
+      $in: this.documents  
       }
     });
     next();
