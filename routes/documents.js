@@ -5,7 +5,7 @@ const upload        = multer({dest: './uploads/'});
 const { isLoggedIn, 
         errorHandler } = require("../middleware");
 const { getDocuments,
-        // newDocument,   
+        showDocument,   
         createDocuments } = require('../controllers/documents'); 
 //         showPatient, 
 //         updatePatient,
@@ -15,14 +15,14 @@ const { getDocuments,
 // // INDEX - List all documents      
 router.get("/", isLoggedIn, errorHandler(getDocuments));
 
-// NEW - Show New Document Form
+// NEW - Show New Document Form ??? is this needed?
 // router.get("/new",  isLoggedIn, newDocument);
 
 // CREATE - Create New Documents
-router.post("/",  isLoggedIn, upload.array('images', 4), errorHandler(createDocuments));
+router.post("/",  isLoggedIn, upload.array('images'), errorHandler(createDocuments));
 
-// // SHOW - Show info about 1 patient
-// router.get("/:id", isLoggedIn, errorHandler(showPatient));
+// // SHOW - Show 1 document
+router.get("/:document_id", isLoggedIn, errorHandler(showDocument));
 
 // // UPDATE - Update selected patient, then redirect
 // router.put("/:id",  isLoggedIn, errorHandler(updatePatient));

@@ -4,6 +4,10 @@
     
     <h3><%= patient.firstname + " " + patient.surname %>'s Uploaded Documents</h3>
 
+    <% patient.documents.forEach(function(document){ %>
+        <a href="/patients/<%= patient._id%>/documents/<%= document._id %>"><img src="<%= document.url %>" alt="uploaded document" width="100px"></a>
+    <% }); %>
+
     <form action="/patients/<%= patient._id %>/documents" method="POST" enctype="multipart/form-data">
         <div>
             <input type="file" accept="images/*" name="images" multiple>

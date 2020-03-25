@@ -1,0 +1,19 @@
+<% include ../partials/header %>
+
+<div class="container">
+    
+    <h3>Uploaded on  <%= moment(document.date_created).format('DD/MM/YYYY') %></h3>
+
+    <img src="<%= document.url %>" alt="uploaded document" width="500px">
+
+        <div>
+            <input class="btn btn-success" type="submit" value="Button for doing something">
+        </div>   
+
+    <div>
+        <a class="btn btn-secondary mt-2" href="/patients/<%= patient._id %>/documents">Back to Documents List</a>
+    </div>
+
+</div>
+
+<% include ../partials/footer %>

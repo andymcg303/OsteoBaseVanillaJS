@@ -11,11 +11,12 @@ cloudinary.config({
 module.exports = {
     // Documents Index
     async getDocuments(req, res, next){
-        let foundPatient = await Patient.findById(req.params.id);
+        let foundPatient = await Patient.findById(req.params.id).
+            populate('documents').exec();
         res.render('documents/index', { patient: foundPatient });
     },
 
-    // Documentss Create
+    // Documents Create
     async createDocuments(req, res, next){
         let foundPatient = await Patient.findById(req.params.id);
         for (const file of req.files){
@@ -27,14 +28,12 @@ module.exports = {
         res.redirect(`/patients/${foundPatient.id}/documents`);
     },
 
-    // // Documents New
-    // async newDocument(req, res, next){
-    //     let foundPatient = await Patient.findById(req.params.id);
-    //     let newDocument = await Document.create();
-    //     foundPatient.documents.push();
-    //     foundPatient.save();
-    //     res.redirect(`/patients/${foundPatient._id}/documents`);
-    // }
+    // Document Show
+    async showDocument(req, res, next){
+        let foundPatient = await Patient.findById(req.params.id); 
+        let foundDocument = await Document.findById(req.params.document_id);
+        res.render('./documents/show', {document: foundDocument, patient: foundPatient, moment: moment});
+    }
 
 }
 
