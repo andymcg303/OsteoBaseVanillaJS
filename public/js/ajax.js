@@ -32,30 +32,6 @@ $(function(){
         });
     });
 
-    // $newPatientForm.submit(function(e){
-    //     debugger;
-    //     e.preventDefault();
-    //     let data = new FormData();
-    //     data.append('body', $(this).serialize());
-    //     data.append(files);
-    //     let $newPatientData = $(this).serialize();
-    //     $.ajax({
-    //         type: "POST",
-    //         url: "/patients",
-    //         data: $newPatientData,
-    //         contentType: false,
-    //         success: function(data){
-    //             $('#patient-list').append(
-    //                 `<a class="list-group-item list-group-item-action list-group-item-light" href="/patients/${data._id}">${data.firstname} ${data.surname}<span class="float-right">${moment(data.dob).format('DD/MM/YYYY')}</span></a>`
-    //             );
-    //             $newPatientForm.find('.form-control').val('');
-    //             $newPatientButton.prop('disabled',false);
-    //             $newPatientForm.toggle();    
-    //         } 
-    //     });
-
-    // });
-
     // Search on patients surname functionality
     $('#search').submit(function(e){
         e.preventDefault();
@@ -169,5 +145,19 @@ $(function(){
             $(this).parent().append('<svg class="bi bi-lock-fill text-dark float-right" width="1.3em" height="1.3em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><rect width="11" height="9" x="4.5" y="8" rx="2"></rect><path fill-rule="evenodd" d="M6.5 5a3.5 3.5 0 117 0v3h-1V5a2.5 2.5 0 00-5 0v3h-1V5z" clip-rule="evenodd"></path></svg>');
         }    
     });
+
+    // FILE UPLOAD FUNCTIONALITTY
+    $('.upload-edit-button').click(function(){
+        $(this).toggle();
+        $('.upload-tools').toggle();
+        $('.back-to-pt-button').toggle();        
+    });
+
+    $('.cancel-upload-button').click(function(){
+        $('.upload-tools').toggle();
+        $('.upload-edit-button').toggle();
+        $('.back-to-pt-button').toggle();
+    });
+    
     
 });

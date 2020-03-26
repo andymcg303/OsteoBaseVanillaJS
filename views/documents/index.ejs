@@ -4,24 +4,29 @@
     
     <h3><%= patient.firstname + " " + patient.surname %>'s Uploaded Documents</h3>
 
-    <% patient.documents.forEach(function(document){ %>
-        <a href="/patients/<%= patient._id%>/documents/<%= document._id %>"><img src="<%= document.url %>" alt="uploaded document" width="100px"></a>
-    <% }); %>
+    <form class="document-form" action="/patients/<%= patient._id %>/documents" method="POST" enctype="multipart/form-data"></form>
+        <div class="form-row">
 
-    <form action="/patients/<%= patient._id %>/documents" method="POST" enctype="multipart/form-data">
-        <div>
-            <input type="file" accept="images/*" name="images" multiple>
+            <div class="form-group col-12">
+                <% patient.documents.forEach(function(document){ %>
+                    <a href="/patients/<%= patient._id%>/documents/<%= document._id %>"><img src="<%= document.url %>" alt="uploaded document" width="100px"></a>
+                <% }); %>
+            </div>
+
+            <div class="form-group col-12 upload-tools">
+                <input type="file" accept="images/*" name="images" multiple>
+            </div>
+            <div class="form-group col-12 upload-button upload-tools">
+                <input class="btn btn-success" type="submit">
+                <div class="btn btn-warning cancel-upload-button" id="cancel-upload-button">Cancel</div>
+            </div>
         </div>
-        <div>
-            <input class="btn btn-success" type="submit" value="Upload">
-        </div>
-        
     </form>
 
+    <div class="btn btn-info mt-2 upload-edit-button">Edit</div>
     <div>
-        <a class="btn btn-secondary mt-2" href="/patients/<%= patient.id %>">Back to Patient Details</a>
+        <a class="btn btn-secondary mt-2 back-to-pt-button" href="/patients/<%= patient.id %>">Back to Patient Details</a>
     </div>
-
 </div>
 
 <% include ../partials/footer %>
