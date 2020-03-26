@@ -4,23 +4,33 @@
     
     <h3><%= patient.firstname + " " + patient.surname %>'s Uploaded Documents</h3>
 
-    <form class="document-form" action="/patients/<%= patient._id %>/documents" method="POST" enctype="multipart/form-data"></form>
+    <form class="document-form" action="/patients/<%= patient._id %>/documents?_method=PUT" method="POST" enctype="multipart/form-data">
         <div class="form-row">
 
-            <div class="form-group col-12">
-                <% patient.documents.forEach(function(document){ %>
-                    <a href="/patients/<%= patient._id%>/documents/<%= document._id %>"><img src="<%= document.url %>" alt="uploaded document" width="100px"></a>
+            <div class="form-group d-flex justify-content-start flex-wrap">
+                <% patient.documents.forEach(function(document, i){ %>
+                    <div class="mx-1">
+                        <a href="/patients/<%= patient._id%>/documents/<%= document._id %>"><img src="<%= document.url %>" alt="uploaded document" width="150px" id="document<%= i %>"></a>
+                        <div>    
+                            <%= moment(document.date_created).format('DD/MM/YYYY') %>
+                        </div>
+                        <div class="delete-tools">
+                            <input type="checkbox" name="deleteDocuments[]" class="documentDeleteCheckbox" id="document<%= i %>" value="<%= document._id %>">
+                            <label for="document<%= i %>">Delete</label>
+                        </div>    
+                    </div>                   
                 <% }); %>
             </div>
 
             <div class="form-group col-12 upload-tools">
-                <input type="file" accept="images/*" name="images" multiple>
+                <input type="file" accept="images/*" name="documents" multiple>
             </div>
-            <div class="form-group col-12 upload-button upload-tools">
+            <div class="form-group col-12 upload-tools">
                 <input class="btn btn-success" type="submit">
                 <div class="btn btn-warning cancel-upload-button" id="cancel-upload-button">Cancel</div>
             </div>
         </div>
+    
     </form>
 
     <div class="btn btn-info mt-2 upload-edit-button">Edit</div>

@@ -150,13 +150,15 @@ $(function(){
     $('.upload-edit-button').click(function(){
         $(this).toggle();
         $('.upload-tools').toggle();
-        $('.back-to-pt-button').toggle();        
+        $('.back-to-pt-button').toggle();
+        $('.delete-tools').css('visibility','visible');        
     });
 
     $('.cancel-upload-button').click(function(){
         $('.upload-tools').toggle();
         $('.upload-edit-button').toggle();
         $('.back-to-pt-button').toggle();
+        $('.delete-tools').css('visibility','hidden');
     });
     
     

@@ -6,7 +6,7 @@ const { isLoggedIn,
         errorHandler } = require("../middleware");
 const { getDocuments,
         showDocument,   
-        createDocuments } = require('../controllers/documents'); 
+        updateDocuments } = require('../controllers/documents'); 
 //         showPatient, 
 //         updatePatient,
 //         deletePatient } 
@@ -15,17 +15,11 @@ const { getDocuments,
 // // INDEX - List all documents      
 router.get("/", isLoggedIn, errorHandler(getDocuments));
 
-// NEW - Show New Document Form ??? is this needed?
-// router.get("/new",  isLoggedIn, newDocument);
-
-// CREATE - Create New Documents
-router.post("/",  isLoggedIn, upload.array('images'), errorHandler(createDocuments));
+// Update Documents - ie Delete and Create Documents
+router.put("/",  isLoggedIn, upload.array('documents'), errorHandler(updateDocuments));
 
 // // SHOW - Show 1 document
 router.get("/:document_id", isLoggedIn, errorHandler(showDocument));
-
-// // UPDATE - Update selected patient, then redirect
-// router.put("/:id",  isLoggedIn, errorHandler(updatePatient));
 
 // // DESTROY - Delete patient. Deleting child data handled in model
 // router.delete("/:id",  isLoggedIn, errorHandler(deletePatient));
