@@ -146,19 +146,19 @@ $(function(){
         }    
     });
 
-    // FILE UPLOAD FUNCTIONALITTY
+    // DOCUMENT MANAGEMENT FUNCTIONALITTY
     $('.upload-edit-button').click(function(){
         $(this).toggle();
         $('.upload-tools').toggle();
         $('.back-to-pt-button').toggle();
-        $('.delete-tools').css('visibility','visible');        
+        $('#delete-document-button').toggle();        
     });
 
     $('.cancel-upload-button').click(function(){
         $('.upload-tools').toggle();
         $('.upload-edit-button').toggle();
         $('.back-to-pt-button').toggle();
-        $('.delete-tools').css('visibility','hidden');
+        $('#delete-document-button').toggle();
     });
     
     

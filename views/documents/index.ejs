@@ -4,7 +4,7 @@
     
     <h3><%= patient.firstname + " " + patient.surname %>'s Uploaded Documents</h3>
 
-    <form class="document-form" action="/patients/<%= patient._id %>/documents?_method=PUT" method="POST" enctype="multipart/form-data">
+    <form class="document-form" action="/patients/<%= patient._id %>/documents" method="POST" enctype="multipart/form-data">
         <div class="form-row">
 
             <div class="form-group d-flex justify-content-start flex-wrap">
@@ -14,9 +14,9 @@
                         <div>    
                             <%= moment(document.date_created).format('DD/MM/YYYY') %>
                         </div>
-                        <div class="delete-tools">
+                        <div>
                             <input type="checkbox" name="deleteDocuments[]" class="documentDeleteCheckbox" id="document<%= i %>" value="<%= document._id %>">
-                            <label for="document<%= i %>">Delete</label>
+                            <label for="document<%= i %>">Select</label>
                         </div>    
                     </div>                   
                 <% }); %>
@@ -33,7 +33,10 @@
     
     </form>
 
-    <div class="btn btn-info mt-2 upload-edit-button">Edit</div>
+    <div class="btn btn-info mt-2 upload-edit-button">Upload</div>
+    <form class="d-inline" action="/patients/<%= patient._id %>/documents?_method=DELETE" method="POST">
+        <input type="submit" class="btn btn-danger mt-2" id="delete-document-button" value="Delete" form="delete-document-form">
+    </form>
     <div>
         <a class="btn btn-secondary mt-2 back-to-pt-button" href="/patients/<%= patient.id %>">Back to Patient Details</a>
     </div>
