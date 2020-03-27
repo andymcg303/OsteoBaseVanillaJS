@@ -20,7 +20,6 @@ $(function(){
     // Post new patient
     $newPatientForm.submit(function(e){
         e.preventDefault();
-        debugger;
         let $newPatientData = $(this).serialize();
         $.post('/patients', $newPatientData, function(data){
             $('#patient-list').append(
@@ -165,19 +164,21 @@ $(function(){
     // });
 
     $('#delete-documents-form').submit(function(e){
-        e.preventDefault();    
-        let $patientId = $('#patient-id').val();
-        let $documentArray = $('.documentDeleteCheckbox:checked');
-        $documentArray.each(function(){
-            let $documentId = $(this).val();
-            $.ajax({
-                url: `/patients/${$patientId}/documents/${$documentId}`,
-                type: 'DELETE',
-                complete: function() {
-                    location.reload();
-                }
+        e.preventDefault();
+        if (confirm('Are you sure?')){    
+            let $patientId = $('#patient-id').val();
+            let $documentArray = $('.documentDeleteCheckbox:checked');
+            $documentArray.each(function(){
+                let $documentId = $(this).val();
+                $.ajax({
+                    url: `/patients/${$patientId}/documents/${$documentId}`,
+                    type: 'DELETE',
+                    complete: function() {
+                        location.reload();
+                    }
+                });
             });
-        });
+        }
     });
     
 });

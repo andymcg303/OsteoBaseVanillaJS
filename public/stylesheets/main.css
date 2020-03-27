@@ -5,8 +5,8 @@
 .delete-button,
 .signoff-edit-button,
 .signoff-button,
-.upload-tools{
-/* #delete-document-button{     */
+.upload-tools,
+#delete-documents-button{    
     display: none;
 }
 
