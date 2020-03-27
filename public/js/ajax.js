@@ -160,23 +160,24 @@ $(function(){
     });
     
     // deduce if any checkboxes clicked and activate delete button on index page
+    // $('documentDeleteCheckbox').click(function(){
+        
+    // });
 
-    $('#delete-documents-form').submit(function(){    
-        let confirmResponse = confirm('Are you sure?'); // have to do this locally
-        if (!confirmResponse) {
-            let $patientId = $('#patient-id').val();
-            let $documentArray = $('.documentDeleteCheckbox:checked');
-            $documentArray.each(function(){
-                let $documentId = $(this).val();
-                $.ajax({
-                    url: `/patients/${$patientId}/documents/${$documentId}`,
-                    type: 'DELETE',
-                    complete: function() {
-                        location.reload();
-                    }
-                });
+    $('#delete-documents-form').submit(function(e){
+        e.preventDefault();    
+        let $patientId = $('#patient-id').val();
+        let $documentArray = $('.documentDeleteCheckbox:checked');
+        $documentArray.each(function(){
+            let $documentId = $(this).val();
+            $.ajax({
+                url: `/patients/${$patientId}/documents/${$documentId}`,
+                type: 'DELETE',
+                complete: function() {
+                    location.reload();
+                }
             });
-        }
+        });
     });
     
 });

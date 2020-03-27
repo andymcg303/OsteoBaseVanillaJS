@@ -42,20 +42,20 @@ module.exports = {
         let document = await Document.findById(req.params.document_id);
         await cloudinary.v2.uploader.destroy(document.public_id);
         await document.remove();
-            Patient.findByIdAndUpdate(patientId,
-                {
-                    $pull: {
-                        documents: req.params.document_id
-                    }
-                }, function(err){
-                    if (err){
-                        console.log(err);
-                    } else {
-                        res.redirect(`/patients/${patientId}/documents`);
-                    }
-
+        await Patient.findByIdAndUpdate(patientId,
+            {
+                $pull: {
+                    documents: req.params.document_id
                 }
-            )
+            }, function(err){
+                if (err){
+                    console.log(err);
+                } else {
+                    res.redirect(`/patients/${patientId}/documents`);
+                }
+
+            }
+        );
     }
 }
 

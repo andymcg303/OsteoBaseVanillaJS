@@ -35,8 +35,8 @@
     </form>
 
     <div class="btn btn-info mt-2 upload-edit-button">Upload</div>
-    <form id="delete-documents-form" class="delete-form d-inline" action="/patients/<%= patient._id %>/documents?_method=DELETE" method="POST">
-        <input type="submit" class="btn btn-danger mt-2" id="delete-document-button" value="Delete">
+    <form id="delete-documents-form" class="d-inline" action="/patients/<%= patient._id %>/documents?_method=DELETE" method="POST">
+        <input type="submit" class="btn btn-danger mt-2" id="delete-documents-button" value="Delete">
     </form>
     <div>
         <a class="btn btn-secondary mt-2 back-to-pt-button" href="/patients/<%= patient.id %>">Back to Patient Details</a>
