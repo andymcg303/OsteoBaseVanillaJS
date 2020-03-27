@@ -161,5 +161,20 @@ $(function(){
         $('#delete-document-button').toggle();
     });
     
+    $('#delete-document-button').click(function(){
+        let $patientId = $('#patient-id').val();
+        let $documentArray = $('.documentDeleteCheckbox:checked');
+        $documentArray.each(function(){
+            let $documentId = $(this).val();
+            $.ajax({
+                url: `/patients/${$patientId}/documents/${$documentId}`,
+                type: 'DELETE',
+                complete: function() {
+                    debugger;
+                    location.reload();
+                }
+            });
+        });
+    });
     
 });

@@ -36,30 +36,49 @@ module.exports = {
         res.render('./documents/show', {document: foundDocument, patient: foundPatient, moment: moment});
     },
 
-    // Document Destroy
+    // Document Destroy (slighty more async that before but dont understand 2nd param of findByIdAndUpdate)
     async destroyDocument(req, res, next){
         let patientId = req.params.id;
-        Document.findByIdAndRemove(req.params.document_id, (err) => {
-            if(err){
-                res.redirect("back");
-            } else {
-                Patient.findByIdAndUpdate(patientId,
-                    {
-                        $pull: {
-                            documents: req.params.document_id
-                        }
-                    }, function(err){
-                        if (err){
-                            console.log(err);
-                        } else {
-                            res.redirect(`/patients/${patientId}/documents`);
-                        }
-    
+        await Document.findByIdAndRemove(req.params.document_id);
+            Patient.findByIdAndUpdate(patientId,
+                {
+                    $pull: {
+                        documents: req.params.document_id
                     }
-                )
-            }
-        });
+                }, function(err){
+                    if (err){
+                        console.log(err);
+                    } else {
+                        res.redirect(`/patients/${patientId}/documents`);
+                    }
+
+                }
+            )
     }
+
+    // destroyDocument(req, res, next){
+    //     let patientId = req.params.id;
+    //     Document.findByIdAndRemove(req.params.document_id, (err) => {
+    //         if(err){
+    //             res.redirect("back");
+    //         } else {
+    //             Patient.findByIdAndUpdate(patientId,
+    //                 {
+    //                     $pull: {
+    //                         documents: req.params.document_id
+    //                     }
+    //                 }, function(err){
+    //                     if (err){
+    //                         console.log(err);
+    //                     } else {
+    //                         res.redirect(`/patients/${patientId}/documents`);
+    //                     }
+    // 
+    //                 }
+    //             )
+    //         }
+    //     });
+    // }
 
 }
 

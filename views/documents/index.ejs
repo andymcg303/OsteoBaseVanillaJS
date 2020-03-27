@@ -3,6 +3,7 @@
 <div class="container">
     
     <h3><%= patient.firstname + " " + patient.surname %>'s Uploaded Documents</h3>
+    <input type="hidden" value="<%= patient._id %>" id="patient-id">
 
     <form class="document-form" action="/patients/<%= patient._id %>/documents" method="POST" enctype="multipart/form-data">
         <div class="form-row">
@@ -10,7 +11,7 @@
             <div class="form-group d-flex justify-content-start flex-wrap">
                 <% patient.documents.forEach(function(document, i){ %>
                     <div class="mx-1">
-                        <a href="/patients/<%= patient._id%>/documents/<%= document._id %>"><img src="<%= document.url %>" alt="uploaded document" width="150px" id="document<%= i %>"></a>
+                        <a href="/patients/<%= patient._id%>/documents/<%= document._id %>"><img class="img-thumbnail" src="<%= document.url %>" alt="uploaded document" width="150px" id="document<%= i %>"></a>
                         <div>    
                             <%= moment(document.date_created).format('DD/MM/YYYY') %>
                         </div>
