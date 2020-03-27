@@ -39,7 +39,9 @@ module.exports = {
     // Document Destroy (slighty more async that before but dont understand 2nd param of findByIdAndUpdate)
     async destroyDocument(req, res, next){
         let patientId = req.params.id;
-        await Document.findByIdAndRemove(req.params.document_id);
+        let document = await Document.findById(req.params.document_id);
+        await cloudinary.v2.uploader.destroy(document.public_id);
+        await document.remove();
             Patient.findByIdAndUpdate(patientId,
                 {
                     $pull: {
@@ -55,30 +57,5 @@ module.exports = {
                 }
             )
     }
-
-    // destroyDocument(req, res, next){
-    //     let patientId = req.params.id;
-    //     Document.findByIdAndRemove(req.params.document_id, (err) => {
-    //         if(err){
-    //             res.redirect("back");
-    //         } else {
-    //             Patient.findByIdAndUpdate(patientId,
-    //                 {
-    //                     $pull: {
-    //                         documents: req.params.document_id
-    //                     }
-    //                 }, function(err){
-    //                     if (err){
-    //                         console.log(err);
-    //                     } else {
-    //                         res.redirect(`/patients/${patientId}/documents`);
-    //                     }
-    // 
-    //                 }
-    //             )
-    //         }
-    //     });
-    // }
-
 }
 

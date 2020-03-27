@@ -150,31 +150,33 @@ $(function(){
     $('.upload-edit-button').click(function(){
         $(this).toggle();
         $('.upload-tools').toggle();
-        $('.back-to-pt-button').toggle();
-        $('#delete-document-button').toggle();        
+        $('.back-to-pt-button').toggle()        
     });
 
     $('.cancel-upload-button').click(function(){
         $('.upload-tools').toggle();
         $('.upload-edit-button').toggle();
-        $('.back-to-pt-button').toggle();
-        $('#delete-document-button').toggle();
+        $('.back-to-pt-button').toggle()
     });
     
-    $('#delete-document-button').click(function(){
-        let $patientId = $('#patient-id').val();
-        let $documentArray = $('.documentDeleteCheckbox:checked');
-        $documentArray.each(function(){
-            let $documentId = $(this).val();
-            $.ajax({
-                url: `/patients/${$patientId}/documents/${$documentId}`,
-                type: 'DELETE',
-                complete: function() {
-                    debugger;
-                    location.reload();
-                }
+    // deduce if any checkboxes clicked and activate delete button on index page
+
+    $('#delete-documents-form').submit(function(){    
+        let confirmResponse = confirm('Are you sure?'); // have to do this locally
+        if (!confirmResponse) {
+            let $patientId = $('#patient-id').val();
+            let $documentArray = $('.documentDeleteCheckbox:checked');
+            $documentArray.each(function(){
+                let $documentId = $(this).val();
+                $.ajax({
+                    url: `/patients/${$patientId}/documents/${$documentId}`,
+                    type: 'DELETE',
+                    complete: function() {
+                        location.reload();
+                    }
+                });
             });
-        });
+        }
     });
     
 });
