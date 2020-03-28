@@ -159,15 +159,19 @@ $(function(){
     });
     
     // deduce if any checkboxes clicked and activate delete button on index page
-    // $('documentDeleteCheckbox').click(function(){
-        
-    // });
+    $('.document-delete-checkbox').click(function(){
+        if ($('.document-delete-checkbox:checked').length > 0){
+            $('#delete-documents-button').show();
+        } else {
+            $('#delete-documents-button').hide();    
+        } 
+    });
 
     $('#delete-documents-form').submit(function(e){
         e.preventDefault();
         if (confirm('Are you sure?')){    
             let $patientId = $('#patient-id').val();
-            let $documentArray = $('.documentDeleteCheckbox:checked');
+            let $documentArray = $('.document-delete-checkbox:checked');
             $documentArray.each(function(){
                 let $documentId = $(this).val();
                 $.ajax({
