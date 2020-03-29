@@ -167,6 +167,7 @@ $(function(){
         } 
     });
 
+    // Delete multiple documents (possibly better to pass an array to controller)
     $('#delete-documents-form').submit(function(e){
         e.preventDefault();
         if (confirm('Are you sure?')){    

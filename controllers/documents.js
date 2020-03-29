@@ -16,7 +16,7 @@ module.exports = {
         res.render('documents/index', { patient: foundPatient, moment: moment });
     },
 
-    // Update Documents ie Delete and Upload
+    // Create Documents Upload
     async createDocuments(req, res, next){
         let foundPatient = await Patient.findById(req.params.id);
         
@@ -41,7 +41,7 @@ module.exports = {
         let patientId = req.params.id;
         let document = await Document.findById(req.params.document_id);
         await cloudinary.v2.uploader.destroy(document.public_id);
-        await document.remove();
+        await document.deleteOne();
         await Patient.findByIdAndUpdate(patientId,
             {
                 $pull: {
@@ -53,7 +53,6 @@ module.exports = {
                 } else {
                     res.redirect(`/patients/${patientId}/documents`);
                 }
-
             }
         );
     }
