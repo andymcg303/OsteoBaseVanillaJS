@@ -171,7 +171,7 @@ $(function(){
     $('#delete-documents-form').submit(function(e){
         e.preventDefault();
         if (confirm('Are you sure?')){    
-            let $patientId = $('#patient-id').val();
+            debugger;
             let $documentArray = $('.document-delete-checkbox:checked');
             $documentArray.each(function(){
                 let $documentId = $(this).val();
