@@ -3,21 +3,16 @@ const express   	= require("express"),
 	  moment  		= require("moment"),
       Patient   	= require("../models/patient"),
 	  MedHist 		= require("../models/medhist"),
-	  { isLoggedIn }	= require("../middleware");
+	  { isLoggedIn,
+		errorHandler }	= require("../middleware"),
+   { newMedhist } = require("../controllers/medhists");
+
 
 // ROUTES   
 // INDEX - N/A as listed on patient show page     
 
-// NEW - Show New MedHist Form
-router.get("/new", isLoggedIn, (req, res) => {
-	Patient.findById(req.params.id, (err, foundPatient) => {
-		if(err){
-		   console.log(err);
-		} else {
-			res.render("./medhists/new", {patient: foundPatient});	
-		}
-	});
-});
+// NEW - Show New MedHist Form  
+ router.get("/new", isLoggedIn, errorHandler(newMedhist));
 
 // CREATE MedHist - Create New MedHist then redirect to Show Patient
 router.post("/", isLoggedIn, (req, res) => {

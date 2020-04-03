@@ -1,5 +1,6 @@
 const Patient   	= require("../models/patient");
 const Interview 	= require("../models/interview");
+const moment		= require("moment");
 
 module.exports = {
     // Interview New
@@ -15,5 +16,38 @@ module.exports = {
         foundPatient.interviews.push(newInterview);
         foundPatient.save();
         res.redirect(`/patients/${foundPatient._id}/interviews/${newInterview._id}`);
-    }  
+    },
+    
+    // Interview Show
+    async showInterview(req, res, next){
+        let foundPatient = await Patient.findById(req.params.id);
+        let foundInterview = await Interview.findById(req.params.interview_id);
+        res.render("./interviews/show", {patient: foundPatient, interview: foundInterview, moment: moment});		
+    },
+
+    // Interview Update
+    async updateInterview(req, res, next){
+        let updatedInterview = await Interview.findByIdAndUpdate(req.params.interview_id, req.body.interview);
+        res.json(updatedInterview);
+    },
+
+    // Interview Destroy
+    async destroyInterview(req, res, next){
+        let patientId = req.params.id;
+        await Interview.findByIdAndRemove(req.params.interview_id);
+        await Patient.findByIdAndUpdate(patientId,
+            {
+                $pull: {
+                    interviews: req.params.interview_id
+                }
+            }, function(err){
+                if (err){
+                    console.log(err);
+                } else {
+                    res.redirect(`/patients/${patientId}`);
+                }
+
+            }
+        );    
+    }
 }

@@ -13,8 +13,8 @@ const express       = require("express"),
 // INDEX - List all patients      
 router.get("/", isLoggedIn, errorHandler(getPatients));
 
-// NEW - Show New Patient Form
-router.get("/new",  isLoggedIn, newPatient);
+// // NEW - Show New Patient Form
+// router.get("/new",  isLoggedIn, newPatient);
 
 // CREATE - Create New Patient then redirect to patients
 router.post("/", isLoggedIn, errorHandler(createPatient));

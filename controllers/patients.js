@@ -20,11 +20,6 @@ module.exports = {
         }
     },
 
-    // Patients New
-    newPatient(req, res, next){
-        res.render("./patients/new");
-    },
-
     // Patients Create
     async createPatient(req, res, next){
         let newPatient = await Patient.create(req.body.patient);
