@@ -1,17 +1,12 @@
 const express   	= require("express"),
 	  router		= express.Router({mergeParams: true}),
-      Patient   	= require("../models/patient"),
-	  Interview 	= require("../models/interview"),
 	  { isLoggedIn,
 		errorHandler }	= require("../middleware"),
 	  { newInterview,
 		createInterview,
 		showInterview,
 		updateInterview,
-		destroyInterview } = require('../controllers/interviews');
-
-// ROUTES   
-// INDEX - N/A as listed on patient show page     
+		destroyInterview } = require('../controllers/interviews');    
 
 // NEW - Show New Interview Form
 router.get("/new", isLoggedIn, errorHandler(newInterview));

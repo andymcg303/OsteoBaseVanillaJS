@@ -2,8 +2,7 @@ const express       = require("express"),
       router        = express.Router({mergeParams: true}),
       { isLoggedIn, 
         errorHandler }    = require("../middleware"),
-      { getPatients, 
-        newPatient, 
+      { getPatients,  
         createPatient, 
         showPatient, 
         updatePatient,
@@ -12,9 +11,6 @@ const express       = require("express"),
 // ROUTES   
 // INDEX - List all patients      
 router.get("/", isLoggedIn, errorHandler(getPatients));
-
-// // NEW - Show New Patient Form
-// router.get("/new",  isLoggedIn, newPatient);
 
 // CREATE - Create New Patient then redirect to patients
 router.post("/", isLoggedIn, errorHandler(createPatient));

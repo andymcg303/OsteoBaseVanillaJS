@@ -1,7 +1,5 @@
 const express   	= require("express"),
 	  router		= express.Router({mergeParams: true}),
-      Patient   	= require("../models/patient"),
-	  MedHist 		= require("../models/medhist"),
 	  { isLoggedIn,
 		errorHandler }	= require("../middleware"),
 	{ newMedhist,

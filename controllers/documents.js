@@ -36,7 +36,7 @@ module.exports = {
         res.render('./documents/show', {document: foundDocument, patient: foundPatient, moment: moment});
     },
 
-    // Document Destroy (slighty more async that before but dont understand 2nd param of findByIdAndUpdate)
+    // Document Destroy
     async destroyDocument(req, res, next){
         let patientId = req.params.id;
         let document = await Document.findById(req.params.document_id);
@@ -47,14 +47,8 @@ module.exports = {
                 $pull: {
                     documents: req.params.document_id
                 }
-            }, function(err){
-                if (err){
-                    console.log(err);
-                } else {
-                    res.redirect(`/patients/${patientId}/documents`);
-                }
-            }
-        );
+            }),
+        res.redirect(`/patients/${patientId}/documents`);
     }
 }
 

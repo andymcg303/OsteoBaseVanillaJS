@@ -41,14 +41,7 @@ module.exports = {
                 $pull: {
                     medhists: req.params.medhist_id
                 }
-            }, function(err){
-                if (err){
-                    console.log(err);
-                } else {
-                    res.redirect("/patients/" + patientId);
-                }    
-            }
-    
-        )
-    }    
+            });
+        res.redirect(`/patients/${patientId}`);    
+    }       
 }

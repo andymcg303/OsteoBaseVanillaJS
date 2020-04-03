@@ -40,14 +40,7 @@ module.exports = {
                 $pull: {
                     interviews: req.params.interview_id
                 }
-            }, function(err){
-                if (err){
-                    console.log(err);
-                } else {
-                    res.redirect(`/patients/${patientId}`);
-                }
-
-            }
-        );    
+            }),
+        res.redirect(`/patients/${patientId}`);
     }
 }
