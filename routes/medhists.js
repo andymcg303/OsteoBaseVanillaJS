@@ -1,90 +1,28 @@
 const express   	= require("express"),
 	  router		= express.Router({mergeParams: true}),
-	  moment  		= require("moment"),
       Patient   	= require("../models/patient"),
 	  MedHist 		= require("../models/medhist"),
 	  { isLoggedIn,
 		errorHandler }	= require("../middleware"),
-   { newMedhist } = require("../controllers/medhists");
-
-
-// ROUTES   
-// INDEX - N/A as listed on patient show page     
+	{ newMedhist,
+	createMedhist,
+	showMedhist,
+	updateMedhist,
+	destroyMedhist } = require("../controllers/medhists");   
 
 // NEW - Show New MedHist Form  
  router.get("/new", isLoggedIn, errorHandler(newMedhist));
 
 // CREATE MedHist - Create New MedHist then redirect to Show Patient
-router.post("/", isLoggedIn, (req, res) => {
-	Patient.findById(req.params.id, (err, foundPatient) => {
-		if(err){
-			console.log(err);		
-		} else {	
-			MedHist.create(req.body.medhist, (err, newMedhist) => {
-				if(err){
-					console.log(err);
-				} else {
-					foundPatient.medhists.push(newMedhist);
-					foundPatient.save();
-					res.redirect("/patients/" + foundPatient._id);
-				}
-			});
-		}
-	});
-});
+router.post("/", isLoggedIn, errorHandler(createMedhist));
 
 // SHOW - Show one medhist
-router.get("/:medhist_id", isLoggedIn, (req, res) => {
-	Patient.findById(req.params.id, (err, foundPatient) => {
-		if(err){
-			console.log(err);
-		} else {
-			MedHist.findById(req.params.medhist_id, (err, foundMedHist) => {
-				if(err){
-					res.redirect("back");
-				} else {
-					res.render("./medhists/show", {patient: foundPatient, medhist: foundMedHist, moment: moment});		
-				}
-			});
-		}
-	});
-});
+router.get("/:medhist_id", isLoggedIn, errorHandler(showMedhist));
 			
 // UPDATE MedHist - Update one medhist
-router.put("/:medhist_id", isLoggedIn, (req, res) => {
-	MedHist.findByIdAndUpdate(req.params.medhist_id, req.body.medhist, (err, updatedMedhist) => {
-		if(err){
-			res.redirect("back");
-		} else { 
-			res.json(updatedMedhist);
-		}		
-	});
-});
+router.put("/:medhist_id", isLoggedIn, errorHandler(updateMedhist));
 
 // DESTROY
-router.delete("/:medhist_id", isLoggedIn, (req, res) => {
-	let patientId = req.params.id;
-	MedHist.findByIdAndRemove(req.params.medhist_id, (err) => {
-		if(err){
-			res.redirect("back");
-		} else {
-			Patient.findByIdAndUpdate(patientId,
-				{
-					$pull: {
-						medhists: req.params.medhist_id
-					}
-				}, function(err){
-					if (err){
-						console.log(err);
-					} else {
-						res.redirect("/patients/" + patientId);
-					}
-
-				}
-
-			)
-		}
-	});
-});
+router.delete("/:medhist_id", isLoggedIn, errorHandler(destroyMedhist));
 
 module.exports = router;
