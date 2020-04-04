@@ -1,49 +1,5 @@
 $(function(){
 
-    // PATIENT INDEX
-    let $newPatientButton = $('#new-patient-button'),
-        $newPatientForm = $('#new-patient-form');
-
-    // Show New Patient form
-    $newPatientButton.click(function(){
-        $newPatientForm.toggle();
-        $(this).prop('disabled',true);
-    });
-
-    // Hide new patient form
-    $('#cancel-new-patient').click(function(){
-        $newPatientButton.prop('disabled',false);
-        $newPatientForm.toggle();
-        $newPatientForm.find('.form-control').val('');
-    });
-
-    // Post new patient
-    $newPatientForm.submit(function(e){
-        e.preventDefault();
-        let $newPatientData = $(this).serialize();
-        $.post('/patients', $newPatientData, function(data){
-            $('#patient-list').append(
-                `<a class="list-group-item list-group-item-action list-group-item-light" href="/patients/${data._id}">${data.firstname} ${data.surname}<span class="float-right">${moment(data.dob).format('DD/MM/YYYY')}</span></a>`
-            );
-            $newPatientForm.find('.form-control').val('');
-            $newPatientButton.prop('disabled',false);
-            $newPatientForm.toggle();    
-        });
-    });
-
-    // Search on patients surname functionality
-    $('#search').submit(function(e){
-        e.preventDefault();
-        $.get('/patients?keyword=' + encodeURIComponent($('#search-text').val()), function (data) {
-            $('#patient-list').html('');
-            data.forEach(function (patient) {
-                $('#patient-list').append(
-                    `<a class="list-group-item list-group-item-action list-group-item-light" href="/patients/${patient._id}">${patient.firstname} ${patient.surname}<span class="float-right">${moment(patient.dob).format('DD/MM/YYYY')}</span></a>`
-                );
-            });    
-        });
-    });
-
     // SHOW/EDIT FUNCTIONALITY
     let $editForm = $('.edit-form'),
         $editButton = $('.edit-button'),
@@ -52,7 +8,6 @@ $(function(){
         $cancelEditButton = $('.cancel-edit-button'),
         $deleteButton = $('.delete-button'),
         $deleteForm = $('.delete-form'),
-        $deletePatientForm = $('#delete-patient-form'),
         $signoffButton = $('.signoff-button'),
         $viewDocumentsButton = $('#view-documents-button');
 
@@ -111,8 +66,8 @@ $(function(){
         }
     });
 
-    // Deleting patients is a special case
-    $deletePatientForm.submit(function(e){
+    // Deleting patients prompt, different text
+       $('#delete-patient-form').submit(function(e){
         let confirmResponse = confirm('This will delete all the patients details including clinical details which by law you are required to keep for 6 years. Are you sure?');
         if (!confirmResponse) {
             e.preventDefault();
@@ -143,48 +98,6 @@ $(function(){
         } else {
             $(this).parent().append('<svg class="bi bi-lock-fill text-dark float-right" width="1.3em" height="1.3em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><rect width="11" height="9" x="4.5" y="8" rx="2"></rect><path fill-rule="evenodd" d="M6.5 5a3.5 3.5 0 117 0v3h-1V5a2.5 2.5 0 00-5 0v3h-1V5z" clip-rule="evenodd"></path></svg>');
         }    
-    });
-
-    // DOCUMENT MANAGEMENT FUNCTIONALITTY
-    $('.upload-edit-button').click(function(){
-        $(this).toggle();
-        $('.upload-tools').toggle();
-        $('.back-to-pt-button').toggle()        
-    });
-
-    $('.cancel-upload-button').click(function(){
-        $('.upload-tools').toggle();
-        $('.upload-edit-button').toggle();
-        $('.back-to-pt-button').toggle()
-    });
-    
-    // deduce if any checkboxes clicked and activate delete button on index page
-    $('.document-delete-checkbox').click(function(){
-        if ($('.document-delete-checkbox:checked').length > 0){
-            $('#delete-documents-button').show();
-        } else {
-            $('#delete-documents-button').hide();    
-        } 
-    });
-
-    // Delete multiple documents (possibly better to pass an array to controller)
-    $('#delete-documents-form').submit(function(e){
-        debugger;
-        e.preventDefault();
-        if (confirm('Are you sure?')){    
-            debugger;
-            let $documentArray = $('.document-delete-checkbox:checked');
-            $documentArray.each(function(){
-                let $documentId = $(this).val();
-                $.ajax({
-                    url: `/patients/${$patientId}/documents/${$documentId}`,
-                    type: 'DELETE',
-                    complete: function() {
-                        location.reload();
-                    }
-                });
-            });
-        }
     });
     
 });

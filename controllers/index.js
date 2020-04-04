@@ -20,8 +20,6 @@ module.exports = {
             {
                 successRedirect: '/patients',
                 failureRedirect: '/login',
-                // failureFlash: true,
-                // successFlash: "Welcome to YelpCamp, " + req.body.username + "!"
             }
         )(req, res, next);
     },
