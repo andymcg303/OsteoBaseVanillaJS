@@ -1,27 +1,52 @@
-<% include ./partials/header %>
-
-<div class="container">
-	<h1 id="login-text">Please Log In</h1>
-	
-	<form action="/login" method="POST">
-		<div class="form-row">
-			<div class="form-group col-md-3">
-				<label for="login-username">User Name</label>
-				<input type="text" class="form-control" name="username" placeholder="username">
-			</div>	
-			<div class="form-group col-md-3">
-				<label for="login-password">Password</label>
-				<input type="password" class="form-control" name="password" placeholder="password">
-			</div>	
-			<div class="form-group col-md-3 align-self-end">
-				<input id="signup-login-button" class="btn btn-primary" type="submit" value="Login">	
-			</div>
-		</div>	
-	</form>
-
-	<a href="/signup">Do you need to sign up?</a>
-
-</div>
-
-<% include ./partials/common-scripts %>
-<% include ./partials/footer %>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>OsteoBase</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<link rel="stylesheet" href="/stylesheets/login.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript" async></script>
+    </head>
+    <body>
+		<div class="container">
+			<% if(error && error.length > 0){ %>
+				<div class="alert alert-danger" role="alert">
+					<%= error %>
+				</div>
+			<% } %>
+			<% if(success && success.length > 0){ %>
+				<div class="alert alert-success" role="alert">
+					<%= success %>
+				</div>
+			<% } %>
+		</div>
+		
+		<div id="landing-header" class="container">
+			<h1>OsteoBase</h1>
+			<h2>Patient Management Database for Manual Therapists</h2> 
+			
+			<form action="/login" method="POST">
+				<div class="form-row justify-content-center">
+					<div class="form-group text-left mx-1">
+						<label for="login-username">User Name</label>
+						<input type="text" class="form-control" name="username" placeholder="username">
+					</div>	
+					<div class="form-group text-left mx-1">
+						<label for="login-password">Password</label>
+						<input type="password" class="form-control" name="password" placeholder="password">
+					</div>	
+					<div class="form-group align-self-end mx-1">
+						<input id="signup-login-button" class="btn btn-primary" type="submit" value="Login">	
+					</div>
+				</div>	
+			</form>
+		
+			<a href="/signup">Do you need to sign up?</a>
+		</div>
+		
+		<ul class="slideshow">
+		<li></li>
+		<li></li>
+		<li></li>
+		</ul>
+	</body>
+</html>

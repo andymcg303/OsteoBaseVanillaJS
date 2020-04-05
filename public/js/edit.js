@@ -7,7 +7,6 @@ $(function(){
         $submitEditButton = $('.submit-edit-button'),
         $cancelEditButton = $('.cancel-edit-button'),
         $deleteButton = $('.delete-button'),
-        $deleteForm = $('.delete-form'),
         $signoffButton = $('.signoff-button'),
         $viewDocumentsButton = $('#view-documents-button');
 
@@ -58,8 +57,8 @@ $(function(){
         disableEditForm();    
     });
 
-    // DELETE FUNCTIONALITY --- Only use AJAX for a confirm prompt 
-    $deleteForm.submit(function(e){
+    // Delete Prompt 
+    $('.delete-form').submit(function(e){
         let confirmResponse = confirm('Are you sure?');
         if (!confirmResponse) {
             e.preventDefault();
@@ -98,6 +97,5 @@ $(function(){
         } else {
             $(this).parent().append('<svg class="bi bi-lock-fill text-dark float-right" width="1.3em" height="1.3em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><rect width="11" height="9" x="4.5" y="8" rx="2"></rect><path fill-rule="evenodd" d="M6.5 5a3.5 3.5 0 117 0v3h-1V5a2.5 2.5 0 00-5 0v3h-1V5z" clip-rule="evenodd"></path></svg>');
         }    
-    });
-    
+    });  
 });
