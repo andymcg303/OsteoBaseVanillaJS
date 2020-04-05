@@ -1,13 +1,14 @@
 module.exports = {
 
-	isLoggedIn(req, res, next){
+	isLoggedIn : (req, res, next) => {
 		if(req.isAuthenticated()){
 			return next();
 		}
-		// res.redirect("/login");
+		req.session.error = 'Please Login';
+		res.redirect("/login");
 	},
 
-    errorHandler: (fn) => 
+    errorHandler : (fn) => 
         (req, res, next) => {
             Promise.resolve(fn(req, res, next))
                 .catch(next);

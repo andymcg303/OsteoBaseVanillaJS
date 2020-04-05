@@ -62,11 +62,11 @@ body{
     opacity: 0; 
     animation-timing-function: ease-in;
   }
-  16.7% {
+  10% {
     opacity: 1;
     animation-timing-function: ease-out;
   }
-  33.3% {
+  40% {
     opacity: 1
   }
   50% {
