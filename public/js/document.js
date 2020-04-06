@@ -30,13 +30,21 @@ $(function(){
             let $documentArray = $('.document-delete-checkbox:checked');
             $documentArray.each(function(){
                 let $documentId = $(this).val();
+                let $itemToDelete = $(this).closest('.document-group-item');
+                debugger;
                 $.ajax({
                     url: `/patients/${$patientId}/documents/${$documentId}`,
                     type: 'DELETE',
-                    complete: function() {
+                    itemToDelete: $itemToDelete,
+                    complete: function (data) {
                         debugger;
+                        this.itemToDelete.remove();
                         window.location.reload();
                     }
+                    // complete: function() {
+                    //     debugger;
+                        
+                    // }
                 });
             });
         }

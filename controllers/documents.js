@@ -47,8 +47,10 @@ module.exports = {
                 $pull: {
                     documents: req.params.document_id
                 }
-            }),
-        res.redirect(`/patients/${patientId}/documents`);
+            })
+        if (!req.xhr){
+            res.redirect(`/patients/${patientId}/documents`);
+        }
     }
 }
 
