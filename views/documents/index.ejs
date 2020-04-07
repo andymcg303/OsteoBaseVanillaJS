@@ -8,7 +8,7 @@
         <div class="form-row">
 
             <% patient.documents.forEach(function(document, i){ %>
-                <div class="form-group d-flex justify-content-start flex-wrap document--group-item">
+                <div class="form-group d-flex justify-content-start flex-wrap document-group-item">
                     <div class="mx-1">
                         <a href="/patients/<%= patient._id%>/documents/<%= document._id %>"><img class="img-thumbnail" src="<%= document.url %>" alt="uploaded document" width="150px" id="document<%= i %>"></a>
                         <div>    

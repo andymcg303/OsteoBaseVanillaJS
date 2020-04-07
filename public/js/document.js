@@ -22,9 +22,8 @@ $(function(){
         } 
     });
 
-    // Delete multiple documents (possibly better to pass an array to controller)
+    // Delete multiple documents
     $('#delete-documents-form').submit(function(e){
-        debugger;
         e.preventDefault();
         if (confirm('Are you sure?')){    
             let $documentArray = $('.document-delete-checkbox:checked');
@@ -36,15 +35,10 @@ $(function(){
                     url: `/patients/${$patientId}/documents/${$documentId}`,
                     type: 'DELETE',
                     itemToDelete: $itemToDelete,
-                    complete: function (data) {
-                        debugger;
+                    success: function success() {
                         this.itemToDelete.remove();
-                        window.location.reload();
+                        $('#delete-documents-button').hide();    
                     }
-                    // complete: function() {
-                    //     debugger;
-                        
-                    // }
                 });
             });
         }

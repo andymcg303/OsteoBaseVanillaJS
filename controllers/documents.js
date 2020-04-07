@@ -48,7 +48,9 @@ module.exports = {
                     documents: req.params.document_id
                 }
             })
-        if (!req.xhr){
+        if (req.xhr){
+            res.json(document);
+        } else {
             res.redirect(`/patients/${patientId}/documents`);
         }
     }
