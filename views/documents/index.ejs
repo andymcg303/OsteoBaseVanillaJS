@@ -13,7 +13,7 @@
                     <div class="mx-1">
                         <a href="/patients/<%= patient._id%>/documents/<%= document._id %>"><img class="img-thumbnail" src="<%= document.url %>" alt="uploaded document" width="150px" id="document<%= i %>"></a>
                         <div>    
-                            <%= moment(document.date_created).format('DD/MM/YYYY') %>
+                            <%= document.file_name %>
                         </div>
                         <div>
                             <input type="checkbox" name="deleteDocuments[]" class="document-delete-checkbox" id="document<%= i %>" value="<%= document._id %>">

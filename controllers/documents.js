@@ -22,7 +22,7 @@ module.exports = {
         
         for (const file of req.files){
             let doc = await cloudinary.v2.uploader.upload(file.path);
-            let newDoc =  await Document.create( {url: doc.secure_url, public_id: doc.public_id} );  
+            let newDoc =  await Document.create( {url: doc.secure_url, public_id: doc.public_id, file_name: file.originalname} );  
             foundPatient.documents.push(newDoc);
             foundPatient.save();
         }

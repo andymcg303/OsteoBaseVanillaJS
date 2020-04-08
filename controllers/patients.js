@@ -29,9 +29,15 @@ module.exports = {
     // Patient Show
     async showPatient(req, res, next){
         let foundPatient = await Patient.findById(req.params.id)
-            .populate("interviews")
-            .populate("medhists")
-            .populate("clinicals")
+            .populate({
+                path: 'medhists', 
+                options: { sort: { '_id': -1 }}})
+            .populate({
+                path: 'interviews', 
+                options: { sort: { '_id': -1 }}})
+            .populate({
+                path: 'clinicals', 
+                options: { sort: { '_id': -1 }}})
             .exec();
             res.render("./patients/show", {patient: foundPatient, moment: moment});
     },

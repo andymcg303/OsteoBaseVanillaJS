@@ -56,7 +56,7 @@
             <h3>Medical Histories</h3>
             <div class="list-group">
                 <% patient.medhists.forEach(function(medhist){ %>
-                    <a class="list-group-item list-group-item-action list-group-item-light" href="/patients/<%= patient._id%>/medhists/<%= medhist._id %>"><%= moment(medhist.date_created).format('DD/MM/YYYY') %></a>
+                    <a class="list-group-item list-group-item-action list-group-item-light" href="/patients/<%= patient._id%>/medhists/<%= medhist._id %>"><span class="text-dark font-weight-bold"><%= moment(medhist.date_created).format('DD/MM/YYYY') %></span></a>
                 <% }); %>
             </div>
             <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/medhists/new">New Medical History</a>
@@ -68,7 +68,8 @@
             <div class="list-group">
                 <% patient.interviews.forEach(function(interview){ %>
                     <a class="list-group-item list-group-item-action list-group-item-light signoff-item" 
-                        href="/patients/<%= patient._id%>/interviews/<%= interview._id %>"><%= moment(interview.date_created).format('DD/MM/YYYY') + " " + interview.CO %>
+                        href="/patients/<%= patient._id%>/interviews/<%= interview._id %>">
+                        <span class="text-dark font-weight-bold"><%= moment(interview.date_created).format('DD/MM/YYYY') %></span><% if (interview.CO){ %> C/O: <% } %><%= interview.CO %>
                         <div class="signed-off" style="display: none;"><%= interview.signed_off %></div>
                     </a>
                 <% }); %>
@@ -82,7 +83,8 @@
             <div class="list-group">    
                 <% patient.clinicals.forEach(function(clinical){ %>
                     <a class="list-group-item list-group-item-action list-group-item-light signoff-item" 
-                        href="/patients/<%= patient._id%>/clinicals/<%= clinical._id %>"><%= moment(clinical.date_created).format('DD/MM/YYYY') + " " + clinical.diag %>
+                        href="/patients/<%= patient._id%>/clinicals/<%= clinical._id %>">
+                        <span class="text-dark font-weight-bold"><%= moment(clinical.date_created).format('DD/MM/YYYY')%></span><% if (clinical.diag){ %> Dx: <% } %><%= clinical.diag %>
                         <div class="signed-off" style="display: none;"><%= clinical.signed_off %></div>
                     </a>
                 <% }); %>
