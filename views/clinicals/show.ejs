@@ -2,7 +2,8 @@
 
 <div class="container">
     
-    <h3><%= patient.firstname + " " + patient.surname %>'s Clinical Details on <%= moment(clinical.date_created).format('DD/MM/YYYY') %></h1>
+    <h1 class="mt-3"><%= patient.firstname + " " + patient.surname %></h1>
+    <h3>Clinical Details: <%= moment(clinical.date_created).format('DD/MM/YYYY') %></h3>  
 
     <form method="POST" action="/patients/<%= patient._id %>/clinicals/<%= clinical.id %>?_method=DELETE" id="delete-clinical-form" class="delete-form"></form>
 

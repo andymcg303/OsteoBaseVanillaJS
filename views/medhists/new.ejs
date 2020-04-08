@@ -2,7 +2,8 @@
 
 <div class="container">
 
-    <h1>New Medical History for <%= patient.firstname + " " + patient.surname %></h1>
+    <h1 class="mt-3"><%= patient.firstname + " " + patient.surname %></h1>
+    <h3>New Medical History</h3>  
 
     <form id="new-medhist-form" action="/patients/<%= patient._id %>/medhists" method="POST">
         <div class="form-row">

@@ -1,8 +1,8 @@
 <% include ../partials/header %>
 
 <div class="container">
-    <h1>Patient Details</h1>
-
+    <h1 class="mt-3">Patient Details</h1>
+    
     <form method="POST" action="/patients/<%= patient._id %>?_method=DELETE" id="delete-patient-form"></form>
 
     <form id="edit-patient-form" class="edit-form" action="/patients/<%= patient._id %>" method="POST" autocomplete="off">

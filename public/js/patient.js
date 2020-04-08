@@ -7,14 +7,15 @@ $(function(){
     // Show New Patient form
     $newPatientButton.click(function(){
         $newPatientForm.toggle();
-        $(this).prop('disabled',true);
+        // $(this).prop('disabled',true);
+        $(this).toggle();
     });
 
     // Hide new patient form
     $('#cancel-new-patient').click(function(){
-        $newPatientButton.prop('disabled',false);
         $newPatientForm.toggle();
         $newPatientForm.find('.form-control').val('');
+        $newPatientButton.toggle();
     });
 
     // Post new patient
@@ -27,7 +28,8 @@ $(function(){
             );
             $newPatientForm.find('.form-control').val('');
             $newPatientButton.prop('disabled',false);
-            $newPatientForm.toggle();    
+            $newPatientForm.toggle();
+            $newPatientButton.toggle();    
         });
     });
 

@@ -3,12 +3,13 @@
 <head>
     <title>OsteoBase</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/stylesheets/main.css">
 </head>
 <body>
 
-<nav class="navbar navbar-dark bg-dark justify-content-start">
-    <a class="navbar-brand" href="/">OsteoBase</a>
+<nav class="navbar bg-dark navbar-dark justify-content-start">
+    <a class="navbar-brand mb-1" href="/">OsteoBase</a>
     <% if (currentUser) { %>
         <a href="/logout" class="btn btn-sm btn-secondary">Logout</a>
     <% } %>
@@ -22,14 +23,16 @@
 
 <div class="container">
 
-    <div class="row">
-        <div class="col-12 d-flex justify-content-between align-items-center">
+    <!-- <div class="row">
+        <div class="col-12 d-flex justify-content-between align-items-center mt-3">
             <h1>Patient Index</h1>
             <button class="btn btn-primary" id="new-patient-button">Add New Patient</button>
         </div>
-    </div>
+    </div> -->
 
     <form action="/patients" method="POST" id="new-patient-form" enctype="multipart/form-data">
+
+        <h1 class="mt-3">New Patient Details</h1>
 
         <div class="form-row">
             <div class="form-group col-md-3">
@@ -72,8 +75,15 @@
     </form>   
 
     <div class="row">
+        <div class="col-12 d-flex justify-content-between align-items-center mt-3">
+            <h1>Patient Index</h1>
+            <button class="btn btn-primary" id="new-patient-button">Add New Patient</button>
+        </div>
+    </div>
+
+    <div class="row">
             
-        <div class="col-12 list-group" id="patient-list">
+        <div class="col-12 list-group mt-2" id="patient-list">
             <% patients.forEach(function(patient){ %>
                 <a class="list-group-item list-group-item-action list-group-item-light" href="/patients/<%= patient._id %>"><%= patient.firstname + " " + patient.surname %><span class="float-right"><%= moment(patient.dob).format('DD/MM/YYYY') %></span></a>
             <% }); %>

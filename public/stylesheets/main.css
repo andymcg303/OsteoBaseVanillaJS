@@ -1,4 +1,13 @@
 
+body{
+    background-color: lightgray;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.navbar-brand{
+    font-size: 2.5em;
+}
+
 #new-patient-form,
 .submit-edit-button, 
 .cancel-edit-button,

@@ -2,7 +2,8 @@
 
 <div class="container">
     
-    <h3>Uploaded on  <%= moment(document.date_created).format('DD/MM/YYYY') %></h3>
+    <h1 class="mt-3"><%= patient.firstname + " " + patient.surname %></h1>
+    <h3>Document: (name)</h3>  
 
     <img src="<%= document.url %>" alt="uploaded document" width="500px">
 

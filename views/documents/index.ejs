@@ -2,7 +2,8 @@
 
 <div class="container">
     
-    <h3><%= patient.firstname + " " + patient.surname %>'s Uploaded Documents</h3>
+    <h1 class="mt-3"><%= patient.firstname + " " + patient.surname %></h1>
+    <h3>Documents:</h3>  
 
     <form class="document-form" action="/patients/<%= patient._id %>/documents" method="POST" enctype="multipart/form-data">
         <div class="form-row">
