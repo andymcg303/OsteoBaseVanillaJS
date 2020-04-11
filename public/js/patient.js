@@ -1,5 +1,7 @@
 $(function(){
 
+    $('#patient-list').DataTable();
+
     // PATIENT INDEX
     let $newPatientButton = $('#new-patient-button'),
         $newPatientForm = $('#new-patient-form');
@@ -18,33 +20,33 @@ $(function(){
         $newPatientButton.toggle();
     });
 
-    // Post new patient
-    $newPatientForm.submit(function(e){
-        e.preventDefault();
-        let $newPatientData = $(this).serialize();
-        $.post('/patients', $newPatientData, function(data){
-            $('#patient-list').append(
-                `<a class="list-group-item list-group-item-action list-group-item-light" href="/patients/${data._id}">${data.firstname} ${data.surname}<span class="float-right">${moment(data.dob).format('DD/MM/YYYY')}</span></a>`
-            );
-            $newPatientForm.find('.form-control').val('');
-            $newPatientButton.prop('disabled',false);
-            $newPatientForm.toggle();
-            $newPatientButton.toggle();    
-        });
-    });
+    // // Post new patient
+    // $newPatientForm.submit(function(e){
+    //     e.preventDefault();
+    //     let $newPatientData = $(this).serialize();
+    //     $.post('/patients', $newPatientData, function(data){
+    //         $('#patient-list').append(
+    //             `<a class="list-group-item list-group-item-action list-group-item-light" href="/patients/${data._id}">${data.firstname} ${data.surname}<span class="float-right">${moment(data.dob).format('DD/MM/YYYY')}</span></a>`
+    //         );
+    //         $newPatientForm.find('.form-control').val('');
+    //         $newPatientButton.prop('disabled',false);
+    //         $newPatientForm.toggle();
+    //         $newPatientButton.toggle();    
+    //     });
+    // });
 
-    // Search on patients surname functionality
-    $('#search').submit(function(e){
-        e.preventDefault();
-        $.get('/patients?keyword=' + encodeURIComponent($('#search-text').val()), function (data) {
-            $('#patient-list').html('');
-            data.forEach(function (patient) {
-                $('#patient-list').append(
-                    `<a class="list-group-item list-group-item-action list-group-item-light" href="/patients/${patient._id}">${patient.firstname} ${patient.surname}<span class="float-right">${moment(patient.dob).format('DD/MM/YYYY')}</span></a>`
-                );
-            });    
-        });
-    });
+    // // Search on patients surname functionality
+    // $('#search').submit(function(e){
+    //     e.preventDefault();
+    //     $.get('/patients?keyword=' + encodeURIComponent($('#search-text').val()), function (data) {
+    //         $('#patient-list').html('');
+    //         data.forEach(function (patient) {
+    //             $('#patient-list').append(
+    //                 `<a class="list-group-item list-group-item-action list-group-item-light" href="/patients/${patient._id}">${patient.firstname} ${patient.surname}<span class="float-right">${moment(patient.dob).format('DD/MM/YYYY')}</span></a>`
+    //             );
+    //         });    
+    //     });
+    // });
 
     // Sorting functionality
     $('#sort-name-button').click(function(){

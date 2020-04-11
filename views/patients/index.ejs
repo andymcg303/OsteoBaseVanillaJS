@@ -1,25 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>OsteoBase</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/stylesheets/main.css">
-</head>
-<body>
-
-<nav class="navbar bg-dark navbar-dark justify-content-start">
-    <a class="navbar-brand mb-1" href="/">OsteoBase</a>
-    <% if (currentUser) { %>
-        <a href="/logout" class="btn btn-sm btn-secondary">Logout</a>
-    <% } %>
-    <form class="form-inline ml-auto" id="search">
-        <input class="form-control mr-sm-2" type="search" placeholder="Surname" name="keyword" id="search-text" aria-label="Search">
-        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Find Patients</button>
-    </form>
-</nav>
-
-<% include ../partials/flash-messages %>
+<% include ../partials/header %>
 
 <div class="container">
 
@@ -71,21 +50,26 @@
         <h1>Patient Index</h1>
     </div>    
 
-    <div class="row justify-content-between align-items-center">
-        <div class="col-12 d-flex justify-content-between align-items-center">
-            <button class="btn btn-info" id="sort-name-button">Sort By Name</button>
-            <button class="btn btn-info" id="sort-dob-button">Sort By DOB</button>
-        </div>
-    </div>    
-            
-    <div class="col-12 list-group mt-2 pr-0" id="patient-list">
-        <% patients.forEach(function(patient){ %>
-            <a class="list-group-item list-group-item-action list-group-item-light" href="/patients/<%= patient._id %>">
-                <span class="patient-name font-weight-bold text-dark"><%= patient.surname %>, <%= patient.firstname %></span>
-                <span class="patient-dob float-right"><%= moment(patient.dob).format('DD/MM/YYYY') %></span>
-            </a>
-        <% }); %>
-    </div>
+    <table id="patient-list" class="table bg-white rounded">
+        <thead>
+            <tr>
+                <th data-priority="1">Last Name</th>
+                <th data-priority="2">First Name</th>
+                <th data-priority="3">Date of Birth</th>
+                <th data-priority="4">Phone Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% patients.forEach(function(patient){ %>
+                <tr>
+                    <td><%= patient.surname %></td>
+                    <td><%= patient.firstname %></td>
+                    <td><%= moment(patient.dob).format('DD/MM/YYYY') %></td>
+                    <td><%= patient.phonenumber %></td>
+                </tr>
+            <% }); %>
+        </tfoot>
+    </table>
 
     <div class="row">
         <div class="col-12 align-items-center mt-3">
