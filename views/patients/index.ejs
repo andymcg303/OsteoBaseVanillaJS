@@ -50,23 +50,25 @@
         <h1>Patient Index</h1>
     </div>    
 
-    <table id="patient-list" class="table bg-white rounded">
+    <table id="patient-table" class="table table-hover bg-white rounded">
         <thead>
             <tr>
-                <th data-priority="1">Last Name</th>
-                <th data-priority="2">First Name</th>
-                <th data-priority="3">Date of Birth</th>
-                <th data-priority="4">Phone Number</th>
+                <th style="display: none;">ID</th>
+                <th>Last Name</th>
+                <th>First Name</th>
+                <th>Date of Birth</th>
+                <th>Phone Number</th>
             </tr>
         </thead>
         <tbody>
             <% patients.forEach(function(patient){ %>
-                <tr>
-                    <td><%= patient.surname %></td>
-                    <td><%= patient.firstname %></td>
-                    <td><%= moment(patient.dob).format('DD/MM/YYYY') %></td>
-                    <td><%= patient.phonenumber %></td>
-                </tr>
+                    <tr>
+                        <td style="display: none;"><%= patient.id %></td>
+                        <td><%= patient.surname %></td>
+                        <td><%= patient.firstname %></td>
+                        <td><%= moment(patient.dob).format('DD/MM/YYYY') %></td>
+                        <td><%= patient.phonenumber %></td>
+                    </tr>
             <% }); %>
         </tfoot>
     </table>

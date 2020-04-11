@@ -1,6 +1,12 @@
 $(function(){
 
-    $('#patient-list').DataTable();
+    // DataTables initialisation
+    let $patientTable = $('#patient-table').DataTable();
+
+    $('#patient-table tbody').on('click', 'tr', function () {
+        let data = $patientTable.row( this ).data();
+            window.location.assign(`patients/${data[0]}`);
+    });
 
     // PATIENT INDEX
     let $newPatientButton = $('#new-patient-button'),
@@ -25,7 +31,7 @@ $(function(){
     //     e.preventDefault();
     //     let $newPatientData = $(this).serialize();
     //     $.post('/patients', $newPatientData, function(data){
-    //         $('#patient-list').append(
+    //         $('#patient-table').append(
     //             `<a class="list-group-item list-group-item-action list-group-item-light" href="/patients/${data._id}">${data.firstname} ${data.surname}<span class="float-right">${moment(data.dob).format('DD/MM/YYYY')}</span></a>`
     //         );
     //         $newPatientForm.find('.form-control').val('');
@@ -39,9 +45,9 @@ $(function(){
     // $('#search').submit(function(e){
     //     e.preventDefault();
     //     $.get('/patients?keyword=' + encodeURIComponent($('#search-text').val()), function (data) {
-    //         $('#patient-list').html('');
+    //         $('#patient-table').html('');
     //         data.forEach(function (patient) {
-    //             $('#patient-list').append(
+    //             $('#patient-table').append(
     //                 `<a class="list-group-item list-group-item-action list-group-item-light" href="/patients/${patient._id}">${patient.firstname} ${patient.surname}<span class="float-right">${moment(patient.dob).format('DD/MM/YYYY')}</span></a>`
     //             );
     //         });    
