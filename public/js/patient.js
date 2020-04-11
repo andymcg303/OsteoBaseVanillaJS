@@ -2,6 +2,7 @@ $(function(){
 
     // DataTables initialisation
     let $patientTable = $('#patient-table').DataTable();
+    $patientTable.column( 0 ).visible( false );
 
     // open patient view
     $('#patient-table tbody').on('click', 'tr', function () {
@@ -32,13 +33,13 @@ $(function(){
         e.preventDefault();
         let $newPatientData = $(this).serialize();
         $.post('/patients', $newPatientData, function(data){
-            $patientTable.row.add( {
-                "ID": `${data.surname}`,
-                "Last Name: `${data.firstname}`,
-                "First Name: 
-                "Date of Birth":
-                "Phone Number":
-            } ).draw();
+            $patientTable.row.add( [ 
+                `${data._id}`,
+                `${data.surname}`,
+                `${data.firstname}`,
+                `${moment(data.dob).format('DD/MM/YYYY')}`,
+                `${data.phonenumber}`] )
+            .draw();
     
             //         $('#patient-table').append(
     //             `<a class="list-group-item list-group-item-action list-group-item-light" href="/patients/${data._id}">${data.firstname} ${data.surname}<span class="float-right">${moment(data.dob).format('DD/MM/YYYY')}</span></a>`
