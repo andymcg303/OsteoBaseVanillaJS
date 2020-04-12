@@ -1,8 +1,14 @@
 $(function(){
 
     // DataTables initialisation
-    let $patientTable = $('#patient-table').DataTable();
-    $patientTable.column( 0 ).visible( false );
+    let $patientTable = $('#patient-table').DataTable(
+        {"columnDefs":  
+            [{
+                "targets": [ 0 ],
+                "visible": false
+            }]
+        }
+    );
 
     // open patient view
     $('#patient-table tbody').on('click', 'tr', function () {
@@ -40,29 +46,12 @@ $(function(){
                 `${moment(data.dob).format('DD/MM/YYYY')}`,
                 `${data.phonenumber}`] )
             .draw();
-    
-            //         $('#patient-table').append(
-    //             `<a class="list-group-item list-group-item-action list-group-item-light" href="/patients/${data._id}">${data.firstname} ${data.surname}<span class="float-right">${moment(data.dob).format('DD/MM/YYYY')}</span></a>`
-    //         );
             $newPatientForm.find('.form-control').val('');
             $newPatientButton.prop('disabled',false);
             $newPatientForm.toggle();
             $newPatientButton.toggle();    
         });
     });
-
-    // // Search on patients surname functionality
-    // $('#search').submit(function(e){
-    //     e.preventDefault();
-    //     $.get('/patients?keyword=' + encodeURIComponent($('#search-text').val()), function (data) {
-    //         $('#patient-table').html('');
-    //         data.forEach(function (patient) {
-    //             $('#patient-table').append(
-    //                 `<a class="list-group-item list-group-item-action list-group-item-light" href="/patients/${patient._id}">${patient.firstname} ${patient.surname}<span class="float-right">${moment(patient.dob).format('DD/MM/YYYY')}</span></a>`
-    //             );
-    //         });    
-    //     });
-    // });
 
     // Sorting functionality
     $('#sort-name-button').click(function(){

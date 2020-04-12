@@ -30,12 +30,11 @@ $(function(){
             $documentArray.each(function(){
                 let $documentId = $(this).val();
                 let $itemToDelete = $(this).closest('.document-group-item');
-                debugger;
                 $.ajax({
                     url: `/patients/${$patientId}/documents/${$documentId}`,
                     type: 'DELETE',
                     itemToDelete: $itemToDelete,
-                    success: function success() {
+                    success: function() {
                         this.itemToDelete.remove();
                         $('#delete-documents-button').hide();    
                     }
