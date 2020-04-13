@@ -19,4 +19,7 @@ body{
     display: none;
 }
 
-
+/* display after renderin page, reduces flicker */
+#patient-table{
+    display: none;
+}

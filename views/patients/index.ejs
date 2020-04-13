@@ -1,6 +1,6 @@
 <% include ../partials/header %>
 
-<div class="container">
+<div class="container mb-3">
 
     <form action="/patients" method="POST" id="new-patient-form" enctype="multipart/form-data">
 
@@ -46,9 +46,12 @@
         </div>
     </form>   
 
-    <div class="row col-12 mt-3"> 
-        <h1>Patient Index</h1>
-    </div>    
+    <div class="row mt-3">
+        <div class="col-12 d-flex justify-content-between align-items-center">
+            <h1>Patient Index</h1>
+            <button class="btn btn-primary" id="new-patient-button" type="button">Add New Patient</button>
+        </div>
+    </div>
 
     <table id="patient-table" class="table table-hover bg-white rounded">
         <thead>
@@ -72,12 +75,6 @@
             <% }); %>
         </tfoot>
     </table>
-
-    <div class="row">
-        <div class="col-12 align-items-center mt-3">
-            <button class="btn btn-primary" id="new-patient-button">Add New Patient</button>
-        </div>
-    </div>
 
 </div>
 

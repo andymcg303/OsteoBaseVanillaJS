@@ -10,6 +10,8 @@ $(function(){
         }
     );
 
+    $('#patient-table').show();    
+
     // open patient view
     $('#patient-table tbody').on('click', 'tr', function () {
         let data = $patientTable.row( this ).data();
