@@ -40,18 +40,39 @@
                 <label for="emailEdit">email</label>
                 <input type="email" class="form-control" name="patient[email]" id="emailEdit" value="<%= patient.email %>" disabled>
             </div>
-            <div class="form-group col-lg-6 align-self-end">
+            <div class="form-group col-lg-6 align-self-end d-flex">
                 <div class="btn btn-info edit-button" id="edit-patient-button">Edit Patient Details</div>
-                <a class="btn btn-info" id="view-documents-button" href="/patients/<%= patient._id %>/documents">View Documents</a>
-                <button class="btn btn-success submit-edit-button" id="submit-edit-patient-button">Submit</button>
-                <div class="btn btn-warning cancel-edit-button" id="cancel-edit-patient-button">Cancel</div>
+                <a class="btn btn-info ml-2 mr-2" id="view-documents-button" href="/patients/<%= patient._id %>/documents">View Documents</a>
+                <button class="btn btn-secondary ml-auto" id="change-view-button" type="button">Change to Column View</button>
+                <button class="btn btn-success submit-edit-button mr-1" id="submit-edit-patient-button">Submit</button>
+                <div class="btn btn-warning cancel-edit-button mr-1" id="cancel-edit-patient-button">Cancel</div>
                 <input type="submit" class="btn btn-danger delete-button" id="delete-patient-button" value="Delete" form="delete-patient-form">
             </div>   
         </div>
     </form>
 
-    <div class="row">
-        <div class="col-lg">
+    <div class="row log-view">
+        <table id="patient-log-table" class="table table-hover bg-white rounded">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Info</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td>20/04/1973</td>
+                    <td>Consultation</td>
+                    <td>Leg Pain</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    
+    <div class="row column-view d-none">
+        <div class="col-lg-4">
             <!-- Show Med Hists -->
             <h3>Medical Histories</h3>
             <div class="list-group">
@@ -66,7 +87,7 @@
             <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/medhists/new">New Medical History</a>
         </div>        
 
-        <div class="col-lg">
+        <div class="col-lg-4">
             <!-- Show Interviews -->
             <h3>Consultations</h3>
             <div class="list-group">
@@ -83,7 +104,7 @@
             <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/interviews/new">New Consultation</a>
         </div>        
 
-        <div class="col-lg">
+        <div class="col-lg-4">
             <!-- Show Clinicals -->
             <h3>Clinical Sessions</h3>
             <div class="list-group">    
@@ -102,6 +123,25 @@
 
     </div><!-- row -->
 
+    <!-- <div class="row log-view">
+        <table id="patient-log-table" class="table table-hover bg-white rounded">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Info</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td>20/04/1973</td>
+                    <td>Consultation</td>
+                    <td>Leg Pain</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div> -->
     <div>
         <a class="btn btn-secondary mt-2" href="/patients">Back to Patient Index</a>
     </div>

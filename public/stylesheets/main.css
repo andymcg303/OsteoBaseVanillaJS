@@ -15,7 +15,8 @@ body{
 .signoff-edit-button,
 .signoff-button,
 .upload-tools,
-#delete-documents-button{    
+#delete-documents-button{
+/* .column-view{     */
     display: none;
 }
 

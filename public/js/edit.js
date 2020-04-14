@@ -8,7 +8,8 @@ $(function(){
         $cancelEditButton = $('.cancel-edit-button'),
         $deleteButton = $('.delete-button'),
         $signoffButton = $('.signoff-button'),
-        $viewDocumentsButton = $('#view-documents-button');
+        $viewDocumentsButton = $('#view-documents-button'),
+        $changeViewButton = $('#change-view-button');
 
     // Enable Edit form and buttons
     $editButton.click(function(){
@@ -19,6 +20,7 @@ $(function(){
         $cancelEditButton.css('display', 'inline-block');
         $deleteButton.css('display', 'inline-block');
         $editFormControls.prop('disabled',false);
+        $changeViewButton.toggle();
     });
 
     function disableEditForm(){
@@ -29,6 +31,7 @@ $(function(){
         $cancelEditButton.hide();
         $deleteButton.hide();
         $editFormControls.prop('disabled',true);
+        $changeViewButton.toggle();
     }
 
     // Disable Edit functionaity
@@ -98,4 +101,15 @@ $(function(){
             $(this).parent().append('<svg class="bi bi-lock-fill text-dark float-right" width="1.3em" height="1.3em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><rect width="11" height="9" x="4.5" y="8" rx="2"></rect><path fill-rule="evenodd" d="M6.5 5a3.5 3.5 0 117 0v3h-1V5a2.5 2.5 0 00-5 0v3h-1V5z" clip-rule="evenodd"></path></svg>');
         }    
     });  
+
+    // Toggle patient info view 
+    $changeViewButton.click(function(){
+        $('.column-view').toggleClass("d-none");
+        $('.log-view').toggleClass("d-none");
+        
+        $changeViewButton.text() === "Change to Column View" ? $changeViewButton.text("Change to Log View") : $changeViewButton.text("Change to Column View");  
+    });
+
 });
+
+

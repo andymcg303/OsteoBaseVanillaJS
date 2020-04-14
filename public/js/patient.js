@@ -55,13 +55,13 @@ $(function(){
         });
     });
 
-    // Sorting functionality
-    $('#sort-name-button').click(function(){
-        tinysort($('.list-group-item'), {selector: '.patient-name'});
-    });
+    // // Sorting functionality
+    // $('#sort-name-button').click(function(){
+    //     tinysort($('.list-group-item'), {selector: '.patient-name'});
+    // });
     
-    $('#sort-dob-button').click(function(){
-        tinysort($('.list-group-item'), {selector: '.patient-dob'});
-    });
+    // $('#sort-dob-button').click(function(){
+    //     tinysort($('.list-group-item'), {selector: '.patient-dob'});
+    // });
 
 });
