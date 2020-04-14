@@ -1,12 +1,7 @@
 const Patient   = require('../models/patient');
 const Document = require('../models/document');
 const moment    = require('moment');
-const cloudinary = require('cloudinary');
-cloudinary.config({
-    cloud_name: 'andymcg303',
-    api_key: '297314977141138',
-    api_secret: process.env.CLOUDINARY_SECRET
-});
+const { cloudinary } = require('../cloudinary');
 
 module.exports = {
     // Documents Index
@@ -21,11 +16,12 @@ module.exports = {
         let foundPatient = await Patient.findById(req.params.id);
         
         for (const file of req.files){
-            let doc = await cloudinary.v2.uploader.upload(file.path);
-            let newDoc =  await Document.create( {url: doc.secure_url, public_id: doc.public_id, file_name: file.originalname} );  
+            // let doc = await cloudinary.v2.uploader.upload(file.path);
+            let newDoc =  await Document.create( {url: file.secure_url, public_id: file.public_id, file_name: file.originalname} );  
             foundPatient.documents.push(newDoc);
-            foundPatient.save();
         }
+        await foundPatient.save();
+
         res.redirect(`/patients/${foundPatient.id}/documents`);
     },
 

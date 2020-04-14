@@ -3,6 +3,7 @@ const MedHist = require("./medhist");
 const Interview = require("./interview");
 const Clinical = require("./clinical");
 const Document = require("./document");
+const { cloudinary } = require("../cloudinary");
 
 const patientSchema = new mongoose.Schema({
     date_created: {type: Date, default: Date.now},
@@ -84,12 +85,20 @@ patientSchema.pre('remove', async function(next){
 // remove assoc documents
 patientSchema.pre('remove', async function(next){
   try {
+
+    // delete from cloudinary whilst id exists in DB
+    for (const document of this.documents){
+      let foundDocument = await Document.findById(document);
+      await cloudinary.v2.uploader.destroy(foundDocument.public_id);      
+    }
+
     await Document.deleteMany({
       "_id": {
       $in: this.documents  
       }
     });
     next();
+
   } catch(err) {
     next(err);
   }
