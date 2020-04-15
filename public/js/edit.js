@@ -1,5 +1,39 @@
 $(function(){
 
+    $.fn.dataTable.moment( 'DD/MM/YYYY' );
+
+    // Patient Index DataTable initialisation
+    let $patientLogTable = $('#patient-log-table').DataTable( {
+        "columnDefs":  
+            [{
+                "targets": [ 0, 1 ],
+                "visible": false
+            }],
+        "order": [[ 2, "desc" ]],
+        "lengthMenu": [[5, 10, 20, -1], [5, 10, 20, "All"]]
+    } );
+
+    // Prevents flicker on loading
+    $('#patient-log-table').show();    
+
+    // open entry type view
+    $('#patient-log-table tbody').on('click', 'tr', function () {
+        let data = $patientLogTable.row( this ).data();
+
+        switch (data[1]){
+            case "M":
+                window.location.assign(`${$patientId}/medhists/${data[0]}`);
+                break;
+            case "I":
+                window.location.assign(`${$patientId}/interviews/${data[0]}`);
+                break;
+            case "C":
+                window.location.assign(`${$patientId}/clinicals/${data[0]}`);
+                break;    
+        }
+
+    });
+
     // SHOW/EDIT FUNCTIONALITY
     let $editForm = $('.edit-form'),
         $editButton = $('.edit-button'),
@@ -93,14 +127,23 @@ $(function(){
         }
     });
 
-    // add signoff icon to signoff items
-    $('.signoff-item .signed-off').each(function(){
+    // add signoff icon to log view signoff items
+    $('.log-signoff-item .signed-off').each(function(){
+        if ($(this).text() === "false"){
+            $(this).parent().append('<svg class="bi bi-unlock-fill text-warning" width="1.3em" height="1.3em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 10a2 2 0 012-2h7a2 2 0 012 2v5a2 2 0 01-2 2h-7a2 2 0 01-2-2v-5z"></path><path fill-rule="evenodd" d="M10.5 5a3.5 3.5 0 117 0v3h-1V5a2.5 2.5 0 00-5 0v3h-1V5z" clip-rule="evenodd"></path></svg>');
+        } else {
+            $(this).parent().append('<svg class="bi bi-lock-fill text-dark" width="1.3em" height="1.3em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><rect width="11" height="9" x="4.5" y="8" rx="2"></rect><path fill-rule="evenodd" d="M6.5 5a3.5 3.5 0 117 0v3h-1V5a2.5 2.5 0 00-5 0v3h-1V5z" clip-rule="evenodd"></path></svg>');
+        }    
+    });
+    
+    // add signoff icon to column signoff items
+    $('.column-signoff-item .signed-off').each(function(){
         if ($(this).text() === "false"){
             $(this).parent().append('<svg class="bi bi-unlock-fill text-warning float-right" width="1.3em" height="1.3em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 10a2 2 0 012-2h7a2 2 0 012 2v5a2 2 0 01-2 2h-7a2 2 0 01-2-2v-5z"></path><path fill-rule="evenodd" d="M10.5 5a3.5 3.5 0 117 0v3h-1V5a2.5 2.5 0 00-5 0v3h-1V5z" clip-rule="evenodd"></path></svg>');
         } else {
             $(this).parent().append('<svg class="bi bi-lock-fill text-dark float-right" width="1.3em" height="1.3em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><rect width="11" height="9" x="4.5" y="8" rx="2"></rect><path fill-rule="evenodd" d="M6.5 5a3.5 3.5 0 117 0v3h-1V5a2.5 2.5 0 00-5 0v3h-1V5z" clip-rule="evenodd"></path></svg>');
         }    
-    });  
+    });
 
     // Toggle patient info view 
     $changeViewButton.click(function(){

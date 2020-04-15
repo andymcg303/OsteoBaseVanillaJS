@@ -1,15 +1,18 @@
 $(function(){
 
-    // DataTables initialisation
-    let $patientTable = $('#patient-table').DataTable(
-        {"columnDefs":  
+    $.fn.dataTable.moment( 'DD/MM/YYYY' );
+
+    // Patient Index DataTable initialisation
+    let $patientTable = $('#patient-table').DataTable( {
+        "columnDefs":  
             [{
                 "targets": [ 0 ],
                 "visible": false
-            }]
-        }
-    );
+            }],
+            "lengthMenu": [[10, 20, -1], [10, 20, "All"]]
+        } );
 
+    // Prevents flicker on loading
     $('#patient-table').show();    
 
     // open patient view

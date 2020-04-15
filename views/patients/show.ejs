@@ -51,26 +51,56 @@
         </div>
     </form>
 
-    <div class="row log-view">
+    <!-- Populate list view with data and order on the client side with datatables -->
+    <div class="log-view">
         <table id="patient-log-table" class="table table-hover bg-white rounded">
             <thead>
                 <tr>
+                    <th>id</th>
+                    <th>typecode</th>
                     <th>Date</th>
                     <th>Type</th>
                     <th>Info</th>
+                    <th>Signed Off?</th>
                 </tr>
             </thead>
             <tbody>
 
-                <tr>
-                    <td>20/04/1973</td>
-                    <td>Consultation</td>
-                    <td>Leg Pain</td>
-                </tr>
+                <% patient.medhists.forEach(function(medhist){ %>                
+                    <tr>
+                        <td><%= medhist._id %></td>
+                        <td>M</td>
+                        <td><span class="text-dark font-weight-bold"><%= moment(medhist.date_created).format('DD/MM/YYYY') %></span></td>
+                        <td><span class="fas fa-comment-medical text-success"></span>  Medical History</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                <% }); %>
+                <% patient.interviews.forEach(function(interview){ %>
+                    <tr class="log-signoff-item">
+                        <td><%= interview._id %></td>
+                        <td>I</td>
+                        <td><span class="text-dark font-weight-bold"><%= moment(interview.date_created).format('DD/MM/YYYY') %></span></td>
+                        <td><span class="fa fa-comments text-info"></span>  Consultation</td>
+                        <td><% if (interview.CO){ %> C/O: <% } %><%= interview.CO %></td>
+                        <td><div class="signed-off" style="display: none;"><%= interview.signed_off %></div></td>
+                    </tr>
+                <% }); %>                
+                <% patient.clinicals.forEach(function(clinical){ %>
+                    <tr class="log-signoff-item">
+                        <td><%= clinical._id %></td>
+                        <td>C</td>
+                        <td><span class="text-dark font-weight-bold"><%= moment(clinical.date_created).format('DD/MM/YYYY')%></span></td>
+                        <td><span class="fas fa-user-friends text-danger"></span>  Clinical Session</td>
+                        <td><% if (clinical.diag){ %> Dx: <% } %><%= clinical.diag %></td>
+                        <td><div class="signed-off" style="display: none;"><%= clinical.signed_off %></div></td>
+                    </tr>
+                <% }); %>                                    
             </tfoot>
         </table>
     </div>
     
+    <!-- Populate column view -->
     <div class="row column-view d-none">
         <div class="col-lg-4">
             <!-- Show Med Hists -->
@@ -92,7 +122,7 @@
             <h3>Consultations</h3>
             <div class="list-group">
                 <% patient.interviews.forEach(function(interview){ %>
-                    <a class="list-group-item list-group-item-action list-group-item-light signoff-item" 
+                    <a class="list-group-item list-group-item-action list-group-item-light column-signoff-item" 
                         href="/patients/<%= patient._id%>/interviews/<%= interview._id %>">
                         <span class="fa fa-comments text-info"></span>
                         <span class="text-dark font-weight-bold"><%= moment(interview.date_created).format('DD/MM/YYYY') %></span>
@@ -109,7 +139,7 @@
             <h3>Clinical Sessions</h3>
             <div class="list-group">    
                 <% patient.clinicals.forEach(function(clinical){ %>
-                    <a class="list-group-item list-group-item-action list-group-item-light signoff-item" 
+                    <a class="list-group-item list-group-item-action list-group-item-light column-signoff-item" 
                         href="/patients/<%= patient._id%>/clinicals/<%= clinical._id %>">
                         <span class="fas fa-user-friends text-danger"></span>
                         <span class="text-dark font-weight-bold"><%= moment(clinical.date_created).format('DD/MM/YYYY')%></span>
@@ -123,32 +153,16 @@
 
     </div><!-- row -->
 
-    <!-- <div class="row log-view">
-        <table id="patient-log-table" class="table table-hover bg-white rounded">
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Type</th>
-                    <th>Info</th>
-                </tr>
-            </thead>
-            <tbody>
-
-                <tr>
-                    <td>20/04/1973</td>
-                    <td>Consultation</td>
-                    <td>Leg Pain</td>
-                </tr>
-            </tfoot>
-        </table>
-    </div> -->
     <div>
-        <a class="btn btn-secondary mt-2" href="/patients">Back to Patient Index</a>
+        <a class="btn btn-secondary mt-2 mb-3" href="/patients">Back to Patient Index</a>
     </div>
 
 </div><!-- container -->
 
 <% include ../partials/common-scripts %>
+<script>
+     let $patientId = <%- JSON.stringify(patient._id) %>;
+</script>
 <script src="/js/edit.js"></script>
 <% include ../partials/footer %>
  

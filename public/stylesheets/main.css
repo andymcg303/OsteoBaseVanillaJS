@@ -20,7 +20,8 @@ body{
     display: none;
 }
 
-/* display after renderin page, reduces flicker */
-#patient-table{
+/* display after rendering page, reduces flicker */
+#patient-table,
+#patient-log-table{
     display: none;
 }
