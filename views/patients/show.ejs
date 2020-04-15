@@ -72,7 +72,7 @@
                         <td>M</td>
                         <td><span class="text-dark font-weight-bold"><%= moment(medhist.date_created).format('DD/MM/YYYY') %></span></td>
                         <td><span class="fas fa-comment-medical text-success"></span>  Medical History</td>
-                        <td></td>
+                        <td><% if (medhist.critical){ %> Critical: <% } %><%= medhist.critical %></td>
                         <td></td>
                     </tr>
                 <% }); %>
@@ -98,6 +98,9 @@
                 <% }); %>                                    
             </tfoot>
         </table>
+        <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/medhists/new"><span class="fas fa-comment-medical text-success"></span>  New Medical History</a>
+        <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/interviews/new"><span class="fa fa-comments text-info"></span>  New Consultation</a>
+        <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/clinicals/new"><span class="fas fa-user-friends text-danger"></span>  New Clinical Session</a>
     </div>
     
     <!-- Populate column view -->
@@ -148,7 +151,7 @@
                     </a>
                 <% }); %>
             </div>
-            <a  class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/clinicals/new">New Clinical Session</a>
+            <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/clinicals/new">New Clinical Session</a>
         </div>
 
     </div><!-- row -->

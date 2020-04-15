@@ -12,7 +12,8 @@ const medhistSchema = new mongoose.Schema({
     gu: String,
     git: String,
     gynae: String,
-    msk: String
+    msk: String,
+    critical: String
 
 });
 
