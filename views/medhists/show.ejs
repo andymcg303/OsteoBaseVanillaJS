@@ -61,11 +61,16 @@
                 <label for="critical-edit">Critical Info:</label>
                 <input type="text" class="form-control" name="medhist[critical]" id="msk-edit" value="<%= medhist.critical %>" disabled> 
             </div>
+
+            <!-- Hidden input for signoff -->
+            <input class="hidden-signed-off" type="text" name="medhist[signed_off]" style="display: none" value="<%= medhist.signed_off %>">
+
             <div class="form-group col-lg-6 align-self-end">
                 <div class="btn btn-info edit-button" id="edit-medhist-button">Edit Medical History</div>
                 <button class="btn btn-success submit-edit-button" id="submit-edit-medhist-button">Submit</button>
                 <div class="btn btn-warning cancel-edit-button" id="cancel-edit-medhist-button">Cancel</div>
                 <input type="submit" class="btn btn-danger delete-button" id="delete-medhist-button" value="Delete" form="delete-medhist-form">
+                <div class="btn btn-dark signoff-button" id="signoff-medhist-button">Sign Off</div>
             </div>
         </div>            
     </form>

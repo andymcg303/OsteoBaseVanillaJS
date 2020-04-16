@@ -36,7 +36,9 @@ async function seedPatients() {
                 gu: faker.lorem.word(),
                 git: faker.lorem.word(),
                 gynae: faker.lorem.word(),
-                msk:faker.lorem.word()            
+                msk:faker.lorem.word(),
+                critical: faker.lorem.word(),
+                signed_off: false             
             }    
 
             let newMedhist = await Medhist.create(medhist);

@@ -1,6 +1,6 @@
 $(function(){
 
-    $.fn.dataTable.moment( 'DD/MM/YYYY' );
+    $.fn.dataTable.moment( 'DD/MM/YYYY HH:mm' );
 
     // Patient Index DataTable initialisation
     let $patientLogTable = $('#patient-log-table').DataTable( {
@@ -9,7 +9,7 @@ $(function(){
                 "targets": [ 0, 1 ],
                 "visible": false
             }],
-        "order": [[ 2, "desc" ]],
+        "order": [[ 2, "desc" ]], // in production will be better to default sorting to ID ie: [0], as date in seed data not accurate
         "lengthMenu": [[5, 10, 20, -1], [5, 10, 20, "All"]]
     } );
 
@@ -125,24 +125,6 @@ $(function(){
             // trigger edit form submission ie update with signed off value
             $editForm.trigger('submit');
         }
-    });
-
-    // add signoff icon to log view signoff items
-    $('.log-signoff-item .signed-off').each(function(){
-        if ($(this).text() === "false"){
-            $(this).parent().append('<svg class="bi bi-unlock-fill text-warning" width="1.3em" height="1.3em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 10a2 2 0 012-2h7a2 2 0 012 2v5a2 2 0 01-2 2h-7a2 2 0 01-2-2v-5z"></path><path fill-rule="evenodd" d="M10.5 5a3.5 3.5 0 117 0v3h-1V5a2.5 2.5 0 00-5 0v3h-1V5z" clip-rule="evenodd"></path></svg>');
-        } else {
-            $(this).parent().append('<svg class="bi bi-lock-fill text-dark" width="1.3em" height="1.3em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><rect width="11" height="9" x="4.5" y="8" rx="2"></rect><path fill-rule="evenodd" d="M6.5 5a3.5 3.5 0 117 0v3h-1V5a2.5 2.5 0 00-5 0v3h-1V5z" clip-rule="evenodd"></path></svg>');
-        }    
-    });
-    
-    // add signoff icon to column signoff items
-    $('.column-signoff-item .signed-off').each(function(){
-        if ($(this).text() === "false"){
-            $(this).parent().append('<svg class="bi bi-unlock-fill text-warning float-right" width="1.3em" height="1.3em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 10a2 2 0 012-2h7a2 2 0 012 2v5a2 2 0 01-2 2h-7a2 2 0 01-2-2v-5z"></path><path fill-rule="evenodd" d="M10.5 5a3.5 3.5 0 117 0v3h-1V5a2.5 2.5 0 00-5 0v3h-1V5z" clip-rule="evenodd"></path></svg>');
-        } else {
-            $(this).parent().append('<svg class="bi bi-lock-fill text-dark float-right" width="1.3em" height="1.3em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><rect width="11" height="9" x="4.5" y="8" rx="2"></rect><path fill-rule="evenodd" d="M6.5 5a3.5 3.5 0 117 0v3h-1V5a2.5 2.5 0 00-5 0v3h-1V5z" clip-rule="evenodd"></path></svg>');
-        }    
     });
 
     // Toggle patient info view 

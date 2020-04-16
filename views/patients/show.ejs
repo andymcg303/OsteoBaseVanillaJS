@@ -70,30 +70,48 @@
                     <tr>
                         <td><%= medhist._id %></td>
                         <td>M</td>
-                        <td><span class="text-dark font-weight-bold"><%= moment(medhist.date_created).format('DD/MM/YYYY') %></span></td>
+                        <td><span class="text-dark font-weight-bold"><%= moment(medhist.date_created).format('DD/MM/YYYY HH:mm') %></span></td>
                         <td><span class="fas fa-comment-medical text-success"></span>  Medical History</td>
                         <td><% if (medhist.critical){ %> Critical: <% } %><%= medhist.critical %></td>
-                        <td></td>
+                        <td>
+                            <% if (medhist.signed_off){ %>
+                                <i class="fas fa-lock text-dark"></i>
+                            <% } else { %>
+                                <i class="fas fa-lock-open text-warning"></i>
+                            <% } %>
+                        </td>
                     </tr>
                 <% }); %>
                 <% patient.interviews.forEach(function(interview){ %>
                     <tr class="log-signoff-item">
                         <td><%= interview._id %></td>
                         <td>I</td>
-                        <td><span class="text-dark font-weight-bold"><%= moment(interview.date_created).format('DD/MM/YYYY') %></span></td>
+                        <td><span class="text-dark font-weight-bold"><%= moment(interview.date_created).format('DD/MM/YYYY HH:mm') %></span></td>
                         <td><span class="fa fa-comments text-info"></span>  Consultation</td>
                         <td><% if (interview.CO){ %> C/O: <% } %><%= interview.CO %></td>
-                        <td><div class="signed-off" style="display: none;"><%= interview.signed_off %></div></td>
+                        <td>
+                            <% if (interview.signed_off){ %>
+                                <i class="fas fa-lock text-dark"></i>
+                            <% } else { %>
+                                <i class="fas fa-lock-open text-warning"></i>
+                            <% } %>
+                        </td>
                     </tr>
                 <% }); %>                
                 <% patient.clinicals.forEach(function(clinical){ %>
                     <tr class="log-signoff-item">
                         <td><%= clinical._id %></td>
                         <td>C</td>
-                        <td><span class="text-dark font-weight-bold"><%= moment(clinical.date_created).format('DD/MM/YYYY')%></span></td>
+                        <td><span class="text-dark font-weight-bold"><%= moment(clinical.date_created).format('DD/MM/YYYY HH:mm')%></span></td>
                         <td><span class="fas fa-user-friends text-danger"></span>  Clinical Session</td>
                         <td><% if (clinical.diag){ %> Dx: <% } %><%= clinical.diag %></td>
-                        <td><div class="signed-off" style="display: none;"><%= clinical.signed_off %></div></td>
+                        <td>
+                            <% if (clinical.signed_off){ %>
+                                <i class="fas fa-lock text-dark"></i>
+                            <% } else { %>
+                                <i class="fas fa-lock-open text-warning"></i>
+                            <% } %>
+                        </td>
                     </tr>
                 <% }); %>                                    
             </tfoot>
@@ -114,6 +132,12 @@
                         href="/patients/<%= patient._id%>/medhists/<%= medhist._id %>">
                         <span class="fas fa-comment-medical text-success"></span>
                         <span class="text-dark font-weight-bold"><%= moment(medhist.date_created).format('DD/MM/YYYY') %></span>
+                        <% if (medhist.critical){ %> C/O: <% } %><%= medhist.critical %>
+                        <% if (medhist.signed_off){ %>
+                            <i class="fas fa-lock text-dark float-right"></i>
+                        <% } else { %>
+                            <i class="fas fa-lock-open text-warning float-right"></i>
+                        <% } %>
                     </a>
                 <% }); %>
             </div>
@@ -130,7 +154,11 @@
                         <span class="fa fa-comments text-info"></span>
                         <span class="text-dark font-weight-bold"><%= moment(interview.date_created).format('DD/MM/YYYY') %></span>
                         <% if (interview.CO){ %> C/O: <% } %><%= interview.CO %>
-                        <div class="signed-off" style="display: none;"><%= interview.signed_off %></div>
+                        <% if (interview.signed_off){ %>
+                            <i class="fas fa-lock text-dark float-right"></i>
+                        <% } else { %>
+                            <i class="fas fa-lock-open text-warning float-right"></i>
+                        <% } %>
                     </a>
                 <% }); %>
             </div>
@@ -147,7 +175,11 @@
                         <span class="fas fa-user-friends text-danger"></span>
                         <span class="text-dark font-weight-bold"><%= moment(clinical.date_created).format('DD/MM/YYYY')%></span>
                         <% if (clinical.diag){ %> Dx: <% } %><%= clinical.diag %>
-                        <div class="signed-off" style="display: none;"><%= clinical.signed_off %></div>
+                        <% if (clinical.signed_off){ %>
+                            <i class="fas fa-lock text-dark float-right"></i>
+                        <% } else { %>
+                            <i class="fas fa-lock-open text-warning float-right"></i>
+                        <% } %>
                     </a>
                 <% }); %>
             </div>

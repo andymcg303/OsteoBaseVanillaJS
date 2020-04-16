@@ -13,7 +13,8 @@ const medhistSchema = new mongoose.Schema({
     git: String,
     gynae: String,
     msk: String,
-    critical: String
+    critical: String,
+    signed_off: Boolean
 
 });
 
