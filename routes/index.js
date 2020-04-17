@@ -1,5 +1,5 @@
 const express = require('express');
-const { errorHandler } = require('../middleware');
+const { asyncErrorHandler } = require('../middleware');
 const { postRegister, postLogin, getLogout } = require('../controllers');
 
 const router = express.Router();
@@ -14,7 +14,7 @@ router.get('/login', (req, res) => res.render('login'));
 router.get('/signup', (req, res) => res.render('signup'));
 
 // Handle Signup Logic
-router.post('/signup', errorHandler(postRegister));
+router.post('/signup', asyncErrorHandler(postRegister));
 
 // // Handle Login Logic
 router.post('/login', postLogin);

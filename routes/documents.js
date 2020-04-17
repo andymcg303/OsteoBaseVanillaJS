@@ -4,7 +4,7 @@ const multer        = require('multer');
 const { storage } = require('../cloudinary');
 const upload = multer({ storage });
 const { isLoggedIn, 
-        errorHandler } = require("../middleware");
+        asyncErrorHandler } = require("../middleware");
 const { getDocuments,
         showDocument,   
         createDocuments,
@@ -12,15 +12,15 @@ const { getDocuments,
 
 // // ROUTES   
 // // INDEX - List all documents      
-router.get("/", isLoggedIn, errorHandler(getDocuments));
+router.get("/", isLoggedIn, asyncErrorHandler(getDocuments));
 
 // Create Documents
-router.post("/",  isLoggedIn, upload.array('documents'), errorHandler(createDocuments));
+router.post("/",  isLoggedIn, upload.array('documents'), asyncErrorHandler(createDocuments));
 
 // // SHOW - Show 1 document
-router.get("/:document_id", isLoggedIn, errorHandler(showDocument));
+router.get("/:document_id", isLoggedIn, asyncErrorHandler(showDocument));
 
 // // DESTROY - Delete Document
-router.delete("/:document_id",  isLoggedIn, errorHandler(destroyDocument));
+router.delete("/:document_id",  isLoggedIn, asyncErrorHandler(destroyDocument));
 
 module.exports = router;

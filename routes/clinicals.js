@@ -1,7 +1,8 @@
 const express   	= require("express"),
 	  router		= express.Router({mergeParams: true}),
 	  { isLoggedIn,
-		errorHandler }	= require("../middleware"),
+		asyncErrorHandler,
+		viewType }	= require("../middleware"),
 	  { newClinical,
 		createClinical,
 		showClinical,
@@ -9,18 +10,18 @@ const express   	= require("express"),
 		destroyClinical } = require("../controllers/clinicals");	    
 
 // NEW - Show New Clinicals Form
-router.get("/new", isLoggedIn, errorHandler(newClinical));
+router.get("/new", isLoggedIn, asyncErrorHandler(newClinical));
 
 // CREATE Clinical - Create New Clinical then redirect to Show Patient
-router.post("/", isLoggedIn, errorHandler(createClinical));
+router.post("/", isLoggedIn, asyncErrorHandler(createClinical));
 
 // SHOW - Show one clinical
-router.get("/:clinical_id", isLoggedIn, errorHandler(showClinical));
+router.get("/:clinical_id", isLoggedIn, viewType, asyncErrorHandler(showClinical));
 		
 // UPDATE MedHist - Update one clinical, then disable controls
-router.put("/:clinical_id", isLoggedIn, errorHandler(updateClinical));
+router.put("/:clinical_id", isLoggedIn, asyncErrorHandler(updateClinical));
 
 // DESTROY Clinical
-router.delete("/:clinical_id", isLoggedIn, errorHandler(destroyClinical));
+router.delete("/:clinical_id", isLoggedIn, asyncErrorHandler(destroyClinical));
 
 module.exports = router;

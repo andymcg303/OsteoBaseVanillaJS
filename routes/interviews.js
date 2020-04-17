@@ -1,7 +1,8 @@
 const express   	= require("express"),
 	  router		= express.Router({mergeParams: true}),
 	  { isLoggedIn,
-		errorHandler }	= require("../middleware"),
+		asyncErrorHandler,
+		viewType }	= require("../middleware"),
 	  { newInterview,
 		createInterview,
 		showInterview,
@@ -9,18 +10,18 @@ const express   	= require("express"),
 		destroyInterview } = require('../controllers/interviews');    
 
 // NEW - Show New Interview Form
-router.get("/new", isLoggedIn, errorHandler(newInterview));
+router.get("/new", isLoggedIn, asyncErrorHandler(newInterview));
 
 // CREATE Interview - Create New Interview then redirect to Edit Interview Form
-router.post("/", isLoggedIn, errorHandler(createInterview));
+router.post("/", isLoggedIn, asyncErrorHandler(createInterview));
 
 // SHOW - Show one interview
-router.get("/:interview_id", isLoggedIn, errorHandler(showInterview));
+router.get("/:interview_id", isLoggedIn, viewType, asyncErrorHandler(showInterview));
 
 // UPDATE Interview - Update one interview, then disable controls
-router.put("/:interview_id", isLoggedIn, errorHandler(updateInterview));
+router.put("/:interview_id", isLoggedIn, asyncErrorHandler(updateInterview));
 
 // DESTROY Interview
-router.delete("/:interview_id", isLoggedIn, errorHandler(destroyInterview));
+router.delete("/:interview_id", isLoggedIn, asyncErrorHandler(destroyInterview));
 
 module.exports = router;

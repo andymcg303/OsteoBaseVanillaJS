@@ -22,13 +22,13 @@ $(function(){
 
         switch (data[1]){
             case "M":
-                window.location.assign(`${$patientId}/medhists/${data[0]}`);
+                window.location.assign(`${$patientId}/medhists/${data[0]}?currentView=log`);
                 break;
             case "I":
-                window.location.assign(`${$patientId}/interviews/${data[0]}`);
+                window.location.assign(`${$patientId}/interviews/${data[0]}?currentView=log`);
                 break;
             case "C":
-                window.location.assign(`${$patientId}/clinicals/${data[0]}`);
+                window.location.assign(`${$patientId}/clinicals/${data[0]}?currentView=log`);
                 break;    
         }
 
@@ -43,7 +43,7 @@ $(function(){
         $deleteButton = $('.delete-button'),
         $signoffButton = $('.signoff-button'),
         $viewDocumentsButton = $('#view-documents-button'),
-        $changeViewButton = $('#change-view-button');
+        $changeViewButton = $('.change-view-button');
 
     // Enable Edit form and buttons
     $editButton.click(function(){
@@ -127,14 +127,4 @@ $(function(){
         }
     });
 
-    // Toggle patient info view 
-    $changeViewButton.click(function(){
-        $('.column-view').toggleClass("d-none");
-        $('.log-view').toggleClass("d-none");
-        
-        $changeViewButton.text() === "Change to Column View" ? $changeViewButton.text("Change to Log View") : $changeViewButton.text("Change to Column View");  
-    });
-
 });
-
-

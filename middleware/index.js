@@ -8,10 +8,16 @@ module.exports = {
 		res.redirect("/login");
 	},
 
-    errorHandler : (fn) => 
+    asyncErrorHandler : (fn) => 
         (req, res, next) => {
             Promise.resolve(fn(req, res, next))
                 .catch(next);
         
-    }
+	},
+
+	// Preserve the current patient view type as chosen by the user in res.locals 
+	viewType: (req, res, next) =>	{
+		res.locals.currentView = req.query.currentView;
+		next();
+	}
 }

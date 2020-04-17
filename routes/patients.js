@@ -1,7 +1,8 @@
 const express       = require("express"),
       router        = express.Router({mergeParams: true}),
       { isLoggedIn, 
-        errorHandler }    = require("../middleware"),
+        asyncErrorHandler,
+        viewType }    = require("../middleware"),
       { getPatients,  
         createPatient, 
         showPatient, 
@@ -10,18 +11,18 @@ const express       = require("express"),
 
 // ROUTES   
 // INDEX - List all patients      
-router.get("/", isLoggedIn, errorHandler(getPatients));
+router.get("/", isLoggedIn, viewType, asyncErrorHandler(getPatients));
 
 // CREATE - Create New Patient then redirect to patients
-router.post("/", isLoggedIn, errorHandler(createPatient));
+router.post("/", isLoggedIn, asyncErrorHandler(createPatient));
 
 // SHOW - Show info about 1 patient
-router.get("/:id", isLoggedIn, errorHandler(showPatient));
+router.get("/:id", isLoggedIn, viewType, asyncErrorHandler(showPatient));
 
 // UPDATE - Update selected patient, then redirect
-router.put("/:id",  isLoggedIn, errorHandler(updatePatient));
+router.put("/:id",  isLoggedIn, asyncErrorHandler(updatePatient));
 
 // DESTROY - Delete patient. Deleting child data handled in model
-router.delete("/:id",  isLoggedIn, errorHandler(deletePatient));
+router.delete("/:id",  isLoggedIn, asyncErrorHandler(deletePatient));
 
 module.exports = router;

@@ -3,7 +3,6 @@ require('dotenv').config();
 const express = require('express');
 
 const createError = require('http-errors');
-const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const passport = require('passport');
@@ -45,7 +44,8 @@ app.use(favicon(path.join(__dirname, 'public/images/icons', 'favicon.ico')));
 // app configuration
 app.use(logger('dev'));
 app.set('view engine', 'ejs');
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'));
 app.use(express.static(`${__dirname}/public`));
 

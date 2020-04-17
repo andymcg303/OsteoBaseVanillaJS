@@ -18,7 +18,9 @@ $(function(){
     // open patient view
     $('#patient-table tbody').on('click', 'tr', function () {
         let data = $patientTable.row( this ).data();
-            window.location.assign(`patients/${data[0]}`);
+        let urlParams = new URLSearchParams(window.location.search);
+        let currentView = urlParams.get('currentView');
+        window.location.assign(`patients/${data[0]}?currentView=${currentView}`);
     });
 
     // PATIENT INDEX

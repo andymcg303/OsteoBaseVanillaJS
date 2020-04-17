@@ -18,7 +18,7 @@ module.exports = {
     postLogin(req, res, next){
         passport.authenticate('local',
             {
-                successRedirect: '/patients',
+                successRedirect: '/patients?currentView=log',
                 failureRedirect: '/login',
             }
         )(req, res, next);
