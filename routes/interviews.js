@@ -10,10 +10,10 @@ const express   	= require("express"),
 		destroyInterview } = require('../controllers/interviews');    
 
 // NEW - Show New Interview Form
-router.get("/new", isLoggedIn, asyncErrorHandler(newInterview));
+router.get("/new", isLoggedIn, viewType, asyncErrorHandler(newInterview));
 
 // CREATE Interview - Create New Interview then redirect to Edit Interview Form
-router.post("/", isLoggedIn, asyncErrorHandler(createInterview));
+router.post("/", isLoggedIn, viewType, asyncErrorHandler(createInterview));
 
 // SHOW - Show one interview
 router.get("/:interview_id", isLoggedIn, viewType, asyncErrorHandler(showInterview));
@@ -22,6 +22,6 @@ router.get("/:interview_id", isLoggedIn, viewType, asyncErrorHandler(showIntervi
 router.put("/:interview_id", isLoggedIn, asyncErrorHandler(updateInterview));
 
 // DESTROY Interview
-router.delete("/:interview_id", isLoggedIn, asyncErrorHandler(destroyInterview));
+router.delete("/:interview_id", isLoggedIn, viewType, asyncErrorHandler(destroyInterview));
 
 module.exports = router;

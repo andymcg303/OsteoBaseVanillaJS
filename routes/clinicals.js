@@ -10,10 +10,10 @@ const express   	= require("express"),
 		destroyClinical } = require("../controllers/clinicals");	    
 
 // NEW - Show New Clinicals Form
-router.get("/new", isLoggedIn, asyncErrorHandler(newClinical));
+router.get("/new", isLoggedIn, viewType, asyncErrorHandler(newClinical));
 
 // CREATE Clinical - Create New Clinical then redirect to Show Patient
-router.post("/", isLoggedIn, asyncErrorHandler(createClinical));
+router.post("/", isLoggedIn, viewType, asyncErrorHandler(createClinical));
 
 // SHOW - Show one clinical
 router.get("/:clinical_id", isLoggedIn, viewType, asyncErrorHandler(showClinical));
@@ -22,6 +22,6 @@ router.get("/:clinical_id", isLoggedIn, viewType, asyncErrorHandler(showClinical
 router.put("/:clinical_id", isLoggedIn, asyncErrorHandler(updateClinical));
 
 // DESTROY Clinical
-router.delete("/:clinical_id", isLoggedIn, asyncErrorHandler(destroyClinical));
+router.delete("/:clinical_id", isLoggedIn, viewType, asyncErrorHandler(destroyClinical));
 
 module.exports = router;

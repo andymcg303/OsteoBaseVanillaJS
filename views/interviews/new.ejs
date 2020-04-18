@@ -5,7 +5,7 @@
     <h1 class="mt-3"><%= patient.firstname + " " + patient.surname %></h1>
     <h3>New Consultation</h3>  
 
-    <form action="/patients/<%= patient._id %>/interviews" method="POST" autocomplete="off">
+    <form action="/patients/<%= patient._id %>/interviews?currentView=<%= currentView %>" method="POST" autocomplete="off">
         <div class="form-row">
             
             <div class="form-group col-12">
@@ -53,7 +53,7 @@
                     
             <div class="form-group align-self-end">
                 <button class="btn btn-success" id="submit-new-interview-button">Save</button>
-                <a href="/patients/<%= patient._id %>" class="btn btn-warning" id="cancel-new-interview-button">Cancel</a>
+                <a href="/patients/<%= patient._id %>?currentView=<%= currentView %>" class="btn btn-warning" id="cancel-new-interview-button">Cancel</a>
             </div>
         
         </div>

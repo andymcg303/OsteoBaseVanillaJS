@@ -12,8 +12,8 @@ const express   	= require("express"),
 // NEW - Show New MedHist Form  
  router.get("/new", isLoggedIn, viewType, asyncErrorHandler(newMedhist));
 
-// CREATE MedHist - Create New MedHist then redirect to Show Patient
-router.post("/", isLoggedIn, asyncErrorHandler(createMedhist));
+// CREATE MedHist - Create New MedHist
+router.post("/", isLoggedIn, viewType, asyncErrorHandler(createMedhist));
 
 // SHOW - Show one medhist
 router.get("/:medhist_id", isLoggedIn, viewType, asyncErrorHandler(showMedhist));
@@ -22,6 +22,6 @@ router.get("/:medhist_id", isLoggedIn, viewType, asyncErrorHandler(showMedhist))
 router.put("/:medhist_id", isLoggedIn, asyncErrorHandler(updateMedhist));
 
 // DESTROY
-router.delete("/:medhist_id", isLoggedIn, asyncErrorHandler(destroyMedhist));
+router.delete("/:medhist_id", isLoggedIn, viewType, asyncErrorHandler(destroyMedhist));
 
 module.exports = router;

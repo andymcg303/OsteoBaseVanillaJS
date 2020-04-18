@@ -16,7 +16,7 @@ module.exports = {
         let newMedhist = await Medhist.create(req.body.medhist);
         foundPatient.medhists.push(newMedhist);
         foundPatient.save();
-        res.redirect(`/patients/${foundPatient._id}/medhists/${newMedhist._id}`);
+        res.redirect(`/patients/${foundPatient._id}/medhists/${newMedhist._id}/?currentView=${res.locals.currentView}`);
     },
 
     // Medhist Show
@@ -42,6 +42,6 @@ module.exports = {
                     medhists: req.params.medhist_id
                 }
             });
-        res.redirect(`/patients/${patientId}`);    
+        res.redirect(`/patients/${patientId}/?currentView=${res.locals.currentView}`);    
     }       
 }

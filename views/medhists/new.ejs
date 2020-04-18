@@ -5,7 +5,7 @@
     <h1 class="mt-3"><%= patient.firstname + " " + patient.surname %></h1>
     <h3>New Medical History</h3>  
 
-    <form id="new-medhist-form" action="/patients/<%= patient._id %>/medhists" method="POST">
+    <form id="new-medhist-form" action="/patients/<%= patient._id %>/medhists?currentView=<%= currentView %>" method="POST">
         <div class="form-row">
             <div class="form-group col-lg-6">
                 <label for="meds-text">Medications?</label>
@@ -65,7 +65,10 @@
             <div class="form-group col-lg-6">                                    
                 <label for="critical-text">Critical Info?</label>
                 <input id="critical-text" name="medhist[critical]" type="text" class="text-input form-control">
-            </div>                
+            </div>
+            
+            <!-- Hidden input for signoff -->
+            <input name="medhist[signed_off]" type="hidden" value="false">
 
             <div class="form-group align-self-end">
                 <button class="btn btn-success" id="submit-new-medhist-button">Save</button>
