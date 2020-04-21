@@ -2,7 +2,8 @@ const express       = require("express"),
       router        = express.Router({mergeParams: true}),
       { isLoggedIn, 
         asyncErrorHandler,
-        viewType }    = require("../middleware"),
+        viewType,
+        getUserType }    = require("../middleware"),
       { getPatients,  
         createPatient, 
         showPatient, 
@@ -17,7 +18,7 @@ router.get("/", isLoggedIn, viewType, asyncErrorHandler(getPatients));
 router.post("/", isLoggedIn, asyncErrorHandler(createPatient));
 
 // SHOW - Show info about 1 patient
-router.get("/:id", isLoggedIn, viewType, asyncErrorHandler(showPatient));
+router.get("/:id", isLoggedIn, getUserType, viewType, asyncErrorHandler(showPatient));
 
 // UPDATE - Update selected patient, then redirect
 router.put("/:id",  isLoggedIn, asyncErrorHandler(updatePatient));

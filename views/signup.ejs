@@ -7,13 +7,22 @@
         <form action="/signup" method="POST">
             <div class="form-row">
                 <div class="form-group col-md-3">
-                    <label for="signup-username">User Name</label>
-                    <input type="text" class="form-control" name="username" placeholder="username">
+                    <label for="username">User Name</label>
+                    <input type="text" class="form-control" name="username" placeholder="username" required>
                 </div>	
                 <div class="form-group col-md-3">
-                    <label for="signup-password">Password</label>
-                    <input type="password" class="form-control" name="password" placeholder="password">
-                </div>	
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" name="password" placeholder="password" required>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="user_type">User Type</label>
+                    <input list="user_type" type="text" class="form-control" name="user_type" placeholder="user type" required>
+                    <datalist id="user_type">
+                        <option value="Admin">
+                        <option value="Practitioner">
+                        <option value="Reception">
+                    </datalist>
+                </div>		
                 <div class="form-group col-md-3 align-self-end">
                     <input id="signup-button" class="btn btn-secondary" type="submit" value="Sign Up">	
                 </div>

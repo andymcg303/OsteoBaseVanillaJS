@@ -120,9 +120,11 @@
                 <% }); %>                                    
             </tfoot>
         </table>
-        <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/medhists/new?currentView=log"><span class="fas fa-comment-medical text-success"></span>  New Medical History</a>
-        <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/interviews/new?currentView=log"><span class="fa fa-comments text-info"></span>  New Consultation</a>
-        <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/clinicals/new?currentView=log"><span class="fas fa-user-friends text-danger"></span>  New Clinical Session</a>
+        <% if (userType !== "Reception") { %>
+            <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/medhists/new?currentView=log"><span class="fas fa-comment-medical text-success"></span>  New Medical History</a>
+            <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/interviews/new?currentView=log"><span class="fa fa-comments text-info"></span>  New Consultation</a>
+            <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/clinicals/new?currentView=log"><span class="fas fa-user-friends text-danger"></span>  New Clinical Session</a>
+        <% } %>    
 
     <% } else { %>
         <!-- Populate column view -->
@@ -203,6 +205,8 @@
 <% include ../partials/common-scripts %>
 <script>
      let $patientId = <%- JSON.stringify(patient._id) %>;
+     let $userType = <%- JSON.stringify(userType) %>
+
 </script>
 <script src="/js/edit.js"></script>
 <% include ../partials/footer %>

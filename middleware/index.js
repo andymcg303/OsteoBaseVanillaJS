@@ -1,3 +1,5 @@
+const User = require('../models/user');
+
 module.exports = {
 
 	isLoggedIn : (req, res, next) => {
@@ -14,6 +16,12 @@ module.exports = {
                 .catch(next);
         
 	},
+
+	getUserType :  async (req, res, next) => {
+		let user = await User.findById(req.user._id);
+		res.locals.userType = user.user_type;
+		next();
+	}, 
 
 	// Preserve the current patient view type as chosen by the user 
 	viewType: (req, res, next) =>	{

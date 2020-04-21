@@ -16,7 +16,6 @@ $(function(){
     // Prevents flicker on loading
     $('#patient-log-table').show();    
 
-    // open entry type view
     $('#patient-log-table tbody').on('click', 'tr', function () {
         let data = $patientLogTable.row( this ).data();
 

@@ -6,6 +6,7 @@ module.exports = {
         console.log('registering user');
         const newUser = new User({
            username: req.body.username,
+           user_type: req.body.user_type 
         //   email: req.body.email,
         //   image: req.body.image
         });
