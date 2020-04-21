@@ -99,7 +99,9 @@ app.use(function(err, req, res, next) {
   // res.render('error');
   console.log(err);
   req.session.error = err.message;
-  res.redirect('back');  
+  // res.redirect('back');
+  // Trial ('/patients') as being the misc error landing page once logged in
+  res.redirect('/patients');
 });
 
 module.exports = app;

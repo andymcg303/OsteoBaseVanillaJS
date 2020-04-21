@@ -15,7 +15,7 @@ module.exports = {
         
 	},
 
-	// Preserve the current patient view type as chosen by the user in res.locals 
+	// Preserve the current patient view type as chosen by the user 
 	viewType: (req, res, next) =>	{
 		res.locals.currentView = req.query.currentView;
 		next();
