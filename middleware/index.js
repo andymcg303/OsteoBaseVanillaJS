@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const Patient = require('../models/patient');
 
 module.exports = {
 
@@ -21,6 +22,14 @@ module.exports = {
 		let user = await User.findById(req.user._id);
 		res.locals.userType = user.user_type;
 		next();
+	}, 
+
+	isAuthorised : async (req, res, next) => {
+		let user = await User.findById(req.user._id);
+		if (user.user_type  !== "Reception") return next();
+		req.session.error = 'Access Denied';
+		// res.redirect('back');
+		res.redirect(`/patients/${req.params.id}?currentView=${req.query.currentView}`); 
 	}, 
 
 	// Preserve the current patient view type as chosen by the user 

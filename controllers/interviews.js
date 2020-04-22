@@ -15,7 +15,7 @@ module.exports = {
         let newInterview = await Interview.create(req.body.interview);
         foundPatient.interviews.push(newInterview);
         foundPatient.save();
-        res.redirect(`/patients/${foundPatient._id}/interviews/${newInterview._id}/?currentView=${res.locals.currentView}`);
+        res.redirect(`/patients/${foundPatient._id}/interviews/${newInterview._id}?currentView=${res.locals.currentView}`);
     },
     
     // Interview Show
@@ -41,6 +41,6 @@ module.exports = {
                     interviews: req.params.interview_id
                 }
             }),
-        res.redirect(`/patients/${patientId}/?currentView=${res.locals.currentView}`);
+        res.redirect(`/patients/${patientId}?currentView=${res.locals.currentView}`);
     }
 }

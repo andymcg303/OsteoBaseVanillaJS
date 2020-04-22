@@ -22,7 +22,7 @@ module.exports = {
         }
         await foundPatient.save();
 
-        res.redirect(`/patients/${foundPatient.id}/documents`);
+        res.redirect(`/patients/${foundPatient.id}/documents?currentView=${res.locals.currentView}`);
     },
 
     // Document Show
@@ -47,7 +47,7 @@ module.exports = {
         if (req.xhr){
             res.json(document);
         } else {
-            res.redirect(`/patients/${patientId}/documents`);
+            res.redirect(`/patients/${patientId}/documents?currentView=${res.locals.currentView}`);
         }
     }
 }

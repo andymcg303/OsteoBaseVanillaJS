@@ -7,12 +7,12 @@
 
     <img src="<%= document.url %>" alt="uploaded document" width="500px">
 
-    <form class="delete-form" action="/patients/<%= patient._id %>/documents/<%= document._id %>?_method=DELETE" method="POST">
+    <form class="delete-form" action="/patients/<%= patient._id %>/documents/<%= document._id %>?_method=DELETE&currentView=<%= currentView %>" method="POST">
         <input class="btn btn-danger mt-2" type="submit" value="Delete">
     </form>   
 
     <div>
-        <a class="btn btn-secondary mt-2" href="/patients/<%= patient._id %>/documents">Back to Documents List</a>
+        <a class="btn btn-secondary mt-2" href="/patients/<%= patient._id %>/documents?currentView=<%= currentView %>">Back to Documents List</a>
     </div>
 
 </div>

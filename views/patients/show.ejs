@@ -42,10 +42,11 @@
             </div>
             <div class="form-group col-lg-6 align-self-end d-flex">
                 <div class="btn btn-info edit-button" id="edit-patient-button">Edit Patient Details</div>
-                <a class="btn btn-info ml-2 mr-2" id="view-documents-button" href="/patients/<%= patient._id %>/documents">View Documents</a>
-                <% if (currentView === "log") { %>                
+                <% if (currentView === "log") { %>
+                    <a class="btn btn-info ml-2 mr-2" id="view-documents-button" href="/patients/<%= patient._id %>/documents?currentView=log">View Documents</a>                
                     <a class="btn btn-secondary ml-auto change-view-button" href="/patients/<%= patient._id%>?currentView=column">Change to Column View</a>
                 <% } else { %>
+                    <a class="btn btn-info ml-2 mr-2" id="view-documents-button" href="/patients/<%= patient._id %>/documents?currentView=column">View Documents</a>
                     <a class="btn btn-secondary ml-auto change-view-button" href="/patients/<%= patient._id%>?currentView=log">Change to Log View</a>
                 <% } %>    
                 <button class="btn btn-success submit-edit-button mr-1" id="submit-edit-patient-button">Submit</button>
@@ -134,8 +135,13 @@
                 <h3>Medical Histories</h3>
                 <div class="list-group">
                     <% patient.medhists.forEach(function(medhist){ %>
-                        <a class="list-group-item list-group-item-action list-group-item-light" 
-                            href="/patients/<%= patient._id%>/medhists/<%= medhist._id %>?currentView=column">
+                        <!-- restrict clickable column items -->
+                        <% if (userType !== "Reception") { %>
+                            <a href="/patients/<%= patient._id%>/medhists/<%= medhist._id %>?currentView=column"
+                        <% } else { %>
+                            <div
+                        <% } %>
+                            class="list-group-item list-group-item-action list-group-item-light">
                             <span class="fas fa-comment-medical text-success"></span>
                             <span class="text-dark font-weight-bold"><%= moment(medhist.date_created).format('DD/MM/YYYY') %></span>
                             <% if (medhist.critical){ %> C/O: <% } %><%= medhist.critical %>
@@ -144,10 +150,16 @@
                             <% } else { %>
                                 <i class="fas fa-lock-open text-warning float-right"></i>
                             <% } %>
-                        </a>
+                        <% if (userType !== "Reception") { %>
+                            </a> 
+                        <% } else { %>
+                            </div>
+                        <% } %>
                     <% }); %>
                 </div>
-                <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/medhists/new?currentView=column">New Medical History</a>
+                <% if (userType !== "Reception") { %>
+                    <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/medhists/new?currentView=column">New Medical History</a>
+                <% } %>
             </div>        
 
             <div class="col-lg-4">
@@ -155,8 +167,13 @@
                 <h3>Consultations</h3>
                 <div class="list-group">
                     <% patient.interviews.forEach(function(interview){ %>
-                        <a class="list-group-item list-group-item-action list-group-item-light column-signoff-item" 
-                            href="/patients/<%= patient._id%>/interviews/<%= interview._id %>?currentView=column">
+                        <!-- restrict clickable column items -->
+                        <% if (userType !== "Reception") { %>
+                            <a href="/patients/<%= patient._id%>/interviews/<%= interview._id %>?currentView=column"
+                        <% } else { %>
+                            <div
+                        <% } %>
+                            class="list-group-item list-group-item-action list-group-item-light column-signoff-item">
                             <span class="fa fa-comments text-info"></span>
                             <span class="text-dark font-weight-bold"><%= moment(interview.date_created).format('DD/MM/YYYY') %></span>
                             <% if (interview.CO){ %> C/O: <% } %><%= interview.CO %>
@@ -165,10 +182,16 @@
                             <% } else { %>
                                 <i class="fas fa-lock-open text-warning float-right"></i>
                             <% } %>
-                        </a>
+                        <% if (userType !== "Reception") { %>
+                            </a> 
+                        <% } else { %>
+                            </div>
+                        <% } %>
                     <% }); %>
                 </div>
-                <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/interviews/new?currentView=column">New Consultation</a>
+                <% if (userType !== "Reception") { %>
+                    <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/interviews/new?currentView=column">New Consultation</a>
+                <% } %>
             </div>        
 
             <div class="col-lg-4">
@@ -176,8 +199,13 @@
                 <h3>Clinical Sessions</h3>
                 <div class="list-group">    
                     <% patient.clinicals.forEach(function(clinical){ %>
-                        <a class="list-group-item list-group-item-action list-group-item-light column-signoff-item" 
-                            href="/patients/<%= patient._id%>/clinicals/<%= clinical._id %>?currentView=column">
+                        <!-- restrict clickable column items -->
+                        <% if (userType !== "Reception") { %>
+                            <a href="/patients/<%= patient._id%>/clinicals/<%= clinical._id %>?currentView=column"
+                        <% } else { %>
+                            <div
+                        <% } %>
+                            class="list-group-item list-group-item-action list-group-item-light column-signoff-item">
                             <span class="fas fa-user-friends text-danger"></span>
                             <span class="text-dark font-weight-bold"><%= moment(clinical.date_created).format('DD/MM/YYYY')%></span>
                             <% if (clinical.diag){ %> Dx: <% } %><%= clinical.diag %>
@@ -186,10 +214,16 @@
                             <% } else { %>
                                 <i class="fas fa-lock-open text-warning float-right"></i>
                             <% } %>
-                        </a>
+                        <% if (userType !== "Reception") { %>
+                            </a> 
+                        <% } else { %>
+                            </div>
+                        <% } %>
                     <% }); %>
                 </div>
-                <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/clinicals/new?currentView=column">New Clinical Session</a>
+                <% if (userType !== "Reception") { %>
+                    <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/clinicals/new?currentView=column">New Clinical Session</a>
+                <% } %>
             </div>
 
         </div>

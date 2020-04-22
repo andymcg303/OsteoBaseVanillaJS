@@ -17,20 +17,22 @@ $(function(){
     $('#patient-log-table').show();    
 
     $('#patient-log-table tbody').on('click', 'tr', function () {
-        let data = $patientLogTable.row( this ).data();
+        // Block access to patient records for reception user type
+        if (`${$userType}` !== "Reception") {
+            let data = $patientLogTable.row( this ).data();
 
-        switch (data[1]){
-            case "M":
-                window.location.assign(`${$patientId}/medhists/${data[0]}?currentView=log`);
-                break;
-            case "I":
-                window.location.assign(`${$patientId}/interviews/${data[0]}?currentView=log`);
-                break;
-            case "C":
-                window.location.assign(`${$patientId}/clinicals/${data[0]}?currentView=log`);
-                break;    
+            switch (data[1]){
+                case "M":
+                    window.location.assign(`${$patientId}/medhists/${data[0]}?currentView=log`);
+                    break;
+                case "I":
+                    window.location.assign(`${$patientId}/interviews/${data[0]}?currentView=log`);
+                    break;
+                case "C":
+                    window.location.assign(`${$patientId}/clinicals/${data[0]}?currentView=log`);
+                    break;    
+            }
         }
-
     });
 
     // SHOW/EDIT FUNCTIONALITY

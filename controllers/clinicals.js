@@ -16,7 +16,7 @@ module.exports = {
         let newClinical = await Clinical.create(req.body.clinical);
         foundPatient.clinicals.push(newClinical);
         foundPatient.save();
-        res.redirect(`/patients/${foundPatient._id}/clinicals/${newClinical._id}/?currentView=${res.locals.currentView}`);
+        res.redirect(`/patients/${foundPatient._id}/clinicals/${newClinical._id}?currentView=${res.locals.currentView}`);
     },
 
     // Clinical Show
@@ -42,7 +42,7 @@ module.exports = {
                             clinicals: req.params.clinical_id
                         }
                     });
-        res.redirect(`/patients/${patientId}/?currentView=${res.locals.currentView}`);
+        res.redirect(`/patients/${patientId}?currentView=${res.locals.currentView}`);
 
     }
 }
