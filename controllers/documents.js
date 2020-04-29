@@ -16,7 +16,6 @@ module.exports = {
         let foundPatient = await Patient.findById(req.params.id);
         
         for (const file of req.files){
-            // let doc = await cloudinary.v2.uploader.upload(file.path);
             let newDoc =  await Document.create( {url: file.secure_url, public_id: file.public_id, file_name: file.originalname} );  
             foundPatient.documents.push(newDoc);
         }

@@ -14,7 +14,8 @@ body{
 .delete-button,
 .signoff-edit-button,
 .signoff-button,
-.upload-tools,
+#upload-button,
+#cancel-documents-button,
 #delete-documents-button{
     display: none;
 }

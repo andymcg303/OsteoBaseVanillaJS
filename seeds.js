@@ -11,7 +11,7 @@ async function seedPatients() {
     await Interview.deleteMany({});
     await Clinical.deleteMany({});
 
-	for(const i of new Array(100)) {
+	for(const i of new Array(10000)) {
 			const patient = {
                 date_created: faker.date.past(), 		
                 firstname: faker.name.firstName(),
@@ -78,7 +78,7 @@ async function seedPatients() {
             newPatient.save(); 
 
         }
-	console.log('100 new patients created');
+	console.log('10,000 new patients created');
 }
 
 module.exports = seedPatients;

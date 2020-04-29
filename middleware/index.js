@@ -36,5 +36,6 @@ module.exports = {
 	viewType: (req, res, next) =>	{
 		res.locals.currentView = req.query.currentView;
 		next();
-	}
+	},
+
 }

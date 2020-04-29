@@ -3,9 +3,12 @@
 <div class="container">
     
     <h1 class="mt-3"><%= patient.firstname + " " + patient.surname %></h1>
-    <h3>Documents:</h3>  
+    <h3>Documents:</h3>
+    
+    <form method="POST" action="patients/<%= patient._id %>/documents?_method=DELETE" id="delete-documents-form"></form>
 
     <form class="document-form" action="/patients/<%= patient._id %>/documents?currentView=<%= currentView %>" method="POST" enctype="multipart/form-data">
+       
         <div class="form-row">
 
             <% patient.documents.forEach(function(document, i){ %>
@@ -25,21 +28,34 @@
                 </div>
             <% }); %>
 
-            <div class="form-group col-12 upload-tools">
-                <input type="file" accept="images/*" name="documents" multiple>
+        </div>
+
+        <div class="form-row">
+
+            <p>
+                <span id="upload-status"> Please choose documents to upload 
+                    <% if (patient.documents.length){ %>
+                        <span>or select documents for deletion</span>
+                    <% } %>
+                </span>
+                <span id="spinner"></span>    
+            </p>
+            
+                
+            <div class="form-group col-12 upload-tools">   
+                <input id="documents-upload-control" type="file" accept="images/*" name="documents" multiple>
             </div>
-            <div class="form-group col-12 upload-tools">
-                <input class="btn btn-success" type="submit">
-                <div class="btn btn-warning cancel-upload-button" id="cancel-upload-button">Cancel</div>
+           
+            <div class="form-group col-lg-12 align-self-end d-flex">
+                <button id="upload-button" class="btn btn-success mr-1" type="submit">Upload</button>
+                <input type="submit" class="btn btn-danger mr-1" id="delete-documents-button" value="Delete" form="delete-documents-form">
+                <div class="btn btn-warning mr-1" id="cancel-documents-button">Cancel</div>
             </div>
+
         </div>
     
     </form>
 
-    <div class="btn btn-info mt-2 upload-edit-button">Upload</div>
-    <form id="delete-documents-form" class="d-inline" action="/patients/<%= patient._id %>/documents?_method=DELETE" method="POST">
-        <input type="submit" class="btn btn-danger mt-2" id="delete-documents-button" value="Delete">
-    </form>
     <div>
         <a class="btn btn-secondary mt-2 back-to-pt-button" href="/patients/<%= patient.id %>?currentView=<%= currentView %>">Back to Patient Details</a>
     </div>

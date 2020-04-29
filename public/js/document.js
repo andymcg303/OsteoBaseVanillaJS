@@ -1,24 +1,51 @@
 $(function(){
    
-   // DOCUMENT MANAGEMENT FUNCTIONALITTY
-    $('.upload-edit-button').click(function(){
-        $(this).toggle();
-        $('.upload-tools').toggle();
-        $('.back-to-pt-button').toggle()        
+    // DOCUMENT MANAGEMENT FUNCTIONALITTY
+    let fileInputControl = document.querySelector('#documents-upload-control'); 
+    fileInputControl.addEventListener('change', (e) => {
+        if (fileInputControl.files.length) {
+            $('#upload-button').show();
+            $('#cancel-documents-button').show();
+        } else {
+            $('#upload-button').hide();
+            $('#cancel-documents-button').hide();
+        }
+
     });
 
-    $('.cancel-upload-button').click(function(){
-        $('.upload-tools').toggle();
-        $('.upload-edit-button').toggle();
-        $('.back-to-pt-button').toggle()
+    // Uploading Documents Message 
+    $('#upload-button').click(function(){
+        $('#upload-status').text('Uploading...');
+        $('#spinner').addClass("fas fa-spinner fa-pulse");
+        console.log('spin!');
+    });    
+ 
+
+    $('#cancel-documents-button').click(function(){
+        // cancel upload functionality
+        if (fileInputControl.files.length) {
+            $('#cancel-documents-button').hide();            
+            $('#upload-button').hide();
+            fileInputControl.value = ""; // resets
+        // cancel delete functionality
+        } else if ($('.document-delete-checkbox:checked').length > 0){
+            $('#delete-documents-button').hide();
+            $('#cancel-documents-button').hide();
+            $('.document-delete-checkbox').prop('checked',false);
+            $('.upload-tools').show(); 
+        }
     });
     
-    // deduce if any checkboxes clicked and activate delete button on index page
+    // deduce if any checkboxes clicked and activate delete or cancel buttons
     $('.document-delete-checkbox').click(function(){
         if ($('.document-delete-checkbox:checked').length > 0){
             $('#delete-documents-button').show();
+            $('#cancel-documents-button').show();
+            $('.upload-tools').hide();
         } else {
-            $('#delete-documents-button').hide();    
+            $('#delete-documents-button').hide();
+            $('#cancel-documents-button').hide();
+            $('.upload-tools').show();    
         } 
     });
 
@@ -36,7 +63,9 @@ $(function(){
                     itemToDelete: $itemToDelete,
                     success: function() {
                         this.itemToDelete.remove();
-                        $('#delete-documents-button').hide();    
+                        $('#delete-documents-button').hide();
+                        $('#cancel-documents-button').hide();
+                        $('.upload-tools').show();    
                     }
                 });
             });
