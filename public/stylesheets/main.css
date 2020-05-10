@@ -16,7 +16,8 @@ body{
 .signoff-button,
 #upload-button,
 #cancel-documents-button,
-#delete-documents-button{
+#delete-documents-button,
+.history-textarea{
     display: none;
 }
 

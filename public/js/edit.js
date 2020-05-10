@@ -128,4 +128,12 @@ $(function(){
         }
     });
 
+    //TOGGLE HISTORY DISPLAY FUNCTIONALITY
+    const $historyButton = $('.history-button');
+
+    $historyButton.click(function(){
+        $('.main-container').toggleClass('container').toggleClass('container-fluid');
+        $('.history-textarea').toggle();
+    })
+
 });
