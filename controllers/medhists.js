@@ -6,14 +6,14 @@ module.exports = {
 
     // Medhist New
     async newMedhist(req, res, next){
-        let foundPatient = await Patient.findById(req.params.id);
+        const foundPatient = await Patient.findById(req.params.id);
         res.render("./medhists/new", {patient: foundPatient});
     },
 
     // Medhist Create
     async createMedhist(req, res, next){
-        let foundPatient = await Patient.findById(req.params.id);
-        let newMedhist = await Medhist.create(req.body.medhist);
+        const foundPatient = await Patient.findById(req.params.id);
+        const newMedhist = await Medhist.create(req.body.medhist);
         foundPatient.medhists.push(newMedhist);
         foundPatient.save();
         res.redirect(`/patients/${foundPatient._id}/medhists/${newMedhist._id}?currentView=${res.locals.currentView}`);
@@ -21,20 +21,20 @@ module.exports = {
 
     // Medhist Show
     async showMedhist(req, res, next){
-        let foundPatient = await Patient.findById(req.params.id);
-        let foundMedhist = await Medhist.findById(req.params.medhist_id);
+        const foundPatient = await Patient.findById(req.params.id);
+        const foundMedhist = await Medhist.findById(req.params.medhist_id);
         res.render("./medhists/show", {patient: foundPatient, medhist: foundMedhist, moment: moment});		
     },
 
     // Medhist Update
     async updateMedhist(req, res, next){
-        let updatedMedhist = await Medhist.findByIdAndUpdate(req.params.medhist_id, req.body.medhist);
+        const updatedMedhist = await Medhist.findByIdAndUpdate(req.params.medhist_id, req.body.medhist);
         res.json(updatedMedhist);
     },
 
     // Medhist Destroy
     async destroyMedhist(req, res, next){
-        let patientId = req.params.id;
+        const patientId = req.params.id;
         await Medhist.findByIdAndRemove(req.params.medhist_id);
         await Patient.findByIdAndUpdate(patientId,
             {

@@ -22,7 +22,7 @@ async function seedPatients() {
                 phonenumber: faker.phone.phoneNumber(),
                 email: faker.internet.email()
             }    
-			let newPatient = await Patient.create(patient);
+			const newPatient = await Patient.create(patient);
     
             const medhist = {
                 date_created: faker.date.past(),
@@ -41,7 +41,7 @@ async function seedPatients() {
                 signed_off: false             
             }    
 
-            let newMedhist = await Medhist.create(medhist);
+            const newMedhist = await Medhist.create(medhist);
             newPatient.medhists.push(newMedhist);            
 
             for (const k of new Array(3)){
@@ -57,7 +57,7 @@ async function seedPatients() {
                     invest: faker.lorem.word(),
                     signed_off: false
                 }
-               let newInterview = await Interview.create(interview);
+               const newInterview = await Interview.create(interview);
                newPatient.interviews.push(newInterview); 
             } 
 
@@ -70,7 +70,7 @@ async function seedPatients() {
                     TTT: faker.lorem.word(),
                     signed_off: false
                 }
-               let newClinical = await Clinical.create(clinical);
+               const newClinical = await Clinical.create(clinical);
                newPatient.clinicals.push(newClinical);
                
             }

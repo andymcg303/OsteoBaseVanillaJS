@@ -6,14 +6,14 @@ module.exports = {
 
     // Clinical New
     async newClinical(req, res, next){
-        let foundPatient = await Patient.findById(req.params.id);
+        const foundPatient = await Patient.findById(req.params.id);
         res.render("./clinicals/new", {patient: foundPatient});	
     },
 
     // Clinical Create
     async createClinical(req, res, next){
-        let foundPatient = await Patient.findById(req.params.id);
-        let newClinical = await Clinical.create(req.body.clinical);
+        const foundPatient = await Patient.findById(req.params.id);
+        const newClinical = await Clinical.create(req.body.clinical);
         foundPatient.clinicals.push(newClinical);
         foundPatient.save();
         res.redirect(`/patients/${foundPatient._id}/clinicals/${newClinical._id}?currentView=${res.locals.currentView}`);
@@ -21,20 +21,20 @@ module.exports = {
 
     // Clinical Show
     async showClinical(req, res, next){
-        let foundPatient = await Patient.findById(req.params.id);
-        let foundClinical = await Clinical.findById(req.params.clinical_id);
+        const foundPatient = await Patient.findById(req.params.id);
+        const foundClinical = await Clinical.findById(req.params.clinical_id);
         res.render("./clinicals/show", {patient: foundPatient, clinical: foundClinical, moment: moment});		
     },
 
     // Clinical Update
     async updateClinical(req, res, next){
-        let updatedClinical = await Clinical.findByIdAndUpdate(req.params.clinical_id, req.body.clinical);
+        const updatedClinical = await Clinical.findByIdAndUpdate(req.params.clinical_id, req.body.clinical);
         res.json(updatedClinical);
     },
 
     // Clinical Destroy
     async destroyClinical(req, res, next){
-        let patientId = req.params.id;
+        const patientId = req.params.id;
         await Clinical.findByIdAndRemove(req.params.clinical_id);
         await Patient.findByIdAndUpdate(patientId,
                     {

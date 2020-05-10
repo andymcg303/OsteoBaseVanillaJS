@@ -19,13 +19,13 @@ module.exports = {
 	},	
 
 	getUserType :  async (req, res, next) => {
-		let user = await User.findById(req.user._id);
+		const user = await User.findById(req.user._id);
 		res.locals.userType = user.user_type;
 		next();
 	}, 
 
 	isAuthorised : async (req, res, next) => {
-		let user = await User.findById(req.user._id);
+		const user = await User.findById(req.user._id);
 		if (user.user_type  !== "Reception") return next();
 		req.session.error = 'Access Denied';
 		// res.redirect('back');

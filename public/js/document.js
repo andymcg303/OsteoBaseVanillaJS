@@ -1,7 +1,7 @@
 $(function(){
    
     // DOCUMENT MANAGEMENT FUNCTIONALITTY
-    let fileInputControl = document.querySelector('#documents-upload-control'); 
+    const fileInputControl = document.querySelector('#documents-upload-control'); 
     fileInputControl.addEventListener('change', (e) => {
         if (fileInputControl.files.length) {
             $('#upload-button').show();
@@ -53,10 +53,10 @@ $(function(){
     $('#delete-documents-form').submit(function(e){
         e.preventDefault();
         if (confirm('Are you sure?')){    
-            let $documentArray = $('.document-delete-checkbox:checked');
+            const $documentArray = $('.document-delete-checkbox:checked');
             $documentArray.each(function(){
-                let $documentId = $(this).val();
-                let $itemToDelete = $(this).closest('.document-group-item');
+                const $documentId = $(this).val();
+                const $itemToDelete = $(this).closest('.document-group-item');
                 $.ajax({
                     url: `/patients/${$patientId}/documents/${$documentId}`,
                     type: 'DELETE',

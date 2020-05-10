@@ -6,17 +6,17 @@ const { cloudinary } = require('../cloudinary');
 module.exports = {
     // Documents Index
     async getDocuments(req, res, next){
-        let foundPatient = await Patient.findById(req.params.id).
+        const foundPatient = await Patient.findById(req.params.id).
             populate('documents').exec();
         res.render('documents/index', { patient: foundPatient, moment: moment });
     },
 
     // Create Documents Upload
     async createDocuments(req, res, next){
-        let foundPatient = await Patient.findById(req.params.id);
+        const foundPatient = await Patient.findById(req.params.id);
         
         for (const file of req.files){
-            let newDoc =  await Document.create( {url: file.secure_url, public_id: file.public_id, file_name: file.originalname} );  
+            const newDoc =  await Document.create( {url: file.secure_url, public_id: file.public_id, file_name: file.originalname} );  
             foundPatient.documents.push(newDoc);
         }
         await foundPatient.save();
@@ -26,15 +26,15 @@ module.exports = {
 
     // Document Show
     async showDocument(req, res, next){
-        let foundPatient = await Patient.findById(req.params.id); 
-        let foundDocument = await Document.findById(req.params.document_id);
+        const foundPatient = await Patient.findById(req.params.id); 
+        const foundDocument = await Document.findById(req.params.document_id);
         res.render('./documents/show', {document: foundDocument, patient: foundPatient, moment: moment});
     },
 
     // Document Destroy
     async destroyDocument(req, res, next){
-        let patientId = req.params.id;
-        let document = await Document.findById(req.params.document_id);
+        const patientId = req.params.id;
+        const document = await Document.findById(req.params.document_id);
         await cloudinary.v2.uploader.destroy(document.public_id);
         await document.deleteOne();
         await Patient.findByIdAndUpdate(patientId,

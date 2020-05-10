@@ -3,7 +3,7 @@ $(function(){
     $.fn.dataTable.moment( 'DD/MM/YYYY HH:mm' );
 
     // Patient Index DataTable initialisation
-    let $patientLogTable = $('#patient-log-table').DataTable( {
+    const $patientLogTable = $('#patient-log-table').DataTable( {
         "columnDefs":  
             [{
                 "targets": [ 0, 1 ],
@@ -19,7 +19,7 @@ $(function(){
     $('#patient-log-table tbody').on('click', 'tr', function () {
         // Block access to patient records for reception user type
         if (`${$userType}` !== "Reception") {
-            let data = $patientLogTable.row( this ).data();
+            const data = $patientLogTable.row( this ).data();
 
             switch (data[1]){
                 case "M":
@@ -36,7 +36,7 @@ $(function(){
     });
 
     // SHOW/EDIT FUNCTIONALITY
-    let $editForm = $('.edit-form'),
+    const $editForm = $('.edit-form'),
         $editButton = $('.edit-button'),
         $editFormControls = $('.edit-form .form-control'),
         $submitEditButton = $('.submit-edit-button'),
@@ -80,8 +80,8 @@ $(function(){
     // Submit Edit Details
     $editForm.submit(function(e){
         e.preventDefault();
-        let $data = $(this).serialize();
-        let $formAction = $(this).attr('action');
+        const $data = $(this).serialize();
+        const $formAction = $(this).attr('action');
         $.ajax({
             url: $formAction,
             data: $data,
@@ -97,7 +97,7 @@ $(function(){
 
     // Delete Prompt 
     $('.delete-form').submit(function(e){
-        let confirmResponse = confirm('Are you sure?');
+        const confirmResponse = confirm('Are you sure?');
         if (!confirmResponse) {
             e.preventDefault();
         }
@@ -105,7 +105,7 @@ $(function(){
 
     // Deleting patients prompt, different text
        $('#delete-patient-form').submit(function(e){
-        let confirmResponse = confirm('This will delete all the patients details including clinical details which by law you are required to keep for 6 years. Are you sure?');
+        const confirmResponse = confirm('This will delete all the patients details including clinical details which by law you are required to keep for 6 years. Are you sure?');
         if (!confirmResponse) {
             e.preventDefault();
         }
@@ -120,7 +120,7 @@ $(function(){
 
     // Perform signoff 
     $signoffButton.click(function(){
-        let confirmResponse = confirm('This will permanently lock this item from further editing. Are you sure?');
+        const confirmResponse = confirm('This will permanently lock this item from further editing. Are you sure?');
         if (confirmResponse) {
             $('.hidden-signed-off').val(true);
             // trigger edit form submission ie update with signed off value

@@ -3,7 +3,7 @@ $(function(){
     $.fn.dataTable.moment( 'DD/MM/YYYY' );
 
     // Patient Index DataTable initialisation
-    let $patientTable = $('#patient-table').DataTable( {
+    const $patientTable = $('#patient-table').DataTable( {
         "columnDefs":  
             [{
                 "targets": [ 0 ],
@@ -24,7 +24,7 @@ $(function(){
     });
 
     // PATIENT INDEX
-    let $newPatientButton = $('#new-patient-button'),
+    const $newPatientButton = $('#new-patient-button'),
         $newPatientForm = $('#new-patient-form');
 
     // Show New Patient form
@@ -44,7 +44,7 @@ $(function(){
     // Post new patient
     $newPatientForm.submit(function(e){
         e.preventDefault();
-        let $newPatientData = $(this).serialize();
+        const $newPatientData = $(this).serialize();
         $.post('/patients', $newPatientData, function(data){
             $patientTable.row.add( [ 
                 `${data._id}`,
