@@ -16,7 +16,7 @@ module.exports = {
             Promise.resolve(fn(req, res, next))
                 .catch(next);
         
-	},
+	},	
 
 	getUserType :  async (req, res, next) => {
 		let user = await User.findById(req.user._id);
