@@ -21,7 +21,10 @@ module.exports = {
 
     // Medhist Show
     async showMedhist(req, res, next){
-        const foundPatient = await Patient.findById(req.params.id);
+        const foundPatient = await Patient.findById(req.params.id).populate({
+            path: 'clinicals', 
+            options: { sort: { '_id': -1 }}})
+        .exec(); // populate all clinicals for the clinical history view
         const foundMedhist = await Medhist.findById(req.params.medhist_id);
         res.render("./medhists/show", {patient: foundPatient, medhist: foundMedhist, moment: moment});		
     },

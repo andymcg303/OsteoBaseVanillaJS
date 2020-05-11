@@ -80,18 +80,21 @@
                 <div class="d-none d-lg-inline">
 
                     <label for="medhist-show-history" class=" history-textarea">History:</label>
-                    <textarea class="form-control history-textarea" name="" id="medhist-show-history" rows="19" readonly>
-                        I'm baby chambray everyday carry food truck forage, twee polaroid affogato lo-fi tofu vinyl offal jianbing vaporware narwhal meggings. Unicorn distillery twee knausgaard gochujang. YOLO small batch before they sold out, meditation seitan banjo disrupt stumptown 3 wolf moon heirloom whatever coloring book twee butcher chartreuse. Kombucha tacos iPhone retro, fixie shoreditch 8-bit fingerstache umami forage. Vape distillery pitchfork +1 fam yr aesthetic banh mi.
-                        Bitters kombucha bicycle rights, tousled brunch church-key tumblr farm-to-table kale chips raw denim synth. Distillery normcore hot chicken unicorn subway tile gluten-free. Hella edison bulb organic pug venmo. Af food truck schlitz ennui blue bottle irony. Activated charcoal af salvia, kogi crucifix farm-to-table fashion axe meditation.
-                        Ramps echo park whatever, bespoke poke asymmetrical biodiesel chambray neutra. Etsy keytar man braid, sustainable af ethical hot chicken kinfolk leggings fingerstache. Squid snackwave ugh affogato, synth raw denim stumptown. Live-edge migas whatever vaporware. Lo-fi sriracha readymade pinterest occupy kitsch. Four dollar toast intelligentsia enamel pin, succulents food truck jean shorts tilde tbh photo booth bitters polaroid. Art party tacos godard YOLO, drinking vinegar raw denim truffaut crucifix four loko pop-up blue bottle waistcoat cornhole.
-                        Wayfarers salvia organic jianbing, art party schlitz pork belly gentrify dreamcatcher pug fanny pack. Godard freegan semiotics vaporware, celiac PBR&B subway tile pickled. Master cleanse shaman squid four dollar toast ennui fanny pack letterpress PBR&B. Snackwave meh live-edge raclette gochujang +1. Coloring book meggings authentic thundercats la croix, umami banjo. Kombucha church-key raclette, pug edison bulb kale chips cold-pressed truffaut ethical palo santo slow-carb 8-bit paleo pok pok tumblr.
-                        Artisan vape slow-carb, mixtape neutra blue bottle disrupt intelligentsia pinterest everyday carry chartreuse dreamcatcher. Vice prism franzen XOXO, succulents narwhal kogi taiyaki microdosing scenester echo park readymade bicycle rights iceland. Typewriter trust fund cray, retro subway tile green juice echo park messenger bag selfies taiyaki pop-up single-origin coffee. Portland pickled disrupt, meditation hot chicken venmo selfies knausgaard. Scenester pabst butcher, blog typewriter selfies literally.
-                        XOXO selfies cold-pressed hell of slow-carb umami pabst sriracha literally health goth. Tofu kinfolk lo-fi kombucha umami mixtape viral retro gochujang disrupt hella normcore. Ennui selvage food truck gastropub, pour-over tattooed disrupt vexillologist kinfolk readymade coloring book tacos migas. Butcher tbh literally, art party godard cold-pressed everyday carry banh mi hoodie woke flexitarian williamsburg taiyaki disrupt +1. Unicorn chillwave franzen brooklyn normcore you probably haven't heard of them seitan cold-pressed kitsch. Biodiesel hexagon coloring book, four dollar toast gochujang master cleanse kogi succulents. Mustache echo park seitan, yr slow-carb cold-pressed selfies fashion axe try-hard vaporware edison bulb af kogi neutra.
-                        Lo-fi vape kinfolk godard authentic affogato. Plaid sartorial DIY, meggings taxidermy vexillologist affogato selvage ennui tacos. Selvage put a bird on it polaroid narwhal, direct trade unicorn hot chicken wayfarers hammock everyday carry. Knausgaard tumeric aesthetic food truck street art, glossier XOXO bitters green juice everyday carry cliche.
-                        Ugh shaman authentic master cleanse pop-up, sustainable irony. Tofu kickstarter cray, YOLO church-key blog viral ethical cronut. Cliche 90's helvetica, copper mug craft beer fashion axe pok pok glossier. Salvia trust fund cornhole chambray, meggings cardigan fashion axe four dollar toast letterpress wayfarers neutra williamsburg banjo truffaut. Mustache distillery scenester bicycle rights vinyl cornhole tbh sustainable. Meditation post-ironic thundercats kale chips. Thundercats readymade gluten-free tofu hoodie, locavore williamsburg vexillologist.
-                        Listicle cronut selfies, disrupt fingerstache semiotics food truck unicorn cardigan flannel. Small batch cronut freegan offal banjo. Organic live-edge poutine pinterest keffiyeh salvia craft beer meh seitan readymade. Disrupt normcore messenger bag, jianbing small batch cardigan shaman literally fam lumbersexual artisan hexagon authentic vape. Helvetica iceland whatever distillery enamel pin 3 wolf moon hoodie stumptown williamsburg squid banh mi.
-                        Microdosing skateboard swag, hashtag pabst shoreditch chartreuse roof party sartorial franzen snackwave twee plaid. Street art messenger bag meh PBR&B snackwave. Keffiyeh microdosing taxidermy kogi lomo. Mumblecore deep v fam fashion axe. Blog cred prism blue bottle crucifix, skateboard direct trade. Mixtape YOLO seitan fam leggings blog.
-                    </textarea>
+
+                    <div class="form-control history-textarea overflow-auto" name="" id="medhist-show-history" rows="19" readonly>
+                        <% patient.clinicals.forEach(clinical => { %>
+                        <strong>Date:</strong>       
+                        <%= moment(clinical.date_created).format('DD/MM/YYYY') %>
+                        Problem:    
+                        <%= clinical.problem %>
+                        O/E:        
+                        <%= clinical.OE %>
+                        Diag:       
+                        <%= clinical.diag %>
+                        TTT:        
+                        <%= clinical.TTT %>
+                        <% }); %>
+                    </div>
 
                 </div>
 
