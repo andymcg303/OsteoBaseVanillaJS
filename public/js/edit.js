@@ -135,6 +135,19 @@ $(function(){
         $('.main-container').toggleClass('container').toggleClass('container-fluid');
         $('.history-textarea').toggle();
         $('.inputs-col').toggleClass('col-12').toggleClass('col-lg-8');
+        $(this).text(function(i, text){
+            return text === "Show History" ? "Hide History" : "Show History";
+        });
     })
 
+    //Reformat main container if window width reduced by user and history view selected
+    $(window).resize(function() {
+        if ($(window).width() < 992 && $historyButton.text() === "Hide History") { // smaller than BS xl? window size
+            $('.main-container').removeClass('container-fluid');
+            $('.main-container').addClass('container');
+        } else if ($(window).width() >= 992 && $historyButton.text() === "Hide History") { //greater or equal to BS xl? window size 
+            $('.main-container').removeClass('container');
+            $('.main-container').addClass('container-fluid');
+        }
+    });
 });
