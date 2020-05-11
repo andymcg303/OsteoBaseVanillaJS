@@ -134,6 +134,7 @@ $(function(){
     $historyButton.click(function(){
         $('.main-container').toggleClass('container').toggleClass('container-fluid');
         $('.history-textarea').toggle();
+        $('.inputs-col').toggleClass('col-12').toggleClass('col-lg-8');
     })
 
 });
