@@ -79,20 +79,18 @@
 
                 <div class="d-none d-lg-inline">
 
-                    <label for="medhist-show-history" class=" history-textarea">History:</label>
-
-                    <div class="form-control history-textarea overflow-auto" name="" id="medhist-show-history" rows="19" readonly>
+                    <label for="medhist-show-history" class=" history-scroll">History:</label>
+                    <div class="form-control history-scroll overflow-auto" id="medhist-show-history">
                         <% patient.clinicals.forEach(clinical => { %>
-                        <strong>Date:</strong>       
-                        <%= moment(clinical.date_created).format('DD/MM/YYYY') %>
-                        Problem:    
-                        <%= clinical.problem %>
-                        O/E:        
-                        <%= clinical.OE %>
-                        Diag:       
-                        <%= clinical.diag %>
-                        TTT:        
-                        <%= clinical.TTT %>
+                        <strong>Date: </strong><%= moment(clinical.date_created).format('DD/MM/YYYY') %><br>
+                        <strong>Problem:</strong><br>    
+                        <%= clinical.problem %><br>
+                        <strong>O/E:</strong><br>        
+                        <%= clinical.OE %><br>
+                        <strong>Diag:</strong><br>       
+                        <%= clinical.diag %><br>
+                        <strong>TTT:</strong><br>        
+                        <%= clinical.TTT %><br><br>
                         <% }); %>
                     </div>
 

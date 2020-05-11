@@ -133,7 +133,7 @@ $(function(){
 
     $historyButton.click(function(){
         $('.main-container').toggleClass('container').toggleClass('container-fluid');
-        $('.history-textarea').toggle();
+        $('.history-scroll').toggle();
         $('.inputs-col').toggleClass('col-12').toggleClass('col-lg-8');
         $(this).text(function(i, text){
             return text === "Show History" ? "Hide History" : "Show History";

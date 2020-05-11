@@ -17,7 +17,7 @@ body{
 #upload-button,
 #cancel-documents-button,
 #delete-documents-button,
-.history-textarea{
+.history-scroll{
     display: none;
 }
 
@@ -27,3 +27,7 @@ body{
     display: none;
 }
 
+div.history-scroll{
+    height: 470px; 
+    background-color: #e9ecef;
+}
