@@ -5,68 +5,96 @@
     <h1 class="mt-3"><%= patient.firstname + " " + patient.surname %></h1>
     <h3><span class="fa fa-comments text-info"></span> Consultation: <%= moment(interview.date_created).format('DD/MM/YYYY') %></h3>  
 
-    <form method="POST" action="/patients/<%= patient._id %>/interviews/<%= interview.id %>?_method=DELETE&currentView=<%= currentView %>" id="delete-interview-form" class="delete-form"></form>
+</div>
 
-    <form class="edit-form" id="edit-interview-form" action="/patients/<%= patient.id %>/interviews/<%= interview.id %>" method="POST" autocomplete="off">
+<form method="POST" action="/patients/<%= patient._id %>/interviews/<%= interview.id %>?_method=DELETE&currentView=<%= currentView %>" id="delete-interview-form" class="delete-form"></form>
+
+<form class="edit-form" id="edit-interview-form" action="/patients/<%= patient.id %>/interviews/<%= interview.id %>" method="POST" autocomplete="off">
+    
+    <div class="container main-container">
+
         <div class="form-row">
-            
-            <div class="form-group col-12">
-                <label for="CO-edit">C/O:</label>
-                <input id="CO-edit" name="interview[CO]" type="text" class="form-control" value="<%= interview.CO %>" disabled>
-            </div>    
+
+            <div class="inputs-col col-12">
+
+                <div class="row">    
         
-            <div class="form-group col-md-2">
-                <label for="onset-edit">Onset:</label>    
-                <input id="onset-edit" name="interview[onset]" type="text" class="form-control" value="<%= interview.onset %>" disabled>
+                    <div class="form-group col-12">
+                        <label for="CO-edit">C/O:</label>
+                        <input id="CO-edit" name="interview[CO]" type="text" class="form-control" value="<%= interview.CO %>" disabled>
+                    </div>    
+                
+                    <div class="form-group col-md-2">
+                        <label for="onset-edit">Onset:</label>    
+                        <input id="onset-edit" name="interview[onset]" type="text" class="form-control" value="<%= interview.onset %>" disabled>
+                    </div>
+
+                    <div class="form-group col-md-10">        
+                        <label for="reason-edit">Reason:</label>
+                        <input id="reason-edit" name="interview[reason]" type="text" class="form-control" value="<%= interview.reason %>" disabled>
+                    </div>
+
+                    <div class="form-group col-lg-4">
+                        <label for="agg-edit">Worse For:</label>        
+                        <input id="agg-edit" name="interview[agg]" type="text" class="form-control" value="<%= interview.agg %>" disabled>
+                    </div>
+                
+                    <div class="form-group col-lg-4">        
+                        <label for="rel-edit">Better For:</label>
+                        <input id="rel-edit" name="interview[rel]" type="text" class="form-control" value="<%= interview.rel %>" disabled>
+                    </div>
+                
+                    <div class="form-group col-lg-4">        
+                        <label for="dp-edit">Daily Pattern:</label>
+                        <input id="dp-edit" name="interview[dp]" type="text" class="form-control" value="<%= interview.dp %>" disabled>
+                    </div>
+
+                    <div class="form-group col-lg-6">        
+                        <label for="ph-edit">Previous History:</label>
+                        <input id="ph-edit" name="interview[ph]" type="text" class="form-control" value="<%= interview.ph %>" disabled>
+                    </div>
+
+                    <div class="form-group col-lg-6">    
+                        <label for="invest-edit">Investigations:</label>
+                        <input id="invest-edit" name="interview[invest]" type="text" class="form-control" value="<%= interview.invest %>" disabled>
+                    </div>
+
+                </div>
+
             </div>
 
-            <div class="form-group col-md-10">        
-                <label for="reason-edit">Reason:</label>
-                <input id="reason-edit" name="interview[reason]" type="text" class="form-control" value="<%= interview.reason %>" disabled>
-            </div>
-
-            <div class="form-group col-lg-4">
-                <label for="agg-edit">Worse For:</label>        
-                <input id="agg-edit" name="interview[agg]" type="text" class="form-control" value="<%= interview.agg %>" disabled>
-            </div>
-        
-            <div class="form-group col-lg-4">        
-                <label for="rel-edit">Better For:</label>
-                <input id="rel-edit" name="interview[rel]" type="text" class="form-control" value="<%= interview.rel %>" disabled>
-            </div>
-        
-            <div class="form-group col-lg-4">        
-                <label for="dp-edit">Daily Pattern:</label>
-                <input id="dp-edit" name="interview[dp]" type="text" class="form-control" value="<%= interview.dp %>" disabled>
-            </div>
-
-            <div class="form-group col-lg-6">        
-                <label for="ph-edit">Previous History:</label>
-                <input id="ph-edit" name="interview[ph]" type="text" class="form-control" value="<%= interview.ph %>" disabled>
-            </div>
-
-            <div class="form-group col-lg-6">    
-                <label for="invest-edit">Investigations:</label>
-                <input id="invest-edit" name="interview[invest]" type="text" class="form-control" value="<%= interview.invest %>" disabled>
-            </div>
-            
+            <!-- common scrollable history feature -->
+            <% let scrollHeight="298px"; %>
+            <% include ../partials/history-scroll %>
+    
             <!-- Hidden input for signoff -->
             <input class="hidden-signed-off" type="text" name="interview[signed_off]" style="display: none" value="<%= interview.signed_off %>">
-                    
-            <div class="form-group col-lg-6 align-self-end">
+ 
+        </div>
+        
+    </div>
+    
+        <div class="container">
+
+            <div class="form-group col-lg-6 px-0">
                 <div class="btn btn-info edit-button signoff-edit-button" id="edit-interview-button">Edit Consultation</div>
                 <button class="btn btn-success submit-edit-button" id="submit-edit-interview-button">Save</button>
                 <div class="btn btn-warning cancel-edit-button" id="cancel-edit-interview-button">Cancel</div>
                 <input type="submit" class="btn btn-danger delete-button" id="delete-interview-button" value="Delete" form="delete-interview-form">
                 <div class="btn btn-dark signoff-button" id="signoff-interview-button">Sign Off</div>
             </div>
-        
-        </div>
-    
-    </form>
 
-    <div>
-        <a class="btn btn-secondary mt-2" href="/patients/<%= patient.id %>?currentView=<%= currentView %>">Back to Patient Details</a>
+        </div>
+
+    </div>
+    
+</form>
+
+<div class="container">
+
+    <div class="d-flex justify-content-between">
+        <a class="btn btn-secondary my-2" href="/patients/<%= patient._id %>?currentView=<%= currentView %>">Back to Patient Details</a>
+        <button class="btn btn-primary my-2 d-none d-lg-inline history-button">Show History</button>
     </div>
 
 </div>

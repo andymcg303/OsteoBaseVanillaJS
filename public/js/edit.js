@@ -150,4 +150,7 @@ $(function(){
             $('.main-container').addClass('container-fluid');
         }
     });
+
+    $( "#history-scroll-id" ).resizable();
+
 });

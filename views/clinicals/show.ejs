@@ -5,48 +5,75 @@
     <h1 class="mt-3"><%= patient.firstname + " " + patient.surname %></h1>
     <h3><span class="fas fa-user-friends text-danger"></span> Clinical Details: <%= moment(clinical.date_created).format('DD/MM/YYYY') %></h3>  
 
-    <form method="POST" action="/patients/<%= patient._id %>/clinicals/<%= clinical.id %>?_method=DELETE&currentView=<%= currentView %>" id="delete-clinical-form" class="delete-form"></form>
+</div>
 
-    <form class="edit-form" id="edit-clinical-form" action="/patients/<%= patient._id %>/clinicals/<%= clinical.id %>" method="POST" autocomplete="off">        
+<form method="POST" action="/patients/<%= patient._id %>/clinicals/<%= clinical.id %>?_method=DELETE&currentView=<%= currentView %>" id="delete-clinical-form" class="delete-form"></form>
+
+<form class="edit-form" id="edit-clinical-form" action="/patients/<%= patient._id %>/clinicals/<%= clinical.id %>" method="POST" autocomplete="off">        
+
+    <div class="container main-container">
 
         <div class="form-row">
 
-            <div class="form-group col-12">
-                <label for="OE-edit">Problem:</label>
-                <textarea name="clinical[problem]" id="OE-problem" class="form-control" disabled><%= clinical.problem %></textarea>
-            </div>
+            <div class="inputs-col col-12">
 
-            <div class="form-group col-12">
-                <label for="OE-edit">Objective Findings:</label>
-                <textarea name="clinical[OE]" id="OE-edit" class="form-control" rows="6" disabled><%= clinical.OE %></textarea>
-            </div>
-    
-            <div class="form-group col-12">    
-                <label for="diag-edit">Diagnosis:</label>
-                <textarea name="clinical[diag]" id="diag-edit" class="form-control" disabled><%= clinical.diag %></textarea>    
-            </div>
+                <div class="row">
 
-            <div class="form-group col-12">
-                <label for="TTT-edit">Treatment:</label>
-                <textarea name="clinical[TTT]" id="TTT-edit" class="form-control" rows="6" disabled><%= clinical.TTT %></textarea>
+                    <div class="form-group col-12">
+                        <label for="OE-edit">Problem:</label>
+                        <textarea name="clinical[problem]" id="OE-problem" class="form-control" disabled><%= clinical.problem %></textarea>
+                    </div>
+
+                    <div class="form-group col-12">
+                        <label for="OE-edit">Objective Findings:</label>
+                        <textarea name="clinical[OE]" id="OE-edit" class="form-control" rows="6" disabled><%= clinical.OE %></textarea>
+                    </div>
+
+                    <div class="form-group col-12">    
+                        <label for="diag-edit">Diagnosis:</label>
+                        <textarea name="clinical[diag]" id="diag-edit" class="form-control" disabled><%= clinical.diag %></textarea>    
+                    </div>
+
+                    <div class="form-group col-12">
+                        <label for="TTT-edit">Treatment:</label>
+                        <textarea name="clinical[TTT]" id="TTT-edit" class="form-control" rows="6" disabled><%= clinical.TTT %></textarea>
+                    </div>
+
+                </div>
+                
             </div>
+            
+            <!-- common scrollable history feature -->
+            <% let scrollHeight="585px"; %>
+            <% include ../partials/history-scroll %>
 
             <!-- Hidden input for signoff -->
             <input class="hidden-signed-off" type="text" name="clinical[signed_off]" style="display: none" value="<%= clinical.signed_off %>">
 
-            <div class="form-group col-lg-6 align-self-end">
-                <div class="btn btn-info edit-button signoff-edit-button" id="edit-clinical-button">Edit Clinical Session</div>
-                <button class="btn btn-success submit-edit-button" id="submit-edit-clinical-button">Submit</button>
-                <div class="btn btn-warning cancel-edit-button" id="cancel-edit-clinical-button">Cancel</div>
-                <input type="submit" class="btn btn-danger delete-button" id="delete-clinical-button" value="Delete" form="delete-clinical-form">
-                <div class="btn btn-dark signoff-button" id="signoff-clinical-button">Sign Off</div>
-            </div>
+        </div>
 
-        </div>    
+    </div>
 
-    </form>
+    <div class="container">
 
-    <a class="btn btn-secondary mt-2" href="/patients/<%= patient._id%>?currentView=<%= currentView %>">Back to Patient Details</a>
+        <div class="form-group col-lg-6 px-0">
+            <div class="btn btn-info edit-button signoff-edit-button" id="edit-clinical-button">Edit Clinical Session</div>
+            <button class="btn btn-success submit-edit-button" id="submit-edit-clinical-button">Submit</button>
+            <div class="btn btn-warning cancel-edit-button" id="cancel-edit-clinical-button">Cancel</div>
+            <input type="submit" class="btn btn-danger delete-button" id="delete-clinical-button" value="Delete" form="delete-clinical-form">
+            <div class="btn btn-dark signoff-button" id="signoff-clinical-button">Sign Off</div>
+        </div>
+
+    </div>    
+
+</form>
+
+<div class="container">
+
+    <div class="d-flex justify-content-between">
+        <a class="btn btn-secondary my-2" href="/patients/<%= patient._id %>?currentView=<%= currentView %>">Back to Patient Details</a>
+        <button class="btn btn-primary my-2 d-none d-lg-inline history-button">Show History</button>
+    </div>
 
 </div>
 
