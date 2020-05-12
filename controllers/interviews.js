@@ -5,8 +5,11 @@ const moment		= require("moment");
 module.exports = {
     // Interview New
     async newInterview(req, res, next) {
-        const foundPatient = await Patient.findById(req.params.id);
-        res.render("./interviews/new", {patient: foundPatient});	
+        const foundPatient = await Patient.findById(req.params.id).populate({
+            path: 'clinicals', 
+            options: { sort: { '_id': -1 }}})
+        .exec(); // populate all clinicals for the clinical history view
+        res.render("./interviews/new", {patient: foundPatient, moment: moment});	
     },
 
     // Interview Create
@@ -20,7 +23,10 @@ module.exports = {
     
     // Interview Show
     async showInterview(req, res, next){
-        const foundPatient = await Patient.findById(req.params.id);
+        const foundPatient = await Patient.findById(req.params.id).populate({
+            path: 'clinicals', 
+            options: { sort: { '_id': -1 }}})
+        .exec(); // populate all clinicals for the clinical history view
         const foundInterview = await Interview.findById(req.params.interview_id);
         res.render("./interviews/show", {patient: foundPatient, interview: foundInterview, moment: moment});		
     },

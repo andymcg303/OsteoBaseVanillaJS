@@ -11,7 +11,7 @@ const express   	= require("express"),
 	destroyMedhist } = require("../controllers/medhists");   
 
 // NEW - Show New MedHist Form  
- router.get("/new", isLoggedIn, asyncErrorHandler(isAuthorised), viewType, asyncErrorHandler(newMedhist));
+router.get("/new", isLoggedIn, asyncErrorHandler(isAuthorised), viewType, asyncErrorHandler(newMedhist));
 
 // CREATE MedHist - Create New MedHist
 router.post("/", isLoggedIn, asyncErrorHandler(isAuthorised), viewType, asyncErrorHandler(createMedhist));

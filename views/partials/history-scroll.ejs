@@ -1,0 +1,22 @@
+<div class="col-4">
+
+    <div class="d-none d-lg-inline">
+
+        <label for="history-scroll-id" class=" history-scroll">History:</label>
+        <div class="form-control history-scroll overflow-auto" id="history-scroll-id" style="height: <%= scrollHeight %>;">
+            <% patient.clinicals.forEach(clinical => { %>
+            <strong>Date: </strong><%= moment(clinical.date_created).format('DD/MM/YYYY') %><br>
+            <strong>Problem:</strong><br>    
+            <%= clinical.problem %><br>
+            <strong>O/E:</strong><br>        
+            <%= clinical.OE %><br>
+            <strong>Diag:</strong><br>       
+            <%= clinical.diag %><br>
+            <strong>TTT:</strong><br>        
+            <%= clinical.TTT %><br><br>
+            <% }); %>
+        </div>
+
+    </div>
+
+</div>

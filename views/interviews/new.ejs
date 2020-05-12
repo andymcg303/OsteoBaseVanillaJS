@@ -3,64 +3,93 @@
 <div class="container">
 
     <h1 class="mt-3"><%= patient.firstname + " " + patient.surname %></h1>
-    <h3>New Consultation</h3>  
+    <h3>New Consultation</h3>
+    
+</div>
 
-    <form action="/patients/<%= patient._id %>/interviews?currentView=<%= currentView %>" method="POST" autocomplete="off">
+<form id="new-interview-form" action="/patients/<%= patient._id %>/interviews?currentView=<%= currentView %>" method="POST" autocomplete="off">
+
+    <div class="container main-container">
+
         <div class="form-row">
             
-            <div class="form-group col-12">
-                <label for="CO-text">C/O:</label>
-                <input id="CO-text" name="interview[CO]" type="text" class="text-input form-control">
-            </div>    
-        
-            <div class="form-group col-md-2">
-                <label for="onset-text">Onset:</label>    
-                <input id="onset-text" name="interview[onset]" type="text" class="text-input form-control">
-            </div>
+            <div class="inputs-col col-12">            
 
-            <div class="form-group col-md-10">        
-                <label for="reason-text">Reason:</label>
-                <input id="reason-text" name="interview[reason]" type="text" class="text-input form-control">
-            </div>
+                <div class="row">
+                    
+                    <div class="form-group col-12">
+                        <label for="CO-text">C/O:</label>
+                        <input id="CO-text" name="interview[CO]" type="text" class="text-input form-control">
+                    </div>    
+                
+                    <div class="form-group col-md-2">
+                        <label for="onset-text">Onset:</label>    
+                        <input id="onset-text" name="interview[onset]" type="text" class="text-input form-control">
+                    </div>
 
-            <div class="form-group col-lg-4">
-                <label for="agg-text">Worse For:</label>        
-                <input id="agg-text" name="interview[agg]" type="text" class="text-input form-control">
-            </div>
-        
-            <div class="form-group col-lg-4">        
-                <label for="rel-text">Better For:</label>
-                <input id="rel-text" name="interview[rel]" type="text" class="text-input form-control">
-            </div>
-        
-            <div class="form-group col-lg-4">        
-                <label for="dp-text">Daily Pattern:</label>
-                <input id="dp-text" name="interview[dp]" type="text" class="text-input form-control">
-            </div>
+                    <div class="form-group col-md-10">        
+                        <label for="reason-text">Reason:</label>
+                        <input id="reason-text" name="interview[reason]" type="text" class="text-input form-control">
+                    </div>
 
-            <div class="form-group col-lg-6">        
-                <label for="ph-text">Previous History:</label>
-                <input id="ph-text" name="interview[ph]" type="text" class="text-input form-control">
-            </div>
+                    <div class="form-group col-lg-4">
+                        <label for="agg-text">Worse For:</label>        
+                        <input id="agg-text" name="interview[agg]" type="text" class="text-input form-control">
+                    </div>
+                
+                    <div class="form-group col-lg-4">        
+                        <label for="rel-text">Better For:</label>
+                        <input id="rel-text" name="interview[rel]" type="text" class="text-input form-control">
+                    </div>
+                
+                    <div class="form-group col-lg-4">        
+                        <label for="dp-text">Daily Pattern:</label>
+                        <input id="dp-text" name="interview[dp]" type="text" class="text-input form-control">
+                    </div>
 
-            <div class="form-group col-lg-6">    
-                <label for="invest-text">Investigations:</label>
-                <input name="interview[invest]" type="text" class="text-input form-control">
+                    <div class="form-group col-lg-6">        
+                        <label for="ph-text">Previous History:</label>
+                        <input id="ph-text" name="interview[ph]" type="text" class="text-input form-control">
+                    </div>
+
+                    <div class="form-group col-lg-6">    
+                        <label for="invest-text">Investigations:</label>
+                        <input name="interview[invest]" type="text" class="text-input form-control">
+                    </div>
+
+                </div>
+
             </div>
-            
+                
+            <!-- common scrollable history feature -->
+            <% include ../partials/history-scroll %>
+
             <!-- Hidden input for signoff -->
             <input name="interview[signed_off]" type="hidden" value="false">
-                    
-            <div class="form-group align-self-end">
-                <button class="btn btn-success" id="submit-new-interview-button">Save</button>
-                <a href="/patients/<%= patient._id %>?currentView=<%= currentView %>" class="btn btn-warning" id="cancel-new-interview-button">Cancel</a>
-            </div>
-        
+            
         </div>
-    
-    </form>
+        
+    </div>
 
-</div>    
+    <div class="container">
+
+        <div class="form-group align-self-end">
+            <button class="btn btn-success" id="submit-new-interview-button">Save</button>
+            <a href="/patients/<%= patient._id %>?currentView=<%= currentView %>" class="btn btn-warning" id="cancel-new-interview-button">Cancel</a>
+        </div>
+                
+    </div>      
+
+</form>
+  
+<div class="container">
+
+    <div class="d-flex justify-content-end">
+        <button class="btn btn-primary mt-2 d-none d-lg-inline history-button">Show History</button>
+    </div>
+
+</div> 
 
 <% include ../partials/common-scripts %>
+<script src="/js/edit.js"></script>
 <% include ../partials/footer %>

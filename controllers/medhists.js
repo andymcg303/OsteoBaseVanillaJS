@@ -6,8 +6,11 @@ module.exports = {
 
     // Medhist New
     async newMedhist(req, res, next){
-        const foundPatient = await Patient.findById(req.params.id);
-        res.render("./medhists/new", {patient: foundPatient});
+        const foundPatient = await Patient.findById(req.params.id).populate({
+            path: 'clinicals', 
+            options: { sort: { '_id': -1 }}})
+        .exec(); // populate all clinicals for the clinical history view
+        res.render("./medhists/new", {patient: foundPatient, moment: moment});
     },
 
     // Medhist Create

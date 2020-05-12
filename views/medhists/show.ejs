@@ -75,31 +75,11 @@
 
             </div>
 
-            <div class="col-4">
+            <!-- common scrollable history feature -->
+            <% include ../partials/history-scroll %>
 
-                <div class="d-none d-lg-inline">
-
-                    <label for="medhist-show-history" class=" history-scroll">History:</label>
-                    <div class="form-control history-scroll overflow-auto" id="medhist-show-history">
-                        <% patient.clinicals.forEach(clinical => { %>
-                        <strong>Date: </strong><%= moment(clinical.date_created).format('DD/MM/YYYY') %><br>
-                        <strong>Problem:</strong><br>    
-                        <%= clinical.problem %><br>
-                        <strong>O/E:</strong><br>        
-                        <%= clinical.OE %><br>
-                        <strong>Diag:</strong><br>       
-                        <%= clinical.diag %><br>
-                        <strong>TTT:</strong><br>        
-                        <%= clinical.TTT %><br><br>
-                        <% }); %>
-                    </div>
-
-                </div>
-
-            </div>
-
-        <!-- Hidden input for signoff -->
-        <input class="hidden-signed-off" type="text" name="medhist[signed_off]" style="display: none" value="<%= medhist.signed_off %>">
+            <!-- Hidden input for signoff -->
+            <input class="hidden-signed-off" type="text" name="medhist[signed_off]" style="display: none" value="<%= medhist.signed_off %>">
 
         </div>
 

@@ -6,8 +6,11 @@ module.exports = {
 
     // Clinical New
     async newClinical(req, res, next){
-        const foundPatient = await Patient.findById(req.params.id);
-        res.render("./clinicals/new", {patient: foundPatient});	
+        const foundPatient = await Patient.findById(req.params.id).populate({
+            path: 'clinicals', 
+            options: { sort: { '_id': -1 }}})
+        .exec(); // populate all clinicals for the clinical history view
+        res.render("./clinicals/new", {patient: foundPatient, moment: moment});	
     },
 
     // Clinical Create
@@ -21,7 +24,10 @@ module.exports = {
 
     // Clinical Show
     async showClinical(req, res, next){
-        const foundPatient = await Patient.findById(req.params.id);
+        const foundPatient = await Patient.findById(req.params.id).populate({
+            path: 'clinicals', 
+            options: { sort: { '_id': -1 }}})
+        .exec(); // populate all clinicals for the clinical history view
         const foundClinical = await Clinical.findById(req.params.clinical_id);
         res.render("./clinicals/show", {patient: foundPatient, clinical: foundClinical, moment: moment});		
     },
