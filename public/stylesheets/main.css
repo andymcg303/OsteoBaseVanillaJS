@@ -28,6 +28,6 @@ body{
 }
 
 div.history-scroll{
-    height: 470px; 
     background-color: #e9ecef;
+    resize: vertical;
 }

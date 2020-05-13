@@ -151,6 +151,6 @@ $(function(){
         }
     });
 
-    $( "#history-scroll-id" ).resizable();
+    // $( "#history-scroll-id" ).resizable();
 
 });
