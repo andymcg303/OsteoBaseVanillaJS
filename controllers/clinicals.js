@@ -22,14 +22,26 @@ module.exports = {
         res.redirect(`/patients/${foundPatient._id}/clinicals/${newClinical._id}?currentView=${res.locals.currentView}`);
     },
 
-    // Clinical Show
+    // // Clinical Show
+    // async showClinical(req, res, next){
+    //     const foundPatient = await Patient.findById(req.params.id).populate({
+    //         path: 'clinicals', 
+    //         options: { sort: { '_id': -1 }}})
+    //     .exec(); // populate all clinicals for the clinical history view
+    //     const foundClinical = await Clinical.findById(req.params.clinical_id);
+    //     res.render("./clinicals/show", {patient: foundPatient, clinical: foundClinical, moment: moment});		
+    // },
+
+    // Clinical Show (proof of concept of parallel async requests)
     async showClinical(req, res, next){
-        const foundPatient = await Patient.findById(req.params.id).populate({
+        const foundPatient = Patient.findById(req.params.id).populate({
             path: 'clinicals', 
             options: { sort: { '_id': -1 }}})
         .exec(); // populate all clinicals for the clinical history view
-        const foundClinical = await Clinical.findById(req.params.clinical_id);
-        res.render("./clinicals/show", {patient: foundPatient, clinical: foundClinical, moment: moment});		
+        const foundClinical = Clinical.findById(req.params.clinical_id);
+        const data = await Promise.all([foundPatient, foundClinical]);
+  
+        res.render("./clinicals/show", {patient: data[0], clinical: data[1], moment: moment});		
     },
 
     // Clinical Update

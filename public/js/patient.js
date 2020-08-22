@@ -9,6 +9,7 @@ $(function(){
                 "targets": [ 0 ],
                 "visible": false
             }],
+            "order": [ 0, 'desc' ],
             "lengthMenu": [[10, 20, -1], [10, 20, "All"]]
         } );
 
