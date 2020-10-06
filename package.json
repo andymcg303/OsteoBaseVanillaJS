@@ -27,6 +27,9 @@
     "serve-favicon": "^2.5.0",
     "tinysort": "^3.2.7"
   },
+  "bin": {
+    "osteobase": "./bin/www"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/andymcg303/OsteoBase.git"

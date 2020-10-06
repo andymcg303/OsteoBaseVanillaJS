@@ -45,7 +45,7 @@ app.use(favicon(path.join(__dirname, 'public/images/icons', 'favicon.ico')));
 app.use(logger('dev'));
 app.set('view engine', 'ejs');
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(express.static(`${__dirname}/public`));
 
