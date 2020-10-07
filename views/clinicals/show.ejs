@@ -3,13 +3,13 @@
 <div class="container">
     
     <h1 class="mt-3"><%= patient.firstname + " " + patient.surname %></h1>
-    <h3><span class="fas fa-user-friends text-danger"></span> Clinical Details: <%= moment(clinical.date_created).format('DD/MM/YYYY') %></h3>  
+    <h3><span class="fas fa-user-friends text-danger"></span> Clinical Details: <%= moment(item.date_created).format('DD/MM/YYYY') %></h3>  
 
 </div>
 
-<form method="POST" action="/patients/<%= patient._id %>/clinicals/<%= clinical.id %>?_method=DELETE&currentView=<%= currentView %>" id="delete-clinical-form" class="delete-form"></form>
+<form method="POST" action="/patients/<%= patient._id %>/clinicals/<%= item.id %>?_method=DELETE&currentView=<%= currentView %>" id="delete-clinical-form" class="delete-form"></form>
 
-<form class="edit-form" id="edit-clinical-form" action="/patients/<%= patient._id %>/clinicals/<%= clinical.id %>" method="POST" autocomplete="off">        
+<form class="edit-form" id="edit-clinical-form" action="/patients/<%= patient._id %>/clinicals/<%= item.id %>" method="POST" autocomplete="off">        
 
     <div class="container main-container">
 
@@ -21,22 +21,22 @@
 
                     <div class="form-group col-12">
                         <label for="OE-edit">Problem:</label>
-                        <textarea name="clinical[problem]" id="OE-problem" class="form-control" disabled><%= clinical.problem %></textarea>
+                        <textarea name="item[problem]" id="OE-problem" class="form-control" disabled><%= item.problem %></textarea>
                     </div>
 
                     <div class="form-group col-12">
                         <label for="OE-edit">Objective Findings:</label>
-                        <textarea name="clinical[OE]" id="OE-edit" class="form-control" rows="6" disabled><%= clinical.OE %></textarea>
+                        <textarea name="item[OE]" id="OE-edit" class="form-control" rows="6" disabled><%= item.OE %></textarea>
                     </div>
 
                     <div class="form-group col-12">    
                         <label for="diag-edit">Diagnosis:</label>
-                        <textarea name="clinical[diag]" id="diag-edit" class="form-control" disabled><%= clinical.diag %></textarea>    
+                        <textarea name="item[diag]" id="diag-edit" class="form-control" disabled><%= item.diag %></textarea>    
                     </div>
 
                     <div class="form-group col-12">
                         <label for="TTT-edit">Treatment:</label>
-                        <textarea name="clinical[TTT]" id="TTT-edit" class="form-control" rows="6" disabled><%= clinical.TTT %></textarea>
+                        <textarea name="item[TTT]" id="TTT-edit" class="form-control" rows="6" disabled><%= item.TTT %></textarea>
                     </div>
 
                 </div>
@@ -48,7 +48,7 @@
             <% include ../partials/history-scroll %>
 
             <!-- Hidden input for signoff -->
-            <input class="hidden-signed-off" type="text" name="clinical[signed_off]" style="display: none" value="<%= clinical.signed_off %>">
+            <input class="hidden-signed-off" type="text" name="item[signed_off]" style="display: none" value="<%= item.signed_off %>">
 
         </div>
 

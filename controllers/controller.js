@@ -27,14 +27,15 @@ module.exports = class Controller {
         res.redirect(`/patients/${foundPatient._id}/${this.path}/${newItem._id}?currentView=${res.locals.currentView}`);
     }
     
-    // Show
+    // Show (proof of concept of parallel async await requests)
     showItem = async (req, res, next) => {
-        const foundPatient = await Patient.findById(req.params.id).populate({
+        const foundPatient = Patient.findById(req.params.id).populate({
             path: 'clinicals', 
             options: { sort: { '_id': -1 }}})
         .exec(); // populate all clinicals for the clinical history view
-        const foundItem = await this.Model.findById(req.params[`${this.item_id}`]);
-        res.render(`./${this.path}/show`, {patient: foundPatient, item: foundItem, moment: moment});		
+        const foundItem = this.Model.findById(req.params[`${this.item_id}`]);
+        const data = await Promise.all([foundPatient, foundItem]);
+        res.render(`./${this.path}/show`, {patient: data[0], item: data[1], moment: moment});		
     }
 
     // Update
