@@ -1,4 +1,4 @@
-const CommonController    = require('./common-controller');
+const CommonController    = require('./common-controllers');
 const Clinical  = require("../models/clinical");
 
 class Clinicals extends CommonController {}
