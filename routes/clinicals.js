@@ -7,8 +7,8 @@ const express   	= require("express"),
 	  { newItem,
 		createItem,
 		showItem,
-		updateItem,
-		destroyItem } = require("../controllers/clinicals");	    
+		updateItem,    
+		destroyItem } = require('../controllers/clinicals');
 
 // NEW - Show New Clinicals Form
 router.get("/new", isLoggedIn, asyncErrorHandler(isAuthorised), viewType, asyncErrorHandler(newItem));
