@@ -38,4 +38,11 @@ module.exports = {
 		next();
 	},
 
+	// Preserve the item type of the request (ie Medhist, Interview, Clinical)
+	itemType: (req, res, next) => { 
+		const str = req.baseUrl.split("/");  
+		res.locals.itemType = str[str.length - 1];
+		next();
+	}
+
 }

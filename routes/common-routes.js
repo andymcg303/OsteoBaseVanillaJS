@@ -3,26 +3,27 @@ const express   	= require("express"),
 	  { isLoggedIn,
 		asyncErrorHandler,
 		viewType,
+		itemType,
 		isAuthorised }	= require("../middleware"),
 	  { newItem,
 		createItem,
 		showItem,
 		updateItem,    
-		destroyItem } = require('../controllers/common-controllers-dev');
+		destroyItem } = require('../controllers/common-controllers');
 
 // NEW - Show New Clinicals Form
-router.get("/new", isLoggedIn, asyncErrorHandler(isAuthorised), viewType, asyncErrorHandler(newItem));
+router.get("/new", isLoggedIn, asyncErrorHandler(isAuthorised), viewType, itemType, asyncErrorHandler(newItem));
 
 // CREATE Clinical - Create New Clinical then redirect to Show Patient
-router.post("/", isLoggedIn, asyncErrorHandler(isAuthorised), viewType, asyncErrorHandler(createItem));
+router.post("/", isLoggedIn, asyncErrorHandler(isAuthorised), viewType, itemType, asyncErrorHandler(createItem));
 
 // SHOW - Show one clinical
-router.get("/:item_id", isLoggedIn, asyncErrorHandler(isAuthorised), viewType, asyncErrorHandler(showItem));
+router.get("/:item_id", isLoggedIn, asyncErrorHandler(isAuthorised), viewType, itemType, asyncErrorHandler(showItem));
 		
 // UPDATE MedHist - Update one clinical, then disable controls
-router.put("/:item_id", isLoggedIn, asyncErrorHandler(isAuthorised), asyncErrorHandler(updateItem));
+router.put("/:item_id", isLoggedIn, asyncErrorHandler(isAuthorised), itemType, asyncErrorHandler(updateItem));
 
 // DESTROY Clinical
-router.delete("/:item_id", isLoggedIn, asyncErrorHandler(isAuthorised), viewType, asyncErrorHandler(destroyItem));
+router.delete("/:item_id", isLoggedIn, asyncErrorHandler(isAuthorised), viewType, itemType, asyncErrorHandler(destroyItem));
 
 module.exports = router;
