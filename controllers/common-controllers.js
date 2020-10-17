@@ -22,7 +22,7 @@ module.exports = {
     },
 
     // Show (proof of concept of parallel async requests)
-    async showItem(req, res, next){
+    async showItem(req, res){
         const foundPatient = Patient.findById(req.params.id).populate({
             path: 'clinicals', 
             options: { sort: { '_id': -1 }}})
@@ -35,18 +35,20 @@ module.exports = {
     },
 
     // Update
-    async updateItem(req, res, next){
-        const updatedClinical = await Clinical.findByIdAndUpdate(req.params.item_id, req.body.item);
-        res.json(updatedClinical);
+    async updateItem(req, res){
+        const Model = getModel(res.locals.itemType);
+        const updatedItem = await Model.findByIdAndUpdate(req.params.item_id, req.body.item);
+        res.json(updatedItem);
     },
     // Destroy
-    async destroyItem(req, res, next){
+    async destroyItem(req, res){
         const patientId = req.params.id;
-        await Clinical.findByIdAndRemove(req.params.clinical_id);
+        const Model = getModel(res.locals.itemType);
+        await Model.findByIdAndRemove(req.params.item_id);
         await Patient.findByIdAndUpdate(patientId,
                     {
                         $pull: {
-                            clinicals: req.params.clinical_id
+                            clinicals: req.params.item_id
                         }
                     });
         res.redirect(`/patients/${patientId}?currentView=${res.locals.currentView}`);
