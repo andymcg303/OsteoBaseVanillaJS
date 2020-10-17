@@ -19,8 +19,6 @@ const logger = require('morgan');
 const indexRoutes = require('./routes/index');
 const patientsRoutes = require('./routes/patients');
 const documentsRoutes = require('./routes/documents');
-const interviewsRoutes = require('./routes/interviews');
-const medhistsRoutes = require('./routes/medhists');
 const commonRoutes = require('./routes/common-routes');
 
 
@@ -80,8 +78,8 @@ app.use(function(req, res, next) {
 app.use(indexRoutes);
 app.use('/patients', patientsRoutes);
 app.use('/patients/:id/documents', documentsRoutes);
-app.use('/patients/:id/interviews', interviewsRoutes);
-app.use('/patients/:id/medhists', medhistsRoutes);
+app.use('/patients/:id/interviews', commonRoutes);
+app.use('/patients/:id/medhists', commonRoutes);
 app.use('/patients/:id/clinicals', commonRoutes);
 
 // catch 404 and forward to error handler

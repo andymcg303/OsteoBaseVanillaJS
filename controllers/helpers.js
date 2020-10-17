@@ -11,5 +11,5 @@ module.exports = {
         } else if (itemType === 'clinicals'){
             return Clinical;
         }
-    } 
+    }
 }

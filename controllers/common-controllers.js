@@ -16,7 +16,7 @@ module.exports = {
         const foundPatient = await Patient.findById(req.params.id);
         const Model = getModel(res.locals.itemType);
         const newItem = await Model.create(req.body.item);
-        foundPatient.clinicals.push(newItem);
+        foundPatient[`${res.locals.itemType}`].push(newItem);
         foundPatient.save();
         res.redirect(`/patients/${foundPatient._id}/${res.locals.itemType}/${newItem._id}?currentView=${res.locals.currentView}`);
     },
@@ -43,14 +43,23 @@ module.exports = {
     // Destroy
     async destroyItem(req, res){
         const patientId = req.params.id;
+        let pullObj;
+
+        if (res.locals.itemType === 'medhists'){
+            pullObj = {medhists: req.params.item_id};
+        } else if (res.locals.itemType === 'interviews'){ 
+            pullObj = {interviews: req.params.item_id};
+        } else if (res.locals.itemType === 'clinicals'){
+            pullObj = {clinicals: req.params.item_id};
+        }
+
         const Model = getModel(res.locals.itemType);
         await Model.findByIdAndRemove(req.params.item_id);
         await Patient.findByIdAndUpdate(patientId,
                     {
-                        $pull: {
-                            clinicals: req.params.item_id
-                        }
-                    });
+                        $pull: pullObj 
+                    }                    
+                );
         res.redirect(`/patients/${patientId}?currentView=${res.locals.currentView}`);
     }
 }
