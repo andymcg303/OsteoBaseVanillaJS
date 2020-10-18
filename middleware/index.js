@@ -1,5 +1,7 @@
 const User = require('../models/user');
-const Patient = require('../models/patient');
+const Medhist = require('../models/medhist');
+const Interview = require('../models/interview');
+const Clinical  = require('../models/clinical');
 
 module.exports = {
 
@@ -38,10 +40,21 @@ module.exports = {
 		next();
 	},
 
-	// Preserve the item type of the request (ie Medhist, Interview, Clinical)
+	// Preserve the item type of the request for setting paths, Model and Pull Object in common controllers
 	itemType: (req, res, next) => { 
 		const str = req.baseUrl.split("/");  
 		res.locals.itemType = str[str.length - 1];
+
+		if (res.locals.itemType === 'medhists'){
+			res.locals.Model = Medhist;
+			res.locals.pullObj = {medhists: req.params.item_id};
+        } else if (res.locals.itemType === 'interviews'){ 
+			res.locals.Model = Interview;
+			res.locals.pullObj = {interviews: req.params.item_id};
+        } else if (res.locals.itemType === 'clinicals'){
+			res.locals.Model = Clinical;
+			res.locals.pullObj = {clinicals: req.params.item_id};
+        }
 		next();
 	}
 
