@@ -72,6 +72,12 @@ $(function(){
                     }
                 })
                 .catch(err => {
+                    // redirect and display error in manner consistent with server side error
+                    const newHeader = document.createElement("h1");
+                    newHeader.style.cssText = "color:red";
+                    newHeader.appendChild(document.createTextNode(err));
+                    const container = document.querySelector('.container');
+                    document.body.insertBefore(newHeader, container);
                     
                 });
             });
