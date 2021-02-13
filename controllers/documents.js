@@ -41,9 +41,13 @@ module.exports = {
 
     async destroyMultipleDocs(req, res, next){
         
-        destroyDocumentHelper(req);
-
-        res.json({ success: true });
+        destroyDocumentHelper(req)
+        .then(() => {
+            res.json({ success: true });
+        })
+        .catch(err => {
+            res.status.json({ err: err });
+        });
     }
 }
 
