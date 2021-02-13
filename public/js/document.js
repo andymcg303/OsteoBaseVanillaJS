@@ -66,7 +66,8 @@ $(function(){
                         $('#delete-documents-button').hide();
                         $('#cancel-documents-button').hide();
                         $('.upload-tools').show(); 
-                });
+                })
+                .catch(err => {alert('Error!')});
             });
         }
     });

@@ -46,7 +46,8 @@ module.exports = {
             res.json({ success: true });
         })
         .catch(err => {
-            res.status.json({ err: err });
+            // res.json({ success: false });
+            next(err);
         });
     }
 }

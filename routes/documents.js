@@ -26,6 +26,6 @@ router.get("/:document_id", isLoggedIn, viewType, asyncErrorHandler(showDocument
 router.delete("/:document_id", isLoggedIn, viewType, asyncErrorHandler(destroyDocument));
 
 // DESTROY - Delete Multiple Documents
-router.delete("/:document_id/multiple", isLoggedIn, viewType, asyncErrorHandler(destroyMultipleDocs));
+router.delete("/:document_id/multiple", isLoggedIn, viewType,  destroyMultipleDocs);
 
 module.exports = router;
