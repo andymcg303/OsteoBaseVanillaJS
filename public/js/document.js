@@ -61,13 +61,19 @@ $(function(){
                 fetch(`/patients/${$patientId}/documents/${$documentId}/multiple`, {
                     method: 'DELETE'
                 })
-                .then(() => {
+                .then((response) => {
+                    if (response.ok) {
                         $itemToDelete.remove();
                         $('#delete-documents-button').hide();
                         $('#cancel-documents-button').hide();
-                        $('.upload-tools').show(); 
+                        $('.upload-tools').show();
+                    } else {
+                        throw new Error(response.statusText);
+                    }
                 })
-                .catch(err => {alert('Error!')});
+                .catch(err => {
+                    
+                });
             });
         }
     });
