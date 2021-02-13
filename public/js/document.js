@@ -57,17 +57,22 @@ $(function(){
             $documentArray.each(function(){
                 const $documentId = $(this).val();
                 const $itemToDelete = $(this).closest('.document-group-item');
-                $.ajax({
-                    url: `/patients/${$patientId}/documents/${$documentId}`,
-                    type: 'DELETE',
-                    itemToDelete: $itemToDelete,
-                    success: function() {
-                        this.itemToDelete.remove();
-                        $('#delete-documents-button').hide();
-                        $('#cancel-documents-button').hide();
-                        $('.upload-tools').show();    
-                    }
+                // $.ajax({
+                //     url: `/patients/${$patientId}/documents/${$documentId}/multiple`,
+                //     type: 'DELETE',
+                //     itemToDelete: $itemToDelete,
+                //     success: function() {
+                //         this.itemToDelete.remove();
+                //         $('#delete-documents-button').hide();
+                //         $('#cancel-documents-button').hide();
+                //         $('.upload-tools').show();    
+                //     }
+                // });
+
+                fetch(`/patients/${$patientId}/documents/${$documentId}/multiple`, {
+                    method: 'DELETE'
                 });
+
             });
         }
     });

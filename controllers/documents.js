@@ -33,21 +33,29 @@ module.exports = {
 
     // Document Destroy
     async destroyDocument(req, res, next){
-        const patientId = req.params.id;
-        const document = await Document.findById(req.params.document_id);
-        await cloudinary.v2.uploader.destroy(document.public_id);
-        await document.deleteOne();
-        await Patient.findByIdAndUpdate(patientId,
-            {
-                $pull: {
-                    documents: req.params.document_id
-                }
-            })
-        if (req.xhr){
-            res.json(document);
-        } else {
-            res.redirect(`/patients/${patientId}/documents?currentView=${res.locals.currentView}`);
-        }
+
+        await destroyDocumentHelper(req);
+
+        res.redirect(`/patients/${req.params.id}/documents?currentView=${res.locals.currentView}`);
+    },
+
+    async destroyMultipleDocs(req, res, next){
+        
+        destroyDocumentHelper(req);
+
+        res.json({ success: true });
     }
 }
 
+const destroyDocumentHelper = async (req) => {
+    const patientId = req.params.id;
+    const document = await Document.findById(req.params.document_id);
+    await cloudinary.v2.uploader.destroy(document.public_id);
+    await document.deleteOne();
+    await Patient.findByIdAndUpdate(patientId,
+        {
+            $pull: {
+                documents: req.params.document_id
+            }
+        })        
+}
