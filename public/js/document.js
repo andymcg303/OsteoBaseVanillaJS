@@ -1,25 +1,47 @@
 $(function(){
    
-    // DOCUMENT MANAGEMENT FUNCTIONALITTY
+    const uploadButton = document.querySelector('#upload-button'); 
+
+    // // DOCUMENT MANAGEMENT FUNCTIONALITTY
+    // const fileInputControl = document.querySelector('#documents-upload-control'); 
+    // fileInputControl.addEventListener('change', (e) => {
+    //     if (fileInputControl.files.length) {
+    //         $('#upload-button').show();
+    //         $('#cancel-documents-button').show();
+    //     } else {
+    //         $('#upload-button').hide();
+    //         $('#cancel-documents-button').hide();
+    //     }
+
+    // });
+
+    // No JQuery DOCUMENT MANAGEMENT FUNCTIONALITTY
     const fileInputControl = document.querySelector('#documents-upload-control'); 
-    fileInputControl.addEventListener('change', (e) => {
+    fileInputControl.addEventListener('change', () => {
         if (fileInputControl.files.length) {
-            $('#upload-button').show();
-            $('#cancel-documents-button').show();
-        } else {
-            $('#upload-button').hide();
-            $('#cancel-documents-button').hide();
+            uploadButton.style.display = 'block';
+            document.querySelector('#cancel-documents-button').style.display = 'block';
+        // } else {
+        //     document.querySelector('#upload-button').style.display = '';
+        //     document.querySelector('#cancel-documents-button').style.display = '';
         }
 
     });
 
-    // Uploading Documents Message 
-    $('#upload-button').click(function(){
+    // // Uploading Documents Message 
+    // $('#upload-button').click(function(){
+    //     $('#upload-status').text('Uploading...');
+    //     $('#spinner').addClass("fas fa-spinner fa-pulse");
+    //     console.log('spin!');
+    // });
+    
+    // No JQuery Uploading Documents Message 
+    // $('#upload-button').click(function(){
+    uploadButton.addEventListener('click', () => {
         $('#upload-status').text('Uploading...');
         $('#spinner').addClass("fas fa-spinner fa-pulse");
         console.log('spin!');
     });    
- 
 
     $('#cancel-documents-button').click(function(){
         // cancel upload functionality
@@ -78,7 +100,6 @@ $(function(){
                     newHeader.appendChild(document.createTextNode(err));
                     const container = document.querySelector('.container');
                     document.body.insertBefore(newHeader, container);
-                    
                 });
             });
         }

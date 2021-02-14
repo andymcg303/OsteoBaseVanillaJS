@@ -39,7 +39,7 @@ module.exports = {
         res.redirect(`/patients/${req.params.id}/documents?currentView=${res.locals.currentView}`);
     },
 
-    async destroyMultipleDocs(req, res, next){
+    destroyMultipleDocs(req, res, next){
         
         destroyDocumentHelper(req)
         .then(() => {
