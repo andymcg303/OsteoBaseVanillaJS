@@ -1,63 +1,59 @@
 $(function(){
    
-    const uploadButton = document.querySelector('#upload-button'); 
+    const uploadButton = document.querySelector('#upload-button');
+    const cancelDocumentsButton = document.querySelector('#cancel-documents-button'); 
+    const deleteDocumentsButton = document.querySelector('#delete-documents-button');
+    const checkedDocDelCheckboxes = document.querySelectorAll('.document-delete-checkbox:checked');
+    const uploadTools = document.querySelectorAll('.upload-tools');
 
-    // // DOCUMENT MANAGEMENT FUNCTIONALITTY
-    // const fileInputControl = document.querySelector('#documents-upload-control'); 
-    // fileInputControl.addEventListener('change', (e) => {
-    //     if (fileInputControl.files.length) {
-    //         $('#upload-button').show();
-    //         $('#cancel-documents-button').show();
-    //     } else {
-    //         $('#upload-button').hide();
-    //         $('#cancel-documents-button').hide();
-    //     }
-
-    // });
-
-    // No JQuery DOCUMENT MANAGEMENT FUNCTIONALITTY
+    // (No JQuery) DOCUMENT MANAGEMENT FUNCTIONALITTY
     const fileInputControl = document.querySelector('#documents-upload-control'); 
     fileInputControl.addEventListener('change', () => {
         if (fileInputControl.files.length) {
             uploadButton.style.display = 'block';
             document.querySelector('#cancel-documents-button').style.display = 'block';
-        // } else {
-        //     document.querySelector('#upload-button').style.display = '';
-        //     document.querySelector('#cancel-documents-button').style.display = '';
         }
 
     });
-
-    // // Uploading Documents Message 
-    // $('#upload-button').click(function(){
-    //     $('#upload-status').text('Uploading...');
-    //     $('#spinner').addClass("fas fa-spinner fa-pulse");
-    //     console.log('spin!');
-    // });
     
-    // No JQuery Uploading Documents Message 
-    // $('#upload-button').click(function(){
+    // (No JQuery) Uploading Documents Message 
     uploadButton.addEventListener('click', () => {
-        $('#upload-status').text('Uploading...');
-        $('#spinner').addClass("fas fa-spinner fa-pulse");
-        console.log('spin!');
+        document.querySelector('#upload-status').textContent = 'Uploading...';
+        document.querySelector('#spinner').classList.add("fas", "fa-spinner", "fa-pulse");
     });    
 
-    $('#cancel-documents-button').click(function(){
+    // $('#cancel-documents-button').click(function(){
+    //     // cancel upload functionality
+    //     if (fileInputControl.files.length) {
+    //         $('#cancel-documents-button').hide();            
+    //         $('#upload-button').hide();
+    //         fileInputControl.value = ""; // resets
+    //     // cancel delete functionality
+    //     } else if ($('.document-delete-checkbox:checked').length > 0){
+    //         $('#delete-documents-button').hide();
+    //         $('#cancel-documents-button').hide();
+    //         $('.document-delete-checkbox').prop('checked',false);
+    //         $('.upload-tools').show(); 
+    //     }
+    // });
+
+    // (No JQuery) Cancel button functionality
+    // $('#cancel-documents-button').click(function(){
+    cancelDocumentsButton.addEventListener('click', () => { 
         // cancel upload functionality
         if (fileInputControl.files.length) {
-            $('#cancel-documents-button').hide();            
-            $('#upload-button').hide();
+            cancelDocumentsButton.style.display = 'none';            
+            uploadButton.style.display = 'none';
             fileInputControl.value = ""; // resets
         // cancel delete functionality
-        } else if ($('.document-delete-checkbox:checked').length > 0){
-            $('#delete-documents-button').hide();
-            $('#cancel-documents-button').hide();
+        } else if (document.querySelectorAll('.document-delete-checkbox:checked').length > 0){    
+            deleteDocumentsButton.style.display = 'none';
+            cancelDocumentsButton.style.display = 'none';
             $('.document-delete-checkbox').prop('checked',false);
             $('.upload-tools').show(); 
         }
     });
-    
+
     // deduce if any checkboxes clicked and activate delete or cancel buttons
     $('.document-delete-checkbox').click(function(){
         if ($('.document-delete-checkbox:checked').length > 0){
