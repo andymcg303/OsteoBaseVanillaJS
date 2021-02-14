@@ -42,7 +42,7 @@
             </p>
             
                 
-            <div class="form-group col-12 upload-tools">   
+            <div id="upload-tools" class="form-group col-12">   
                 <input id="documents-upload-control" type="file" accept="images/*" name="documents" multiple>
             </div>
            
@@ -62,7 +62,7 @@
 </div>
 <script>
     // for use in ajax delete
-    const $patientId = <%- JSON.stringify(patient._id) %>;
+    const patientId = <%- JSON.stringify(patient._id) %>;
 </script>
 
 <% include ../partials/common-scripts %>
