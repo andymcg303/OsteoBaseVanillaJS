@@ -21,11 +21,11 @@ body{
     display: none;
 }
 
-/* display after rendering page, reduces flicker
+/* display after rendering page, reduces flicker */
 #patient-table,
 #patient-log-table{
     display: none;
-} */
+}
 
 div.history-scroll{
     background-color: #e9ecef;
