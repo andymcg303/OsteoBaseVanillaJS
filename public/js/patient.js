@@ -24,50 +24,40 @@ $(function(){
         window.location.assign(`patients/${data[0]}?currentView=${currentView}`);
     });
 
-    // PATIENT INDEX
-    const $newPatientButton = $('#new-patient-button'),
-        $newPatientForm = $('#new-patient-form');
+    // // PATIENT INDEX
+    const newPatientButton = document.querySelector('#new-patient-button');
+    const newPatientForm = document.querySelector('#new-patient-form');
 
     // Show New Patient form
-    $newPatientButton.click(function(){
-        $newPatientForm.toggle();
-        // $(this).prop('disabled',true);
-        $(this).toggle();
+    newPatientButton.addEventListener('click', function(){
+        newPatientForm.style.display = 'block';
+        this.style.display = 'none';
     });
 
     // Hide new patient form
-    $('#cancel-new-patient').click(function(){
-        $newPatientForm.toggle();
-        $newPatientForm.find('.form-control').val('');
-        $newPatientButton.toggle();
+    document.querySelector('#cancel-new-patient').addEventListener('click', () => {
+        newPatientForm.style.display = 'none';
+        document.querySelectorAll('.form-control').forEach(el => el.value = '');
+        newPatientButton.style.display = 'block';
     });
 
-    // Post new patient
-    $newPatientForm.submit(function(e){
-        e.preventDefault();
-        const $newPatientData = $(this).serialize();
-        $.post('/patients', $newPatientData, function(data){
-            $patientTable.row.add( [ 
-                `${data._id}`,
-                `${data.surname}`,
-                `${data.firstname}`,
-                `${moment(data.dob).format('DD/MM/YYYY')}`,
-                `${data.phonenumber}`] )
-            .draw();
-            $newPatientForm.find('.form-control').val('');
-            $newPatientButton.prop('disabled',false);
-            $newPatientForm.toggle();
-            $newPatientButton.toggle();    
-        });
-    });
-
-    // // Sorting functionality
-    // $('#sort-name-button').click(function(){
-    //     tinysort($('.list-group-item'), {selector: '.patient-name'});
-    // });
-    
-    // $('#sort-dob-button').click(function(){
-    //     tinysort($('.list-group-item'), {selector: '.patient-dob'});
+    // // Post new patient
+    // $newPatientForm.submit(function(e){
+    //     e.preventDefault();
+    //     const $newPatientData = $(this).serialize();
+    //     $.post('/patients', $newPatientData, function(data){
+    //         $patientTable.row.add( [ 
+    //             `${data._id}`,
+    //             `${data.surname}`,
+    //             `${data.firstname}`,
+    //             `${moment(data.dob).format('DD/MM/YYYY')}`,
+    //             `${data.phonenumber}`] )
+    //         .draw();
+    //         $newPatientForm.find('.form-control').val('');
+    //         $newPatientButton.prop('disabled',false);
+    //         $newPatientForm.toggle();
+    //         $newPatientButton.toggle();    
+    //     });
     // });
 
 });
