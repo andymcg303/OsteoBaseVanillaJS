@@ -3,7 +3,6 @@ const cancelDocumentsButton = document.querySelector('#cancel-documents-button')
 const deleteDocumentsButton = document.querySelector('#delete-documents-button');
 const docDelCheckboxes = document.querySelectorAll('.document-delete-checkbox');
 const uploadTools = document.querySelector('#upload-tools');
-const selectTools = document.querySelectorAll('.select-tools');
 
 // (No JQuery) DOCUMENT MANAGEMENT FUNCTIONALITTY
 const fileInputControl = document.querySelector('#documents-upload-control'); 
@@ -11,7 +10,6 @@ fileInputControl.addEventListener('change', () => {
     if (fileInputControl.files.length) {
         uploadButton.style.display = 'block';
         document.querySelector('#cancel-documents-button').style.display = 'block';
-        selectTools.forEach(tool => {tool.style.display = 'none'});
     }
 
 });
@@ -28,7 +26,6 @@ cancelDocumentsButton.addEventListener('click', () => {
     if (fileInputControl.files.length) {
         cancelDocumentsButton.style.display = 'none';            
         uploadButton.style.display = 'none';
-        selectTools.forEach(tool => {tool.style.display = 'block'});
         fileInputControl.value = ""; // resets
     // cancel delete functionality
     } else if (document.querySelectorAll('.document-delete-checkbox:checked').length > 0){    
