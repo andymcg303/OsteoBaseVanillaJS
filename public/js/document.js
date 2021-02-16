@@ -58,12 +58,12 @@ docDelCheckboxes.forEach(checkBox => {
 document.querySelector('#delete-documents-form').addEventListener('submit', e => {
     e.preventDefault();
     if (confirm('Are you sure?')){    
-        const documentArray = document.querySelectorAll('.document-delete-checkbox:checked');
-        documentArray.forEach(document => {
-            const documentId = document.value;
-            const itemToDelete = document.closest('.document-group-item');
+        const docArray = document.querySelectorAll('.document-delete-checkbox:checked');
+        docArray.forEach(doc => {
+            const docId = doc.value;
+            const itemToDelete = doc.closest('.document-group-item');
 
-            fetch(`/patients/${patientId}/documents/${documentId}/multiple`, {
+            fetch(`/patients/${patientId}/documents/${docId}/multiple`, {
                 method: 'DELETE'
             })
             .then((response) => {
