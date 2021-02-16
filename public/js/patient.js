@@ -49,38 +49,10 @@ var serializeForm = function (form) {
 };
 
 // // Post new patient
-// newPatientForm.addEventListener('submit', e => {    
-//     e.preventDefault();
-//     const newPatientData = JSON.stringify(serializeForm(e.target));
-//     $.post('/patients', newPatientData, function(data){
-//         $patientTable.row.add( [ 
-//             `${data._id}`,
-//             `${data.surname}`,
-//             `${data.firstname}`,
-//             `${moment(data.dob).format('DD/MM/YYYY')}`,
-//             `${data.phonenumber}`] )
-//         .draw();
-//         newPatientForm.find('.form-control').val('');
-//         newPatientButton.prop('disabled',false);
-//         newPatientForm.toggle();
-//         newPatientButton.toggle();    
-//     });
-
-// });
-
-// // No JQuery Post new patient
 newPatientForm.addEventListener('submit', e => {    
     e.preventDefault();
-    const newPatientData =JSON.stringify(serializeForm(e.target));
-    fetch('/patients', {
-        method: 'POST',
-        body: newPatientData
-    }).then(response => {
-        if (response.ok) {
-            return response.json();
-        }
-        return Promise.reject(response);
-    }).then(() => {
+    const newPatientData = JSON.stringify(serializeForm(e.target));
+    $.post('/patients', newPatientData, function(data){
         $patientTable.row.add( [ 
             `${data._id}`,
             `${data.surname}`,
@@ -88,8 +60,37 @@ newPatientForm.addEventListener('submit', e => {
             `${moment(data.dob).format('DD/MM/YYYY')}`,
             `${data.phonenumber}`] )
         .draw();
-        formControls.forEach(el => el.value = '');
-        newPatientForm.style.display = 'none';
-        newPatientButton.style.display = 'block';                    
+        newPatientForm.find('.form-control').val('');
+        newPatientButton.prop('disabled',false);
+        newPatientForm.toggle();
+        newPatientButton.toggle();    
     });
+
+// });
+
+// // No JQuery Post new patient
+// newPatientForm.addEventListener('submit', e => {    
+//     e.preventDefault();
+//     const newPatientData =JSON.stringify(serializeForm(e.target));
+//     fetch('/patients', {
+//         method: 'POST',
+//         body: newPatientData
+//     });
+        // }).then(response => {
+    //     if (response.ok) {
+    //         return response.json();
+    //     }
+    //     return Promise.reject(response);
+    // }).then((data) => {
+    //     $patientTable.row.add( [ 
+    //         `${data._id}`,
+    //         `${data.surname}`,
+    //         `${data.firstname}`,
+    //         `${moment(data.dob).format('DD/MM/YYYY')}`,
+    //         `${data.phonenumber}`] )
+    //     .draw();
+    //     formControls.forEach(el => el.value = '');
+    //     newPatientForm.style.display = 'none';
+    //     newPatientButton.style.display = 'block';                    
+    // });
 });
