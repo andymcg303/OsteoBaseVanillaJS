@@ -39,27 +39,6 @@ document.querySelector('#cancel-new-patient').addEventListener('click', () => {
     newPatientButton.style.display = 'block';
 });
 
-// // Post new patient
-// newPatientForm.addEventListener('submit', e => {    
-//     e.preventDefault();
-//     const formData = new FormData(e.target);
-//     const newPatientData = Object.fromEntries(formData.entries());
-//     $.post('/patients', newPatientData, function(data){
-//         $patientTable.row.add( [ 
-//             `${data._id}`,
-//             `${data.surname}`,
-//             `${data.firstname}`,
-//             `${moment(data.dob).format('DD/MM/YYYY')}`,
-//             `${data.phonenumber}`] )
-//         .draw();
-//         newPatientForm.find('.form-control').val('');
-//         newPatientButton.prop('disabled',false);
-//         newPatientForm.toggle();
-//         newPatientButton.toggle();    
-//     });
-
-// // });
-
 // No JQuery Post new patient
 newPatientForm.addEventListener('submit', e => {    
     e.preventDefault();

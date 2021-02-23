@@ -23,7 +23,7 @@ module.exports = {
 
     // Patients Create
     async createPatient(req, res, next){
-        // const newPatient = await Patient.create(req.body.patient);
+        // this uses ajax and fetch api, so does not use express functionality that would require .patient after body
         const newPatient = await Patient.create(req.body);
         res.json(newPatient);
     },
