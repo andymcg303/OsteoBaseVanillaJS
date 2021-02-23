@@ -1,4 +1,8 @@
-const options = {valueNames: ['id', 'surname', 'firstname', 'dob', 'phonenumber']};
+const options = {
+    valueNames: ['id', 'surname', 'firstname', 'dob', 'phonenumber'],
+    page: 10,
+    pagination: true
+};
 const patientTableRows = document.querySelectorAll('#patient-table tbody tr');
 
 const patientTableList = new List('patients', options);
