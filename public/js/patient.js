@@ -9,6 +9,8 @@ const patientTableList = new List('patients', options);
 // sort form newest patient in descending order
 patientTableList.sort('id', { order: 'desc'});
 
+// Sort table according to header item clicked
+
 // helper function
 const openPatientDetails = function() {
     const id = this.querySelector('.id').textContent;
@@ -38,7 +40,7 @@ document.querySelector('#cancel-new-patient').addEventListener('click', () => {
     newPatientButton.style.display = 'block';
 });
 
-// No JQuery Post new patient
+// Post new patient
 newPatientForm.addEventListener('submit', e => {    
     e.preventDefault();
     const formData = new FormData(e.target);
