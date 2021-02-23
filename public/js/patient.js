@@ -66,8 +66,9 @@ newPatientForm.addEventListener('submit', e => {
     const formData = new FormData(e.target);
     const newPatientData = Object.fromEntries(formData.entries());    
     fetch('/patients', {
+        headers: { "Content-Type": "application/json" },
         method: 'POST',
-        body: newPatientData
+        body: JSON.stringify(newPatientData)
     }).then(response => {
         if (response.ok) {
             return response.json();

@@ -23,7 +23,8 @@ module.exports = {
 
     // Patients Create
     async createPatient(req, res, next){
-        const newPatient = await Patient.create(req.body.patient);
+        // const newPatient = await Patient.create(req.body.patient);
+        const newPatient = await Patient.create(req.body);
         res.json(newPatient);
     },
 
