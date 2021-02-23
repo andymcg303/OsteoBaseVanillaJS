@@ -1,14 +1,18 @@
-const options = {valueNames: ['surname', 'firstname', 'dob', 'phonenumber']};
-const patientTable = new List('patients', options);
-const patientTableRow = document.querySelectorAll('#patient-table tbody tr');
+const options = {valueNames: ['id', 'surname', 'firstname', 'dob', 'phonenumber']};
+const patientTableRows = document.querySelectorAll('#patient-table tbody tr');
 
-patientTableRow.forEach(row => {
-    row.addEventListener('click', function() {
-        const id = this.querySelector('.id').textContent;
-        const urlParams = new URLSearchParams(window.location.search);
-        const currentView = urlParams.get('currentView');
-        window.location.assign(`patients/${id}?currentView=${currentView}`);
-    });
+const patientTableList = new List('patients', options);
+
+// helper function
+const openPatientDetails = function() {
+    const id = this.querySelector('.id').textContent;
+    const urlParams = new URLSearchParams(window.location.search);
+    const currentView = urlParams.get('currentView');
+    window.location.assign(`patients/${id}?currentView=${currentView}`);
+};
+
+patientTableRows.forEach(row => {
+    row.addEventListener('click', openPatientDetails);
 });
 
 // // PATIENT INDEX
@@ -43,15 +47,19 @@ newPatientForm.addEventListener('submit', e => {
         }
         return Promise.reject(response);
     }).then((data) => {
-        $patientTable.row.add( [ 
-            `${data._id}`,
-            `${data.surname}`,
-            `${data.firstname}`,
-            `${moment(data.dob).format('DD/MM/YYYY')}`,
-            `${data.phonenumber}`] )
-        .draw();
+        patientTableList.add({ 
+            id: `${data._id}`,
+            surname: `${data.surname}`,
+            firstname: `${data.firstname}`,
+            dob: `${moment(data.dob).format('DD/MM/YYYY')}`,
+            phonenumber: `${data.phonenumber}`
+        });
         formControls.forEach(el => el.value = '');
         newPatientForm.style.display = 'none';
-        newPatientButton.style.display = 'block';                    
+        newPatientButton.style.display = 'block';                        
+        // Add event listener to newly added row    
+        const patientTable = document.querySelector('#patient-table');    
+        const lastRow = patientTable.rows[patientTable.rows.length -1];
+        lastRow.addEventListener('click', openPatientDetails);    
     });
 });
