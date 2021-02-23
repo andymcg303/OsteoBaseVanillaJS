@@ -1,32 +1,15 @@
-// $.fn.dataTable.moment( 'DD/MM/YYYY' );
-
-// // Patient Index DataTable initialisation
-// const $patientTable = $('#patient-table').DataTable( {
-//     "columnDefs":  
-//         [{
-//             "targets": [ 0 ],
-//             "visible": false
-//         }],
-//         "order": [ 0, 'desc' ],
-//         "lengthMenu": [[10, 20, -1], [10, 20, "All"]]
-//     } );
-
-// // Prevents flicker on loading
-// $('#patient-table').show();    
-
-// // open patient view
-// $('#patient-table tbody').on('click', 'tr', function () {
-//     const data = $patientTable.row( this ).data();
-//     const urlParams = new URLSearchParams(window.location.search);
-//     const currentView = urlParams.get('currentView');
-//     window.location.assign(`patients/${data[0]}?currentView=${currentView}`);
-// });
-
-const options = {
-    valueNames: ['id', 'surname', 'firstname', 'dob', 'phonenumber'],
-}
-
+const options = {valueNames: ['surname', 'firstname', 'dob', 'phonenumber']};
 const patientTable = new List('patients', options);
+const patientTableRow = document.querySelectorAll('#patient-table tbody tr');
+
+patientTableRow.forEach(row => {
+    row.addEventListener('click', function() {
+        const id = this.querySelector('.id').textContent;
+        const urlParams = new URLSearchParams(window.location.search);
+        const currentView = urlParams.get('currentView');
+        window.location.assign(`patients/${id}?currentView=${currentView}`);
+    });
+});
 
 // // PATIENT INDEX
 const newPatientButton = document.querySelector('#new-patient-button');
