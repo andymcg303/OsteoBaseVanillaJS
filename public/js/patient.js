@@ -6,6 +6,8 @@ const options = {
 const patientTableRows = document.querySelectorAll('#patient-table tbody tr');
 
 const patientTableList = new List('patients', options);
+// sort form newest patient in descending order
+patientTableList.sort('id', { order: 'desc'});
 
 // helper function
 const openPatientDetails = function() {
@@ -64,6 +66,8 @@ newPatientForm.addEventListener('submit', e => {
         // Add event listener to newly added row    
         const patientTable = document.querySelector('#patient-table');    
         const lastRow = patientTable.rows[patientTable.rows.length -1];
-        lastRow.addEventListener('click', openPatientDetails);    
+        lastRow.addEventListener('click', openPatientDetails);
+        // sort by id so newly added row appears first
+        patientTableList.sort('id', { order: 'desc'});    
     });
 });
