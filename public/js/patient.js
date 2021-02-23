@@ -1,26 +1,32 @@
-$.fn.dataTable.moment( 'DD/MM/YYYY' );
+// $.fn.dataTable.moment( 'DD/MM/YYYY' );
 
-// Patient Index DataTable initialisation
-const $patientTable = $('#patient-table').DataTable( {
-    "columnDefs":  
-        [{
-            "targets": [ 0 ],
-            "visible": false
-        }],
-        "order": [ 0, 'desc' ],
-        "lengthMenu": [[10, 20, -1], [10, 20, "All"]]
-    } );
+// // Patient Index DataTable initialisation
+// const $patientTable = $('#patient-table').DataTable( {
+//     "columnDefs":  
+//         [{
+//             "targets": [ 0 ],
+//             "visible": false
+//         }],
+//         "order": [ 0, 'desc' ],
+//         "lengthMenu": [[10, 20, -1], [10, 20, "All"]]
+//     } );
 
-// Prevents flicker on loading
-$('#patient-table').show();    
+// // Prevents flicker on loading
+// $('#patient-table').show();    
 
-// open patient view
-$('#patient-table tbody').on('click', 'tr', function () {
-    const data = $patientTable.row( this ).data();
-    const urlParams = new URLSearchParams(window.location.search);
-    const currentView = urlParams.get('currentView');
-    window.location.assign(`patients/${data[0]}?currentView=${currentView}`);
-});
+// // open patient view
+// $('#patient-table tbody').on('click', 'tr', function () {
+//     const data = $patientTable.row( this ).data();
+//     const urlParams = new URLSearchParams(window.location.search);
+//     const currentView = urlParams.get('currentView');
+//     window.location.assign(`patients/${data[0]}?currentView=${currentView}`);
+// });
+
+const options = {
+    valueNames: ['id', 'surname', 'firstname', 'dob', 'phonenumber'],
+}
+
+const patientTable = new List('patients', options);
 
 // // PATIENT INDEX
 const newPatientButton = document.querySelector('#new-patient-button');

@@ -53,28 +53,32 @@
         </div>
     </div>
 
-    <table id="patient-table" class="table table-hover bg-white rounded">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Last Name</th>
-                <th>First Name</th>
-                <th>Date of Birth</th>
-                <th>Phone Number</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% patients.forEach(function(patient){ %>
-                    <tr>
-                        <td><%= patient.id %></td>
-                        <td><%= patient.surname %></td>
-                        <td><%= patient.firstname %></td>
-                        <td><%= moment(patient.dob).format('DD/MM/YYYY') %></td>
-                        <td><%= patient.phonenumber %></td>
-                    </tr>
-            <% }); %>
-        </tfoot>
-    </table>
+    <div id="patients">
+        <input type="text" class="search" placeholder="Search">
+        <!-- SORT BUTTOM/FUNCTIONALITY IN HERE -->
+        <table id="patient-table" class="table table-hover bg-white rounded">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Last Name</th>
+                    <th>First Name</th>
+                    <th>Date of Birth</th>
+                    <th>Phone Number</th>
+                </tr>
+            </thead>
+            <tbody class="list">
+                <% patients.forEach(function(patient){ %>
+                        <tr>
+                            <td class="id"><%= patient.id %></td>
+                            <td class="surname"><%= patient.surname %></td>
+                            <td class="firstname"><%= patient.firstname %></td>
+                            <td class="dob"><%= moment(patient.dob).format('DD/MM/YYYY') %></td>
+                            <td class="phonenumber"><%= patient.phonenumber %></td>
+                        </tr>
+                <% }); %>
+            </tfoot>
+        </table>
+    </div>
 
 </div>
 

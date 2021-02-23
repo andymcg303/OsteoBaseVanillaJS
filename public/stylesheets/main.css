@@ -22,9 +22,22 @@ body{
 }
 
 /* display after rendering page, reduces flicker */
-#patient-table,
+/* #patient-table, */ /* NB converting to list.js */ 
 #patient-log-table{
     display: none;
+}
+
+/* Hide id column */
+#patient-table tr th:first-child,
+#patient-table tr td:first-child { 
+    display: none; 
+}
+
+.search {
+    border:solid 1px #ccc;
+    border-radius: 5px;
+    padding:7px 14px;
+    margin-bottom:10px
 }
 
 div.history-scroll{
