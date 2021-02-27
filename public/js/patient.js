@@ -1,7 +1,9 @@
 const options = {
     valueNames: ['id', 'surname', 'firstname', 'dob', 'phonenumber'],
     page: 10,
-    pagination: true
+    pagination: [{
+        outerWindow: 1
+    }]
 };
 const patientTableRows = document.querySelectorAll('#patient-table tbody tr');
 
@@ -9,7 +11,7 @@ const patientTableList = new List('patients', options);
 // sort form newest patient in descending order
 patientTableList.sort('id', { order: 'desc'});
 
-// helper function
+// opening patient details helper function
 const openPatientDetails = function() {
     const id = this.querySelector('.id').textContent;
     const urlParams = new URLSearchParams(window.location.search);
@@ -20,6 +22,28 @@ const openPatientDetails = function() {
 patientTableRows.forEach(row => {
     row.addEventListener('click', openPatientDetails);
 });
+
+
+// pagination style helper function
+const stylePagination = () => {
+    // To style pagination with bootsrap, dynamically add list.js classes
+    const pageListItem = document.querySelectorAll('.pagination li');
+    pageListItem.forEach(el => {
+        el.classList.add('page-item')
+        el.querySelector('a').classList.add('page-link');
+    });
+}
+
+stylePagination();
+
+patientTableList.on('updated', () => {
+    const activePage = document.querySelector('li.active'); 
+    activePage.addEventListener('change', () => {
+        stylePagination()
+    });
+});
+
+
 
 // // PATIENT INDEX
 const newPatientButton = document.querySelector('#new-patient-button');
