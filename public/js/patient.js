@@ -23,27 +23,36 @@ patientTableRows.forEach(row => {
     row.addEventListener('click', openPatientDetails);
 });
 
+// Observe when pagination list changes to re-style
+const observer = new MutationObserver(() => {
+    stylePagination()
+});
+const pageList = document.querySelector('.pagination');
+observer.observe(pageList, {subtree: true, attributes: true});
 
 // pagination style helper function
 const stylePagination = () => {
-    // To style pagination with bootsrap, dynamically add list.js classes
+    // To style pagination with bootsrap, dynamically add required classes
     const pageListItem = document.querySelectorAll('.pagination li');
     pageListItem.forEach(el => {
         el.classList.add('page-item')
         el.querySelector('a').classList.add('page-link');
     });
+    // prevent infinite loop
+    observer.disconnect();
 }
 
-stylePagination();
-
-patientTableList.on('updated', () => {
-    const activePage = document.querySelector('li.active'); 
-    activePage.addEventListener('change', () => {
-        stylePagination()
-    });
+// Reconnect observation of pagination list on selectin new page
+pageList.addEventListener('click', () => {
+    observer.observe(pageList, {subtree: true, attributes: true});
 });
 
+// Restyle pagination after sort and search
+patientTableList.on('searchComplete', () => stylePagination())
+patientTableList.on('sortComplete', () => stylePagination());
 
+// Style pagination on page load
+stylePagination();
 
 // // PATIENT INDEX
 const newPatientButton = document.querySelector('#new-patient-button');
