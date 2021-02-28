@@ -36,37 +36,40 @@ $(function(){
     });
 
     // SHOW/EDIT FUNCTIONALITY
-    // const $editForm = $('.edit-form'),
-    //     $editButton = $('.edit-button'),
-    //     $editFormControls = $('.edit-form .form-control'),
-    //     $submitEditButton = $('.submit-edit-button'),
-    //     $cancelEditButton = $('.cancel-edit-button'),
-    //     $deleteButton = $('.delete-button'),
-    //     $signoffButton = $('.signoff-button'),
-    //     $viewDocumentsButton = $('#view-documents-button'),
-    //     $changeViewButton = $('.change-view-button');
 
-    const editForm = document.getQuerySelector('.edit-form');
-    const editButton = document.getQuerySelector('.edit-button');
-    const editFormControls = document.getQuerySelector('.edit-form .form-control');
-    const submitEditButton = document.getQuerySelector('.submit-edit-button');
-    const cancelEditButton = document.getQuerySelector('.cancel-edit-button');
-    const deleteButton = document.getQuerySelector('.delete-button');
-    const signoffButton = document.getQuerySelector('.signoff-button');
-    const viewDocumentsButton = document.getQuerySelector('#view-documents-button');
-    const changeViewButton = document.getQuerySelector('.change-view-button');
+    // const $editForm = document.querySelector('.edit-form');
+    const $editButton = document.querySelector('.edit-button');
+    const $editFormControls = document.querySelectorAll('.edit-form .form-control');
+    const $submitEditButton = document.querySelector('.submit-edit-button');
+    const $cancelEditButton = document.querySelector('.cancel-edit-button');
+    const $deleteButton = document.querySelector('.delete-button');
+    const $signoffButton = document.querySelector('.signoff-button');
+    const $viewDocumentsButton = document.querySelector('#view-documents-button');
+    const $changeViewButton = document.querySelector('.change-view-button');
+
+    const $editForm = $('.edit-form');
 
     // Enable Edit form and buttons
-    editButton.click(function(){
+    $editButton.addEventListener('click', function(){
         this.style.display = 'none';
-        viewDocumentsButton.style.display = 'block';
-        submitEditButton.style.display = 'block';
-        signoffButton.style.display = 'block';
-        cancelEditButton.style.display = 'inline-block';
-        deleteButton.style.display = 'inline-block';
-        editFormControls.forEach (control => {control.disabled = false});
-        changeViewButton.style.display = 'block';
+        $viewDocumentsButton.style.display = 'none';
+        $submitEditButton.style.display = 'block';
+        $cancelEditButton.style.display = 'inline-block';
+        $deleteButton.style.display = 'inline-block';
+        $editFormControls.forEach(control => {control.disabled = false});
+        $changeViewButton.style.display = 'none';
     });
+
+    // $editButton.click(function(){    
+    //     this.style.display = 'none';
+    //     $viewDocumentsButton.toggle();
+    //     $submitEditButton.toggle();
+    //     $signoffButton.toggle();
+    //     $cancelEditButton.css('display', 'inline-block');
+    //     $deleteButton.css('display', 'inline-block');
+    //     $editFormControls.forEach (control => {control.disabled = false});
+    //     $changeViewButton.toggle();
+    // });
 
     function disableEditForm(){
         $editButton.toggle();
@@ -80,7 +83,8 @@ $(function(){
     }
 
     // Disable Edit functionaity
-    $cancelEditButton.click(function(){
+    // $cancelEditButton.click(function(){
+    $cancelEditButton.addEventListener('click', function(){    
         $editFormControls.each(function(){
             $(this).val($(this).prop('defaultValue'));
         }); 
@@ -128,15 +132,15 @@ $(function(){
         $signoffButton.css('display', 'inline-block');
     }
 
-    // Perform signoff 
-    $signoffButton.click(function(){
-        const confirmResponse = confirm('This will permanently lock this item from further editing. Are you sure?');
-        if (confirmResponse) {
-            $('.hidden-signed-off').val(true);
-            // trigger edit form submission ie update with signed off value
-            $editForm.trigger('submit');
-        }
-    });
+    // // Perform signoff 
+    // $signoffButton.click(function(){
+    //     const confirmResponse = confirm('This will permanently lock this item from further editing. Are you sure?');
+    //     if (confirmResponse) {
+    //         $('.hidden-signed-off').val(true);
+    //         // trigger edit form submission ie update with signed off value
+    //         $editForm.trigger('submit');
+    //     }
+    // });
 
     //TOGGLE HISTORY DISPLAY FUNCTIONALITY
     const $historyButton = $('.history-button');
