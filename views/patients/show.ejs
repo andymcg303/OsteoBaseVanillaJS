@@ -10,35 +10,35 @@
         <div class="form-row">
             <div class="form-group col-md-3">
                 <label for="firstnameEdit">First Name</label>
-                <input type="text" class="form-control" name="patient[firstname]" id="firstnameEdit" value="<%= patient.firstname %>" disabled>
+                <input type="text" class="form-control" name="firstname" id="firstnameEdit" value="<%= patient.firstname %>" disabled>
             </div>
             <div class="form-group col-md-3">
                 <label for="surnameEdit">Surname</label>
-                <input type="text" class="form-control" name="patient[surname]" id="surnameEdit" value="<%= patient.surname %>" disabled>
+                <input type="text" class="form-control" name="surname" id="surnameEdit" value="<%= patient.surname %>" disabled>
             </div>
             <div class="form-group col-md-3">
                 <label for="dobEdit">Date of Birth</label>
-                <input type="date" class="form-control" name="patient[dob]" id="dobEdit" value="<%= moment(patient.dob).format('YYYY-MM-DD') %>" disabled>
+                <input type="date" class="form-control" name="dob" id="dobEdit" value="<%= moment(patient.dob).format('YYYY-MM-DD') %>" disabled>
             </div>
             <div class="form-group col-md-3">
                 <label for="phonenumberEdit">Phone</label>
-                <input type="tel" class="form-control" name="patient[phonenumber]" id="phonenumberEdit" value="<%= patient.phonenumber %>" disabled>
+                <input type="tel" class="form-control" name="phonenumber" id="phonenumberEdit" value="<%= patient.phonenumber %>" disabled>
             </div>
         </div>
         
         <div class="form-group">
             <label for="addressEdit">Address</label>
-            <input type="text" class="form-control" name="patient[address]" id="addressEdit" value="<%= patient.address %>" disabled>
+            <input type="text" class="form-control" name="address" id="addressEdit" value="<%= patient.address %>" disabled>
         </div>    
 
         <div class="form-row">
             <div class="form-group col-md-3">
                 <label for="postcodeEdit">Postcode</label>
-                <input type="text" class="form-control" name="patient[postcode]" id="postcodeEdit" value="<%= patient.postcode %>" disabled>
+                <input type="text" class="form-control" name="postcode" id="postcodeEdit" value="<%= patient.postcode %>" disabled>
             </div>
             <div class="form-group col-md-3">
                 <label for="emailEdit">email</label>
-                <input type="email" class="form-control" name="patient[email]" id="emailEdit" value="<%= patient.email %>" disabled>
+                <input type="email" class="form-control" name="email" id="emailEdit" value="<%= patient.email %>" disabled>
             </div>
             <div class="form-group col-lg-6 align-self-end d-flex">
                 <div class="btn btn-info edit-button" id="edit-patient-button">Edit Patient Details</div>

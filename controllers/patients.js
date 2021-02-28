@@ -46,7 +46,7 @@ module.exports = {
 
     // Patient Update
     async updatePatient(req, res, next){
-        const updatedPatient = await Patient.findByIdAndUpdate(req.params.id, req.body.patient, {new: true});
+        const updatedPatient = await Patient.findByIdAndUpdate(req.params.id, req.body, {new: true});
         res.json(updatedPatient);
     },
 

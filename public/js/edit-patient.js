@@ -72,23 +72,29 @@ cancelEditButton.addEventListener('click', function(){
     disableEditForm();
 });
 
-// // Submit Edit Details
-// $editForm.submit(function(e){
-//     e.preventDefault();
-//     const $data = $(this).serialize();
-//     const $formAction = $(this).attr('action');
-//     $.ajax({
-//         url: $formAction,
-//         data: $data,
-//         method: 'PUT',
-//     });
-
-//     // Make default values the updated values
-//     $editFormControls.forEach(control => {
-//         control.defaultValue = control.value;
-//     }); 
-//     disableEditForm();    
-// });
+// Submit Edit Details
+editForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const patientData = Object.fromEntries(formData.entries());
+    const formAction = e.target.getAttribute('action');
+    fetch(formAction, {
+        headers: { "Content-Type": "application/json" },
+        method: 'PUT',
+        body: JSON.stringify(patientData)
+    }).then(response => {
+        if (response.ok) {
+            return response.json();
+        }
+        return Promise.reject(response);
+    }).then(() => {
+        // Make default values the updated values
+        editFormControls.forEach(control => {
+            control.defaultValue = control.value;
+        }); 
+        disableEditForm();         
+    });
+}); 
 
 // Deleting patients prompt, different text to common delete
 document.querySelector('#delete-patient-form').addEventListener('submit', e => {
