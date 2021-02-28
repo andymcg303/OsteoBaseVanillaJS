@@ -70,16 +70,16 @@
                         <th>Signed Off?</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="list">
 
                     <% patient.medhists.forEach(function(medhist){ %>                
                         <tr>
-                            <td><%= medhist._id %></td>
-                            <td>M</td>
-                            <td><span class="text-dark font-weight-bold"><%= moment(medhist.date_created).format('DD/MM/YYYY HH:mm') %></span></td>
-                            <td><span class="fas fa-comment-medical text-success"></span>  Medical History</td>
-                            <td><% if (medhist.critical){ %> Critical: <% } %><%= medhist.critical %></td>
-                            <td>
+                            <td class="id"><%= medhist._id %></td>
+                            <td class="typecode">M</td>
+                            <td class="date_created"><span class="text-dark font-weight-bold"><%= moment(medhist.date_created).format('DD/MM/YYYY HH:mm') %></span></td>
+                            <td class="type"><span class="fas fa-comment-medical text-success"></span>  Medical History</td>
+                            <td class="info"><% if (medhist.critical){ %> Critical: <% } %><%= medhist.critical %></td>
+                            <td class="signed_off">
                                 <% if (medhist.signed_off){ %>
                                     <i class="fas fa-lock text-dark"></i>
                                 <% } else { %>
@@ -90,12 +90,12 @@
                     <% }); %>
                     <% patient.interviews.forEach(function(interview){ %>
                         <tr class="log-signoff-item">
-                            <td><%= interview._id %></td>
-                            <td>I</td>
-                            <td><span class="text-dark font-weight-bold"><%= moment(interview.date_created).format('DD/MM/YYYY HH:mm') %></span></td>
-                            <td><span class="fa fa-comments text-info"></span>  Consultation</td>
-                            <td><% if (interview.CO){ %> C/O: <% } %><%= interview.CO %></td>
-                            <td>
+                            <td class="id"><%= interview._id %></td>
+                            <td class="typecode">I</td>
+                            <td class="date_created"><span class="text-dark font-weight-bold"><%= moment(interview.date_created).format('DD/MM/YYYY HH:mm') %></span></td>
+                            <td class="type"><span class="fa fa-comments text-info"></span>  Consultation</td>
+                            <td class="info"><% if (interview.CO){ %> C/O: <% } %><%= interview.CO %></td>
+                            <td class="signed_off">
                                 <% if (interview.signed_off){ %>
                                     <i class="fas fa-lock text-dark"></i>
                                 <% } else { %>
@@ -106,12 +106,12 @@
                     <% }); %>                
                     <% patient.clinicals.forEach(function(clinical){ %>
                         <tr class="log-signoff-item">
-                            <td><%= clinical._id %></td>
-                            <td>C</td>
-                            <td><span class="text-dark font-weight-bold"><%= moment(clinical.date_created).format('DD/MM/YYYY HH:mm')%></span></td>
-                            <td><span class="fas fa-user-friends text-danger"></span>  Clinical Session</td>
-                            <td><% if (clinical.diag){ %> Dx: <% } %><%= clinical.diag %></td>
-                            <td>
+                            <td class="id"><%= clinical._id %></td>
+                            <td class="typecode">C</td>
+                            <td class="date_created"><span class="text-dark font-weight-bold"><%= moment(clinical.date_created).format('DD/MM/YYYY HH:mm')%></span></td>
+                            <td class="type"><span class="fas fa-user-friends text-danger"></span>  Clinical Session</td>
+                            <td class="info"><% if (clinical.diag){ %> Dx: <% } %><%= clinical.diag %></td>
+                            <td class="signed_off">
                                 <% if (clinical.signed_off){ %>
                                     <i class="fas fa-lock text-dark"></i>
                                 <% } else { %>
@@ -122,6 +122,9 @@
                     <% }); %>                                    
                 </tfoot>
             </table>
+            <nav aria-label="Patient Log pagination">
+                <ul class="pagination"></ul>
+            </nav>
         </div>
         <% if (userType !== "Reception") { %>
             <div class="d-flex">
@@ -242,8 +245,8 @@
 
 <% include ../partials/common-scripts %>
 <script>
-     const $patientId = <%- JSON.stringify(patient._id) %>;
-     const $userType = <%- JSON.stringify(userType) %>
+     const patientId = <%- JSON.stringify(patient._id) %>;
+     const userTypePass = <%- JSON.stringify(userType) %>;
 
 </script>
 <script src="/js/edit-patient.js"></script>
