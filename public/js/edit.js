@@ -36,26 +36,36 @@ $(function(){
     });
 
     // SHOW/EDIT FUNCTIONALITY
-    const $editForm = $('.edit-form'),
-        $editButton = $('.edit-button'),
-        $editFormControls = $('.edit-form .form-control'),
-        $submitEditButton = $('.submit-edit-button'),
-        $cancelEditButton = $('.cancel-edit-button'),
-        $deleteButton = $('.delete-button'),
-        $signoffButton = $('.signoff-button'),
-        $viewDocumentsButton = $('#view-documents-button'),
-        $changeViewButton = $('.change-view-button');
+    // const $editForm = $('.edit-form'),
+    //     $editButton = $('.edit-button'),
+    //     $editFormControls = $('.edit-form .form-control'),
+    //     $submitEditButton = $('.submit-edit-button'),
+    //     $cancelEditButton = $('.cancel-edit-button'),
+    //     $deleteButton = $('.delete-button'),
+    //     $signoffButton = $('.signoff-button'),
+    //     $viewDocumentsButton = $('#view-documents-button'),
+    //     $changeViewButton = $('.change-view-button');
+
+    const editForm = document.getQuerySelector('.edit-form');
+    const editButton = document.getQuerySelector('.edit-button');
+    const editFormControls = document.getQuerySelector('.edit-form .form-control');
+    const submitEditButton = document.getQuerySelector('.submit-edit-button');
+    const cancelEditButton = document.getQuerySelector('.cancel-edit-button');
+    const deleteButton = document.getQuerySelector('.delete-button');
+    const signoffButton = document.getQuerySelector('.signoff-button');
+    const viewDocumentsButton = document.getQuerySelector('#view-documents-button');
+    const changeViewButton = document.getQuerySelector('.change-view-button');
 
     // Enable Edit form and buttons
-    $editButton.click(function(){
-        $(this).toggle();
-        $viewDocumentsButton.toggle();
-        $submitEditButton.toggle();
-        $signoffButton.toggle();
-        $cancelEditButton.css('display', 'inline-block');
-        $deleteButton.css('display', 'inline-block');
-        $editFormControls.prop('disabled',false);
-        $changeViewButton.toggle();
+    editButton.click(function(){
+        this.style.display = 'none';
+        viewDocumentsButton.style.display = 'block';
+        submitEditButton.style.display = 'block';
+        signoffButton.style.display = 'block';
+        cancelEditButton.style.display = 'inline-block';
+        deleteButton.style.display = 'inline-block';
+        editFormControls.forEach (control => {control.disabled = false});
+        changeViewButton.style.display = 'block';
     });
 
     function disableEditForm(){
