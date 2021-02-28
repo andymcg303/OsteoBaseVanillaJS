@@ -1,37 +1,72 @@
-$.fn.dataTable.moment( 'DD/MM/YYYY HH:mm' );
+// $.fn.dataTable.moment( 'DD/MM/YYYY HH:mm' );
 
-// Patient Index DataTable initialisation
-const $patientLogTable = $('#patient-log-table').DataTable( {
-    "columnDefs":  
-        [{
-            "targets": [ 0, 1 ],
-            "visible": false
-        }],
-    "order": [[ 2, "desc" ]], // in production will be better to default sorting to ID ie: [0], as date in seed data not accurate
-    "lengthMenu": [[5, 10, 20, -1], [5, 10, 20, "All"]]
-} );
+// // Patient Index DataTable initialisation
+// const $patientLogTable = $('#patient-log-table').DataTable( {
+//     "columnDefs":  
+//         [{
+//             "targets": [ 0, 1 ],
+//             "visible": false
+//         }],
+//     "order": [[ 2, "desc" ]], // in production will be better to default sorting to ID ie: [0], as date in seed data not accurate
+//     "lengthMenu": [[5, 10, 20, -1], [5, 10, 20, "All"]]
+// } );
 
-// Prevents flicker on loading
-$('#patient-log-table').show();    
+// // Prevents flicker on loading
+// $('#patient-log-table').show();    
 
-$('#patient-log-table tbody').on('click', 'tr', function () {
-    // Block access to patient records for reception user type
-    if (`${$userType}` !== "Reception") {
-        const data = $patientLogTable.row( this ).data();
+// $('#patient-log-table tbody').on('click', 'tr', function () {
+//     // Block access to patient records for reception user type
+//     if (`${$userType}` !== "Reception") {
+//         const data = $patientLogTable.row( this ).data();
 
-        switch (data[1]){
-            case "M":
-                window.location.assign(`${$patientId}/medhists/${data[0]}?currentView=log`);
-                break;
-            case "I":
-                window.location.assign(`${$patientId}/interviews/${data[0]}?currentView=log`);
-                break;
-            case "C":
-                window.location.assign(`${$patientId}/clinicals/${data[0]}?currentView=log`);
-                break;    
-        }
-    }
-});
+//         switch (data[1]){
+//             case "M":
+//                 window.location.assign(`${$patientId}/medhists/${data[0]}?currentView=log`);
+//                 break;
+//             case "I":
+//                 window.location.assign(`${$patientId}/interviews/${data[0]}?currentView=log`);
+//                 break;
+//             case "C":
+//                 window.location.assign(`${$patientId}/clinicals/${data[0]}?currentView=log`);
+//                 break;    
+//         }
+//     }
+// });
+
+const options = {
+    valueNames: ['id', 'typecode', 'date_created', 'type', 'info', 'signed_off'],
+    page: 5,
+    pagination: [{
+        outerWindow: 1
+    }]
+};
+
+// const patientLogTableRows = document.querySelectorAll('#patient-log-table tbody tr');
+
+// const patientLogTableList = new List('patient-log', options);
+// // sort by date created in descending order
+// patientLogTableList.sort('date_created', { order: 'desc' });
+
+// patientLogTableRows.forEach(row => {
+//     row.addEventListener('click', () => {
+//         // Block access to patient records for reception user type
+//         if (`${$userType}` !== "Reception") {
+//             const data = $patientLogTable.row( this ).data();
+
+//             switch (data[1]){
+//                 case "M":
+//                     window.location.assign(`${$patientId}/medhists/${data[0]}?currentView=log`);
+//                     break;
+//                 case "I":
+//                     window.location.assign(`${$patientId}/interviews/${data[0]}?currentView=log`);
+//                     break;
+//                 case "C":
+//                     window.location.assign(`${$patientId}/clinicals/${data[0]}?currentView=log`);
+//                     break;    
+//             }       
+//         }
+//     });
+// });
 
 // SHOW/EDIT FUNCTIONALITY
 

@@ -21,15 +21,11 @@ body{
     display: none;
 }
 
-/* display after rendering page, reduces flicker */
-/* #patient-table, */ /* NB converting to list.js */ 
-#patient-log-table{
-    display: none;
-}
-
 /* Hide id column */
 #patient-table tr th:first-child,
-#patient-table tr td:first-child { 
+#patient-table tr td:first-child,
+#patient-log-table tr th:nth-child(-n+2),
+#patient-log-table tr td:nth-child(-n+2) { 
     display: none; 
 }
 

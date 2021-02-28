@@ -56,71 +56,73 @@
         </div>
     </form>
 
-    <!-- Populate list view with data and order on the client side with datatables -->
+    <!-- Populate list view with data and order on the client side with list.js -->
     <% if (currentView === "log") { %>
-        <table id="patient-log-table" class="table table-hover bg-white rounded">
-            <thead>
-                <tr>
-                    <th>id</th>
-                    <th>typecode</th>
-                    <th>Date</th>
-                    <th>Type</th>
-                    <th>Info</th>
-                    <th>Signed Off?</th>
-                </tr>
-            </thead>
-            <tbody>
-
-                <% patient.medhists.forEach(function(medhist){ %>                
+        <div id="patient-log">
+            <table id="patient-log-table" class="table table-hover bg-white rounded">
+                <thead>
                     <tr>
-                        <td><%= medhist._id %></td>
-                        <td>M</td>
-                        <td><span class="text-dark font-weight-bold"><%= moment(medhist.date_created).format('DD/MM/YYYY HH:mm') %></span></td>
-                        <td><span class="fas fa-comment-medical text-success"></span>  Medical History</td>
-                        <td><% if (medhist.critical){ %> Critical: <% } %><%= medhist.critical %></td>
-                        <td>
-                            <% if (medhist.signed_off){ %>
-                                <i class="fas fa-lock text-dark"></i>
-                            <% } else { %>
-                                <i class="fas fa-lock-open text-warning"></i>
-                            <% } %>
-                        </td>
+                        <th>id</th>
+                        <th>typecode</th>
+                        <th>Date</th>
+                        <th>Type</th>
+                        <th>Info</th>
+                        <th>Signed Off?</th>
                     </tr>
-                <% }); %>
-                <% patient.interviews.forEach(function(interview){ %>
-                    <tr class="log-signoff-item">
-                        <td><%= interview._id %></td>
-                        <td>I</td>
-                        <td><span class="text-dark font-weight-bold"><%= moment(interview.date_created).format('DD/MM/YYYY HH:mm') %></span></td>
-                        <td><span class="fa fa-comments text-info"></span>  Consultation</td>
-                        <td><% if (interview.CO){ %> C/O: <% } %><%= interview.CO %></td>
-                        <td>
-                            <% if (interview.signed_off){ %>
-                                <i class="fas fa-lock text-dark"></i>
-                            <% } else { %>
-                                <i class="fas fa-lock-open text-warning"></i>
-                            <% } %>
-                        </td>
-                    </tr>
-                <% }); %>                
-                <% patient.clinicals.forEach(function(clinical){ %>
-                    <tr class="log-signoff-item">
-                        <td><%= clinical._id %></td>
-                        <td>C</td>
-                        <td><span class="text-dark font-weight-bold"><%= moment(clinical.date_created).format('DD/MM/YYYY HH:mm')%></span></td>
-                        <td><span class="fas fa-user-friends text-danger"></span>  Clinical Session</td>
-                        <td><% if (clinical.diag){ %> Dx: <% } %><%= clinical.diag %></td>
-                        <td>
-                            <% if (clinical.signed_off){ %>
-                                <i class="fas fa-lock text-dark"></i>
-                            <% } else { %>
-                                <i class="fas fa-lock-open text-warning"></i>
-                            <% } %>
-                        </td>
-                    </tr>
-                <% }); %>                                    
-            </tfoot>
-        </table>
+                </thead>
+                <tbody>
+
+                    <% patient.medhists.forEach(function(medhist){ %>                
+                        <tr>
+                            <td><%= medhist._id %></td>
+                            <td>M</td>
+                            <td><span class="text-dark font-weight-bold"><%= moment(medhist.date_created).format('DD/MM/YYYY HH:mm') %></span></td>
+                            <td><span class="fas fa-comment-medical text-success"></span>  Medical History</td>
+                            <td><% if (medhist.critical){ %> Critical: <% } %><%= medhist.critical %></td>
+                            <td>
+                                <% if (medhist.signed_off){ %>
+                                    <i class="fas fa-lock text-dark"></i>
+                                <% } else { %>
+                                    <i class="fas fa-lock-open text-warning"></i>
+                                <% } %>
+                            </td>
+                        </tr>
+                    <% }); %>
+                    <% patient.interviews.forEach(function(interview){ %>
+                        <tr class="log-signoff-item">
+                            <td><%= interview._id %></td>
+                            <td>I</td>
+                            <td><span class="text-dark font-weight-bold"><%= moment(interview.date_created).format('DD/MM/YYYY HH:mm') %></span></td>
+                            <td><span class="fa fa-comments text-info"></span>  Consultation</td>
+                            <td><% if (interview.CO){ %> C/O: <% } %><%= interview.CO %></td>
+                            <td>
+                                <% if (interview.signed_off){ %>
+                                    <i class="fas fa-lock text-dark"></i>
+                                <% } else { %>
+                                    <i class="fas fa-lock-open text-warning"></i>
+                                <% } %>
+                            </td>
+                        </tr>
+                    <% }); %>                
+                    <% patient.clinicals.forEach(function(clinical){ %>
+                        <tr class="log-signoff-item">
+                            <td><%= clinical._id %></td>
+                            <td>C</td>
+                            <td><span class="text-dark font-weight-bold"><%= moment(clinical.date_created).format('DD/MM/YYYY HH:mm')%></span></td>
+                            <td><span class="fas fa-user-friends text-danger"></span>  Clinical Session</td>
+                            <td><% if (clinical.diag){ %> Dx: <% } %><%= clinical.diag %></td>
+                            <td>
+                                <% if (clinical.signed_off){ %>
+                                    <i class="fas fa-lock text-dark"></i>
+                                <% } else { %>
+                                    <i class="fas fa-lock-open text-warning"></i>
+                                <% } %>
+                            </td>
+                        </tr>
+                    <% }); %>                                    
+                </tfoot>
+            </table>
+        </div>
         <% if (userType !== "Reception") { %>
             <div class="d-flex">
                 <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/medhists/new?currentView=log"><span class="fas fa-comment-medical text-success"></span>  New Medical History</a>
