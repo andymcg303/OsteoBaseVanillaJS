@@ -167,11 +167,11 @@ const $signoffButton = document.querySelector('.signoff-button');
 // Enable Edit form and buttons
 $editButton.addEventListener('click', function(){
     this.style.display = 'none';
-    $submitEditButton.style.display = 'block';
-    // $signoffButton.toggle();
+    $submitEditButton.style.display = 'inline-block';
+    $signoffButton.style.display = 'none';
     $cancelEditButton.style.display = 'inline-block';
     $deleteButton.style.display = 'inline-block';
-    $editFormControls.disabled = false;
+    $editFormControls.forEach(control => control.disabled = false);
 });
 
 // function disableEditForm(){
@@ -184,6 +184,15 @@ $editButton.addEventListener('click', function(){
 //     $editFormControls.prop('disabled',true);
 //     $changeViewButton.toggle();
 // }
+
+function disableEditForm(){
+    $editButton.style.display = 'inline-block';
+    $signoffButton.style.display = 'inline-block';
+    $submitEditButton.style.display = 'none';
+    $cancelEditButton.style.display = 'none';
+    $deleteButton.style.display = 'inline-block';
+    // $editFormControls.prop('disabled',true);
+}
 
 // // Disable Edit functionaity
 // $cancelEditButton.click(function(){
