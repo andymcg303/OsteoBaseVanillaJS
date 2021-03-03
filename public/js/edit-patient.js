@@ -13,25 +13,31 @@ const patientLogTableList = new List('patient-log', options);
 patientLogTableList.sort('id', { order: 'desc' });
 
 patientLogTableRows.forEach(row => {
-    row.addEventListener('click', () => {
+    row.addEventListener('click', function() {
         // Block access to patient records for reception user type
         if (`${userTypePass}` !== "Reception") {
-            const data = patientLogTable.row( this ).data();
+            const id = this.querySelector('.id').textContent;
+            const typeCode = this.querySelector('.typecode').textContent;
 
-            switch (data[1]){
+            switch (typeCode){
                 case "M":
-                    window.location.assign(`${patientId}/medhists/${data[0]}?currentView=log`);
+                    window.location.assign(`${patientId}/medhists/${id}?currentView=log`);
                     break;
                 case "I":
-                    window.location.assign(`${patientId}/interviews/${data[0]}?currentView=log`);
+                    window.location.assign(`${patientId}/interviews/${id}?currentView=log`);
                     break;
                 case "C":
-                    window.location.assign(`${patientId}/clinicals/${data[0]}?currentView=log`);
+                    window.location.assign(`${patientId}/clinicals/${id}?currentView=log`);
                     break;    
             }       
         }
     });
 });
+
+// Style pagination after DOMLoad, sort and search
+window.addEventListener('DOMContentLoaded', () => stylePagination());
+patientLogTableList.on('searchComplete', () => stylePagination())
+patientLogTableList.on('sortComplete', () => stylePagination());
 
 // SHOW/EDIT FUNCTIONALITY
 const editForm = document.querySelector('.edit-form');

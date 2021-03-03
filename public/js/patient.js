@@ -24,6 +24,11 @@ patientTableRows.forEach(row => {
     row.addEventListener('click', openPatientDetails);
 });
 
+// Style pagination after DOMLoad, sort and search
+window.addEventListener('DOMContentLoaded', () => stylePagination());
+patientTableList.on('searchComplete', () => stylePagination())
+patientTableList.on('sortComplete', () => stylePagination());
+
 // New Patient functionality
 const newPatientButton = document.querySelector('#new-patient-button');
 const newPatientForm = document.querySelector('#new-patient-form');

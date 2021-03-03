@@ -1,4 +1,4 @@
-// DYNAMIC PAGINATION STYLING
+// DYNAMIC PAGINATION STYLING HELPER
 
 // Observe when pagination list changes to re-style
 const observer = new MutationObserver(() => {
@@ -23,8 +23,3 @@ const stylePagination = () => {
 pageList.addEventListener('click', () => {
     observer.observe(pageList, {subtree: true, attributes: true});
 });
-
-// Style pagination after DOMLoad, sort and search
-window.addEventListener('DOMContentLoaded', () => stylePagination());
-patientTableList.on('searchComplete', () => stylePagination())
-patientTableList.on('sortComplete', () => stylePagination());
