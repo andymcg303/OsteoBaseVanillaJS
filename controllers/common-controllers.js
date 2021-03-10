@@ -33,7 +33,7 @@ module.exports = {
 
     // Update
     async updateItem(req, res){
-        const updatedItem = await res.locals.Model.findByIdAndUpdate(req.params.item_id, req.body.item);
+        const updatedItem = await res.locals.Model.findByIdAndUpdate(req.params.item_id, req.body);
         res.json(updatedItem);
     },
     // Destroy

@@ -21,42 +21,42 @@
         
                     <div class="form-group col-12">
                         <label for="CO-edit">C/O:</label>
-                        <input id="CO-edit" name="item[CO]" type="text" class="form-control" value="<%= item.CO %>" disabled>
+                        <input id="CO-edit" name="CO" type="text" class="form-control" value="<%= item.CO %>" disabled>
                     </div>    
                 
                     <div class="form-group col-md-2">
                         <label for="onset-edit">Onset:</label>    
-                        <input id="onset-edit" name="item[onset]" type="text" class="form-control" value="<%= item.onset %>" disabled>
+                        <input id="onset-edit" name="onset" type="text" class="form-control" value="<%= item.onset %>" disabled>
                     </div>
 
                     <div class="form-group col-md-10">        
                         <label for="reason-edit">Reason:</label>
-                        <input id="reason-edit" name="item[reason]" type="text" class="form-control" value="<%= item.reason %>" disabled>
+                        <input id="reason-edit" name="reason" type="text" class="form-control" value="<%= item.reason %>" disabled>
                     </div>
 
                     <div class="form-group col-lg-4">
                         <label for="agg-edit">Worse For:</label>        
-                        <input id="agg-edit" name="item[agg]" type="text" class="form-control" value="<%= item.agg %>" disabled>
+                        <input id="agg-edit" name="agg" type="text" class="form-control" value="<%= item.agg %>" disabled>
                     </div>
                 
                     <div class="form-group col-lg-4">        
                         <label for="rel-edit">Better For:</label>
-                        <input id="rel-edit" name="item[rel]" type="text" class="form-control" value="<%= item.rel %>" disabled>
+                        <input id="rel-edit" name="rel" type="text" class="form-control" value="<%= item.rel %>" disabled>
                     </div>
                 
                     <div class="form-group col-lg-4">        
                         <label for="dp-edit">Daily Pattern:</label>
-                        <input id="dp-edit" name="item[dp]" type="text" class="form-control" value="<%= item.dp %>" disabled>
+                        <input id="dp-edit" name="dp" type="text" class="form-control" value="<%= item.dp %>" disabled>
                     </div>
 
                     <div class="form-group col-lg-6">        
                         <label for="ph-edit">Previous History:</label>
-                        <input id="ph-edit" name="item[ph]" type="text" class="form-control" value="<%= item.ph %>" disabled>
+                        <input id="ph-edit" name="ph" type="text" class="form-control" value="<%= item.ph %>" disabled>
                     </div>
 
                     <div class="form-group col-lg-6">    
                         <label for="invest-edit">Investigations:</label>
-                        <input id="invest-edit" name="item[invest]" type="text" class="form-control" value="<%= item.invest %>" disabled>
+                        <input id="invest-edit" name="invest" type="text" class="form-control" value="<%= item.invest %>" disabled>
                     </div>
 
                 </div>
@@ -68,7 +68,7 @@
             <% include ../partials/history-scroll %>
     
             <!-- Hidden input for signoff -->
-            <input class="hidden-signed-off" type="text" name="item[signed_off]" style="display: none" value="<%= item.signed_off %>">
+            <input class="hidden-signed-off" type="text" name="signed_off" style="display: none" value="<%= item.signed_off %>">
  
         </div>
         

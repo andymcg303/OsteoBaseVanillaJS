@@ -21,22 +21,22 @@
 
                     <div class="form-group col-12">
                         <label for="OE-edit">Problem:</label>
-                        <textarea name="item[problem]" id="OE-problem" class="form-control" disabled><%= item.problem %></textarea>
+                        <textarea name="problem" id="OE-problem" class="form-control" disabled><%= item.problem %></textarea>
                     </div>
 
                     <div class="form-group col-12">
                         <label for="OE-edit">Objective Findings:</label>
-                        <textarea name="item[OE]" id="OE-edit" class="form-control" rows="6" disabled><%= item.OE %></textarea>
+                        <textarea name="OE" id="OE-edit" class="form-control" rows="6" disabled><%= item.OE %></textarea>
                     </div>
 
                     <div class="form-group col-12">    
                         <label for="diag-edit">Diagnosis:</label>
-                        <textarea name="item[diag]" id="diag-edit" class="form-control" disabled><%= item.diag %></textarea>    
+                        <textarea name="diag" id="diag-edit" class="form-control" disabled><%= item.diag %></textarea>    
                     </div>
 
                     <div class="form-group col-12">
                         <label for="TTT-edit">Treatment:</label>
-                        <textarea name="item[TTT]" id="TTT-edit" class="form-control" rows="6" disabled><%= item.TTT %></textarea>
+                        <textarea name="TTT" id="TTT-edit" class="form-control" rows="6" disabled><%= item.TTT %></textarea>
                     </div>
 
                 </div>
@@ -48,7 +48,7 @@
             <% include ../partials/history-scroll %>
 
             <!-- Hidden input for signoff -->
-            <input class="hidden-signed-off" type="text" name="item[signed_off]" style="display: none" value="<%= item.signed_off %>">
+            <input class="hidden-signed-off" type="text" name="signed_off" style="display: none" value="<%= item.signed_off %>">
 
         </div>
 

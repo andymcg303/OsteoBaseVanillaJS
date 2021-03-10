@@ -21,54 +21,54 @@
 
                     <div class="form-group col-lg-6">
                         <label for="meds-edit">Medications:</label>
-                        <input type="text" class="form-control" name="item[meds]" id="meds-edit" value="<%= item.meds %>" disabled> 
+                        <input type="text" class="form-control" name="meds" id="meds-edit" value="<%= item.meds %>" disabled> 
                     </div>
                     <div class="form-group col-lg-6">
                         <label for="ops-edit">Operations:</label>
-                        <input type="text" class="form-control" name="item[ops]" id="ops-edit" value="<%= item.ops %>" disabled> 
+                        <input type="text" class="form-control" name="ops" id="ops-edit" value="<%= item.ops %>" disabled> 
                     </div>
                     <div class="form-group col-lg-6">
                         <label for="fracs-edit">Fractures:</label>
-                        <input type="text" class="form-control" name="item[fracs]" id="fracs-edit" value="<%= item.fracs %>"disabled> 
+                        <input type="text" class="form-control" name="fracs" id="fracs-edit" value="<%= item.fracs %>"disabled> 
                     </div>
 
                     <div class="form-group col-lg-6">
                         <label for="accs-edit">Accidents:</label>
-                        <input type="text" class="form-control" name="item[accs]" id="accs-edit" value="<%= item.accs %>"disabled> 
+                        <input type="text" class="form-control" name="accs" id="accs-edit" value="<%= item.accs %>"disabled> 
                     </div>
                     <div class="form-group col-lg-6">
                         <label for="ops-edit">Illneses:</label>
-                        <input type="text" class="form-control" name="item[ill]" id="ill-edit" value="<%= item.ill %>" disabled> 
+                        <input type="text" class="form-control" name="ill" id="ill-edit" value="<%= item.ill %>" disabled> 
                     </div>
                     <div class="form-group col-lg-6">
                         <label for="resp-edit">Respiratory:</label>
-                        <input type="text" class="form-control" name="item[resp]" id="resp-edit" value="<%= item.resp %>" disabled> 
+                        <input type="text" class="form-control" name="resp" id="resp-edit" value="<%= item.resp %>" disabled> 
                     </div>
                     
                     <div class="form-group col-lg-6">
                         <label for="cvs-edit">Cardiovascular:</label>
-                        <input type="text" class="form-control" name="item[cvs]" id="cvs-edit" value="<%= item.cvs %>" disabled> 
+                        <input type="text" class="form-control" name="cvs" id="cvs-edit" value="<%= item.cvs %>" disabled> 
                     </div>
                     <div class="form-group col-lg-6">
                         <label for="gu-edit">Genitourinary:</label>
-                        <input type="text" class="form-control" name="item[gu]" id="gu-edit" value="<%= item.gu %>" disabled> 
+                        <input type="text" class="form-control" name="gu" id="gu-edit" value="<%= item.gu %>" disabled> 
                     </div>
                     <div class="form-group col-lg-6">
                         <label for="git-edit">Gastrointestinal:</label>
-                        <input type="text" class="form-control" name="item[git]" id="git-edit" value="<%= item.git %>" disabled> 
+                        <input type="text" class="form-control" name="git" id="git-edit" value="<%= item.git %>" disabled> 
                     </div>
                     
                     <div class="form-group col-lg-6">
                         <label for="gynae-edit">Gynaecological:</label>
-                        <input type="text" class="form-control" name="item[gynae]" id="gynae-edit" value="<%= item.gynae %>" disabled> 
+                        <input type="text" class="form-control" name="gynae" id="gynae-edit" value="<%= item.gynae %>" disabled> 
                     </div>
                     <div class="form-group col-lg-6">
                         <label for="msk-edit">Musculoskeletal:</label>
-                        <input type="text" class="form-control" name="item[msk]" id="msk-edit" value="<%= item.msk %>" disabled> 
+                        <input type="text" class="form-control" name="msk" id="msk-edit" value="<%= item.msk %>" disabled> 
                     </div>
                     <div class="form-group col-lg-6">
                         <label for="critical-edit">Critical Info:</label>
-                        <input type="text" class="form-control" name="item[critical]" id="critical-edit" value="<%= item.critical %>" disabled> 
+                        <input type="text" class="form-control" name="critical" id="critical-edit" value="<%= item.critical %>" disabled> 
                     </div>
 
                 </div>
@@ -80,7 +80,7 @@
             <% include ../partials/history-scroll %>
 
             <!-- Hidden input for signoff -->
-            <input class="hidden-signed-off" type="text" name="item[signed_off]" style="display: none" value="<%= item.signed_off %>">
+            <input class="hidden-signed-off" type="text" name="signed_off" style="display: none" value="<%= item.signed_off %>">
 
         </div>
 
