@@ -29,8 +29,8 @@ $editButton.addEventListener('click', function(){
 // }
 
 function disableEditForm(){
-    $editButton.style.display = 'inline-block';
-    $signoffButton.style.display = 'inline-block';
+    // $editButton.style.display = 'inline-block';
+    // $signoffButton.style.display = 'inline-block';
     $submitEditButton.style.display = 'none';
     $cancelEditButton.style.display = 'none';
     $deleteButton.style.display = 'none';
@@ -51,6 +51,8 @@ $cancelEditButton.addEventListener('click', function(){
         control.value = control.defaultValue;
     }); 
     disableEditForm();
+    $editButton.style.display = 'inline-block';
+    $signoffButton.style.display = 'inline-block';
 });
 
 // // Submit Edit Details
@@ -91,7 +93,15 @@ $editForm.addEventListener('submit', e => {
         $editFormControls.forEach(control => {
             control.defaultValue = control.value;
         }); 
-        disableEditForm();         
+        disableEditForm();
+        // Toggle buttons according to edit or signoff
+        if (window.getComputedStyle($signoffButton).display === 'inline-block') {
+            $editButton.style.display = 'none';
+            $signoffButton.style.display = 'none';
+        } else {
+            $editButton.style.display = 'inline-block';
+            $signoffButton.style.display = 'inline-block';
+        }
     });
 });
 
