@@ -134,7 +134,7 @@ if (signedOff === "false") {
 $signoffButton.addEventListener('click', () => {
     const confirmResponse = confirm('This will permanently lock this item from further editing. Are you sure?');
     if (confirmResponse) {
-        document.querySelector('.hidden-signed-off').value = true;
+        document.querySelector('.hidden-signed-off').value = "true";
         // trigger edit form submission ie update with signed off value
         $editForm.submit();
     }
