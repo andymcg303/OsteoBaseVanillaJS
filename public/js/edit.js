@@ -136,7 +136,7 @@ $signoffButton.addEventListener('click', () => {
     if (confirmResponse) {
         document.querySelector('.hidden-signed-off').value = "true";
         // trigger edit form submission ie update with signed off value
-        $editForm.submit();
+        $editForm.requestSubmit();
     }
 });
 
