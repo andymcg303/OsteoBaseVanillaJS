@@ -17,33 +17,12 @@ $editButton.addEventListener('click', function(){
     $editFormControls.forEach(control => control.disabled = false);
 });
 
-// function disableEditForm(){
-//     $editButton.toggle();
-//     $viewDocumentsButton.toggle();
-//     $signoffButton.toggle();
-//     $submitEditButton.hide();
-//     $cancelEditButton.hide();
-//     $deleteButton.hide();
-//     $editFormControls.prop('disabled',true);
-//     $changeViewButton.toggle();
-// }
-
 function disableEditForm(){
-    // $editButton.style.display = 'inline-block';
-    // $signoffButton.style.display = 'inline-block';
     $submitEditButton.style.display = 'none';
     $cancelEditButton.style.display = 'none';
     $deleteButton.style.display = 'none';
     $editFormControls.forEach(control => control.disabled = true);
 }
-
-// // Disable Edit functionaity
-// $cancelEditButton.click(function(){
-//     $editFormControls.each(function(){
-//         $(this).val($(this).prop('defaultValue'));
-//     }); 
-//     disableEditForm();
-// });
 
 // Disable Edit functionaity
 $cancelEditButton.addEventListener('click', function(){
@@ -54,24 +33,6 @@ $cancelEditButton.addEventListener('click', function(){
     $editButton.style.display = 'inline-block';
     $signoffButton.style.display = 'inline-block';
 });
-
-// // Submit Edit Details
-// $editForm.submit(function(e){
-//     e.preventDefault();
-//     const $data = $(this).serialize();
-//     const $formAction = $(this).attr('action');
-//     $.ajax({
-//         url: $formAction,
-//         data: $data,
-//         method: 'PUT',
-//     });
-
-//     // Make default values the updated values
-//     $editFormControls.each(function(){
-//         $(this).prop('defaultValue', $(this).val());
-//     }); 
-//     disableEditForm();    
-// });
 
 // Submit Edit Details
 $editForm.addEventListener('submit', e => {
@@ -105,14 +66,6 @@ $editForm.addEventListener('submit', e => {
     });
 });
 
-// // Delete Prompt 
-// $('.delete-form').submit(function(e){
-//     const confirmResponse = confirm('Are you sure?');
-//     if (!confirmResponse) {
-//         e.preventDefault();
-//     }
-// }); 
-
 // Delete Prompt 
 const deleteForm = document.querySelector('.delete-form');
 deleteForm.addEventListener('submit', e => {
@@ -129,16 +82,6 @@ if (signedOff === "false") {
     document.querySelector('.signoff-edit-button').style.display = 'inline-block';
     $signoffButton.style.display = 'inline-block';
 }
-
-// // Perform signoff 
-// $signoffButton.click(function(){
-//     const confirmResponse = confirm('This will permanently lock this item from further editing. Are you sure?');
-//     if (confirmResponse) {
-//         $('.hidden-signed-off').val(true);
-//         // trigger edit form submission ie update with signed off value
-//         $editForm.trigger('submit');
-//     }
-// });
 
 // Perform signoff 
 $signoffButton.addEventListener('click', () => {
