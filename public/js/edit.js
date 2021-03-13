@@ -94,10 +94,10 @@ signoffButton.addEventListener('click', () => {
 });
 
 //TOGGLE HISTORY DISPLAY FUNCTIONALITY
-const $historyButton = document.querySelector('.history-button');
+const historyButton = document.querySelector('.history-button');
 const mainContainer = document.querySelector('.main-container');
 
-$historyButton.addEventListener('click', function(){ 
+historyButton.addEventListener('click', function(){ 
     mainContainer.classList.toggle('container');
     mainContainer.classList.toggle('container-fluid');
 
