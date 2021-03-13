@@ -1,8 +1,7 @@
 <div class="col-4">
 
-    <div class="d-none d-lg-inline">
-
-        <label for="history-scroll-id" class=" history-scroll">Clinical History:</label>
+    <div class="d-none d-lg-inline">    
+        <label for="history-scroll-id" class="history-scroll">Clinical History:</label>
         <div class="form-control history-scroll overflow-auto ui-widget-content" id="history-scroll-id" style="height: <%= scrollHeight %>;">
             <% patient.clinicals.forEach(clinical => { %>
                 <strong>Date: </strong><%= moment(clinical.date_created).format('DD/MM/YYYY') %><br>

@@ -101,26 +101,26 @@ $historyButton.addEventListener('click', function(){
     mainContainer.classList.toggle('container');
     mainContainer.classList.toggle('container-fluid');
     // $('.history-scroll').toggle();
-    const historyScroll = document.querySelector('.history-scroll');
-    if (window.getComputedStyle(historyScroll).display === 'none') {
-        historyScroll.style.display = 'block';
+    const historyScroll = document.querySelectorAll('.history-scroll');
+    if (window.getComputedStyle(historyScroll[0]).display === 'none') {
+        historyScroll.forEach(el => el.style.display = 'block');
     } else {
-        historyScroll.style.display = 'none';
+        historyScroll.forEach(el => el.style.display = 'none');
     }
 
-    $('.inputs-col').toggleClass('col-12').toggleClass('col-lg-8');
-    $(this).text(function(i, text){
-        return text === "Show History" ? "Hide History" : "Show History";
-    });
+    const inputsCol = document.querySelector('.inputs-col');
+    inputsCol.classList.toggle('col-12');
+    inputsCol.classList.toggle('col-lg-8');
+    
 });
 
 //Reformat main container if window width reduced by user and history view selected
-$(window).resize(function() {
-    if ($(window).width() < 992 && $historyButton.text() === "Hide History") { // smaller than BS xl? window size
-        $('.main-container').removeClass('container-fluid');
-        $('.main-container').addClass('container');
-    } else if ($(window).width() >= 992 && $historyButton.text() === "Hide History") { //greater or equal to BS xl? window size 
-        $('.main-container').removeClass('container');
-        $('.main-container').addClass('container-fluid');
-    }
-});
+// $(window).resize(function() {
+//     if ($(window).width() < 992 && $historyButton.text() === "Hide History") { // smaller than BS xl? window size
+//         $('.main-container').removeClass('container-fluid');
+//         $('.main-container').addClass('container');
+//     } else if ($(window).width() >= 992 && $historyButton.text() === "Hide History") { //greater or equal to BS xl? window size 
+//         $('.main-container').removeClass('container');
+//         $('.main-container').addClass('container-fluid');
+//     }
+// });
