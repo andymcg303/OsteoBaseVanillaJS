@@ -111,6 +111,8 @@ $historyButton.addEventListener('click', function(){
     const inputsCol = document.querySelector('.inputs-col');
     inputsCol.classList.toggle('col-12');
     inputsCol.classList.toggle('col-lg-8');
+
+    this.textContent = this.textContent === "Show History" ? "Hide History" : "Show History";
     
 });
 
