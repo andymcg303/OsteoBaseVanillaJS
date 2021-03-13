@@ -117,12 +117,13 @@ historyButton.addEventListener('click', function(){
 });
 
 //Reformat main container if window width reduced by user and history view selected
-// $(window).resize(function() {
-//     if ($(window).width() < 992 && $historyButton.text() === "Hide History") { // smaller than BS xl? window size
-//         $('.main-container').removeClass('container-fluid');
-//         $('.main-container').addClass('container');
-//     } else if ($(window).width() >= 992 && $historyButton.text() === "Hide History") { //greater or equal to BS xl? window size 
-//         $('.main-container').removeClass('container');
-//         $('.main-container').addClass('container-fluid');
-//     }
-// });
+window.addEventListener('resize', () => {
+    const mainContainer = document.querySelector('.main-container');
+    if (window.innerWidth < 992 && historyButton.textContent === "Hide History") { // smaller than BS xl? window size
+        mainContainer.classList.remove('container-fluid');
+        mainContainer.classList.add('container');
+    } else if (window.innerWidth >= 992 && historyButton.textContent === "Hide History") { //greater or equal to BS xl? window size
+        mainContainer.classList.remove('container');
+        mainContainer.classList.add('container-fluid');
+    }
+});
