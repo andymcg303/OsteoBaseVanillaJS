@@ -100,7 +100,7 @@ const mainContainer = document.querySelector('.main-container');
 $historyButton.addEventListener('click', function(){ 
     mainContainer.classList.toggle('container');
     mainContainer.classList.toggle('container-fluid');
-    // $('.history-scroll').toggle();
+
     const historyScroll = document.querySelectorAll('.history-scroll');
     if (window.getComputedStyle(historyScroll[0]).display === 'none') {
         historyScroll.forEach(el => el.style.display = 'block');
