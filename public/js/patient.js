@@ -1,6 +1,10 @@
 // list.js configuration
 const options = {
-    valueNames: ['id', 'surname', 'firstname', 'dob', 'phonenumber'],
+    valueNames: ['id', 
+                'surname', 
+                'firstname', 
+                {name: 'dob', attr: 'timestamp'}, // use timestamp attribut asd list.ls does not accurately sort string dates
+                'phonenumber'],
     page: 10,
     pagination: [{
         outerWindow: 1

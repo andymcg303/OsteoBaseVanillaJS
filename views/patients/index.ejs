@@ -71,7 +71,8 @@
                             <td class='id'><%= patient.id %></td>
                             <td class="surname"><%= patient.surname %></td>
                             <td class="firstname"><%= patient.firstname %></td>
-                            <td class="dob"><%= moment(patient.dob).format('DD/MM/YYYY') %></td>
+                            <!-- using Date.parse OK as just want timestamp relative to other dates for ordeing with list.js -->
+                            <td class="dob" timestamp="<%= Date.parse(patient.dob) %>"><%= moment(patient.dob).format('DD/MM/YYYY') %></td>
                             <td class="phonenumber"><%= patient.phonenumber %></td>
                         </tr>
                 <% }); %>
