@@ -5,7 +5,7 @@ const docDelCheckboxes = document.querySelectorAll('.document-delete-checkbox');
 const uploadTools = document.querySelector('#upload-tools');
 const selectTools = document.querySelectorAll('.select-tools');
 
-// (No JQuery) DOCUMENT MANAGEMENT FUNCTIONALITTY
+// DOCUMENT MANAGEMENT FUNCTIONALITTY
 const fileInputControl = document.querySelector('#documents-upload-control'); 
 fileInputControl.addEventListener('change', () => {
     if (fileInputControl.files.length) {
@@ -16,13 +16,13 @@ fileInputControl.addEventListener('change', () => {
 
 });
 
-// (No JQuery) Uploading Documents Message 
+// Uploading Documents Message 
 uploadButton.addEventListener('click', () => {
     document.querySelector('#upload-status').textContent = 'Uploading...';
     document.querySelector('#spinner').classList.add("fas", "fa-spinner", "fa-pulse");
 });    
 
-// (No JQuery) Cancel button functionality
+// Cancel button functionality
 cancelDocumentsButton.addEventListener('click', () => { 
     // cancel upload functionality
     if (fileInputControl.files.length) {
@@ -39,7 +39,7 @@ cancelDocumentsButton.addEventListener('click', () => {
     }
 });
 
-// (No JQuery) deduce if any checkboxes clicked and activate delete or cancel buttons
+// deduce if any checkboxes clicked and activate delete or cancel buttons
 docDelCheckboxes.forEach(checkBox => {
     checkBox.addEventListener('click', () => {
         if (document.querySelectorAll('.document-delete-checkbox:checked').length > 0){
@@ -54,7 +54,7 @@ docDelCheckboxes.forEach(checkBox => {
     });
 });
 
-// (No JQuery) Delete multiple documents
+// Delete multiple documents
 document.querySelector('#delete-documents-form').addEventListener('submit', e => {
     e.preventDefault();
     if (confirm('Are you sure?')){    
