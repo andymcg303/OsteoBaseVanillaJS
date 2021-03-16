@@ -8,6 +8,9 @@
     <img src="<%= document.url %>" alt="uploaded document" width="500px">
 
     <form class="delete-form" action="/patients/<%= patient._id %>/documents/<%= document._id %>?_method=DELETE&currentView=<%= currentView %>" method="POST">
+        <button type="button" class="btn btn-dark export-button mt-2" onclick="printJS('<%= document.url %>', 'image')">
+            Print
+        </button>
         <input class="btn btn-danger mt-2" type="submit" value="Delete">
     </form>   
 
@@ -18,5 +21,14 @@
 </div>
 
 <% include ../partials/common-scripts %>
-<script src="/js/edit.js"></script>
+<!-- Delete prompt -->
+<script>
+    const deleteForm = document.querySelector('.delete-form');
+    deleteForm.addEventListener('submit', e => {
+        const confirmResponse = confirm('Are you sure?');
+        if (!confirmResponse) {
+            e.preventDefault();
+        }
+    })
+</script>
 <% include ../partials/footer %>
