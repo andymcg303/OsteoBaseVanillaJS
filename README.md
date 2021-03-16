@@ -1,2 +1,2 @@
 # OsteoBaseVanillaJS
-OsteoBase CSS styled with Bootstrap 4, no JQuery 
+Bootstrap 4 used for CSS styling only, no JQuery 
