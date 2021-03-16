@@ -1,4 +1,5 @@
 const uploadButton = document.querySelector('#upload-button');
+const printDocumentsButton = document.querySelector('#print-documents-button');
 const cancelDocumentsButton = document.querySelector('#cancel-documents-button'); 
 const deleteDocumentsButton = document.querySelector('#delete-documents-button');
 const docDelCheckboxes = document.querySelectorAll('.document-delete-checkbox');
@@ -32,6 +33,7 @@ cancelDocumentsButton.addEventListener('click', () => {
         fileInputControl.value = ""; // resets
     // cancel delete functionality
     } else if (document.querySelectorAll('.document-delete-checkbox:checked').length > 0){    
+        printDocumentsButton.style.display = "none";
         deleteDocumentsButton.style.display = 'none';
         cancelDocumentsButton.style.display = 'none';
         document.querySelectorAll('.document-delete-checkbox:checked').forEach(checkBox => {checkBox.checked = false});
@@ -39,19 +41,33 @@ cancelDocumentsButton.addEventListener('click', () => {
     }
 });
 
-// deduce if any checkboxes clicked and activate delete or cancel buttons
+// deduce if any checkboxes clicked and activate print, delete and cancel buttons
 docDelCheckboxes.forEach(checkBox => {
     checkBox.addEventListener('click', () => {
         if (document.querySelectorAll('.document-delete-checkbox:checked').length > 0){
+            printDocumentsButton.style.display = "block";
             deleteDocumentsButton.style.display = 'block';
             cancelDocumentsButton.style.display = 'block';
             uploadTools.style.display = 'none';
         } else {
+            printDocumentsButton.style.display = "none";
             deleteDocumentsButton.style.display = 'none';
             cancelDocumentsButton.style.display = 'none';
             uploadTools.style.display = 'block';    
         }
     });
+});
+
+// Print multiple documents
+printDocumentsButton.addEventListener('click', () => { 
+    const checkedArray = document.querySelectorAll('.document-delete-checkbox:checked');
+    const urlArray = [];
+    checkedArray.forEach(el => {
+        // up the dom tree, back down to image, the get the src attribute
+        const url = el.closest('.document-group-item').querySelector('.img-thumbnail').getAttribute('src');
+        urlArray.push(url);
+    })
+    printJS(urlArray, 'image');
 });
 
 // Delete multiple documents

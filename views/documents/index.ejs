@@ -10,7 +10,6 @@
     <form class="document-form" action="/patients/<%= patient._id %>/documents?currentView=<%= currentView %>" method="POST" enctype="multipart/form-data">
        
         <div class="form-row">
-
             <% patient.documents.forEach(function(document, i){ %>
                 <div class="form-group d-flex justify-content-start flex-wrap document-group-item">
                     <div class="mx-1">
@@ -27,7 +26,6 @@
                     </div>                   
                 </div>
             <% }); %>
-
         </div>
 
         <div class="form-row">
@@ -48,7 +46,7 @@
            
             <div class="form-group col-lg-12 align-self-end d-flex">
                 <button id="upload-button" class="btn btn-success mr-1" type="submit">Upload</button>
-                <button type="button" class="btn btn-dark export-button" onclick="printJS('', 'image')">
+                <button type="button" id="print-documents-button" class="btn btn-dark export-button mr-1">
                     Print
                 </button>
                 <input type="submit" class="btn btn-danger mr-1" id="delete-documents-button" value="Delete" form="delete-documents-form">
