@@ -67,7 +67,7 @@ printDocumentsButton.addEventListener('click', () => {
         const url = el.closest('.document-group-item').querySelector('.img-thumbnail').getAttribute('src');
         urlArray.push(url);
     })
-    printJS(urlArray, 'image');
+    printJS({printable: urlArray, type: 'image'});
 });
 
 // Delete multiple documents
