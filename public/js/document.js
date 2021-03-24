@@ -87,6 +87,7 @@ document.querySelector('#delete-documents-form').addEventListener('submit', e =>
             .then((response) => {
                 if (response.ok) {
                     itemToDelete.remove();
+                    printDocumentsButton.style.display = 'none';
                     deleteDocumentsButton.style.display = 'none';
                     cancelDocumentsButton.style.display = 'none';
                     uploadTools.style.display = 'block';
