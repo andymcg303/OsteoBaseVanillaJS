@@ -239,16 +239,9 @@
 
     <div class="d-flex justify-content-between">
         <a class="btn btn-secondary mt-2 mb-3" href="/patients?currentView=<%= currentView %>">Back to Patient Index</a>
-        <button onclick="printJS({
-            printable: 'patient-log',
-            type: 'html',
-            targetStyles: ['*']
-         })" 
-            class="btn btn-dark export-button mt-2 mb-3" 
-            id="signoff-clinical-button" 
-            type="button">
-            Export to PDF
-         </button>
+        <button class="btn btn-dark export-button mt-2 mb-3" id="print-records-button" type="button">
+            Print Case Records
+        </button>
     </div>
 
 </div><!-- container -->
