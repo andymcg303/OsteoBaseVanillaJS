@@ -109,26 +109,3 @@ document.querySelector('#delete-patient-form').addEventListener('submit', e => {
         e.preventDefault();
     }
 });
-
-const someJSONdata = [
-    {
-       name: 'John Doe',
-       email: 'john@doe.com',
-       phone: '111-111-1111'
-    },
-    {
-       name: 'Barry Allen',
-       email: 'barry@flash.com',
-       phone: '222-222-2222'
-    },
-    {
-       name: 'Cool Dude',
-       email: 'cool@dude.com',
-       phone: '333-333-3333'
-    }
- ];
-
-// Print Case Records functionality
-document.querySelector('#print-records-button').addEventListener('click', () => {
-    printJS({printable: someJSONdata, properties: ['name', 'email', 'phone'], type: 'json'});
-});
