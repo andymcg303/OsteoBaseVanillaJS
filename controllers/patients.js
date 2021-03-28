@@ -13,11 +13,11 @@ module.exports = {
         } else {
             // if there wasn't any query string keyword then..
             const allPatients = await Patient.find({});
-            if(req.xhr) {
-                res.json(allPatients);
-            } else {
+            // if(req.xhr) {
+                // res.json(allPatients);
+            // } else {
                 res.render("./patients/index", {patients: allPatients, moment: moment});
-            }
+            // }
         }
     },
 
@@ -41,7 +41,11 @@ module.exports = {
                 path: 'clinicals', 
                 options: { sort: { '_id': -1 }}})
             .exec();
-            res.render("./patients/show", {patient: foundPatient, moment: moment});
+            if(req.xhr){
+                res.json(foundPatient);
+            } else {
+                res.render("./patients/show", {patient: foundPatient, moment: moment});
+            }
     },
 
     // Patient Update
