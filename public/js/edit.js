@@ -63,16 +63,18 @@ editForm.addEventListener('submit', e => {
             return response.json();
         }
         return Promise.reject(response);
-    })
-    .then(() => {
+    }).then(() => {
         // get updated patient for history scroll
         return fetch(`/patients/${patientId}`, {
             // headers: { "Content-Type": "application/json" },
             headers: { "X-Requested-With": "XMLHttpRequest" },
             method: 'GET'});
-    }).then(response => response.text())
-    // .then(text => console.log(text))   
-    .then(() => {
+    }).then(response => {
+        if (response.ok) {
+            return response.json();
+        }
+        return Promise.reject(response);
+    }).then(patient => {
         // Make default values the updated values
         editFormControls.forEach(control => {
             control.defaultValue = control.value;
