@@ -17,6 +17,7 @@ module.exports = {
         .exec(); // populate all for the clinical history view
         res.render(`./${res.locals.itemType}/new`, {patient: foundPatient, moment: moment});	
     },
+    
     // Create
     async createItem(req, res, next){
         const foundPatient = await Patient.findById(req.params.id);
