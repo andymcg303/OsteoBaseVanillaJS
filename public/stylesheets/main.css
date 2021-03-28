@@ -68,3 +68,8 @@ div.history-scroll{
     top:-10px;
     right:-5px;
 }
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}

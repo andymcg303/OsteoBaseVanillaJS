@@ -3,18 +3,41 @@
     <div class="d-none d-lg-inline">    
         <label for="history-scroll-id" class="history-scroll">Clinical History:</label>
         <div class="form-control history-scroll overflow-auto ui-widget-content" id="history-scroll-id" style="height: <%= scrollHeight %>;">
-            <% patient.clinicals.forEach(clinical => { %>
-                <strong>Date: </strong><%= moment(clinical.date_created).format('DD/MM/YYYY') %><br>
-                <strong>Problem:</strong><br>    
-                <%= clinical.problem %><br>
-                <strong>O/E:</strong><br>        
-                <%= clinical.OE %><br>
-                <strong>Diag:</strong><br>       
-                <%= clinical.diag %><br>
-                <strong>TTT:</strong><br>        
-                <%= clinical.TTT %><br>
-                <hr>
-            <% }); %>
+            <ul class="list">
+                <% patient.medhists.forEach(medhist => { %>
+                    <li>
+                        <div class="type"><strong><span class="fas fa-comment-medical text-success"></span> Medical History</strong></div>
+                        <div class="date-created" timestamp="<%= Date.parse(medhist.date_created) %>"><strong>Date: </strong><%= moment(medhist.date_created).format('DD/MM/YYYY') %></div>
+                        <div class="data">DATA</div>
+                        <hr>
+                    </li>
+                <% }); %>
+                <% patient.interviews.forEach(interview => { %>
+                    <li>
+                        <div class="type"><strong><span class="fa fa-comments text-info"></span> Consultation</strong></div>
+                        <div class="date-created" timestamp="<%= Date.parse(interview.date_created) %>"><strong>Date: </strong><%= moment(interview.date_created).format('DD/MM/YYYY') %><br></div>
+                        <div class="data">DATA</div>    
+                        <hr>
+                    </li>
+                <% }); %>
+                <% patient.clinicals.forEach(clinical => { %>
+                    <li>
+                        <div class="type"><strong><span class="fas fa-user-friends text-danger"></span> Clinical Details</strong></div>
+                        <div class="date-created" timestamp="<%= Date.parse(clinical.date_created) %>"><strong>Date: </strong><%= moment(clinical.date_created).format('DD/MM/YYYY') %></div>
+                        <div class="data">
+                            <strong>Problem:</strong><br>    
+                            <%= clinical.problem %><br>
+                            <strong>O/E:</strong><br>        
+                            <%= clinical.OE %><br>
+                            <strong>Diag:</strong><br>       
+                            <%= clinical.diag %><br>
+                            <strong>TTT:</strong><br>        
+                            <%= clinical.TTT %><br>
+                        </div>
+                        <hr>
+                    </li>
+                <% }); %>
+            </ul>
         </div>
 
     </div>

@@ -4,10 +4,17 @@ const moment        = require("moment");
 module.exports = {
     // New
     async newItem(req, res, next){
-        const foundPatient = await Patient.findById(req.params.id).populate({
+        const foundPatient = await Patient.findById(req.params.id)
+        .populate({
+            path: 'medhists', 
+            options: { sort: { '_id': -1 }}})
+        .populate({
+            path: 'interviews', 
+            options: { sort: { '_id': -1 }}})
+        .populate({
             path: 'clinicals', 
             options: { sort: { '_id': -1 }}})
-        .exec(); // populate all clinicals for the clinical history view
+        .exec(); // populate all for the clinical history view
         res.render(`./${res.locals.itemType}/new`, {patient: foundPatient, moment: moment});	
     },
     // Create
@@ -21,10 +28,17 @@ module.exports = {
 
     // Show (proof of concept of parallel async requests)
     async showItem(req, res){
-        const foundPatient = Patient.findById(req.params.id).populate({
-            path: 'clinicals', 
-            options: { sort: { '_id': -1 }}})
-        .exec(); // populate all clinicals for the clinical history view
+        const foundPatient = Patient.findById(req.params.id)
+            .populate({
+                path: 'medhists', 
+                options: { sort: { '_id': -1 }}})
+            .populate({
+                path: 'interviews', 
+                options: { sort: { '_id': -1 }}})
+            .populate({
+                path: 'clinicals', 
+                options: { sort: { '_id': -1 }}})
+        .exec(); // populate for the clinical history view
         const foundItem = res.locals.Model.findById(req.params.item_id);
         const data = await Promise.all([foundPatient, foundItem]);
 
