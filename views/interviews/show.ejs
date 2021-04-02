@@ -100,5 +100,8 @@
 </div>
 
 <% include ../partials/common-scripts %>
+<script>
+    const patientId = <%- JSON.stringify(patient._id) %>;
+</script>
 <script src="/js/edit.js"></script>
 <% include ../partials/footer %>
