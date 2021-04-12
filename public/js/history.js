@@ -20,11 +20,18 @@ historyButton.addEventListener('click', function(){
     mainContainer.classList.toggle('container');
     mainContainer.classList.toggle('container-fluid');
 
+    const url = new URL(window.location);
     const historyScroll = document.querySelectorAll('.history-scroll');
     if (window.getComputedStyle(historyScroll[0]).display === 'none') {
         historyScroll.forEach(el => el.style.display = 'block');
+        // update url to reflect history being shown
+        url.searchParams.set('historyScroll', 'true');
+        window.history.pushState({}, '', url);
     } else {
         historyScroll.forEach(el => el.style.display = 'none');
+        // update url to reflect history not being shown
+        url.searchParams.set('historyScroll', 'false');
+        window.history.pushState({}, '', url);
     }
 
     const inputsCol = document.querySelector('.inputs-col');
