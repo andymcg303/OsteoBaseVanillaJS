@@ -128,9 +128,9 @@
         </div>
         <% if (userType !== "Reception") { %>
             <div class="d-flex">
-                <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/medhists/new?currentView=log"><span class="fas fa-comment-medical text-success"></span>  New Medical History</a>
-                <a class="btn btn-primary mt-2 mx-2" href="/patients/<%= patient._id%>/interviews/new?currentView=log"><span class="fa fa-comments text-info"></span>  New Consultation</a>
-                <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/clinicals/new?currentView=log"><span class="fas fa-user-friends text-danger"></span>  New Clinical Session</a>
+                <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/medhists/new?currentView=log&historyScroll=false"><span class="fas fa-comment-medical text-success"></span>  New Medical History</a>
+                <a class="btn btn-primary mt-2 mx-2" href="/patients/<%= patient._id%>/interviews/new?currentView=log&historyScroll=false"><span class="fa fa-comments text-info"></span>  New Consultation</a>
+                <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/clinicals/new?currentView=log&historyScroll=false"><span class="fas fa-user-friends text-danger"></span>  New Clinical Session</a>
             </div>    
         <% } %>    
 
@@ -144,7 +144,7 @@
                     <% patient.medhists.forEach(function(medhist){ %>
                         <!-- restrict clickable column items -->
                         <% if (userType !== "Reception") { %>
-                            <a href="/patients/<%= patient._id%>/medhists/<%= medhist._id %>?currentView=column"
+                            <a href="/patients/<%= patient._id%>/medhists/<%= medhist._id %>?currentView=column&historyScroll=false"
                         <% } else { %>
                             <div
                         <% } %>
@@ -165,7 +165,7 @@
                     <% }); %>
                 </div>
                 <% if (userType !== "Reception") { %>
-                    <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/medhists/new?currentView=column">New Medical History</a>
+                    <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/medhists/new?currentView=column&historyScroll=false">New Medical History</a>
                 <% } %>
             </div>        
 
@@ -176,7 +176,7 @@
                     <% patient.interviews.forEach(function(interview){ %>
                         <!-- restrict clickable column items -->
                         <% if (userType !== "Reception") { %>
-                            <a href="/patients/<%= patient._id%>/interviews/<%= interview._id %>?currentView=column"
+                            <a href="/patients/<%= patient._id%>/interviews/<%= interview._id %>?currentView=column&historyScroll=false"
                         <% } else { %>
                             <div
                         <% } %>
@@ -197,7 +197,7 @@
                     <% }); %>
                 </div>
                 <% if (userType !== "Reception") { %>
-                    <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/interviews/new?currentView=column">New Consultation</a>
+                    <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/interviews/new?currentView=column&historyScroll=false">New Consultation</a>
                 <% } %>
             </div>        
 
@@ -208,7 +208,7 @@
                     <% patient.clinicals.forEach(function(clinical){ %>
                         <!-- restrict clickable column items -->
                         <% if (userType !== "Reception") { %>
-                            <a href="/patients/<%= patient._id%>/clinicals/<%= clinical._id %>?currentView=column"
+                            <a href="/patients/<%= patient._id%>/clinicals/<%= clinical._id %>?currentView=column&historyScroll=false"
                         <% } else { %>
                             <div
                         <% } %>
@@ -229,7 +229,7 @@
                     <% }); %>
                 </div>
                 <% if (userType !== "Reception") { %>
-                    <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/clinicals/new?currentView=column">New Clinical Session</a>
+                    <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/clinicals/new?currentView=column&historyScroll=false">New Clinical Session</a>
                 <% } %>
             </div>
 

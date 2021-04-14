@@ -21,13 +21,13 @@ patientLogTableRows.forEach(row => {
 
             switch (typeCode){
                 case "M":
-                    window.location.assign(`${patientId}/medhists/${id}?currentView=log`);
+                    window.location.assign(`${patientId}/medhists/${id}?currentView=log&historyScroll=false`);
                     break;
                 case "I":
-                    window.location.assign(`${patientId}/interviews/${id}?currentView=log`);
+                    window.location.assign(`${patientId}/interviews/${id}?currentView=log&historyScroll=false`);
                     break;
                 case "C":
-                    window.location.assign(`${patientId}/clinicals/${id}?currentView=log`);
+                    window.location.assign(`${patientId}/clinicals/${id}?currentView=log&historyScroll=false`);
                     break;    
             }       
         }
