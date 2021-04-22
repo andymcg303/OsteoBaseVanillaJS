@@ -35,15 +35,10 @@ module.exports = {
 	}, 
 
 	// Preserve the current patient view type as chosen by the user 
-	viewType: (req, res, next) => {
+	viewType: (req, res, next) =>	{
 		res.locals.currentView = req.query.currentView;
 		next();
 	},
-
-	historyScroll: (req, res, next) => {
-		res.locals.historyScroll = req.query.historyScroll;
-		next();
-	}, 
 
 	// Preserve the item type of the request for setting paths, Model and Pull Object in common controllers
 	itemType: (req, res, next) => { 

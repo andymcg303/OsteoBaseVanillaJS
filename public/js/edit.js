@@ -1,3 +1,17 @@
+// // list.js configuration for history scroll
+// const options = {
+//     valueNames: [
+//         'type',
+//         {name: 'date-created', attr: 'timestamp'},
+//         'data'
+//     ]
+// };
+  
+// let historyList = new List('history-scroll-id', options);
+
+// // sort form newest patient in descending order
+// historyList.sort('date-created', { order: 'desc'});
+
 // SHOW/EDIT FUNCTIONALITY
 const editForm = document.querySelector('.edit-form');
 const editButton = document.querySelector('.edit-button');
