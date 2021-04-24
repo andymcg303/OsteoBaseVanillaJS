@@ -21,7 +21,8 @@ const openPatientDetails = function() {
     const id = this.querySelector('.id').textContent;
     const urlParams = new URLSearchParams(window.location.search);
     const currentView = urlParams.get('currentView');
-    window.location.assign(`patients/${id}?currentView=${currentView}`);
+    const showHistory = urlParams.get('showHistory');
+    window.location.assign(`patients/${id}?currentView=${currentView}&showHistory=${showHistory}`);
 };
 
 patientTableRows.forEach(row => {

@@ -18,16 +18,18 @@ patientLogTableRows.forEach(row => {
         if (`${userTypePass}` !== "Reception") {
             const id = this.querySelector('.id').textContent;
             const typeCode = this.querySelector('.typecode').textContent;
+            const urlParams = new URLSearchParams(window.location.search);
+            const showHistory = urlParams.get('showHistory');
 
             switch (typeCode){
                 case "M":
-                    window.location.assign(`${patientId}/medhists/${id}?currentView=log`);
+                    window.location.assign(`${patientId}/medhists/${id}?currentView=log&showHistory=${showHistory}`);
                     break;
                 case "I":
-                    window.location.assign(`${patientId}/interviews/${id}?currentView=log`);
+                    window.location.assign(`${patientId}/interviews/${id}?currentView=log&showHistory=${showHistory}`);
                     break;
                 case "C":
-                    window.location.assign(`${patientId}/clinicals/${id}?currentView=log`);
+                    window.location.assign(`${patientId}/clinicals/${id}?currentView=log&showHistory=${showHistory}`);
                     break;    
             }       
         }

@@ -17,8 +17,9 @@ body{
 #upload-button,
 #print-documents-button,
 #cancel-documents-button,
-#delete-documents-button,
-.history-scroll{
+#delete-documents-button{
+/* .history-scroll{ */
+
     display: none;
 }
 

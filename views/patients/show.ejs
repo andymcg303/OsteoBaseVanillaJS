@@ -43,10 +43,10 @@
             <div class="form-group col-lg-6 align-self-end d-flex">
                 <div class="btn btn-info edit-button" id="edit-patient-button">Edit Patient Details</div>
                 <% if (currentView === "log") { %>
-                    <a class="btn btn-info ml-2 mr-2" id="view-documents-button" href="/patients/<%= patient._id %>/documents?currentView=log">View Documents</a>                
+                    <a class="btn btn-info ml-2 mr-2" id="view-documents-button" href="/patients/<%= patient._id %>/documents?currentView=<%= currentView %>">View Documents</a>                
                     <a class="btn btn-secondary ml-auto change-view-button" href="/patients/<%= patient._id%>?currentView=column">Change to Column View</a>
                 <% } else { %>
-                    <a class="btn btn-info ml-2 mr-2" id="view-documents-button" href="/patients/<%= patient._id %>/documents?currentView=column">View Documents</a>
+                    <a class="btn btn-info ml-2 mr-2" id="view-documents-button" href="/patients/<%= patient._id %>/documents?currentView=<%= currentView %>">View Documents</a>
                     <a class="btn btn-secondary ml-auto change-view-button" href="/patients/<%= patient._id%>?currentView=log">Change to Log View</a>
                 <% } %>    
                 <button class="btn btn-success submit-edit-button mr-1" id="submit-edit-patient-button">Save</button>
