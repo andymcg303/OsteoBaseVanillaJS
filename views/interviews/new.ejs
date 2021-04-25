@@ -7,7 +7,7 @@
     
 </div>
 
-<form id="new-interview-form" action="/patients/<%= patient._id %>/interviews?currentView=<%= currentView %>" method="POST" autocomplete="off">
+<form id="new-interview-form" action="/patients/<%= patient._id %>/interviews?currentView=<%= currentView %>&showHistory=<%= showHistory %>" method="POST" autocomplete="off">
 
     <div class="container main-container">
 
@@ -60,10 +60,12 @@
                 </div>
 
             </div>
-                
-            <!-- common scrollable history feature -->
-            <% let scrollHeight="298px"; %>
-            <% include ../partials/history-scroll %>
+
+            <% if (showHistory === "true") { %>
+                <!-- common scrollable history feature -->
+                <% let scrollHeight="298px"; %>
+                <% include ../partials/history-scroll %>
+            <% }; %>
 
             <!-- Hidden input for signoff -->
             <input name="item[signed_off]" type="hidden" value="false">
@@ -76,7 +78,7 @@
 
         <div class="form-group align-self-end">
             <button class="btn btn-success" id="submit-new-interview-button">Save</button>
-            <a href="/patients/<%= patient._id %>?currentView=<%= currentView %>" class="btn btn-warning" id="cancel-new-interview-button">Cancel</a>
+            <a href="/patients/<%= patient._id %>?currentView=<%= currentView %>&showHistory=<%= showHistory %>" class="btn btn-warning" id="cancel-new-interview-button">Cancel</a>
         </div>
                 
     </div>      
@@ -86,7 +88,11 @@
 <div class="container">
 
     <div class="d-flex justify-content-end">
-        <button class="btn btn-primary my-2 d-none d-lg-inline history-button">Show History</button>
+        <% if (showHistory === "false"){ %>
+            <a class="btn btn-primary my-2 d-none d-lg-inline history-button" href="/patients/<%= patient._id %>/interviews/new?currentView=<%= currentView %>&showHistory=true">Show History</a>
+        <% } else { %>
+            <a class="btn btn-primary my-2 d-none d-lg-inline history-button" href="/patients/<%= patient._id %>/interviews/new?currentView=<%= currentView %>&showHistory=false">Hide History</a>
+        <% }; %>
     </div>
 
 </div> 

@@ -7,7 +7,7 @@
 
 </div>
 
-<form method="POST" action="/patients/<%= patient._id %>/interviews/<%= item.id %>?_method=DELETE&currentView=<%= currentView %>" id="delete-interview-form" class="delete-form"></form>
+<form method="POST" action="/patients/<%= patient._id %>/interviews/<%= item.id %>?_method=DELETE&currentView=<%= currentView %>&showHistory=<%= showHistory %>" id="delete-interview-form" class="delete-form"></form>
 
 <form class="edit-form" id="edit-interview-form" action="/patients/<%= patient.id %>/interviews/<%= item.id %>" method="POST" autocomplete="off">
     

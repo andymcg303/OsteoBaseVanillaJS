@@ -129,8 +129,8 @@
         <% if (userType !== "Reception") { %>
             <div class="d-flex">
                 <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/medhists/new?currentView=log&showHistory=<%= showHistory %>"><span class="fas fa-comment-medical text-success"></span>  New Medical History</a>
-                <a class="btn btn-primary mt-2 mx-2" href="/patients/<%= patient._id%>/interviews/new?currentView=log"><span class="fa fa-comments text-info"></span>  New Consultation</a>
-                <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/clinicals/new?currentView=log"><span class="fas fa-user-friends text-danger"></span>  New Clinical Session</a>
+                <a class="btn btn-primary mt-2 mx-2" href="/patients/<%= patient._id%>/interviews/new?currentView=log&showHistory=<%= showHistory %>"><span class="fa fa-comments text-info"></span>  New Consultation</a>
+                <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/clinicals/new?currentView=log&showHistory=<%= showHistory %>"><span class="fas fa-user-friends text-danger"></span>  New Clinical Session</a>
             </div>    
         <% } %>    
 
