@@ -105,7 +105,7 @@
 <div class="container">
 
     <div class="d-flex justify-content-between">
-        <a class="btn btn-secondary my-2" href="/patients/<%= patient._id %>?currentView=<%= currentView %>">Back to Patient Details</a>
+        <a class="btn btn-secondary my-2" href="/patients/<%= patient._id %>?currentView=<%= currentView %>&showHistory=<%= showHistory %>">Back to Patient Details</a>
         <% if (showHistory === "false"){ %>
             <a class="btn btn-primary my-2 d-none d-lg-inline history-button" href="/patients/<%= patient._id %>/medhists/<%= item.id %>?currentView=<%= currentView %>&showHistory=true">Show History</a>
         <% } else { %>
