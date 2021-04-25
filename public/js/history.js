@@ -13,7 +13,7 @@ let historyList = new List('history-scroll-id', options);
 historyList.sort('date-created', { order: 'desc'});
 
 //TOGGLE HISTORY DISPLAY FUNCTIONALITY
-const historyButton = document.querySelector('.history-button');
+// const historyButton = document.querySelector('.history-button');
 const mainContainer = document.querySelector('.main-container');
 
 // historyButton.addEventListener('click', function(){ 
@@ -36,12 +36,15 @@ const mainContainer = document.querySelector('.main-container');
 // });
 
 //Reformat main container if window width reduced by user and history view selected
+const urlParams = new URLSearchParams(window.location.search);
+const showHistory = urlParams.get('showHistory');
+
 window.addEventListener('resize', () => {
-    const mainContainer = document.querySelector('.main-container');
-    if (window.innerWidth < 992 && historyButton.textContent === "Hide History") { // smaller than BS xl? window size
+    // const mainContainer = document.querySelector('.main-container');
+    if (window.innerWidth < 992 && showHistory === 'true') { // smaller than BS xl? window size
         mainContainer.classList.remove('container-fluid');
         mainContainer.classList.add('container');
-    } else if (window.innerWidth >= 992 && historyButton.textContent === "Hide History") { //greater or equal to BS xl? window size
+    } else if (window.innerWidth >= 992 && showHistory === 'false') { //greater or equal to BS xl? window size
         mainContainer.classList.remove('container');
         mainContainer.classList.add('container-fluid');
     }
