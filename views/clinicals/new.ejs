@@ -6,7 +6,7 @@
     <h3>New Clinical Details</h3>
 </div>  
 
-<form action="/patients/<%= patient._id %>/clinicals?currentView=<%= currentView %>" method="POST">
+<form action="/patients/<%= patient._id %>/clinicals?currentView=<%= currentView %>&showHistory=<%= showHistory %>" method="POST">
 
     <div class="container main-container">
 
@@ -40,9 +40,11 @@
 
             </div>
 
-            <!-- common scrollable history feature -->
-            <% let scrollHeight="585px"; %>
-            <% include ../partials/history-scroll %>
+            <% if (showHistory === "true") { %>
+                <!-- common scrollable history feature -->
+                <% let scrollHeight="585px"; %>
+                <% include ../partials/history-scroll %>
+            <% }; %>    
 
             <!-- Hidden input for signoff -->
             <input name="item[signed_off]" type="hidden" value="false">
@@ -55,7 +57,7 @@
 
         <div class="form-group align-self-end">
             <button class="btn btn-success" id="submit-new-clinical-button">Save</button>
-            <a href="/patients/<%= patient._id %>?currentView=<%= currentView %>" class="btn btn-warning" id="cancel-new-clinical-button">Cancel</a>
+            <a href="/patients/<%= patient._id %>?currentView=<%= currentView %>&showHistory=<%= showHistory %>" class="btn btn-warning" id="cancel-new-clinical-button">Cancel</a>
         </div>
 
     </div>
@@ -65,7 +67,11 @@
 <div class="container">
 
     <div class="d-flex justify-content-end">
-        <button class="btn btn-primary my-2 d-none d-lg-inline history-button">Show History</button>
+        <% if (showHistory === "false"){ %>
+            <a class="btn btn-primary my-2 d-none d-lg-inline history-button" href="/patients/<%= patient._id %>/clinicals/new?currentView=<%= currentView %>&showHistory=true">Show History</a>
+        <% } else { %>
+            <a class="btn btn-primary my-2 d-none d-lg-inline history-button" href="/patients/<%= patient._id %>/clinicals/new?currentView=<%= currentView %>&showHistory=false">Hide History</a>
+        <% }; %>
     </div>
 
 </div>

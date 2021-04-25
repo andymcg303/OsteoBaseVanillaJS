@@ -7,7 +7,7 @@
 
 </div>
 
-<form method="POST" action="/patients/<%= patient._id %>/clinicals/<%= item.id %>?_method=DELETE&currentView=<%= currentView %>" id="delete-clinical-form" class="delete-form"></form>
+<form method="POST" action="/patients/<%= patient._id %>/clinicals/<%= item.id %>?_method=DELETE&currentView=<%= currentView %>&showHistory=<%= showHistory %>" id="delete-clinical-form" class="delete-form"></form>
 
 <form class="edit-form" id="edit-clinical-form" action="/patients/<%= patient._id %>/clinicals/<%= item.id %>" method="POST" autocomplete="off">        
 
@@ -42,10 +42,12 @@
                 </div>
                 
             </div>
-            
-            <!-- common scrollable history feature -->
-            <% let scrollHeight="585px"; %>
-            <% include ../partials/history-scroll %>
+
+            <% if (showHistory === "true"){ %>
+                <!-- common scrollable history feature -->
+                <% let scrollHeight="585px"; %>
+                <% include ../partials/history-scroll %>
+            <% }; %>
 
             <!-- Hidden input for signoff -->
             <input class="hidden-signed-off" type="text" name="signed_off" style="display: none" value="<%= item.signed_off %>">
@@ -71,8 +73,12 @@
 <div class="container">
 
     <div class="d-flex justify-content-between">
-        <a class="btn btn-secondary my-2" href="/patients/<%= patient._id %>?currentView=<%= currentView %>">Back to Patient Details</a>
-        <button class="btn btn-primary my-2 d-none d-lg-inline history-button">Show History</button>
+        <a class="btn btn-secondary my-2" href="/patients/<%= patient._id %>?currentView=<%= currentView %>&showHistory=<%= showHistory %>">Back to Patient Details</a>
+        <% if (showHistory === "false"){ %>
+            <a class="btn btn-primary my-2 d-none d-lg-inline history-button" href="/patients/<%= patient._id %>/clinicals/<%= item.id %>?currentView=<%= currentView %>&showHistory=true">Show History</a>
+        <% } else { %>
+            <a class="btn btn-primary my-2 d-none d-lg-inline history-button" href="/patients/<%= patient._id %>/clinicals/<%= item.id %>?currentView=<%= currentView %>&showHistory=false">Hide History</a>
+        <% }; %>
     </div>
 
 </div>

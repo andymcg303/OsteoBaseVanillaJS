@@ -21,7 +21,7 @@ module.exports = {
         }
         await foundPatient.save();
 
-        res.redirect(`/patients/${foundPatient.id}/documents?currentView=${res.locals.currentView}`);
+        res.redirect(`/patients/${foundPatient.id}/documents?currentView=${res.locals.currentView}&showHistory=${res.locals.showHistory}`);
     },
 
     // Document Show
@@ -36,7 +36,7 @@ module.exports = {
 
         await destroyDocumentHelper(req);
 
-        res.redirect(`/patients/${req.params.id}/documents?currentView=${res.locals.currentView}`);
+        res.redirect(`/patients/${req.params.id}/documents?currentView=${res.locals.currentView}&showHistory=${res.locals.showHistory}`);
     },
 
     destroyMultipleDocs(req, res, next){

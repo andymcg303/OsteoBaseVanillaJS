@@ -7,13 +7,13 @@
     
     <form method="POST" action="patients/<%= patient._id %>/documents?_method=DELETE" id="delete-documents-form"></form>
 
-    <form class="document-form" action="/patients/<%= patient._id %>/documents?currentView=<%= currentView %>" method="POST" enctype="multipart/form-data">
+    <form class="document-form" action="/patients/<%= patient._id %>/documents?currentView=<%= currentView %>&showHistory=<%= showHistory %>" method="POST" enctype="multipart/form-data">
        
         <div class="form-row">
             <% patient.documents.forEach(function(document, i){ %>
                 <div class="form-group d-flex justify-content-start flex-wrap document-group-item">
                     <div class="mx-1">
-                        <a href="/patients/<%= patient._id%>/documents/<%= document._id %>?currentView=<%= currentView %>">
+                        <a href="/patients/<%= patient._id%>/documents/<%= document._id %>?currentView=<%= currentView %>&showHistory=<%= showHistory %>">
                             <img class="img-thumbnail" src="<%= document.url %>" alt="uploaded document" width="150px" id="document<%= i %>">
                         </a>
                         <div>    
@@ -58,7 +58,7 @@
     </form>
 
     <div>
-        <a class="btn btn-secondary mt-2 back-to-pt-button" href="/patients/<%= patient.id %>?currentView=<%= currentView %>">Back to Patient Details</a>
+        <a class="btn btn-secondary mt-2 back-to-pt-button" href="/patients/<%= patient.id %>?currentView=<%= currentView %>&showHistory=<%= showHistory %>">Back to Patient Details</a>
     </div>
 </div>
 <script>
