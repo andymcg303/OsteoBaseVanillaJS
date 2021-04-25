@@ -12,39 +12,22 @@ let historyList = new List('history-scroll-id', options);
 // sort form newest patient in descending order
 historyList.sort('date-created', { order: 'desc'});
 
-//TOGGLE HISTORY DISPLAY FUNCTIONALITY
-// const historyButton = document.querySelector('.history-button');
+//History Display Functionality ie formatting with bootstrap
 const mainContainer = document.querySelector('.main-container');
+      
+mainContainer.classList.toggle('container');
+mainContainer.classList.toggle('container-fluid');
 
-// historyButton.addEventListener('click', function(){ 
-//     mainContainer.classList.toggle('container');
-//     mainContainer.classList.toggle('container-fluid');
-
-    // const historyScroll = document.querySelectorAll('.history-scroll');
-    // if (window.getComputedStyle(historyScroll[0]).display === 'none') {
-    //     historyScroll.forEach(el => el.style.display = 'block');
-    // } else {
-    //     historyScroll.forEach(el => el.style.display = 'none');
-    // }
-
-    const inputsCol = document.querySelector('.inputs-col');
-    inputsCol.classList.toggle('col-12');
-    inputsCol.classList.toggle('col-lg-8');
-
-    // this.textContent = this.textContent === "Show History" ? "Hide History" : "Show History";
-    
-// });
+const inputsCol = document.querySelector('.inputs-col');
+inputsCol.classList.toggle('col-12');
+inputsCol.classList.toggle('col-lg-8');
 
 //Reformat main container if window width reduced by user and history view selected
-const urlParams = new URLSearchParams(window.location.search);
-const showHistory = urlParams.get('showHistory');
-
 window.addEventListener('resize', () => {
-    // const mainContainer = document.querySelector('.main-container');
-    if (window.innerWidth < 992 && showHistory === 'true') { // smaller than BS xl? window size
+    if (window.innerWidth < 992) { // smaller than BS xl? window size
         mainContainer.classList.remove('container-fluid');
         mainContainer.classList.add('container');
-    } else if (window.innerWidth >= 992 && showHistory === 'false') { //greater or equal to BS xl? window size
+    } else if (window.innerWidth >= 992) { //greater or equal to BS xl? window size
         mainContainer.classList.remove('container');
         mainContainer.classList.add('container-fluid');
     }
