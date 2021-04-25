@@ -43,11 +43,11 @@
             <div class="form-group col-lg-6 align-self-end d-flex">
                 <div class="btn btn-info edit-button" id="edit-patient-button">Edit Patient Details</div>
                 <% if (currentView === "log") { %>
-                    <a class="btn btn-info ml-2 mr-2" id="view-documents-button" href="/patients/<%= patient._id %>/documents?currentView=<%= currentView %>">View Documents</a>                
-                    <a class="btn btn-secondary ml-auto change-view-button" href="/patients/<%= patient._id%>?currentView=column">Change to Column View</a>
+                    <a class="btn btn-info ml-2 mr-2" id="view-documents-button" href="/patients/<%= patient._id %>/documents?currentView=<%= currentView %>&showHistory=<%= showHistory %>">View Documents</a>                
+                    <a class="btn btn-secondary ml-auto change-view-button" href="/patients/<%= patient._id%>?currentView=column&showHistory=<%= showHistory %>">Change to Column View</a>
                 <% } else { %>
-                    <a class="btn btn-info ml-2 mr-2" id="view-documents-button" href="/patients/<%= patient._id %>/documents?currentView=<%= currentView %>">View Documents</a>
-                    <a class="btn btn-secondary ml-auto change-view-button" href="/patients/<%= patient._id%>?currentView=log">Change to Log View</a>
+                    <a class="btn btn-info ml-2 mr-2" id="view-documents-button" href="/patients/<%= patient._id %>/documents?currentView=<%= currentView %>&showHistory=<%= showHistory %>">View Documents</a>
+                    <a class="btn btn-secondary ml-auto change-view-button" href="/patients/<%= patient._id%>?currentView=log&showHistory=<%= showHistory %>">Change to Log View</a>
                 <% } %>    
                 <button class="btn btn-success submit-edit-button mr-1" id="submit-edit-patient-button">Save</button>
                 <div class="btn btn-warning cancel-edit-button mr-1" id="cancel-edit-patient-button">Cancel</div>
@@ -128,7 +128,7 @@
         </div>
         <% if (userType !== "Reception") { %>
             <div class="d-flex">
-                <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/medhists/new?currentView=log"><span class="fas fa-comment-medical text-success"></span>  New Medical History</a>
+                <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/medhists/new?currentView=log&showHistory=<%= showHistory %>"><span class="fas fa-comment-medical text-success"></span>  New Medical History</a>
                 <a class="btn btn-primary mt-2 mx-2" href="/patients/<%= patient._id%>/interviews/new?currentView=log"><span class="fa fa-comments text-info"></span>  New Consultation</a>
                 <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/clinicals/new?currentView=log"><span class="fas fa-user-friends text-danger"></span>  New Clinical Session</a>
             </div>    
@@ -144,7 +144,7 @@
                     <% patient.medhists.forEach(function(medhist){ %>
                         <!-- restrict clickable column items -->
                         <% if (userType !== "Reception") { %>
-                            <a href="/patients/<%= patient._id%>/medhists/<%= medhist._id %>?currentView=column"
+                            <a href="/patients/<%= patient._id%>/medhists/<%= medhist._id %>?currentView=column&showHistory=<%= showHistory %>"
                         <% } else { %>
                             <div
                         <% } %>
@@ -165,7 +165,7 @@
                     <% }); %>
                 </div>
                 <% if (userType !== "Reception") { %>
-                    <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/medhists/new?currentView=column">New Medical History</a>
+                    <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/medhists/new?currentView=column&showHistory=<%= showHistory %>">New Medical History</a>
                 <% } %>
             </div>        
 
@@ -176,7 +176,7 @@
                     <% patient.interviews.forEach(function(interview){ %>
                         <!-- restrict clickable column items -->
                         <% if (userType !== "Reception") { %>
-                            <a href="/patients/<%= patient._id%>/interviews/<%= interview._id %>?currentView=column"
+                            <a href="/patients/<%= patient._id%>/interviews/<%= interview._id %>?currentView=column&showHistory=<%= showHistory %>"
                         <% } else { %>
                             <div
                         <% } %>
@@ -197,7 +197,7 @@
                     <% }); %>
                 </div>
                 <% if (userType !== "Reception") { %>
-                    <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/interviews/new?currentView=column">New Consultation</a>
+                    <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/interviews/new?currentView=column&showHistory=<%= showHistory %>">New Consultation</a>
                 <% } %>
             </div>        
 
@@ -208,7 +208,7 @@
                     <% patient.clinicals.forEach(function(clinical){ %>
                         <!-- restrict clickable column items -->
                         <% if (userType !== "Reception") { %>
-                            <a href="/patients/<%= patient._id%>/clinicals/<%= clinical._id %>?currentView=column"
+                            <a href="/patients/<%= patient._id%>/clinicals/<%= clinical._id %>?currentView=column&showHistory=<%= showHistory %>"
                         <% } else { %>
                             <div
                         <% } %>
@@ -229,7 +229,7 @@
                     <% }); %>
                 </div>
                 <% if (userType !== "Reception") { %>
-                    <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/clinicals/new?currentView=column">New Clinical Session</a>
+                    <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/clinicals/new?currentView=column&showHistory=<%= showHistory %>">New Clinical Session</a>
                 <% } %>
             </div>
 

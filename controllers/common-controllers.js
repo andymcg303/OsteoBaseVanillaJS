@@ -24,7 +24,7 @@ module.exports = {
         const newItem = await res.locals.Model.create(req.body.item);
         foundPatient[`${res.locals.itemType}`].push(newItem);
         foundPatient.save();
-        res.redirect(`/patients/${foundPatient._id}/${res.locals.itemType}/${newItem._id}?currentView=${res.locals.currentView}`);
+        res.redirect(`/patients/${foundPatient._id}/${res.locals.itemType}/${newItem._id}?currentView=${res.locals.currentView}&showHistory=${res.locals.showHistory}`);
     },
 
     // Show (proof of concept of parallel async requests)
@@ -61,6 +61,6 @@ module.exports = {
                         $pull: res.locals.pullObj 
                     }                    
                 );
-        res.redirect(`/patients/${patientId}?currentView=${res.locals.currentView}`);
+        res.redirect(`/patients/${patientId}?currentView=${res.locals.currentView}&showHistory=${res.locals.showHistory}`);
     }
 }
