@@ -32,14 +32,17 @@ module.exports = {
     async showPatient(req, res, next){
         const foundPatient = await Patient.findById(req.params.id)
             .populate({
-                path: 'medhists', 
-                options: { sort: { '_id': -1 }}})
+                path: 'medhists'
+            }) 
+                // options: { sort: { '_id': -1 }}}) NB Use List.js sorting functionality instead
             .populate({
-                path: 'interviews', 
-                options: { sort: { '_id': -1 }}})
+                path: 'interviews'
+            })                 
+                // options: { sort: { '_id': -1 }}})
             .populate({
-                path: 'clinicals', 
-                options: { sort: { '_id': -1 }}})
+                path: 'clinicals'
+            }) 
+                // options: { sort: { '_id': -1 }}})
             .exec();
             if(req.xhr){
                 res.json(foundPatient);
