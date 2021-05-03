@@ -34,15 +34,12 @@ module.exports = {
             .populate({
                 path: 'medhists'
             }) 
-                // options: { sort: { '_id': -1 }}}) NB Use List.js sorting functionality instead
             .populate({
                 path: 'interviews'
             })                 
-                // options: { sort: { '_id': -1 }}})
             .populate({
                 path: 'clinicals'
-            }) 
-                // options: { sort: { '_id': -1 }}})
+            })
             .exec();
             if(req.xhr){
                 res.json(foundPatient);

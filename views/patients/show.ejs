@@ -64,7 +64,7 @@
                     <tr>
                         <th>id</th>
                         <th>typecode</th>
-                        <th class="sort" data-sort="id">Date/Time</th> <!-- sort by id as list.js does not accurately sort dates -->
+                        <th class="sort" data-sort="date_created">Date/Time</th> <!-- sort by timestamp as list.js does not accurately sort dates -->
                         <th class="sort" data-sort="type">Type</th>
                         <th class="sort" data-sort="info">Info</th>
                         <th class="sort" data-sort="signed_off">Signed Off?</th>
@@ -76,7 +76,7 @@
                         <tr>
                             <td class="id"><%= medhist._id %></td>
                             <td class="typecode">M</td>
-                            <td class="date_created"><span class="text-dark font-weight-bold"><%= moment(medhist.date_created).format('DD/MM/YYYY HH:mm') %></span></td>
+                            <td class="date_created" timestamp="<%= Date.parse(medhist.date_created) %>"><span class="text-dark font-weight-bold"><%= moment(medhist.date_created).format('DD/MM/YYYY HH:mm') %></span></td>
                             <td class="type"><span class="fas fa-comment-medical text-success"></span>  Medical History</td>
                             <td class="info"><% if (medhist.critical){ %> Critical: <% } %><%= medhist.critical %></td>
                             <td class="signed_off">
@@ -92,7 +92,7 @@
                         <tr class="log-signoff-item">
                             <td class="id"><%= interview._id %></td>
                             <td class="typecode">I</td>
-                            <td class="date_created"><span class="text-dark font-weight-bold"><%= moment(interview.date_created).format('DD/MM/YYYY HH:mm') %></span></td>
+                            <td class="date_created" timestamp="<%= Date.parse(interview.date_created) %>"><span class="text-dark font-weight-bold"><%= moment(interview.date_created).format('DD/MM/YYYY HH:mm') %></span></td>
                             <td class="type"><span class="fa fa-comments text-info"></span>  Consultation</td>
                             <td class="info"><% if (interview.CO){ %> C/O: <% } %><%= interview.CO %></td>
                             <td class="signed_off">
@@ -108,7 +108,7 @@
                         <tr class="log-signoff-item">
                             <td class="id"><%= clinical._id %></td>
                             <td class="typecode">C</td>
-                            <td class="date_created"><span class="text-dark font-weight-bold"><%= moment(clinical.date_created).format('DD/MM/YYYY HH:mm')%></span></td>
+                            <td class="date_created" timestamp="<%= Date.parse(clinical.date_created) %>"><span class="text-dark font-weight-bold"><%= moment(clinical.date_created).format('DD/MM/YYYY HH:mm')%></span></td>
                             <td class="type"><span class="fas fa-user-friends text-danger"></span>  Clinical Session</td>
                             <td class="info"><% if (clinical.diag){ %> Dx: <% } %><%= clinical.diag %></td>
                             <td class="signed_off">

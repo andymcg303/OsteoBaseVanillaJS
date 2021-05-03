@@ -1,5 +1,10 @@
 const options = {
-    valueNames: ['id', 'typecode', 'date_created', 'type', 'info', 'signed_off'],
+    valueNames: ['id', 
+                'typecode', 
+                {name: 'date_created', attr: 'timestamp'},
+                'type', 
+                'info', 
+                'signed_off'],
     page: 5,
     pagination: [{
         outerWindow: 1
@@ -9,8 +14,8 @@ const options = {
 const patientLogTableRows = document.querySelectorAll('#patient-log-table tbody tr');
 
 const patientLogTableList = new List('patient-log', options);
-// sort by id in descending order (NB testing seed data dates may be out of sync)
-patientLogTableList.sort('id', { order: 'desc' });
+
+patientLogTableList.sort('date_created', { order: 'desc' });
 
 patientLogTableRows.forEach(row => {
     row.addEventListener('click', function() {

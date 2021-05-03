@@ -6,14 +6,11 @@ module.exports = {
     async newItem(req, res, next){
         const foundPatient = await Patient.findById(req.params.id)
         .populate({
-            path: 'medhists', 
-            options: { sort: { '_id': -1 }}})
+            path: 'medhists'})
         .populate({
-            path: 'interviews', 
-            options: { sort: { '_id': -1 }}})
+            path: 'interviews'})
         .populate({
-            path: 'clinicals', 
-            options: { sort: { '_id': -1 }}})
+            path: 'clinicals'})
         .exec(); // populate all for the clinical history view
         res.render(`./${res.locals.itemType}/new`, {patient: foundPatient, moment: moment});	
     },
@@ -31,14 +28,11 @@ module.exports = {
     async showItem(req, res){
         const foundPatient = Patient.findById(req.params.id)
             .populate({
-                path: 'medhists', 
-                options: { sort: { '_id': -1 }}})
+                path: 'medhists'})
             .populate({
-                path: 'interviews', 
-                options: { sort: { '_id': -1 }}})
+                path: 'interviews'})
             .populate({
-                path: 'clinicals', 
-                options: { sort: { '_id': -1 }}})
+                path: 'clinicals'})
         .exec(); // populate for the clinical history view
         const foundItem = res.locals.Model.findById(req.params.item_id);
         const data = await Promise.all([foundPatient, foundItem]);

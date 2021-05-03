@@ -1,9 +1,10 @@
 // list.js configuration
 const options = {
-    valueNames: ['id', 
+    valueNames: ['id',
+                {name: 'date_created', attr: 'timestamp'}, // use timestamp attribute as list.ls does not accurately sort string dates 
                 'surname', 
                 'firstname', 
-                {name: 'dob', attr: 'timestamp'}, // use timestamp attribute as list.ls does not accurately sort string dates
+                {name: 'dob', attr: 'timestamp'},
                 'phonenumber'],
     page: 10,
     pagination: [{
@@ -14,7 +15,7 @@ const patientTableRows = document.querySelectorAll('#patient-table tbody tr');
 
 const patientTableList = new List('patients', options);
 // sort form newest patient in descending order
-patientTableList.sort('id', { order: 'desc'});
+patientTableList.sort('date_created', { order: 'desc'});
 
 // opening patient details helper function
 const openPatientDetails = function() {
@@ -80,7 +81,7 @@ newPatientForm.addEventListener('submit', e => {
         const patientTable = document.querySelector('#patient-table');    
         const lastRow = patientTable.rows[patientTable.rows.length -1];
         lastRow.addEventListener('click', openPatientDetails);
-        // sort by id so newly added row appears first
-        patientTableList.sort('id', { order: 'desc'});    
+        // sort from newest patient in descending order
+        patientTableList.sort('date_created', { order: 'desc'});    
     });
 });

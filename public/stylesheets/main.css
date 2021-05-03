@@ -24,8 +24,8 @@ body{
 }
 
 /* Hide id, typecode and timestamp columns */
-#patient-table tr th:first-child,
-#patient-table tr td:first-child,
+#patient-table tr th:nth-child(-n+2),
+#patient-table tr td:nth-child(-n+2),
 #patient-log-table tr th:nth-child(-n+2),
 #patient-log-table tr td:nth-child(-n+2){ 
     display: none; 
