@@ -3,6 +3,7 @@ const moment  = require("moment");
 
 module.exports = {
     // Patients Index
+    // *** INVESTIGATE IF THIS IF STATEMENT IS STILL REQUIRED with list.js doing the search **
     async getPatients(req, res, next){
         if(req.query.keyword) {
             // let escapeRegex = (text) => text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
@@ -58,6 +59,6 @@ module.exports = {
     async deletePatient(req, res, next){
         const foundPatient = await Patient.findById(req.params.id);
         await foundPatient.remove();
-        res.redirect("/patients");
+        res.redirect(`/patients?currentView=${res.locals.currentView}&showHistory=${res.locals.showHistory}`);
     }
 }

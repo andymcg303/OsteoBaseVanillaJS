@@ -24,6 +24,6 @@ router.get("/:id", isLoggedIn, asyncErrorHandler(getUserType), viewType, asyncEr
 router.put("/:id",  isLoggedIn, asyncErrorHandler(updatePatient));
 
 // DESTROY - Delete patient. Deleting child data handled in model
-router.delete("/:id",  isLoggedIn, asyncErrorHandler(deletePatient));
+router.delete("/:id",  isLoggedIn, viewType, asyncErrorHandler(deletePatient));
 
 module.exports = router;
