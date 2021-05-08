@@ -11,7 +11,7 @@ const options = {
         outerWindow: 1
     }]
 };
-const patientTableRows = document.querySelectorAll('#patient-table tbody tr');
+let patientTableRows = document.querySelectorAll('#patient-table tbody tr');
 
 const patientTableList = new List('patients', options);
 // sort form newest patient in descending order
@@ -26,6 +26,7 @@ const openPatientDetails = function() {
     window.location.assign(`patients/${id}?currentView=${currentView}&showHistory=${showHistory}`);
 };
 
+// add event listener to each row
 patientTableRows.forEach(row => {
     row.addEventListener('click', openPatientDetails);
 });
@@ -74,14 +75,18 @@ newPatientForm.addEventListener('submit', e => {
             dob: `${moment(data.dob).format('DD/MM/YYYY')}`,
             phonenumber: `${data.phonenumber}`
         });
+        // reset new patient form
         formControls.forEach(el => el.value = '');
         newPatientForm.style.display = 'none';
         newPatientButton.style.display = 'block';                        
-        // Add event listener to newly added row    
-        const patientTable = document.querySelector('#patient-table');    
-        const lastRow = patientTable.rows[patientTable.rows.length -1];
-        lastRow.addEventListener('click', openPatientDetails);
         // sort from newest patient in descending order
-        patientTableList.sort('date_created', { order: 'desc'});    
+        patientTableList.sort('date_created', { order: 'desc'});
+        // back to first page
+        patientTableList.show(1, 10);
+        // add event listener to new patient row
+        patientTableRows = document.querySelectorAll('#patient-table tbody tr');
+        patientTableRows[0].addEventListener('click', openPatientDetails);
+        //restyle pagination
+        stylePagination();
     });
 });
