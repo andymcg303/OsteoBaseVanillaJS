@@ -1,16 +1,15 @@
 const urlParams = new URLSearchParams(window.location.search);
 const showHistory = urlParams.get('showHistory');
+// list.js configuration for history scroll
+const options = {
+    valueNames: [
+        'type',
+        {name: 'date-created', attr: 'timestamp'},
+        'data'
+    ]
+};
 
 if (showHistory === 'true') {
-
-    // list.js configuration for history scroll
-    const options = {
-        valueNames: [
-            'type',
-            {name: 'date-created', attr: 'timestamp'},
-            'data'
-        ]
-    };
 
     let historyList = new List('history-scroll-id', options);
 

@@ -253,7 +253,10 @@
      const userTypePass = <%- JSON.stringify(userType) %>;
 
 </script>
-<script src="/js/helpers.js"></script>
+<% if (currentView === "log"){ %>
+    <script src="/js/pagination.js"></script>
+    <script src="/js/log-view.js"></script>
+<% }; %>
 <script src="/js/edit-patient.js"></script>
 <% include ../partials/footer %>
  
