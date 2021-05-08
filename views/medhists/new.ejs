@@ -107,13 +107,16 @@
 
 <div class="container">
 
-    <div class="d-flex justify-content-end">
-        <% if (showHistory === "false"){ %>
-            <a class="btn btn-primary my-2 d-none d-lg-inline history-button" href="/patients/<%= patient._id %>/medhists/new?currentView=<%= currentView %>&showHistory=true">Show History</a>
-        <% } else { %>
-            <a class="btn btn-primary my-2 d-none d-lg-inline history-button" href="/patients/<%= patient._id %>/medhists/new?currentView=<%= currentView %>&showHistory=false">Hide History</a>
-        <% }; %>
-    </div>
+    <!-- prevents list.js error -->
+    <% if (patient.medhists.length + patient.interviews.length + patient.clinicals.length){ %>
+        <div class="d-flex justify-content-end">
+            <% if (showHistory === "false"){ %>
+                <a class="btn btn-primary my-2 d-none d-lg-inline history-button" href="/patients/<%= patient._id %>/medhists/new?currentView=<%= currentView %>&showHistory=true">Show History</a>
+            <% } else { %>
+                <a class="btn btn-primary my-2 d-none d-lg-inline history-button" href="/patients/<%= patient._id %>/medhists/new?currentView=<%= currentView %>&showHistory=false">Hide History</a>
+            <% }; %>
+        </div>
+    <% }; %>
 
 </div>
 
