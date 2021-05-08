@@ -249,7 +249,6 @@
 <script>
      const patientId = <%- JSON.stringify(patient._id) %>;
      const userTypePass = <%- JSON.stringify(userType) %>;
-
 </script>
 <% if ((currentView === "log") && (patient.medhists.length + patient.interviews.length + patient.clinicals.length)){ %>
     <script src="/js/pagination.js"></script>

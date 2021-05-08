@@ -7,7 +7,12 @@
 
 </div>
 
-<form method="POST" action="/patients/<%= patient._id %>/medhists/<%= item.id %>?_method=DELETE&currentView=<%= currentView %>&showHistory=<%= showHistory %>" id="delete-medhist-form" class="delete-form"></form>
+<!-- if no items remain after delete default to not showing history -->
+<% if ((patient.medhists.length + patient.interviews.length + patient.clinicals.length) === 1){ %>
+    <form method="POST" action="/patients/<%= patient._id %>/medhists/<%= item.id %>?_method=DELETE&currentView=<%= currentView %>&showHistory=false" id="delete-medhist-form" class="delete-form"></form>
+<% } else { %>
+    <form method="POST" action="/patients/<%= patient._id %>/medhists/<%= item.id %>?_method=DELETE&currentView=<%= currentView %>&showHistory=<%= showHistory %>" id="delete-medhist-form" class="delete-form"></form>
+<% }; %>
 
 <form class="edit-form" id="edit-medhist-form" action="/patients/<%= patient._id %>/medhists/<%= item.id %>" method="POST" autocomplete="off">
 
