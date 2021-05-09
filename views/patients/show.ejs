@@ -47,7 +47,9 @@
                 <% } else { %>
                     <a class="btn btn-info ml-2 mr-2" id="view-documents-button" href="/patients/<%= patient._id %>/documents?currentView=<%= currentView %>&showHistory=<%= showHistory %>">View Documents</a>
                 <% } %>
-                <button id="print-history-button" class="btn btn-dark ml-auto" type="button">Print Case History</button>
+                <% if (patient.medhists.length + patient.interviews.length + patient.clinicals.length){ %>
+                    <button id="print-history-button" class="btn btn-dark ml-auto" type="button">Print Case History</button>
+                <% } %>
                 <button class="btn btn-success submit-edit-button mr-1" id="submit-edit-patient-button">Save</button>
                 <div class="btn btn-warning cancel-edit-button mr-1" id="cancel-edit-patient-button">Cancel</div>
                 <input type="submit" class="btn btn-danger delete-button" id="delete-patient-button" value="Delete" form="delete-patient-form">
@@ -252,20 +254,21 @@
 </div><!-- container -->
 
 <!-- Hidden case history element for printing. Has to be 2 seperate divs to work with print.js -->
-<div style="display: none">
-    <div id="case-history">
+<% if (patient.medhists.length + patient.interviews.length + patient.clinicals.length){ %>
+    <div style="display: none">
+        <div id="case-history">
 
-        <div class="pt-details">Name: <%= patient.firstname %> <%= patient.surname %></div>
-        <div class="pt-details">Date of Birth: <%= moment(patient.dob).format('YYYY-MM-DD') %></div>
-        <div class="pt-details">Phone: <%= patient.phonenumber %></div>
-        <div class="pt-details">Address: <%= patient.address %> <%= patient.postcode %></div>
-        <div id="email" class="pt-details">Email: <%= patient.email %></div>    
-        <% let scrollHeight="0px"; %>
-        <% include ../partials/history-scroll %>
+            <div class="pt-details">Name: <%= patient.firstname %> <%= patient.surname %></div>
+            <div class="pt-details">Date of Birth: <%= moment(patient.dob).format('YYYY-MM-DD') %></div>
+            <div class="pt-details">Phone: <%= patient.phonenumber %></div>
+            <div class="pt-details">Address: <%= patient.address %> <%= patient.postcode %></div>
+            <div id="email" class="pt-details">Email: <%= patient.email %></div>    
+            <% let scrollHeight="0px"; %>
+            <% include ../partials/history-scroll %>
 
+        </div>
     </div>
-</div>
-
+<% } %>
 
 <% include ../partials/common-scripts %>
 <script>

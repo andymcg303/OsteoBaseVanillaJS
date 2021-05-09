@@ -61,138 +61,143 @@ editForm.addEventListener('submit', e => {
         return Promise.reject(response);
     }).then(patient => {
 
-        // update history scroll
-        const historyTemplate = `
-                <% patient.medhists.forEach(medhist => { %>
-                    <li>
-                        <div class="type"><strong><span class="fas fa-comment-medical text-success"></span> Medical History</strong></div>
-                        <div class="date-created" timestamp="<%= Date.parse(medhist.date_created) %>"><strong>Date: </strong><%= moment(medhist.date_created).format('DD/MM/YYYY') %></div>
-                        <div class="data">
-                            <% if (medhist.critical){ %>
-                                <strong>CRITICAL:</strong>        
-                                <%= medhist.critical %><br>
-                            <% } %>
-                            <% if (medhist.meds){ %>
-                                <strong>Meds:</strong>   
-                                <%= medhist.meds %><br>
-                            <% } %>
-                            <% if (medhist.ops){ %>
-                                <strong>Ops:</strong>        
-                                <%= medhist.ops %><br>
-                            <% } %>
-                            <% if (medhist.fracs){ %>
-                                <strong>#:</strong>       
-                                <%= medhist.fracs %><br>
-                            <% } %>
-                            <% if (medhist.accs){ %>
-                                <strong>A:</strong>        
-                                <%= medhist.accs %><br>
-                            <% } %>
-                            <% if (medhist.ill){ %>
-                                <strong>Ill:</strong>    
-                                <%= medhist.ill %><br>
-                            <% } %>
-                            <% if (medhist.resp){ %>
-                                <strong>Resp:</strong>        
-                                <%= medhist.resp %><br>
-                            <% } %>
-                            <% if (medhist.cvs){ %>
-                                <strong>CVS:</strong>       
-                                <%= medhist.cvs %><br>
-                            <% } %>
-                            <% if (medhist.gu){ %>
-                                <strong>GU:</strong>        
-                                <%= medhist.gu %><br>
-                            <% } %>
-                            <% if (medhist.git){ %>
-                                <strong>GIT:</strong>    
-                                <%= medhist.git %><br>
-                            <% } %>
-                            <% if (medhist.gynae){ %>
-                                <strong>Gynae:</strong>        
-                                <%= medhist.gynae %><br>
-                            <% } %>
-                            <% if (medhist.msk){ %>
-                                <strong>MSk:</strong>       
-                                <%= medhist.msk %>
-                            <% } %>
-                        </div>
-                        <hr>
-                    </li>
-                <% }); %>
-                <% patient.interviews.forEach(interview => { %>
-                    <li>
-                        <div class="type"><strong><span class="fa fa-comments text-info"></span> Consultation</strong></div>
-                        <div class="date-created" timestamp="<%= Date.parse(interview.date_created) %>"><strong>Date: </strong><%= moment(interview.date_created).format('DD/MM/YYYY') %><br></div>
-                        <div class="data">
-                            <% if (interview.CO){ %>
-                                <strong>CO:</strong>        
-                                <%= interview.CO %><br>
-                            <% } %>
-                            <% if (interview.onset){ %>
-                                <strong>Onset:</strong>   
-                                <%= interview.onset %><br>
-                            <% } %>
-                            <% if (interview.reason){ %>
-                                <strong>Reason:</strong>        
-                                <%= interview.reason %><br>
-                            <% } %>
-                            <% if (interview.agg){ %>
-                                <strong>Agg:</strong>       
-                                <%= interview.agg %><br>
-                            <% } %>
-                            <% if (interview.rel){ %>
-                                <strong>Rel:</strong>        
-                                <%= interview.rel %><br>
-                            <% } %>
-                            <% if (interview.dp){ %>
-                                <strong>DP:</strong>    
-                                <%= interview.dp %><br>
-                            <% } %>
-                            <% if (interview.ph){ %>
-                                <strong>PH:</strong>        
-                                <%= interview.ph %><br>
-                            <% } %>
-                            <% if (interview.invest){ %>
-                                <strong>Invest:</strong>       
-                                <%= interview.invest %>
-                            <% } %>
-                        </div>    
-                        <hr>
-                    </li>
-                <% }); %>
-                <% patient.clinicals.forEach(clinical => { %>
-                    <li>
-                        <div class="type"><strong><span class="fas fa-user-friends text-danger"></span> Clinical Details</strong></div>
-                        <div class="date-created" timestamp="<%= Date.parse(clinical.date_created) %>"><strong>Date: </strong><%= moment(clinical.date_created).format('DD/MM/YYYY') %></div>
-                        <div class="data">
-                            <% if (clinical.problem){ %>
-                                <strong>Problem: </strong>    
-                                <%= clinical.problem %><br>
-                            <% } %>
-                            <% if (clinical.OE){ %>
-                                <strong>O/E:</strong>        
-                                <%= clinical.OE %><br>
-                            <% } %>
-                            <% if (clinical.diag){ %>
-                                <strong>Diag: </strong>       
-                                <%= clinical.diag %><br>
-                            <% } %>
-                            <% if (clinical.TTT){ %>
-                                <strong>TTT: </strong>        
-                                <%= clinical.TTT %>
-                            <% } %>
-                        </div>
-                        <hr>
-                    </li>
-                <% }); %>
-            `
-        const html = ejs.render(historyTemplate, { patient });
-        document.querySelector('#history-list').innerHTML = html;
+        const showHistory = urlParams.get('showHistory');
+        if (showHistory === 'true'){
 
-        // sort form newest patient in descending order
-        historyList = new List('history-scroll-id', options);
-        historyList.sort('date-created', { order: 'desc'});
+            // update history scroll
+            const historyTemplate = `
+                    <% patient.medhists.forEach(medhist => { %>
+                        <li>
+                            <div class="type"><strong><span class="fas fa-comment-medical text-success"></span> Medical History</strong></div>
+                            <div class="date-created" timestamp="<%= Date.parse(medhist.date_created) %>"><strong>Date: </strong><%= moment(medhist.date_created).format('DD/MM/YYYY') %></div>
+                            <div class="data">
+                                <% if (medhist.critical){ %>
+                                    <strong>CRITICAL:</strong>        
+                                    <%= medhist.critical %><br>
+                                <% } %>
+                                <% if (medhist.meds){ %>
+                                    <strong>Meds:</strong>   
+                                    <%= medhist.meds %><br>
+                                <% } %>
+                                <% if (medhist.ops){ %>
+                                    <strong>Ops:</strong>        
+                                    <%= medhist.ops %><br>
+                                <% } %>
+                                <% if (medhist.fracs){ %>
+                                    <strong>#:</strong>       
+                                    <%= medhist.fracs %><br>
+                                <% } %>
+                                <% if (medhist.accs){ %>
+                                    <strong>A:</strong>        
+                                    <%= medhist.accs %><br>
+                                <% } %>
+                                <% if (medhist.ill){ %>
+                                    <strong>Ill:</strong>    
+                                    <%= medhist.ill %><br>
+                                <% } %>
+                                <% if (medhist.resp){ %>
+                                    <strong>Resp:</strong>        
+                                    <%= medhist.resp %><br>
+                                <% } %>
+                                <% if (medhist.cvs){ %>
+                                    <strong>CVS:</strong>       
+                                    <%= medhist.cvs %><br>
+                                <% } %>
+                                <% if (medhist.gu){ %>
+                                    <strong>GU:</strong>        
+                                    <%= medhist.gu %><br>
+                                <% } %>
+                                <% if (medhist.git){ %>
+                                    <strong>GIT:</strong>    
+                                    <%= medhist.git %><br>
+                                <% } %>
+                                <% if (medhist.gynae){ %>
+                                    <strong>Gynae:</strong>        
+                                    <%= medhist.gynae %><br>
+                                <% } %>
+                                <% if (medhist.msk){ %>
+                                    <strong>MSk:</strong>       
+                                    <%= medhist.msk %>
+                                <% } %>
+                            </div>
+                            <hr>
+                        </li>
+                    <% }); %>
+                    <% patient.interviews.forEach(interview => { %>
+                        <li>
+                            <div class="type"><strong><span class="fa fa-comments text-info"></span> Consultation</strong></div>
+                            <div class="date-created" timestamp="<%= Date.parse(interview.date_created) %>"><strong>Date: </strong><%= moment(interview.date_created).format('DD/MM/YYYY') %><br></div>
+                            <div class="data">
+                                <% if (interview.CO){ %>
+                                    <strong>CO:</strong>        
+                                    <%= interview.CO %><br>
+                                <% } %>
+                                <% if (interview.onset){ %>
+                                    <strong>Onset:</strong>   
+                                    <%= interview.onset %><br>
+                                <% } %>
+                                <% if (interview.reason){ %>
+                                    <strong>Reason:</strong>        
+                                    <%= interview.reason %><br>
+                                <% } %>
+                                <% if (interview.agg){ %>
+                                    <strong>Agg:</strong>       
+                                    <%= interview.agg %><br>
+                                <% } %>
+                                <% if (interview.rel){ %>
+                                    <strong>Rel:</strong>        
+                                    <%= interview.rel %><br>
+                                <% } %>
+                                <% if (interview.dp){ %>
+                                    <strong>DP:</strong>    
+                                    <%= interview.dp %><br>
+                                <% } %>
+                                <% if (interview.ph){ %>
+                                    <strong>PH:</strong>        
+                                    <%= interview.ph %><br>
+                                <% } %>
+                                <% if (interview.invest){ %>
+                                    <strong>Invest:</strong>       
+                                    <%= interview.invest %>
+                                <% } %>
+                            </div>    
+                            <hr>
+                        </li>
+                    <% }); %>
+                    <% patient.clinicals.forEach(clinical => { %>
+                        <li>
+                            <div class="type"><strong><span class="fas fa-user-friends text-danger"></span> Clinical Details</strong></div>
+                            <div class="date-created" timestamp="<%= Date.parse(clinical.date_created) %>"><strong>Date: </strong><%= moment(clinical.date_created).format('DD/MM/YYYY') %></div>
+                            <div class="data">
+                                <% if (clinical.problem){ %>
+                                    <strong>Problem: </strong>    
+                                    <%= clinical.problem %><br>
+                                <% } %>
+                                <% if (clinical.OE){ %>
+                                    <strong>O/E:</strong>        
+                                    <%= clinical.OE %><br>
+                                <% } %>
+                                <% if (clinical.diag){ %>
+                                    <strong>Diag: </strong>       
+                                    <%= clinical.diag %><br>
+                                <% } %>
+                                <% if (clinical.TTT){ %>
+                                    <strong>TTT: </strong>        
+                                    <%= clinical.TTT %>
+                                <% } %>
+                            </div>
+                            <hr>
+                        </li>
+                    <% }); %>
+                `
+            const html = ejs.render(historyTemplate, { patient });
+            document.querySelector('#history-list').innerHTML = html;
+
+            // sort form newest patient in descending order
+            historyList = new List('history-scroll-id', options);
+            historyList.sort('date-created', { order: 'desc'});
+        
+        }
 
         // Make default values the updated values
         editFormControls.forEach(control => {

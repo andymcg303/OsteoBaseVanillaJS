@@ -17,7 +17,6 @@ editButton.addEventListener('click', function(){
     cancelEditButton.style.display = 'inline-block';
     deleteButton.style.display = 'inline-block';
     editFormControls.forEach(control => {control.disabled = false});
-    // changeViewButton.style.display = 'none';
     printHistoryButton.style.display = 'none';
 });
 
@@ -28,7 +27,6 @@ function disableEditForm(){
     cancelEditButton.style.display = 'none';
     deleteButton.style.display = 'none';
     editFormControls.forEach(control => {control.disabled = true});
-    // changeViewButton.style.display = 'block';
     printHistoryButton.style.display = 'inline-block';
 }
 
@@ -83,11 +81,13 @@ const historyOptions = {
 }
 // // sort hidden history list from newest patient in descending order
 const historyList = new List('history-scroll-id', historyOptions);
-historyList.sort('date-created', { order: 'desc'});
+if (historyList.items.length){
+    historyList.sort('date-created', { order: 'desc'});
 
-// Print patients case history
-printHistoryButton.addEventListener('click', () => { 
-    printJS({printable: 'case-history', 
-            type: 'html',
-            style: 'body{ font-family: sans-serif; } .pt-details{ font-size: 1.4em; font-weight: bold; } #email{ margin-bottom: 20px; } #history-scroll-label{ font-size: 1.4em; font-weight: bold; } ul{ list-style-type: none; } hr{ display: none; } li{ margin-bottom: 20px; } .type{ font-size: 1.2em; } '});
-});
+    // Print patients case history on button click
+    printHistoryButton.addEventListener('click', () => { 
+        printJS({printable: 'case-history', 
+                type: 'html',
+                style: 'body{ font-family: sans-serif; } .pt-details{ font-size: 1.4em; font-weight: bold; } #email{ margin-bottom: 20px; } #history-scroll-label{ font-size: 1.4em; font-weight: bold; } ul{ list-style-type: none; } hr{ display: none; } li{ margin-bottom: 20px; } .type{ font-size: 1.2em; } '});
+    });
+}
