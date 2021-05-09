@@ -44,11 +44,10 @@
                 <div class="btn btn-info edit-button" id="edit-patient-button">Edit Patient Details</div>
                 <% if (currentView === "log") { %>
                     <a class="btn btn-info ml-2 mr-2" id="view-documents-button" href="/patients/<%= patient._id %>/documents?currentView=<%= currentView %>&showHistory=<%= showHistory %>">View Documents</a>                
-                    <a class="btn btn-secondary ml-auto change-view-button" href="/patients/<%= patient._id%>?currentView=column&showHistory=<%= showHistory %>">Change to Column View</a>
                 <% } else { %>
                     <a class="btn btn-info ml-2 mr-2" id="view-documents-button" href="/patients/<%= patient._id %>/documents?currentView=<%= currentView %>&showHistory=<%= showHistory %>">View Documents</a>
-                    <a class="btn btn-secondary ml-auto change-view-button" href="/patients/<%= patient._id%>?currentView=log&showHistory=<%= showHistory %>">Change to Log View</a>
-                <% } %>    
+                <% } %>
+                <button id="print-history-button" class="btn btn-dark ml-auto" type="button">Print Case History</button>
                 <button class="btn btn-success submit-edit-button mr-1" id="submit-edit-patient-button">Save</button>
                 <div class="btn btn-warning cancel-edit-button mr-1" id="cancel-edit-patient-button">Cancel</div>
                 <input type="submit" class="btn btn-danger delete-button" id="delete-patient-button" value="Delete" form="delete-patient-form">
@@ -128,7 +127,7 @@
                 <ul class="pagination"></ul>
             </nav>
         </div>
-        <% }; %>
+        <% } %>
           
         <% if (userType !== "Reception") { %>
             <div class="d-flex">
@@ -136,7 +135,7 @@
                 <a class="btn btn-primary mt-2 mx-2" href="/patients/<%= patient._id%>/interviews/new?currentView=log&showHistory=<%= showHistory %>"><span class="fa fa-comments text-info"></span>  New Consultation</a>
                 <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/clinicals/new?currentView=log&showHistory=<%= showHistory %>"><span class="fas fa-user-friends text-danger"></span>  New Clinical Session</a>
             </div>    
-        <% }; %>  
+        <% } %>  
 
     <% } else { %>
         <!-- Populate column view -->
@@ -241,9 +240,32 @@
     
     <% } %>
 
-    <a class="btn btn-secondary mt-2 mb-3" href="/patients?currentView=<%= currentView %>&showHistory=<%= showHistory %>">Back to Patient Index</a>
+    <div class="d-flex justify-content-between">
+        <a class="btn btn-secondary mt-2 mb-3" href="/patients?currentView=<%= currentView %>&showHistory=<%= showHistory %>">Back to Patient Index</a>
+        <% if (currentView === "log") { %>        
+            <a class="btn btn-dark ml-auto mt-2 mb-3 change-view-button" href="/patients/<%= patient._id%>?currentView=column&showHistory=<%= showHistory %>">Change to Column View</a>
+        <% } else { %>
+            <a class="btn btn-dark ml-auto mt-2 mb-3 change-view-button" href="/patients/<%= patient._id%>?currentView=log&showHistory=<%= showHistory %>">Change to Log View</a>
+        <% } %>
+    </div>
 
 </div><!-- container -->
+
+<!-- Hidden case history element for printing. Has to be 2 seperate divs to work with print.js -->
+<div style="display: none">
+    <div id="case-history">
+
+        <div class="pt-details">Name: <%= patient.firstname %> <%= patient.surname %></div>
+        <div class="pt-details">Date of Birth: <%= moment(patient.dob).format('YYYY-MM-DD') %></div>
+        <div class="pt-details">Phone: <%= patient.phonenumber %></div>
+        <div class="pt-details">Address: <%= patient.address %> <%= patient.postcode %></div>
+        <div id="email" class="pt-details">Email: <%= patient.email %></div>    
+        <% let scrollHeight="0px"; %>
+        <% include ../partials/history-scroll %>
+
+    </div>
+</div>
+
 
 <% include ../partials/common-scripts %>
 <script>
@@ -253,7 +275,7 @@
 <% if ((currentView === "log") && (patient.medhists.length + patient.interviews.length + patient.clinicals.length)){ %>
     <script src="/js/pagination.js"></script>
     <script src="/js/log-view.js"></script>
-<% }; %>
+<% } %>
 <script src="/js/edit-patient.js"></script>
 <% include ../partials/footer %>
  

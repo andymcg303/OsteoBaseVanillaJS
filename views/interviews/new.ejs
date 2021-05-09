@@ -65,7 +65,7 @@
                 <!-- common scrollable history feature -->
                 <% let scrollHeight="298px"; %>
                 <% include ../partials/history-scroll %>
-            <% }; %>
+            <% } %>
 
             <!-- Hidden input for signoff -->
             <input name="item[signed_off]" type="hidden" value="false">
@@ -94,9 +94,9 @@
                 <a class="btn btn-primary my-2 d-none d-lg-inline history-button" href="/patients/<%= patient._id %>/interviews/new?currentView=<%= currentView %>&showHistory=true">Show History</a>
             <% } else { %>
                 <a class="btn btn-primary my-2 d-none d-lg-inline history-button" href="/patients/<%= patient._id %>/interviews/new?currentView=<%= currentView %>&showHistory=false">Hide History</a>
-            <% }; %>
+            <% } %>
         </div>
-    <% }; %>
+    <% } %>
 
 </div> 
 

@@ -7,7 +7,7 @@ const options = {
         {name: 'date-created', attr: 'timestamp'},
         'data'
     ]
-};
+}
 
 if (showHistory === 'true') {
 
@@ -37,4 +37,4 @@ if (showHistory === 'true') {
         }
     });
 
-};
+}

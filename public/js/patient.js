@@ -10,7 +10,7 @@ const options = {
     pagination: [{
         outerWindow: 1
     }]
-};
+}
 let patientTableRows = document.querySelectorAll('#patient-table tbody tr');
 
 const patientTableList = new List('patients', options);
@@ -24,7 +24,7 @@ const openPatientDetails = function() {
     const currentView = urlParams.get('currentView');
     const showHistory = urlParams.get('showHistory');
     window.location.assign(`patients/${id}?currentView=${currentView}&showHistory=${showHistory}`);
-};
+}
 
 // add event listener to each row
 patientTableRows.forEach(row => {

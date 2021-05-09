@@ -12,7 +12,7 @@
     <form method="POST" action="/patients/<%= patient._id %>/medhists/<%= item.id %>?_method=DELETE&currentView=<%= currentView %>&showHistory=false" id="delete-medhist-form" class="delete-form"></form>
 <% } else { %>
     <form method="POST" action="/patients/<%= patient._id %>/medhists/<%= item.id %>?_method=DELETE&currentView=<%= currentView %>&showHistory=<%= showHistory %>" id="delete-medhist-form" class="delete-form"></form>
-<% }; %>
+<% } %>
 
 <form class="edit-form" id="edit-medhist-form" action="/patients/<%= patient._id %>/medhists/<%= item.id %>" method="POST" autocomplete="off">
 
@@ -84,7 +84,7 @@
                 <!-- common scrollable history feature -->
                 <% let scrollHeight="470px"; %>
                 <% include ../partials/history-scroll %>
-            <% }; %>
+            <% } %>
 
             <!-- Hidden input for signoff -->
             <input class="hidden-signed-off" type="text" name="signed_off" style="display: none" value="<%= item.signed_off %>">
@@ -115,7 +115,7 @@
             <a class="btn btn-primary my-2 d-none d-lg-inline history-button" href="/patients/<%= patient._id %>/medhists/<%= item.id %>?currentView=<%= currentView %>&showHistory=true">Show History</a>
         <% } else { %>
             <a class="btn btn-primary my-2 d-none d-lg-inline history-button" href="/patients/<%= patient._id %>/medhists/<%= item.id %>?currentView=<%= currentView %>&showHistory=false">Hide History</a>
-        <% }; %>
+        <% } %>
     </div>
 
 </div>

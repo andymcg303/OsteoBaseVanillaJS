@@ -7,6 +7,7 @@ const cancelEditButton = document.querySelector('.cancel-edit-button');
 const deleteButton = document.querySelector('.delete-button');
 const viewDocumentsButton = document.querySelector('#view-documents-button');
 const changeViewButton = document.querySelector('.change-view-button');
+const printHistoryButton = document.querySelector('#print-history-button');
 
 // Enable Edit form and buttons
 editButton.addEventListener('click', function(){
@@ -16,7 +17,8 @@ editButton.addEventListener('click', function(){
     cancelEditButton.style.display = 'inline-block';
     deleteButton.style.display = 'inline-block';
     editFormControls.forEach(control => {control.disabled = false});
-    changeViewButton.style.display = 'none';
+    // changeViewButton.style.display = 'none';
+    printHistoryButton.style.display = 'none';
 });
 
 function disableEditForm(){
@@ -26,7 +28,8 @@ function disableEditForm(){
     cancelEditButton.style.display = 'none';
     deleteButton.style.display = 'none';
     editFormControls.forEach(control => {control.disabled = true});
-    changeViewButton.style.display = 'block';
+    // changeViewButton.style.display = 'block';
+    printHistoryButton.style.display = 'inline-block';
 }
 
 // Disable Edit functionaity
@@ -67,4 +70,24 @@ document.querySelector('#delete-patient-form').addEventListener('submit', e => {
     if (!confirmResponse) {
         e.preventDefault();
     }
+});
+
+// Printing functionality
+// list.js configuration for hidden history scroll
+const historyOptions = {
+    valueNames: [
+        'type',
+        {name: 'date-created', attr: 'timestamp'},
+        'data'
+    ]
+}
+// // sort hidden history list from newest patient in descending order
+const historyList = new List('history-scroll-id', historyOptions);
+historyList.sort('date-created', { order: 'desc'});
+
+// Print patients case history
+printHistoryButton.addEventListener('click', () => { 
+    printJS({printable: 'case-history', 
+            type: 'html',
+            style: 'body{ font-family: sans-serif; } .pt-details{ font-size: 1.4em; font-weight: bold; } #email{ margin-bottom: 20px; } #history-scroll-label{ font-size: 1.4em; font-weight: bold; } ul{ list-style-type: none; } hr{ display: none; } li{ margin-bottom: 20px; } .type{ font-size: 1.2em; } '});
 });

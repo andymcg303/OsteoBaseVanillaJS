@@ -9,7 +9,7 @@ const options = {
     pagination: [{
         outerWindow: 1
     }]
-};
+}
 
 const patientLogTableRows = document.querySelectorAll('#patient-log-table tbody tr');
 

@@ -2,7 +2,7 @@
 
     <div class="d-none d-lg-inline">    
         <!-- <div class="d-lg-inline"></div> -->
-        <label for="history-scroll-id" class="history-scroll">Clinical History:</label>
+        <label for="history-scroll-id" class="history-scroll" id="history-scroll-label">Clinical History:</label>
         <div class="form-control history-scroll overflow-auto ui-widget-content" id="history-scroll-id" style="height: <%= scrollHeight %>;">
             <ul class="list" id="history-list">
                 <% patient.medhists.forEach(medhist => { %>
