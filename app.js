@@ -17,6 +17,7 @@ const logger = require('morgan');
 
 // configure route requires
 const indexRoutes = require('./routes/index');
+const calendarRoutes = require('./routes/calendar');
 const patientsRoutes = require('./routes/patients');
 const documentsRoutes = require('./routes/documents');
 const commonRoutes = require('./routes/common-routes');
@@ -76,6 +77,7 @@ app.use(function(req, res, next) {
 
 // Mount Routes, Has to be done after app.use(bodyParser)
 app.use(indexRoutes);
+app.use(calendarRoutes);
 app.use('/patients', patientsRoutes);
 app.use('/patients/:id/documents', documentsRoutes);
 app.use('/patients/:id/interviews', commonRoutes);
