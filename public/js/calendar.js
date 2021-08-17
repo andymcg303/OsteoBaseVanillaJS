@@ -9,6 +9,6 @@ const calendar = new Calendar('#calendar', {
       return '<span class="calendar-week-dayname-name">' + dayname.label + '</span>';
     }
   },
-  useDetailPopup: true
+  useDetailPopup: true,
+  useCreationPopup: true
 });
-
