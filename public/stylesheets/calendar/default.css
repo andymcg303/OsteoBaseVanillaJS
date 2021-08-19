@@ -1,34 +1,30 @@
 @import url(https://fonts.googleapis.com/css?family=Noto+Sans);
 
-body {
-  font-family: 'Noto Sans', sans-serif;
-  font-size: 12px;
-}
-
-/**  custom bootstrap - start */
-.btn {
-  border-radius: 25px;
+/* *  custom bootstrap - start */
+.calendar-btn {
   border-color: #ddd;
 }
 
-.btn:hover {
+.calendar-btn:hover {
   border: solid 1px #bbb;
   background-color: #fff;
 }
 
-.btn:active {
+.calendar-btn:active {
   background-color: #f9f9f9;
   border: solid 1px #bbb;
   outline: none;
 }
 
-.btn:disabled {
+.calendar-btn:disabled {
   background-color: #f9f9f9;
   border: solid 1px #ddd;
   color: #bbb;
 }
 
-.btn:focus:active, .btn:focus, .btn:active {
+.calendar-btn:focus:active, 
+.calendar-btn:focus, 
+.calendar-btn:active {
   outline: none;
 }
 
@@ -72,19 +68,21 @@ body {
 }
 
 #lnb {
-  position: absolute;
+  /* position: absolute; */
   width: 200px;
-  top: 49px;
+  /* top: 49px; */
   bottom: 0;
   border-right: 1px solid #d5d5d5;
   padding: 12px 10px;
   background: #fafafa;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 12px;
 }
 
 #right {
   position: absolute;
   left: 200px;
-  top: 49px;
+  top: 90px;
   right: 0;
   bottom: 0;
 }
@@ -101,33 +99,25 @@ body {
 
 .lnb-new-schedule-btn {
   height: 100%;
-  font-size: 14px;
-  background-color: #ff6618;
+  background-color: #007bff;
   color: #ffffff;
   border: 0;
-  border-radius: 25px;
   padding: 10px 20px;
   font-weight: bold;
 }
 
 .lnb-new-schedule-btn:hover {
   height: 100%;
-  font-size: 14px;
-  background-color: #e55b15;
   color: #ffffff;
   border: 0;
-  border-radius: 25px;
   padding: 10px 20px;
   font-weight: bold;
 }
 
 .lnb-new-schedule-btn:active {
   height: 100%;
-  font-size: 14px;
-  background-color: #d95614;
   color: #ffffff;
   border: 0;
-  border-radius: 25px;
   padding: 10px 20px;
   font-weight: bold;
 }
@@ -162,6 +152,7 @@ body {
 
 #menu {
   padding: 16px;
+  background-color: white;
 }
 
 #dropdownMenu-calendarType {
