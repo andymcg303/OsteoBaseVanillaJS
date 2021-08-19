@@ -2,20 +2,20 @@
 <html>
 <head>
     <title>OsteoBase</title>
-	<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="../../public/stylesheets/main.css">
-    <link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui-calendar/latest/tui-calendar.css" />
-    <link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css" />
-    <link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.time-picker/latest/tui-time-picker.css" />
-    <link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui-calendar/latest/tui-calendar.css"">
-    <link rel="stylesheet" type="text/css" href="../../public/stylesheets/calendar/default.css">
-    <link rel="stylesheet" type="text/css" href="../../public/stylesheets/calendar/icons.css"> -->
-	<!-- <script src="https://kit.fontawesome.com/7336d766ea.js" crossorigin="anonymous"></script> -->
+	<link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
+    <link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui-calendar/latest/tui-calendar.css">
+    <link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css">
+    <link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.time-picker/latest/tui-time-picker.css">
+    <link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui-calendar/latest/tui-calendar.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/calendar/default.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/calendar/icons.css">
+	<script src="https://kit.fontawesome.com/7336d766ea.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
-  <!-- <nav class="navbar navbar-dark bg-dark justify-content-start">
+  <nav class="navbar navbar-dark bg-dark justify-content-start">
     <a class="navbar-brand mb-1" href="/">OsteoBase</a>
     <% if (currentUser) { %>
       <a href="/logout" class="btn btn-sm btn-secondary">Logout <%= currentUser.username %></a>
@@ -115,13 +115,13 @@
           <span id="renderRange" class="render-range"></span>
       </div>
       <div id="calendar"></div>
-  </div> -->
+  </div>
 
   <% include ../partials/common-scripts %>
 
-  <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
   crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/chance/1.0.13/chance.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
@@ -130,8 +130,8 @@
   <script src="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.min.js"></script>
   <script src="https://uicdn.toast.com/tui-calendar/latest/tui-calendar.js"></script>
 
-  <script src="../../public/js/calendar/data/calendars.js"></script>
-  <script src="../../public/js/calendar/data/schedules.js"></script>
-  <script src="../../public/js/calendar/app.js"></script> -->
+  <script src="/js/calendar/data/calendars.js"></script>
+  <script src="/js/calendar/data/schedules.js"></script>
+  <script src="/js/calendar/app.js"></script>
 
 <% include ../partials/footer %>
