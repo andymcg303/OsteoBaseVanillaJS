@@ -1,5 +1,10 @@
 @import url(https://fonts.googleapis.com/css?family=Noto+Sans);
 
+body {
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 12px;
+}
+
 /* *  custom bootstrap - start */
 .calendar-btn {
   border-color: #ddd;
@@ -68,15 +73,13 @@
 }
 
 #lnb {
-  /* position: absolute; */
+  position: absolute;
   width: 200px;
-  /* top: 49px; */
+  top: 90px;
   bottom: 0;
   border-right: 1px solid #d5d5d5;
   padding: 12px 10px;
   background: #fafafa;
-  font-family: 'Noto Sans', sans-serif;
-  font-size: 12px;
 }
 
 #right {
@@ -85,6 +88,7 @@
   top: 90px;
   right: 0;
   bottom: 0;
+  background-color: #fff;
 }
 
 #lnb label {
@@ -152,7 +156,6 @@
 
 #menu {
   padding: 16px;
-  background-color: white;
 }
 
 #dropdownMenu-calendarType {
@@ -232,4 +235,29 @@
   font-size: 12px;
   text-align: center;
   color: #000;
+}
+
+/* Navbar styling to compensate for Bootsrap 3 */
+.navbar {
+  display: flex;
+  align-items: center;
+  background-color: #343a40;
+  font-family: 'Open Sans', sans-serif;
+  height: 90px;
+}
+
+.navbar-brand {
+  font-size: 3.33em;
+  margin-bottom: 5px;
+}
+
+.navbar .navbar-brand {
+  color: #fff;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: #fff;
+  font-size: 1.4rem;
+  padding: 4px 8px;
 }
