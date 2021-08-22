@@ -13,15 +13,26 @@
 
     cal = new Calendar('#calendar', {
         defaultView: 'week',
+        taskView: ['task'],
+        scheduleView: ['time'],
         useCreationPopup: useCreationPopup,
         useDetailPopup: useDetailPopup,
         calendars: CalendarList,
+        week: {
+            startDayOfWeek: 1
+        },
+        month: {
+            startDayOfWeek: 1
+        },
         template: {
-            milestone: function(model) {
-                return '<span class="calendar-font-icon ic-milestone-b"></span> <span style="background-color: ' + model.bgColor + '">' + model.title + '</span>';
-            },
-            allday: function(schedule) {
-                return getTimeTemplate(schedule, true);
+            // milestone: function(model) {
+            //     return '<span class="calendar-font-icon ic-milestone-b"></span> <span style="background-color: ' + model.bgColor + '">' + model.title + '</span>';
+            // },
+            // allday: function(schedule) {
+            //     return getTimeTemplate(schedule, true);
+            // },
+            taskTitle: function() {
+                return '<span class="tui-full-calendar-left-content">Notes</span>';
             },
             time: function(schedule) {
                 return getTimeTemplate(schedule, false);
@@ -389,14 +400,14 @@
 
         var html = [];
         if (viewName === 'day') {
-            html.push(currentCalendarDate('YYYY.MM.DD'));
+            html.push(currentCalendarDate('DD/MM/YYYY'));
         } else if (viewName === 'month' &&
             (!options.month.visibleWeeksCount || options.month.visibleWeeksCount > 4)) {
-            html.push(currentCalendarDate('YYYY.MM'));
+            html.push(currentCalendarDate('MMMM YYYY'));
         } else {
-            html.push(moment(cal.getDateRangeStart().getTime()).format('YYYY.MM.DD'));
+            html.push(moment(cal.getDateRangeStart().getTime()).format('DD/MM/YYYY'));
             html.push(' ~ ');
-            html.push(moment(cal.getDateRangeEnd().getTime()).format(' MM.DD'));
+            html.push(moment(cal.getDateRangeEnd().getTime()).format(' DD/MM/YYYY'));
         }
         renderRange.innerHTML = html.join('');
     }

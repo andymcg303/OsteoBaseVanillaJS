@@ -15,10 +15,17 @@
 <body>
 
     <nav class="navbar">
-    <a class="navbar-brand" href="/patients?currentView=<%= currentView %>&showHistory=<%= showHistory %>">OsteoBase</a>
-    <% if (currentUser) { %>
-        <a href="/logout" class="btn logout-btn btn-sm btn-secondary">Logout <%= currentUser.username %></a>
-    <% } %>
+        <div class="container">
+            <div class="formatting">
+                <div class="changeview">
+                    <a class="navbar-brand" href="/patients?currentView=<%= currentView %>&showHistory=<%= showHistory %>">OsteoBase</a>
+                    <a href="/patients?currentView=<%= currentView %>&showHistory=<%= showHistory %>" class="btn btn-info">View Patient Info</a>
+                </div>
+                <% if (currentUser) { %>
+                    <a href="/logout" class="btn logout-btn btn-sm btn-secondary">Logout <%= currentUser.username %></a>
+                <% } %>
+            </div>
+        </div>
     </nav>
 
     <% include ../partials/flash-messages %>

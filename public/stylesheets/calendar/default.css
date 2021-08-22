@@ -229,6 +229,7 @@ body {
   background-color: #343a40;
   font-family: 'Open Sans', sans-serif;
   height: 90px;
+  border-radius: 0;
 }
 
 .navbar-brand {
@@ -246,3 +247,27 @@ body {
   font-size: 1.4rem;
   padding: 4px 8px;
 }
+
+.formatting {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.changeview {
+  display: flex;
+  align-items: center;
+}
+
+.btn-info {
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+  font-size: 1.3em;
+}
+
+.btn-info:hover {
+  background-color: #138496;
+  border-color: #138496;
+}
+
+/* navbar end */
