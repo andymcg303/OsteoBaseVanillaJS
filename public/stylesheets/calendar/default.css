@@ -5,33 +5,27 @@ body {
   font-size: 12px;
 }
 
-/* *  custom bootstrap - start */
-.calendar-btn {
-  border-color: #ddd;
+/* *  custom bootstrap - start calendar-button*/
+.logout-btn:hover,
+.logout-btn:active
+{
+  color:#fff;
+  background-color: #5a6268;
 }
 
-.calendar-btn:hover {
-  border: solid 1px #bbb;
-  background-color: #fff;
-}
-
-.calendar-btn:active {
-  background-color: #f9f9f9;
-  border: solid 1px #bbb;
-  outline: none;
-}
-
-.calendar-btn:disabled {
+/* .btn:disabled {
   background-color: #f9f9f9;
   border: solid 1px #ddd;
   color: #bbb;
-}
+} */
 
-.calendar-btn:focus:active, 
-.calendar-btn:focus, 
-.calendar-btn:active {
+/* .btn:focus:active, 
+.btn:focus, 
+.btn:active {
   outline: none;
-}
+} */
+
+/* calendar-button end */
 
 .open > .dropdown-toggle.btn-default {
   background-color: #fff;
@@ -110,20 +104,11 @@ body {
   font-weight: bold;
 }
 
-.lnb-new-schedule-btn:hover {
-  height: 100%;
-  color: #ffffff;
-  border: 0;
-  padding: 10px 20px;
-  font-weight: bold;
-}
-
-.lnb-new-schedule-btn:active {
-  height: 100%;
-  color: #ffffff;
-  border: 0;
-  padding: 10px 20px;
-  font-weight: bold;
+.lnb-new-schedule-btn:hover,
+.lnb-new-schedule-btn:active,
+.lnb-new-schedule-btn:focus {
+  background-color: #0069d9;
+  color: #fff;
 }
 
 .lnb-calendars > div {

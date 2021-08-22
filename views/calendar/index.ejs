@@ -15,9 +15,9 @@
 <body>
 
     <nav class="navbar">
-    <a class="navbar-brand" href="/">OsteoBase</a>
+    <a class="navbar-brand" href="/patients?currentView=<%= currentView %>&showHistory=<%= showHistory %>">OsteoBase</a>
     <% if (currentUser) { %>
-        <a href="/logout" class="btn btn-sm btn-secondary">Logout <%= currentUser.username %></a>
+        <a href="/logout" class="btn logout-btn btn-sm btn-secondary">Logout <%= currentUser.username %></a>
     <% } %>
     </nav>
 
