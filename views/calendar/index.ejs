@@ -51,7 +51,7 @@
                         <label>
                             <input type="checkbox" class="tui-full-calendar-checkbox-round" value="<%= user._id %>" checked>
                             <!-- <span style="border-color: ' + calendar.borderColor + '; background-color: ' + calendar.borderColor + ';"></span> -->
-                            <span style="border-color: red; background-color: red;"></span>
+                            <span style="border-color: <%= user.calendar_color %>; background-color: <%= user.calendar_color %>;"></span> <!-- add colour to user at signup time -->
                             <span><%= user.username %></span>
                         </label>
                     </div>    

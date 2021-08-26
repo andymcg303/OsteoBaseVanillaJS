@@ -1,4 +1,24 @@
-<% include ./partials/header %>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>OsteoBase</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="/stylesheets/main.css">
+	<script src="https://kit.fontawesome.com/7336d766ea.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-dark bg-dark">
+	<div class="container">
+		<div class="d-flex align-items-center">
+			<div class="navbar-brand mb-1">OsteoBase</div>
+		</div>
+	</div>
+
+</nav>
+
+<% include ./partials/flash-messages %>
 	
     <div class="container">
 
@@ -22,7 +42,11 @@
                         <option value="Practitioner">
                         <option value="Reception">
                     </datalist>
-                </div>		
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="calendar_color">Calendar Colour</label>
+                    <input type="color" class="form-control" name="calendar_color" required>
+                </div>				
                 <div class="form-group col-md-3 align-self-end">
                     <input id="signup-button" class="btn btn-secondary" type="submit" value="Sign Up">	
                 </div>
