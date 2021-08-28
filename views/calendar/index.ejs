@@ -46,16 +46,6 @@
                 </div>
             </div>
             <div id="calendarList" class="lnb-calendars-d1">
-                <% users.forEach(function(user) { %>
-                    <div class="lnb-calendars-item">
-                        <label>
-                            <input type="checkbox" class="tui-full-calendar-checkbox-round" value="<%= user._id %>" checked>
-                            <!-- <span style="border-color: ' + calendar.borderColor + '; background-color: ' + calendar.borderColor + ';"></span> -->
-                            <span style="border-color: <%= user.calendar_color %>; background-color: <%= user.calendar_color %>;"></span> <!-- add colour to user at signup time -->
-                            <span><%= user.username %></span>
-                        </label>
-                    </div>    
-                <% }); %>
             </div>
         </div>
     </div>

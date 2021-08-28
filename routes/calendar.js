@@ -3,9 +3,13 @@ const express   	= require("express"),
 	  { isLoggedIn,
 		asyncErrorHandler,
         viewType } = require("../middleware");
-const { getCalendar } = require('../controllers/calendar');
+const { getCalendar,
+		getCalendarList } = require('../controllers/calendar');
 
 // Calendar
 router.get("/calendar", isLoggedIn, viewType, asyncErrorHandler(getCalendar));
+
+// Calendar List
+router.get("/calendar/calendarlist", isLoggedIn, asyncErrorHandler(getCalendarList));
 
 module.exports = router;
