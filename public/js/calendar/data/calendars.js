@@ -50,6 +50,7 @@ fetch(`/calendar/calendarlist`, {
         }
     });
 
+    // Populate CalendarList for sidebar
     const calendarList = document.getElementById('calendarList');
     const html = [];
     CalendarList.forEach(function(calendar) {
@@ -61,4 +62,7 @@ fetch(`/calendar/calendarlist`, {
         );
     });
     calendarList.innerHTML = html.join('\n');
+
+    // Populate Modal Datalist
+    
 });

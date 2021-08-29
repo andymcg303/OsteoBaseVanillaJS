@@ -36,12 +36,12 @@
                 </div>
                 <div class="form-group col-md-3">
                     <label for="user_type">User Type</label>
-                    <input list="user_type" type="text" class="form-control" name="user_type" placeholder="user type" required>
-                    <datalist id="user_type">
-                        <option value="Admin">
-                        <option value="Practitioner">
-                        <option value="Reception">
-                    </datalist>
+                    <select name="user_type" id="user_type" class="form-control" required>
+                        <option value="">user type</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Practitioner">Practitioner</option>
+                        <option value="Reception">Reception</option>
+                    </select>
                 </div>
                 <div class="form-group col-md-3">
                     <label for="calendar_color">Calendar Colour</label>

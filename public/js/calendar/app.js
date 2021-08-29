@@ -52,11 +52,9 @@
             console.log('clickDayname', date);
         },
         'beforeCreateSchedule': function(e) {
-            // console.log('beforeCreateSchedule', e);
-            // saveNewSchedule(e);
 
             // no choice but to use JQuery, need it for TUI anyway
-            $('#exampleModalCenter').modal();
+            $('#create-appointment').modal();
 
         },
         'beforeUpdateSchedule': function(e) {
@@ -280,37 +278,37 @@
             });
         }
     }
-    function saveNewSchedule(scheduleData) {
-        var calendar = scheduleData.calendar || findCalendar(scheduleData.calendarId);
-        var schedule = {
-            id: String(chance.guid()),
-            title: scheduleData.title,
-            isAllDay: scheduleData.isAllDay,
-            start: scheduleData.start,
-            end: scheduleData.end,
-            category: scheduleData.isAllDay ? 'allday' : 'time',
-            dueDateClass: '',
-            color: calendar.color,
-            bgColor: calendar.bgColor,
-            dragBgColor: calendar.bgColor,
-            borderColor: calendar.borderColor,
-            location: scheduleData.location,
-            raw: {
-                class: scheduleData.raw['class']
-            },
-            state: scheduleData.state
-        };
-        if (calendar) {
-            schedule.calendarId = calendar.id;
-            schedule.color = calendar.color;
-            schedule.bgColor = calendar.bgColor;
-            schedule.borderColor = calendar.borderColor;
-        }
+    // function saveNewSchedule(scheduleData) {
+    //     var calendar = scheduleData.calendar || findCalendar(scheduleData.calendarId);
+    //     var schedule = {
+    //         id: String(chance.guid()),
+    //         title: scheduleData.title,
+    //         isAllDay: scheduleData.isAllDay,
+    //         start: scheduleData.start,
+    //         end: scheduleData.end,
+    //         category: scheduleData.isAllDay ? 'allday' : 'time',
+    //         dueDateClass: '',
+    //         color: calendar.color,
+    //         bgColor: calendar.bgColor,
+    //         dragBgColor: calendar.bgColor,
+    //         borderColor: calendar.borderColor,
+    //         location: scheduleData.location,
+    //         raw: {
+    //             class: scheduleData.raw['class']
+    //         },
+    //         state: scheduleData.state
+    //     };
+    //     if (calendar) {
+    //         schedule.calendarId = calendar.id;
+    //         schedule.color = calendar.color;
+    //         schedule.bgColor = calendar.bgColor;
+    //         schedule.borderColor = calendar.borderColor;
+    //     }
 
-        cal.createSchedules([schedule]);
+    //     cal.createSchedules([schedule]);
 
-        refreshScheduleVisibility();
-    }
+    //     refreshScheduleVisibility();
+    // }
 
     function onChangeCalendars(e) {
         var calendarId = e.target.value;
@@ -416,13 +414,13 @@
         renderRange.innerHTML = html.join('');
     }
 
-    function setSchedules() {
-        cal.clear();
-        generateSchedule(cal.getViewName(), cal.getDateRangeStart(), cal.getDateRangeEnd());
-        cal.createSchedules(ScheduleList);
+    // function setSchedules() {
+    //     cal.clear();
+    //     generateSchedule(cal.getViewName(), cal.getDateRangeStart(), cal.getDateRangeEnd());
+    //     cal.createSchedules(ScheduleList);
 
-        refreshScheduleVisibility();
-    }
+    //     refreshScheduleVisibility();
+    // }
 
     function setEventListener() {
         $('#menu-navi').on('click', onClickNavi);
