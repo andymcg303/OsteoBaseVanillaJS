@@ -52,8 +52,12 @@
             console.log('clickDayname', date);
         },
         'beforeCreateSchedule': function(e) {
-            console.log('beforeCreateSchedule', e);
+            // console.log('beforeCreateSchedule', e);
             // saveNewSchedule(e);
+
+            // no choice but to use JQuery, need it for TUI anyway
+            $('#exampleModalCenter').modal();
+
         },
         'beforeUpdateSchedule': function(e) {
             var schedule = e.schedule;
