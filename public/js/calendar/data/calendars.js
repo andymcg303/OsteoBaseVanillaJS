@@ -1,3 +1,4 @@
+// needs to be global for TUI calendar CDN functionality?
 const CalendarList = [];
 
 function CalendarInfo() {

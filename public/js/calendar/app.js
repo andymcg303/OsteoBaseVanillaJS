@@ -7,8 +7,8 @@
 
 (function(window, Calendar) {
     var cal, resizeThrottled;
-    var useCreationPopup = true;
-    var useDetailPopup = true;
+    var useCreationPopup = false;
+    var useDetailPopup = false;
     var datePicker, selectedCalendar;
 
     cal = new Calendar('#calendar', {
@@ -53,7 +53,7 @@
         },
         'beforeCreateSchedule': function(e) {
             console.log('beforeCreateSchedule', e);
-            saveNewSchedule(e);
+            // saveNewSchedule(e);
         },
         'beforeUpdateSchedule': function(e) {
             var schedule = e.schedule;
