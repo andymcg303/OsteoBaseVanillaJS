@@ -28,7 +28,7 @@ module.exports = {
 
 	isAuthorised : async (req, res, next) => {
 		const user = await User.findById(req.user._id);
-		if (user.user_type  !== "Reception") return next();
+		if (user.user_type  !== "reception") return next();
 		req.session.error = 'Access Denied';
 		// res.redirect('back');
 		res.redirect(`/patients/${req.params.id}?currentView=${req.query.currentView}`); 

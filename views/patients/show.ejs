@@ -131,7 +131,7 @@
         </div>
         <% } %>
           
-        <% if (userType !== "Reception") { %>
+        <% if (userType !== "reception") { %>
             <div class="d-flex">
                 <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/medhists/new?currentView=log&showHistory=<%= showHistory %>"><span class="fas fa-comment-medical text-success"></span>  New Medical History</a>
                 <a class="btn btn-primary mt-2 mx-2" href="/patients/<%= patient._id%>/interviews/new?currentView=log&showHistory=<%= showHistory %>"><span class="fa fa-comments text-info"></span>  New Consultation</a>
@@ -148,7 +148,7 @@
                 <div class="list-group">
                     <% patient.medhists.forEach(function(medhist){ %>
                         <!-- restrict clickable column items -->
-                        <% if (userType !== "Reception") { %>
+                        <% if (userType !== "reception") { %>
                             <a href="/patients/<%= patient._id%>/medhists/<%= medhist._id %>?currentView=column&showHistory=<%= showHistory %>"
                         <% } else { %>
                             <div
@@ -162,14 +162,14 @@
                             <% } else { %>
                                 <i class="fas fa-lock-open text-warning float-right"></i>
                             <% } %>
-                        <% if (userType !== "Reception") { %>
+                        <% if (userType !== "reception") { %>
                             </a> 
                         <% } else { %>
                             </div>
                         <% } %>
                     <% }); %>
                 </div>
-                <% if (userType !== "Reception") { %>
+                <% if (userType !== "reception") { %>
                     <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/medhists/new?currentView=column&showHistory=<%= showHistory %>">New Medical History</a>
                 <% } %>
             </div>        
@@ -180,7 +180,7 @@
                 <div class="list-group">
                     <% patient.interviews.forEach(function(interview){ %>
                         <!-- restrict clickable column items -->
-                        <% if (userType !== "Reception") { %>
+                        <% if (userType !== "reception") { %>
                             <a href="/patients/<%= patient._id%>/interviews/<%= interview._id %>?currentView=column&showHistory=<%= showHistory %>"
                         <% } else { %>
                             <div
@@ -194,14 +194,14 @@
                             <% } else { %>
                                 <i class="fas fa-lock-open text-warning float-right"></i>
                             <% } %>
-                        <% if (userType !== "Reception") { %>
+                        <% if (userType !== "reception") { %>
                             </a> 
                         <% } else { %>
                             </div>
                         <% } %>
                     <% }); %>
                 </div>
-                <% if (userType !== "Reception") { %>
+                <% if (userType !== "reception") { %>
                     <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/interviews/new?currentView=column&showHistory=<%= showHistory %>">New Consultation</a>
                 <% } %>
             </div>        
@@ -212,7 +212,7 @@
                 <div class="list-group">    
                     <% patient.clinicals.forEach(function(clinical){ %>
                         <!-- restrict clickable column items -->
-                        <% if (userType !== "Reception") { %>
+                        <% if (userType !== "reception") { %>
                             <a href="/patients/<%= patient._id%>/clinicals/<%= clinical._id %>?currentView=column&showHistory=<%= showHistory %>"
                         <% } else { %>
                             <div
@@ -226,14 +226,14 @@
                             <% } else { %>
                                 <i class="fas fa-lock-open text-warning float-right"></i>
                             <% } %>
-                        <% if (userType !== "Reception") { %>
+                        <% if (userType !== "reception") { %>
                             </a> 
                         <% } else { %>
                             </div>
                         <% } %>
                     <% }); %>
                 </div>
-                <% if (userType !== "Reception") { %>
+                <% if (userType !== "reception") { %>
                     <a class="btn btn-primary mt-2" href="/patients/<%= patient._id%>/clinicals/new?currentView=column&showHistory=<%= showHistory %>">New Clinical Session</a>
                 <% } %>
             </div>

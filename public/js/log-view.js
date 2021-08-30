@@ -20,7 +20,7 @@ patientLogTableList.sort('date_created', { order: 'desc' });
 patientLogTableRows.forEach(row => {
     row.addEventListener('click', function() {
         // Block access to patient records for reception user type
-        if (`${userTypePass}` !== "Reception") {
+        if (`${userTypePass}` !== "reception") {
             const id = this.querySelector('.id').textContent;
             const typeCode = this.querySelector('.typecode').textContent;
             const urlParams = new URLSearchParams(window.location.search);
