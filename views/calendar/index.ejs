@@ -51,23 +51,25 @@
                     const CalendarList = [];
                 </script>
                 <% users.forEach(function(user) { %>
-                    <div class="lnb-calendars-item">  
-                        <label>
-                            <input type="checkbox" class="tui-full-calendar-checkbox-round" value="<%= user._id %>" checked>
-                            <span style="border-color: <%= user.calendar_color %>; background-color: <%= user.calendar_color %>;"></span>
-                            <span><%= user.username %></span>
-                        </label>
-                    </div>
-                    <script>
-                        CalendarList.push({
-                            id: '<%= user._id %>',
-                            name: '<%= user.username %>',
-                            color: '#FFF',
-                            bgColor: '<%= user.calendar_color %>',
-                            dragBgColor: '<%= user.calendar_color %>',
-                            borderColor: '<%= user.calendar_color %>'
-                        });
-                    </script>
+                    <% if (user.user_type !== 'reception') { %>
+                        <div class="lnb-calendars-item">  
+                            <label>
+                                <input type="checkbox" class="tui-full-calendar-checkbox-round" value="<%= user._id %>" checked>
+                                <span style="border-color: <%= user.calendar_color %>; background-color: <%= user.calendar_color %>;"></span>
+                                <span><%= user.username %></span>
+                            </label>
+                        </div>
+                        <script>
+                            CalendarList.push({
+                                id: '<%= user._id %>',
+                                name: '<%= user.username %>',
+                                color: '#FFF',
+                                bgColor: '<%= user.calendar_color %>',
+                                dragBgColor: '<%= user.calendar_color %>',
+                                borderColor: '<%= user.calendar_color %>'
+                            });
+                        </script>
+                    <% } %>        
                 <% }); %>
             </div>
         </div>
@@ -146,24 +148,38 @@
     <!-- Appointment Creation Modal -->
     <div class="modal fade" id="create-appointment" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="create-appointment-title"><strong>Create Appointment</strong></h4>
-            </div>
-            <h5 class="modal-body">
-                <label for="practitioner">Practitioner:</label>
-                <select name="practitioner-list" id="practitioner-list" required>
-                    <!-- populate from js -->
-                </select>    
-            </h5>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-success">Save</button>
-                <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
-            </div>
-        </div>
+            <form class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="modal-title" id="create-appointment-title"><strong>Create Appointment</strong></div>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="practitioner-list">Practitioner:</label>
+                        <select class="form-control" name="practitioner-list" id="practitioner-list" required>
+                            <% users.forEach(function(user) { %>
+                                <% if (user.user_type !== 'reception') { %>
+                                    <option value="<%= user._id %>"><%= user.username %></option>
+                                <% } %>
+                            <% }); %>    
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="practitioner-list">Patient:</label>
+                        <select class="form-control" name="patient-list" id="patient-list" required>
+                            <% patients.forEach(function(patient) { %>
+                                <option value="<%= patient._id %>"><%= patient.firstname + " " + patient.surname + " (" + moment(patient.dob).format('DD/MM/YYYY') + ")" %></option>
+                            <% }); %>    
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success">Save</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
         </div>
     </div>
 

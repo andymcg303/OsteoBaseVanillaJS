@@ -15,17 +15,22 @@
 //     CalendarList.push(calendar);
 // }
 
-function findCalendar(id) {
-    let found;
 
-    CalendarList.forEach(function(calendar) {
-        if (calendar.id === id) {
-            found = calendar;
-        }
-    });
+// *** MIGHT STILL NEED THIS ***
 
-    return found || CalendarList[0];
-}
+// function findCalendar(id) {
+//     let found;
+
+//     CalendarList.forEach(function(calendar) {
+//         if (calendar.id === id) {
+//             found = calendar;
+//         }
+//     });
+
+//     return found || CalendarList[0];
+// }
+
+// ***
 
 // fetch(`/calendar/calendarlist`, {
 //     // headers: { "X-Requested-With": "XMLHttpRequest" },

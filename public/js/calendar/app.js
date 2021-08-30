@@ -330,7 +330,8 @@
                 calendar.checked = checked;
             });
         } else {
-            findCalendar(calendarId).checked = checked;
+
+            CalendarList.find(calendar => calendar.id === calendarId).checked = checked;
 
             allCheckedCalendars = calendarElements.every(function(input) {
                 return input.checked;
