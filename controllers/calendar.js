@@ -2,8 +2,9 @@ const User = require('../models/user');
 
 module.exports = {
 
-    getCalendar(req, res, next){ 
-        res.render('calendar/index');
+    async getCalendar(req, res, next){
+        const foundUsers = await User.find({}); 
+        res.render('calendar/index', {users: foundUsers});
     },
 
     async getCalendarList(req, res, next){

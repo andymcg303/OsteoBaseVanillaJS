@@ -46,6 +46,29 @@
                 </div>
             </div>
             <div id="calendarList" class="lnb-calendars-d1">
+                <!-- Create CalendarList Array here to avoid having to fetch from DB again -->                  
+                <script>
+                    const CalendarList = [];
+                </script>
+                <% users.forEach(function(user) { %>
+                    <div class="lnb-calendars-item">  
+                        <label>
+                            <input type="checkbox" class="tui-full-calendar-checkbox-round" value="<%= user._id %>" checked>
+                            <span style="border-color: <%= user.calendar_color %>; background-color: <%= user.calendar_color %>;"></span>
+                            <span><%= user.username %></span>
+                        </label>
+                    </div>
+                    <script>
+                        CalendarList.push({
+                            id: '<%= user._id %>',
+                            name: '<%= user.username %>',
+                            color: '#FFF',
+                            bgColor: '<%= user.calendar_color %>',
+                            dragBgColor: '<%= user.calendar_color %>',
+                            borderColor: '<%= user.calendar_color %>'
+                        });
+                    </script>
+                <% }); %>
             </div>
         </div>
     </div>
