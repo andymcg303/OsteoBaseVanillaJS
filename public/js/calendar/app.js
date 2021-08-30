@@ -19,25 +19,27 @@
         useDetailPopup: useDetailPopup,
         calendars: CalendarList,
         week: {
-            startDayOfWeek: 1
+            startDayOfWeek: 1,
+            hourStart: 7,
+            hourEnd: 20
         },
         month: {
             startDayOfWeek: 1
-        },
-        template: {
-            // milestone: function(model) {
-            //     return '<span class="calendar-font-icon ic-milestone-b"></span> <span style="background-color: ' + model.bgColor + '">' + model.title + '</span>';
-            // },
-            // allday: function(schedule) {
-            //     return getTimeTemplate(schedule, true);
-            // },
-            taskTitle: function() {
-                return '<span class="tui-full-calendar-left-content">Notes</span>';
-            },
-            time: function(schedule) {
-                return getTimeTemplate(schedule, false);
-            }
         }
+        // template: {
+        //     // milestone: function(model) {
+        //     //     return '<span class="calendar-font-icon ic-milestone-b"></span> <span style="background-color: ' + model.bgColor + '">' + model.title + '</span>';
+        //     // },
+        //     // allday: function(schedule) {
+        //     //     return getTimeTemplate(schedule, true);
+        //     // },
+        //     // taskTitle: function() {
+        //     //     return '<span class="tui-full-calendar-left-content">Notes</span>';
+        //     // },
+        //     // time: function(schedule) {
+        //     //     return getTimeTemplate(schedule, false);
+        //     // }
+        // }
     });
 
     // event handlers
@@ -53,8 +55,13 @@
         },
         'beforeCreateSchedule': function(e) {
 
+            document.querySelector('#appointment-start-time').value = `${moment(e.start.getTime()).format('HH:mm')}`; 
+            document.querySelector('#appointment-end-time').value = `${moment(e.end.getTime()).format('HH:mm')}`;
+
             // no choice but to use JQuery, need it for TUI anyway
             $('#create-appointment').modal();
+
+            // e.guide.clearGuideElement();
 
         },
         'beforeUpdateSchedule': function(e) {
@@ -98,36 +105,36 @@
         }
     });
 
-    /**
-     * Get time template for time and all-day
-     * @param {Schedule} schedule - schedule
-     * @param {boolean} isAllDay - isAllDay or hasMultiDates
-     * @returns {string}
-     */
-    function getTimeTemplate(schedule, isAllDay) {
-        var html = [];
-        var start = moment(schedule.start.toUTCString());
-        if (!isAllDay) {
-            html.push('<strong>' + start.format('HH:mm') + '</strong> ');
-        }
-        if (schedule.isPrivate) {
-            html.push('<span class="calendar-font-icon ic-lock-b"></span>');
-            html.push(' Private');
-        } else {
-            if (schedule.isReadOnly) {
-                html.push('<span class="calendar-font-icon ic-readonly-b"></span>');
-            } else if (schedule.recurrenceRule) {
-                html.push('<span class="calendar-font-icon ic-repeat-b"></span>');
-            } else if (schedule.attendees.length) {
-                html.push('<span class="calendar-font-icon ic-user-b"></span>');
-            } else if (schedule.location) {
-                html.push('<span class="calendar-font-icon ic-location-b"></span>');
-            }
-            html.push(' ' + schedule.title);
-        }
+    // /**
+    //  * Get time template for time and all-day
+    //  * @param {Schedule} schedule - schedule
+    //  * @param {boolean} isAllDay - isAllDay or hasMultiDates
+    //  * @returns {string}
+    //  */
+    // function getTimeTemplate(schedule, isAllDay) {
+    //     var html = [];
+    //     var start = moment(schedule.start.toUTCString());
+    //     if (!isAllDay) {
+    //         html.push('<strong>' + start.format('HH:mm') + '</strong> ');
+    //     }
+    //     if (schedule.isPrivate) {
+    //         html.push('<span class="calendar-font-icon ic-lock-b"></span>');
+    //         html.push(' Private');
+    //     } else {
+    //         if (schedule.isReadOnly) {
+    //             html.push('<span class="calendar-font-icon ic-readonly-b"></span>');
+    //         } else if (schedule.recurrenceRule) {
+    //             html.push('<span class="calendar-font-icon ic-repeat-b"></span>');
+    //         } else if (schedule.attendees.length) {
+    //             html.push('<span class="calendar-font-icon ic-user-b"></span>');
+    //         } else if (schedule.location) {
+    //             html.push('<span class="calendar-font-icon ic-location-b"></span>');
+    //         }
+    //         html.push(' ' + schedule.title);
+    //     }
 
-        return html.join('');
-    }
+    //     return html.join('');
+    // }
 
     /**
      * A listener for click the menu
