@@ -14,7 +14,7 @@ const express   	= require("express"),
 // NEW - Show New Form
 router.get("/new", isLoggedIn, asyncErrorHandler(isAuthorised), viewType, itemType, asyncErrorHandler(newItem));
 
-// CREATE- Create New then redirect to Show Patient
+// CREATE- Create New
 router.post("/", isLoggedIn, asyncErrorHandler(isAuthorised), viewType, itemType, asyncErrorHandler(createItem));
 
 // SHOW - Show one

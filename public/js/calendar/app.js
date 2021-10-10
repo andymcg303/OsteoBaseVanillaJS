@@ -55,8 +55,8 @@
         },
         'beforeCreateSchedule': function(e) {
 
-            document.querySelector('#appointment-start-time').value = `${moment(e.start.getTime()).format('HH:mm')}`; 
-            document.querySelector('#appointment-end-time').value = `${moment(e.end.getTime()).format('HH:mm')}`;
+            document.querySelector('#starttime').value = `${moment(e.start.getTime()).format('HH:mm')}`; 
+            document.querySelector('#endtime').value = `${moment(e.end.getTime()).format('HH:mm')}`;
 
             // no choice but to use JQuery, need it for TUI anyway
             $('#create-appointment').modal();
@@ -221,39 +221,84 @@
         // setSchedules();
     }
 
-    function onNewSchedule() {
-        var title = $('#new-schedule-title').val();
-        var location = $('#new-schedule-location').val();
-        var isAllDay = document.getElementById('new-schedule-allday').checked;
-        var start = datePicker.getStartDate();
-        var end = datePicker.getEndDate();
-        var calendar = selectedCalendar ? selectedCalendar : CalendarList[0];
+    const newAppointmentForm = document.querySelector('#new-appointment-form');
 
-        if (!title) {
-            return;
-        }
+    // Post new schedule/appointment
+    newAppointmentForm.addEventListener('submit', e => {    
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const newAppointmentData = Object.fromEntries(formData.entries());    
+        fetch('/calendar/appointment', {
+            headers: { "Content-Type": "application/json" },
+            method: 'POST',
+            body: JSON.stringify(newAppointmentData)
+        }).then(response => {
+            if (response.ok) {
+                return response.json();
+            }
+            return Promise.reject(response);
+         });
+        // Add to calendar grid
+         //.then((data) => {
+        //     patientTableList.add({ 
+        //         id: `${data._id}`,
+        //         surname: `${data.surname}`,
+        //         firstname: `${data.firstname}`,
+        //         dob: `${moment(data.dob).format('DD/MM/YYYY')}`,
+        //         phonenumber: `${data.phonenumber}`
+        //     });
+        //     // reset new patient form
+        //     formControls.forEach(el => el.value = '');
+        //     newPatientForm.style.display = 'none';
+        //     newPatientButton.style.display = 'block';                        
+        //     // sort from newest patient in descending order
+        //     patientTableList.sort('date_created', { order: 'desc'});
+        //     // back to first page
+        //     patientTableList.show(1, 10);
+        //     // add event listener to new patient row
+        //     patientTableRows = document.querySelectorAll('#patient-table tbody tr');
+        //     patientTableRows[0].addEventListener('click', openPatientDetails);
+        //     //restyle pagination
+        //     stylePagination();
+        // });
+    });
 
-        cal.createSchedules([{
-            id: String(chance.guid()),
-            calendarId: calendar.id,
-            title: title,
-            isAllDay: isAllDay,
-            start: start,
-            end: end,
-            category: isAllDay ? 'allday' : 'time',
-            dueDateClass: '',
-            color: calendar.color,
-            bgColor: calendar.bgColor,
-            dragBgColor: calendar.bgColor,
-            borderColor: calendar.borderColor,
-            raw: {
-                location: location
-            },
-            state: 'Busy'
-        }]);
+    // Get rid of this and add an event listener on the form submit button
+    // need to use cal.createSchedules 
+    // function onNewSchedule() {
 
-        $('#modal-new-schedule').modal('hide');
-    }
+    //     var title = $('#new-schedule-title').val();
+    //     var location = $('#new-schedule-location').val();
+    //     var isAllDay = document.getElementById('new-schedule-allday').checked;
+    //     var start = datePicker.getStartDate();
+    //     var end = datePicker.getEndDate();
+    //     var calendar = selectedCalendar ? selectedCalendar : CalendarList[0];
+
+    //     if (!title) {
+    //         return;
+    //     }
+
+    //     cal.createSchedules([{
+    //         id: String(chance.guid()),
+    //         calendarId: calendar.id,
+    //         title: title,
+    //         isAllDay: isAllDay,
+    //         start: start,
+    //         end: end,
+    //         category: isAllDay ? 'allday' : 'time',
+    //         dueDateClass: '',
+    //         color: calendar.color,
+    //         bgColor: calendar.bgColor,
+    //         dragBgColor: calendar.bgColor,
+    //         borderColor: calendar.borderColor,
+    //         raw: {
+    //             location: location
+    //         },
+    //         state: 'Busy'
+    //     }]);
+
+    //     $('#modal-new-schedule').modal('hide');
+    // }
 
     function onChangeNewScheduleCalendar(e) {
         var target = $(e.target).closest('a[role="menuitem"]')[0];
@@ -274,17 +319,19 @@
         selectedCalendar = calendar;
     }
 
-    function createNewSchedule(event) {
-        var start = event.start ? new Date(event.start.getTime()) : new Date();
-        var end = event.end ? new Date(event.end.getTime()) : moment().add(1, 'hours').toDate();
+    // Dont needs related to default popup
+    // function createNewSchedule(event) {
+    //     var start = event.start ? new Date(event.start.getTime()) : new Date();
+    //     var end = event.end ? new Date(event.end.getTime()) : moment().add(1, 'hours').toDate();
 
-        if (useCreationPopup) {
-            cal.openCreationPopup({
-                start: start,
-                end: end
-            });
-        }
-    }
+    //     if (useCreationPopup) {
+    //         cal.openCreationPopup({
+    //             start: start,
+    //             end: end
+    //         });
+    //     }
+    // }
+
     // function saveNewSchedule(scheduleData) {
     //     var calendar = scheduleData.calendar || findCalendar(scheduleData.calendarId);
     //     var schedule = {
@@ -315,7 +362,7 @@
     //     cal.createSchedules([schedule]);
 
     //     refreshScheduleVisibility();
-    // }
+    // };
 
     function onChangeCalendars(e) {
         var calendarId = e.target.value;
@@ -435,8 +482,11 @@
         $('.dropdown-menu a[role="menuitem"]').on('click', onClickMenu);
         $('#lnb-calendars').on('change', onChangeCalendars);
 
-        $('#btn-save-schedule').on('click', onNewSchedule);
-        $('#btn-new-schedule').on('click', createNewSchedule);
+        // Get rid of this and add an event listener of the modal forms submit button
+        // $('#btn-save-schedule').on('click', onNewSchedule);
+
+        // Dont need this relates to default popup
+        // $('#btn-new-schedule').on('click', createNewSchedule);
 
         $('#dropdownMenu-calendars-list').on('click', onChangeNewScheduleCalendar);
 

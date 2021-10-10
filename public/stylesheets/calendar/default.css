@@ -287,4 +287,7 @@ body {
   align-items: center;
 }
 
+.modal-footer .btn-warning {
+  color: #000;
+}
 /* modal end */

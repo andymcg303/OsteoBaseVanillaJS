@@ -12,8 +12,8 @@ const favicon = require('serve-favicon');
 const path = require('path');
 const session = require('express-session');
 const logger = require('morgan');
-// const seedPosts = require('./seeds');
-// seedPosts();
+// const seedItems = require('./seeds');
+// seedItems();
 
 // configure route requires
 const indexRoutes = require('./routes/index');
