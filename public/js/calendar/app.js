@@ -55,6 +55,7 @@
         },
         'beforeCreateSchedule': function(e) {
 
+            document.querySelector('#apptdate').value = `${moment(e.start.toDate()).format('YYYY-MM-DD')}`;
             document.querySelector('#starttime').value = `${moment(e.start.getTime()).format('HH:mm')}`; 
             document.querySelector('#endtime').value = `${moment(e.end.getTime()).format('HH:mm')}`;
 

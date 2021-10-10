@@ -5,8 +5,8 @@ const appointmentSchema = new mongoose.Schema({
     practitioner: String,
     patient: String,
     type: String,
-    starttime: String,
-    endtime: String
+    start: Date,
+    end: Date
 });
 
 module.exports = mongoose.model("Appointment", appointmentSchema);

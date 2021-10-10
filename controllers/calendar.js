@@ -22,7 +22,13 @@ module.exports = {
     // Create Appointment
     async createAppointment(req, res, next){
         // this uses ajax and fetch api so uses req.body
-        const newAppointment = await Appointment.create(req.body);
+        const newAppointment = await Appointment.create({
+            practitioner: req.body.practitioner,
+            patient: req.body.patient,
+            type: req.body.type,
+            start: new Date(`${moment(req.body.apptdate).format('YYYY-MM-DD')} ${req.body.starttime}`),
+            end: new Date(`${moment(req.body.apptdate).format('YYYY-MM-DD')} ${req.body.endtime}`)
+        });
         res.json(newAppointment);
     }
     
