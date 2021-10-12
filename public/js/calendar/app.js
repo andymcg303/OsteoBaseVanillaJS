@@ -55,6 +55,7 @@
         },
         'beforeCreateSchedule': function(e) {
 
+            //populate modal form with selected time and date
             document.querySelector('#apptdate').value = `${moment(e.start.toDate()).format('YYYY-MM-DD')}`;
             document.querySelector('#starttime').value = `${moment(e.start.getTime()).format('HH:mm')}`; 
             document.querySelector('#endtime').value = `${moment(e.end.getTime()).format('HH:mm')}`;
@@ -238,30 +239,25 @@
                 return response.json();
             }
             return Promise.reject(response);
-         });
-        // Add to calendar grid
-         //.then((data) => {
-        //     patientTableList.add({ 
-        //         id: `${data._id}`,
-        //         surname: `${data.surname}`,
-        //         firstname: `${data.firstname}`,
-        //         dob: `${moment(data.dob).format('DD/MM/YYYY')}`,
-        //         phonenumber: `${data.phonenumber}`
-        //     });
-        //     // reset new patient form
-        //     formControls.forEach(el => el.value = '');
-        //     newPatientForm.style.display = 'none';
-        //     newPatientButton.style.display = 'block';                        
-        //     // sort from newest patient in descending order
-        //     patientTableList.sort('date_created', { order: 'desc'});
-        //     // back to first page
-        //     patientTableList.show(1, 10);
-        //     // add event listener to new patient row
-        //     patientTableRows = document.querySelectorAll('#patient-table tbody tr');
-        //     patientTableRows[0].addEventListener('click', openPatientDetails);
-        //     //restyle pagination
-        //     stylePagination();
-        // });
+        })
+        .then((data) => {
+
+            // FETCH FROM DB to get ids and patient name etc
+
+            // display in calendar grid
+            cal.createSchedules([
+                {
+                    id: 1,
+                    calendarId: newAppointmentData.practitioner,
+                    title: newAppointmentData.patient,
+                    category: 'time',
+                    start: '2021-10-13T13:00:00+00:00',
+                    end: '2021-10-13T13:30:00+00:00'
+                },
+            ]);
+            // close modal form
+            $('#create-appointment').modal('hide');           
+        });
     });
 
     // Get rid of this and add an event listener on the form submit button
