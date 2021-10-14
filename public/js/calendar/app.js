@@ -240,62 +240,34 @@
             }
             return Promise.reject(response);
         })
-        .then((data) => {
+        .then(data => {
 
-            // FETCH FROM DB to get ids and patient name etc
-
-            // display in calendar grid
-            cal.createSchedules([
-                {
-                    id: 1,
-                    calendarId: newAppointmentData.practitioner,
-                    title: newAppointmentData.patient,
-                    category: 'time',
-                    start: '2021-10-13T13:00:00+00:00',
-                    end: '2021-10-13T13:30:00+00:00'
-                },
-            ]);
+            // fetch from db to get patient name. id and patientid can be gotten from data returned from post
+            fetch(`/patients/${data.patient}`, {
+                headers: { "X-Requested-With": "XMLHttpRequest" },
+                method: 'GET'})
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                 }
+                return Promise.reject(response);
+            }).then(patient => {
+                // display in calendar grid
+                cal.createSchedules([
+                    {
+                        id: `${data._id}`,
+                        calendarId: newAppointmentData.practitioner,
+                        title: `${patient.firstname} ${patient.surname}`,
+                        category: 'time',
+                        start: `${data.start}`,
+                        end: `${data.end}`
+                    },
+                ]);
+            });
             // close modal form
             $('#create-appointment').modal('hide');           
         });
     });
-
-    // Get rid of this and add an event listener on the form submit button
-    // need to use cal.createSchedules 
-    // function onNewSchedule() {
-
-    //     var title = $('#new-schedule-title').val();
-    //     var location = $('#new-schedule-location').val();
-    //     var isAllDay = document.getElementById('new-schedule-allday').checked;
-    //     var start = datePicker.getStartDate();
-    //     var end = datePicker.getEndDate();
-    //     var calendar = selectedCalendar ? selectedCalendar : CalendarList[0];
-
-    //     if (!title) {
-    //         return;
-    //     }
-
-    //     cal.createSchedules([{
-    //         id: String(chance.guid()),
-    //         calendarId: calendar.id,
-    //         title: title,
-    //         isAllDay: isAllDay,
-    //         start: start,
-    //         end: end,
-    //         category: isAllDay ? 'allday' : 'time',
-    //         dueDateClass: '',
-    //         color: calendar.color,
-    //         bgColor: calendar.bgColor,
-    //         dragBgColor: calendar.bgColor,
-    //         borderColor: calendar.borderColor,
-    //         raw: {
-    //             location: location
-    //         },
-    //         state: 'Busy'
-    //     }]);
-
-    //     $('#modal-new-schedule').modal('hide');
-    // }
 
     function onChangeNewScheduleCalendar(e) {
         var target = $(e.target).closest('a[role="menuitem"]')[0];
