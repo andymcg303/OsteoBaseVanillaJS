@@ -199,7 +199,7 @@
 
         setDropdownCalendarType();
         setRenderRangeText();
-        // setSchedules();
+        setSchedules();
     }
 
     function onClickNavi(e) {
@@ -220,7 +220,7 @@
         }
 
         setRenderRangeText();
-        // setSchedules();
+        setSchedules();
     }
 
     const newAppointmentForm = document.querySelector('#new-appointment-form');
@@ -261,7 +261,7 @@
                         category: 'time',
                         start: `${data.start}`,
                         end: `${data.end}`
-                    },
+                    }
                 ]);
             });
             // close modal form
@@ -446,6 +446,49 @@
     //     refreshScheduleVisibility();
     // }
 
+    function setSchedules() {
+        cal.clear();
+
+        // Populate ScheduleList from DB 
+        fetch(`/calendar/appointments`, {
+            headers: { "X-Requested-With": "XMLHttpRequest" },
+            method: 'GET'})
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+                }
+            return Promise.reject(response);
+        }).then(appointments => {
+
+            const ScheduleList = [];
+
+            // Create ScheduleList
+            appointments.forEach(appointment => {
+                const count = ScheduleList.push(
+                    {
+                    //     id: `${appointment._id}`,
+                    //     calendarId: `${appointment.practitioner}`,
+                    //     title: 'Steve Jenkins',
+                    //     category: 'time',
+                    //     start: `${appointment.start}`,
+                    //     end: `${appointment.end}`
+                        id: appointment._id,
+                        calendarId: appointment.practitioner,
+                        title: 'Steve Jenkins',
+                        category: 'time',
+                        start: appointment.start,
+                        end: appointment.end                                         
+                    }
+                )
+            });
+
+            cal.createSchedules(ScheduleList);
+            refreshScheduleVisibility();
+
+        });
+
+    }
+
     function setEventListener() {
         $('#menu-navi').on('click', onClickNavi);
         $('.dropdown-menu a[role="menuitem"]').on('click', onClickMenu);
@@ -474,7 +517,7 @@
 
     setDropdownCalendarType();
     setRenderRangeText();
-    // setSchedules();
+    setSchedules();
     setEventListener();
 })(window, tui.Calendar);
 

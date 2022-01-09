@@ -18,6 +18,12 @@ module.exports = {
             moment: moment
         });
     },
+
+    // Get All Appointments
+    async getAppointments(req, res, next){
+        const foundAppointments = await Appointment.find({});
+        res.json(foundAppointments);
+    },
     
     // Create Appointment
     async createAppointment(req, res, next){
