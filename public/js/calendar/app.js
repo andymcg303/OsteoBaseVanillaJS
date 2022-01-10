@@ -263,9 +263,10 @@
                         end: `${data.end}`
                     }
                 ]);
+                $('#create-appointment').modal('hide'); 
             });
-            // close modal form
-            $('#create-appointment').modal('hide');           
+            // // close modal form
+            // $('#create-appointment').modal('hide');           
         });
     });
 
@@ -466,12 +467,6 @@
             appointments.forEach(appointment => {
                 const count = ScheduleList.push(
                     {
-                    //     id: `${appointment._id}`,
-                    //     calendarId: `${appointment.practitioner}`,
-                    //     title: 'Steve Jenkins',
-                    //     category: 'time',
-                    //     start: `${appointment.start}`,
-                    //     end: `${appointment.end}`
                         id: appointment._id,
                         calendarId: appointment.practitioner,
                         title: 'Steve Jenkins',
@@ -483,9 +478,10 @@
             });
 
             cal.createSchedules(ScheduleList);
-            refreshScheduleVisibility();
-
         });
+
+        // Is this necc?
+        refreshScheduleVisibility();
 
     }
 
