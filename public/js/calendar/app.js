@@ -289,19 +289,6 @@
         selectedCalendar = calendar;
     }
 
-    // Dont needs related to default popup
-    // function createNewSchedule(event) {
-    //     var start = event.start ? new Date(event.start.getTime()) : new Date();
-    //     var end = event.end ? new Date(event.end.getTime()) : moment().add(1, 'hours').toDate();
-
-    //     if (useCreationPopup) {
-    //         cal.openCreationPopup({
-    //             start: start,
-    //             end: end
-    //         });
-    //     }
-    // }
-
     // function saveNewSchedule(scheduleData) {
     //     var calendar = scheduleData.calendar || findCalendar(scheduleData.calendarId);
     //     var schedule = {
@@ -439,16 +426,8 @@
         renderRange.innerHTML = html.join('');
     }
 
-    // function setSchedules() {
-    //     cal.clear();
-    //     generateSchedule(cal.getViewName(), cal.getDateRangeStart(), cal.getDateRangeEnd());
-    //     cal.createSchedules(ScheduleList);
-
-    //     refreshScheduleVisibility();
-    // }
-
     function setSchedules() {
-        cal.clear();
+        // cal.clear();
 
         // Populate ScheduleList from DB 
         fetch(`/calendar/appointments`, {
@@ -461,40 +440,38 @@
             return Promise.reject(response);
         }).then(appointments => {
 
-            const ScheduleList = [];
-
-            // Create ScheduleList
-            appointments.forEach(appointment => {
-                const count = ScheduleList.push(
-                    {
+            Promise.all(appointments.map(appointment => {
+                fetch(`/patients/${appointment.patient}`, {
+                    headers: { "X-Requested-With": "XMLHttpRequest" },
+                    method: 'GET'})
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    return Promise.reject(response);
+                })
+                .then(patient => {
+                    const ScheduleList = [{
                         id: appointment._id,
                         calendarId: appointment.practitioner,
-                        title: 'Steve Jenkins',
+                        title: `${patient.firstname} ${patient.surname}`,
                         category: 'time',
                         start: appointment.start,
                         end: appointment.end                                         
-                    }
-                )
-            });
-
-            cal.createSchedules(ScheduleList);
+                    }];
+                    cal.createSchedules(ScheduleList);
+                });
+            }));
         });
 
         // Is this necc?
-        refreshScheduleVisibility();
-
+        // refreshScheduleVisibility();
     }
 
     function setEventListener() {
         $('#menu-navi').on('click', onClickNavi);
         $('.dropdown-menu a[role="menuitem"]').on('click', onClickMenu);
         $('#lnb-calendars').on('change', onChangeCalendars);
-
-        // Get rid of this and add an event listener of the modal forms submit button
-        // $('#btn-save-schedule').on('click', onNewSchedule);
-
-        // Dont need this relates to default popup
-        // $('#btn-new-schedule').on('click', createNewSchedule);
 
         $('#dropdownMenu-calendars-list').on('click', onChangeNewScheduleCalendar);
 
@@ -516,18 +493,3 @@
     setSchedules();
     setEventListener();
 })(window, tui.Calendar);
-
-// // set calendars
-// (function() {
-//     var calendarList = document.getElementById('calendarList');
-//     var html = [];
-//     CalendarList.forEach(function(calendar) {
-//         html.push('<div class="lnb-calendars-item"><label>' +
-//             '<input type="checkbox" class="tui-full-calendar-checkbox-round" value="' + calendar.id + '" checked>' +
-//             '<span style="border-color: ' + calendar.borderColor + '; background-color: ' + calendar.borderColor + ';"></span>' +
-//             '<span>' + calendar.name + '</span>' +
-//             '</label></div>'
-//         );
-//     });
-//     calendarList.innerHTML = html.join('\n');
-// })();
