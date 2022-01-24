@@ -220,7 +220,7 @@
         }
 
         setRenderRangeText();
-        setSchedules();
+        // setSchedules();
     }
 
     const newAppointmentForm = document.querySelector('#new-appointment-form');
@@ -288,38 +288,6 @@
 
         selectedCalendar = calendar;
     }
-
-    // function saveNewSchedule(scheduleData) {
-    //     var calendar = scheduleData.calendar || findCalendar(scheduleData.calendarId);
-    //     var schedule = {
-    //         id: String(chance.guid()),
-    //         title: scheduleData.title,
-    //         isAllDay: scheduleData.isAllDay,
-    //         start: scheduleData.start,
-    //         end: scheduleData.end,
-    //         category: scheduleData.isAllDay ? 'allday' : 'time',
-    //         dueDateClass: '',
-    //         color: calendar.color,
-    //         bgColor: calendar.bgColor,
-    //         dragBgColor: calendar.bgColor,
-    //         borderColor: calendar.borderColor,
-    //         location: scheduleData.location,
-    //         raw: {
-    //             class: scheduleData.raw['class']
-    //         },
-    //         state: scheduleData.state
-    //     };
-    //     if (calendar) {
-    //         schedule.calendarId = calendar.id;
-    //         schedule.color = calendar.color;
-    //         schedule.bgColor = calendar.bgColor;
-    //         schedule.borderColor = calendar.borderColor;
-    //     }
-
-    //     cal.createSchedules([schedule]);
-
-    //     refreshScheduleVisibility();
-    // };
 
     function onChangeCalendars(e) {
         var calendarId = e.target.value;
@@ -427,7 +395,7 @@
     }
 
     function setSchedules() {
-        // cal.clear();
+        cal.clear();
 
         // Populate ScheduleList from DB 
         fetch(`/calendar/appointments`, {
@@ -441,7 +409,7 @@
         }).then(appointments => {
 
             Promise.all(appointments.map(appointment => {
-                fetch(`/patients/${appointment.patient}`, {
+                fetch(`/patients/info/${appointment.patient}`, {
                     headers: { "X-Requested-With": "XMLHttpRequest" },
                     method: 'GET'})
                 .then(response => {
@@ -465,7 +433,7 @@
         });
 
         // Is this necc?
-        // refreshScheduleVisibility();
+        refreshScheduleVisibility();
     }
 
     function setEventListener() {

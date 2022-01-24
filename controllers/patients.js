@@ -60,5 +60,11 @@ module.exports = {
         const foundPatient = await Patient.findById(req.params.id);
         await foundPatient.remove();
         res.redirect(`/patients?currentView=${res.locals.currentView}&showHistory=${res.locals.showHistory}`);
-    }
+    },
+
+    // Patient Info only ie without populating assoc data
+    async getPatientInfo(req, res, next){
+        const foundPatient = await Patient.findById(req.params.id)
+        res.json(foundPatient);
+    },
 }

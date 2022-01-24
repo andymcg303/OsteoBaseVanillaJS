@@ -8,7 +8,8 @@ const express       = require("express"),
         createPatient, 
         showPatient, 
         updatePatient,
-        deletePatient } = require('../controllers/patients');
+        deletePatient,
+        getPatientInfo } = require('../controllers/patients');
 
 // ROUTES   
 // INDEX - List all patients      
@@ -25,5 +26,9 @@ router.put("/:id",  isLoggedIn, asyncErrorHandler(updatePatient));
 
 // DESTROY - Delete patient. Deleting child data handled in model
 router.delete("/:id",  isLoggedIn, viewType, asyncErrorHandler(deletePatient));
+
+// GET PATIENT INFO ONLY ie do not populate assoc info, used in calendar setSchedules
+router.get("/info/:id", isLoggedIn, viewType, asyncErrorHandler(getPatientInfo));
+
 
 module.exports = router;
