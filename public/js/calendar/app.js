@@ -199,7 +199,7 @@
 
         setDropdownCalendarType();
         setRenderRangeText();
-        setSchedules();
+    
     }
 
     function onClickNavi(e) {
@@ -220,7 +220,7 @@
         }
 
         setRenderRangeText();
-        // setSchedules();
+    
     }
 
     const newAppointmentForm = document.querySelector('#new-appointment-form');

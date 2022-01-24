@@ -66,7 +66,8 @@
                                 color: '#FFF',
                                 bgColor: '<%= user.calendar_color %>',
                                 dragBgColor: '<%= user.calendar_color %>',
-                                borderColor: '<%= user.calendar_color %>'
+                                borderColor: '<%= user.calendar_color %>',
+                                checked: true
                             });
                         </script>
                     <% } %>        
@@ -216,11 +217,7 @@
     <script src="https://uicdn.toast.com/tui.time-picker/latest/tui-time-picker.min.js"></script>
     <script src="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.min.js"></script>
     <script src="https://uicdn.toast.com/tui-calendar/latest/tui-calendar.js"></script>
-
-    <script src="/js/calendar/data/calendars.js"></script>
-    <!-- <script src="/js/calendar/data/schedules.js"></script> -->
-    <!-- n<script src="https://cdnjs.cloudflare.com/ajax/libs/chance/1.0.13/chance.min.js"></script> -->
-    
+ 
     <script src="/js/calendar/app.js"></script>
     
 <% include ../partials/footer %>
