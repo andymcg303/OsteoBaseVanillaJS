@@ -440,6 +440,7 @@
         $('.dropdown-menu a[role="menuitem"]').on('click', onClickMenu);
         $('#lnb-calendars').on('change', onChangeCalendars);
 
+        $('#btn-new-schedule').on('click', () => $('#create-appointment').modal());
         $('#dropdownMenu-calendars-list').on('click', onChangeNewScheduleCalendar);
 
         window.addEventListener('resize', resizeThrottled);
