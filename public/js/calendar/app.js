@@ -432,7 +432,6 @@
             }));
         });
 
-        // Is this necc?
         refreshScheduleVisibility();
     }
 
