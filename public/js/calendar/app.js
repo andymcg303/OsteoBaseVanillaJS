@@ -51,7 +51,8 @@
 
             //populate edit modal form
             document.querySelector('#appointment-modal-title').textContent = "Edit Appointment";
-            // document.querySelector('#practitioner').value = e.schedule.;
+            document.querySelector('#practitioner').value = e.schedule.calendarId;
+            document.querySelector('#patient').value = e.schedule.attendees[0];
             document.querySelector('#apptdate').value = `${moment(e.schedule.start.toDate()).format('YYYY-MM-DD')}`;
             document.querySelector('#starttime').value = `${moment(e.schedule.start.getTime()).format('HH:mm')}`; 
             document.querySelector('#endtime').value = `${moment(e.schedule.end.getTime()).format('HH:mm')}`;
@@ -272,7 +273,8 @@
                         title: `${patient.firstname} ${patient.surname}`,
                         category: 'time',
                         start: `${data.start}`,
-                        end: `${data.end}`
+                        end: `${data.end}`,
+                        attendees: [data.patient]
                     }
                 ]);
                 $('#appointment-modal').modal('hide'); 
@@ -435,7 +437,8 @@
                         title: `${patient.firstname} ${patient.surname}`,
                         category: 'time',
                         start: appointment.start,
-                        end: appointment.end                                         
+                        end: appointment.end,
+                        attendees: [appointment.patient]                                         
                     }];
                     cal.createSchedules(ScheduleList);
                 });
