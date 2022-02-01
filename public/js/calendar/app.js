@@ -48,36 +48,48 @@
             console.log('clickMore', e);
         },
         'clickSchedule': function(e) {
-            console.log('clickSchedule', e);
+
+            //populate edit modal form
+            document.querySelector('#appointment-modal-title').textContent = "Edit Appointment";
+            // document.querySelector('#practitioner').value = e.schedule.;
+            document.querySelector('#apptdate').value = `${moment(e.schedule.start.toDate()).format('YYYY-MM-DD')}`;
+            document.querySelector('#starttime').value = `${moment(e.schedule.start.getTime()).format('HH:mm')}`; 
+            document.querySelector('#endtime').value = `${moment(e.schedule.end.getTime()).format('HH:mm')}`;
+
+            // no choice but to use JQuery, need it for TUI anyway
+            $('#appointment-modal').modal();
+
         },
         'clickDayname': function(date) {
             console.log('clickDayname', date);
         },
         'beforeCreateSchedule': function(e) {
 
-            //populate modal form with selected time and date
+            //populate create modal form
+            document.querySelector('#appointment-modal-title').textContent = "Create Appointment";
             document.querySelector('#apptdate').value = `${moment(e.start.toDate()).format('YYYY-MM-DD')}`;
             document.querySelector('#starttime').value = `${moment(e.start.getTime()).format('HH:mm')}`; 
             document.querySelector('#endtime').value = `${moment(e.end.getTime()).format('HH:mm')}`;
 
             // no choice but to use JQuery, need it for TUI anyway
-            $('#create-appointment').modal();
+            $('#appointment-modal').modal();
 
             // e.guide.clearGuideElement();
 
         },
         'beforeUpdateSchedule': function(e) {
-            var schedule = e.schedule;
-            var changes = e.changes;
 
-            console.log('beforeUpdateSchedule', e);
+            // var schedule = e.schedule;
+            // var changes = e.changes;
 
-            if (changes && !changes.isAllDay && schedule.category === 'allday') {
-                changes.category = 'time';
-            }
+            // console.log('beforeUpdateSchedule', e);
 
-            cal.updateSchedule(schedule.id, schedule.calendarId, changes);
-            refreshScheduleVisibility();
+            // if (changes && !changes.isAllDay && schedule.category === 'allday') {
+            //     changes.category = 'time';
+            // }
+
+            // cal.updateSchedule(schedule.id, schedule.calendarId, changes);
+            // refreshScheduleVisibility();
         },
         'beforeDeleteSchedule': function(e) {
             console.log('beforeDeleteSchedule', e);
@@ -263,10 +275,8 @@
                         end: `${data.end}`
                     }
                 ]);
-                $('#create-appointment').modal('hide'); 
+                $('#appointment-modal').modal('hide'); 
             });
-            // // close modal form
-            // $('#create-appointment').modal('hide');           
         });
     });
 
@@ -440,7 +450,7 @@
         $('.dropdown-menu a[role="menuitem"]').on('click', onClickMenu);
         $('#lnb-calendars').on('change', onChangeCalendars);
 
-        $('#btn-new-schedule').on('click', () => $('#create-appointment').modal());
+        $('#btn-new-schedule').on('click', () => $('#appointment-modal').modal());
         $('#dropdownMenu-calendars-list').on('click', onChangeNewScheduleCalendar);
 
         window.addEventListener('resize', resizeThrottled);
