@@ -57,6 +57,8 @@
             document.querySelector('#starttime').value = `${moment(e.schedule.start.getTime()).format('HH:mm')}`; 
             document.querySelector('#endtime').value = `${moment(e.schedule.end.getTime()).format('HH:mm')}`;
 
+            document.querySelector('.delete-button').style.display = 'inline-block';
+
             // no choice but to use JQuery, need it for TUI anyway
             $('#appointment-modal').modal();
 
@@ -75,6 +77,7 @@
             // no choice but to use JQuery, need it for TUI anyway
             $('#appointment-modal').modal();
 
+            // ISSUE WITH CLICKING ON GUIDE ELEMENT, INVESTIGATE
             // e.guide.clearGuideElement();
 
         },
@@ -455,6 +458,9 @@
 
         $('#btn-new-schedule').on('click', () => $('#appointment-modal').modal());
         $('#dropdownMenu-calendars-list').on('click', onChangeNewScheduleCalendar);
+
+        // Hide delete button once modal hidden ready for next time
+        $('#appointment-modal').on('hidden.bs.modal', e => document.querySelector('.delete-button').style.display = 'none');
 
         window.addEventListener('resize', resizeThrottled);
     }
