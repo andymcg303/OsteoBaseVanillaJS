@@ -5,12 +5,15 @@ const express   	= require("express"),
         viewType } = require("../middleware");
 const { getCalendar,
 		getAppointments, 
-		createAppointment } = require('../controllers/calendar');
+		createAppointment,
+		deleteAppointment } = require('../controllers/calendar');
 
-router.get("/calendar", isLoggedIn, viewType, asyncErrorHandler(getCalendar));
+router.get("/", isLoggedIn, viewType, asyncErrorHandler(getCalendar));
 
-router.get("/calendar/appointments", isLoggedIn, viewType, asyncErrorHandler(getAppointments));
+router.get("/appointments", isLoggedIn, viewType, asyncErrorHandler(getAppointments));
 
-router.post("/calendar/appointment", isLoggedIn, asyncErrorHandler(createAppointment));
+router.post("/appointment", isLoggedIn, asyncErrorHandler(createAppointment));
+
+router.delete("/appointment/:appt_id",  isLoggedIn, viewType, asyncErrorHandler(deleteAppointment));
 
 module.exports = router;

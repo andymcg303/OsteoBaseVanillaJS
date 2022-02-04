@@ -203,11 +203,11 @@
                     <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
                     <button type="button" class="btn btn-danger delete-button" id="delete-appointment-button">Delete</button>
                 </div>
+                <!-- Hidden input for appointment id -->
+                <input id="appointment-id" name="appointment-id" type="hidden">
             </form>
         </div>
     </div>
-
-    <!-- Appointment Update Modal -->
   
     <% include ../partials/common-scripts %>
 
@@ -221,4 +221,4 @@
  
     <script src="/js/calendar/app.js"></script>
     
-<% include ../partials/footer %>
+    <% include ../partials/footer %>

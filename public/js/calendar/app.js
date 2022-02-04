@@ -11,6 +11,8 @@
     var useDetailPopup = false;
     var datePicker, selectedCalendar;
 
+    const guideElement = [];
+
     cal = new Calendar('#calendar', {
         defaultView: 'week',
         taskView: ['task'],
@@ -56,6 +58,8 @@
             document.querySelector('#apptdate').value = `${moment(e.schedule.start.toDate()).format('YYYY-MM-DD')}`;
             document.querySelector('#starttime').value = `${moment(e.schedule.start.getTime()).format('HH:mm')}`; 
             document.querySelector('#endtime').value = `${moment(e.schedule.end.getTime()).format('HH:mm')}`;
+            // hidden field for appointment id
+            document.querySelector('#appointment-id').value = e.schedule.id;
 
             document.querySelector('.delete-button').style.display = 'inline-block';
 
@@ -77,8 +81,8 @@
             // no choice but to use JQuery, need it for TUI anyway
             $('#appointment-modal').modal();
 
-            // ISSUE WITH CLICKING ON GUIDE ELEMENT, INVESTIGATE
-            // e.guide.clearGuideElement();
+            // Store guide element for clearing when hiding modal
+            guideElement.push(e.guide.guideElement);
 
         },
         'beforeUpdateSchedule': function(e) {
@@ -285,6 +289,21 @@
         });
     });
 
+    // delete appointment
+    const deleteAppointmentButton = document.querySelector('.delete-button');
+
+    deleteAppointmentButton.addEventListener('click', () => {
+        const appointmentId = document.querySelector('#appointment-id').value;
+        fetch(`/calendar/appointment/${appointmentId}`, {
+            method: 'DELETE',
+        }).then(response => {
+            if (response.ok) {
+                
+            }
+            return Promise.reject(response);
+        })
+    });
+
     function onChangeNewScheduleCalendar(e) {
         var target = $(e.target).closest('a[role="menuitem"]')[0];
         var calendarId = getDataAction(target);
@@ -459,8 +478,11 @@
         $('#btn-new-schedule').on('click', () => $('#appointment-modal').modal());
         $('#dropdownMenu-calendars-list').on('click', onChangeNewScheduleCalendar);
 
-        // Hide delete button once modal hidden ready for next time
-        $('#appointment-modal').on('hidden.bs.modal', e => document.querySelector('.delete-button').style.display = 'none');
+        // Tidy up after modal hidden
+        $('#appointment-modal').on('hidden.bs.modal', e => {
+            document.querySelector('.delete-button').style.display = 'none';
+            guideElement[0].remove();
+        });
 
         window.addEventListener('resize', resizeThrottled);
     }

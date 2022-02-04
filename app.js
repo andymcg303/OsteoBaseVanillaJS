@@ -77,7 +77,7 @@ app.use(function(req, res, next) {
 
 // Mount Routes, Has to be done after app.use(bodyParser)
 app.use(indexRoutes);
-app.use(calendarRoutes);
+app.use('/calendar', calendarRoutes);
 app.use('/patients', patientsRoutes);
 app.use('/patients/:id/documents', documentsRoutes);
 app.use('/patients/:id/interviews', commonRoutes);

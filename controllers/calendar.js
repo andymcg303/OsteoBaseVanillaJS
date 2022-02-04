@@ -36,6 +36,11 @@ module.exports = {
             end: new Date(`${moment(req.body.apptdate).format('YYYY-MM-DD')} ${req.body.endtime}`)
         });
         res.json(newAppointment);
+    },
+
+    // Delete Appointment
+    deleteAppointment(req, res, next){
+        console.log(req.params.appt_id) 
     }
     
 };
