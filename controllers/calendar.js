@@ -39,8 +39,9 @@ module.exports = {
     },
 
     // Delete Appointment
-    deleteAppointment(req, res, next){
-        console.log(req.params.appt_id) 
+    async deleteAppointment(req, res, next){
+        const appointment = await Appointment.findById(req.params.appt_id);
+        const deletedAppt = await appointment.deleteOne();
+        res.json(deletedAppt); 
     }
-    
 };

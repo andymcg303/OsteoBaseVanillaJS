@@ -243,7 +243,7 @@
     
     }
 
-    const newAppointmentForm = document.querySelector('#new-appointment-form');
+    const newAppointmentForm = document.querySelector('#appointment-form');
 
     // Post new schedule/appointment
     newAppointmentForm.addEventListener('submit', e => {    
@@ -284,6 +284,7 @@
                         attendees: [data.patient]
                     }
                 ]);
+                document.querySelector('#appointment-form').reset();
                 $('#appointment-modal').modal('hide'); 
             });
         });
@@ -298,10 +299,14 @@
             method: 'DELETE',
         }).then(response => {
             if (response.ok) {
-                
+                return response.json();
             }
             return Promise.reject(response);
-        })
+        }).then(appointment => {
+            cal.deleteSchedule(appointment._id, appointment.practitioner);
+            document.querySelector('#appointment-form').reset();
+            $('#appointment-modal').modal('hide');
+        });
     });
 
     function onChangeNewScheduleCalendar(e) {
@@ -481,7 +486,7 @@
         // Tidy up after modal hidden
         $('#appointment-modal').on('hidden.bs.modal', e => {
             document.querySelector('.delete-button').style.display = 'none';
-            guideElement[0].remove();
+            if (guideElement.length) guideElement[0].remove();
         });
 
         window.addEventListener('resize', resizeThrottled);
