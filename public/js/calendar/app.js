@@ -284,7 +284,7 @@
                         attendees: [data.patient]
                     }
                 ]);
-                document.querySelector('#appointment-form').reset();
+                // document.querySelector('#appointment-form').reset();
                 $('#appointment-modal').modal('hide'); 
             });
         });
@@ -304,7 +304,7 @@
             return Promise.reject(response);
         }).then(appointment => {
             cal.deleteSchedule(appointment._id, appointment.practitioner);
-            document.querySelector('#appointment-form').reset();
+            // document.querySelector('#appointment-form').reset();
             $('#appointment-modal').modal('hide');
         });
     });
@@ -486,6 +486,8 @@
         // Tidy up after modal hidden
         $('#appointment-modal').on('hidden.bs.modal', e => {
             document.querySelector('.delete-button').style.display = 'none';
+            document.querySelector('#appointment-form').reset();
+            document.querySelector('#appointment-id').value = ''; //as reset() wont reset hidden input
             if (guideElement.length) guideElement[0].remove();
         });
 
