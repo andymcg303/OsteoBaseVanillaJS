@@ -19,7 +19,7 @@
             <div class="formatting">
                 <div class="changeview">
                     <a class="navbar-brand" href="/patients?currentView=<%= currentView %>&showHistory=<%= showHistory %>">OsteoBase</a>
-                    <a href="/patients?currentView=<%= currentView %>&showHistory=<%= showHistory %>" class="btn btn-info">View Patient Info</a>
+                    <a href="/patients?currentView=<%= currentView %>&showHistory=<%= showHistory %>" class="btn btn-info btn-info-larger">View Patient Info</a>
                 </div>
                 <% if (currentUser) { %>
                     <a href="/logout" class="btn logout-btn btn-sm btn-secondary">Logout <%= currentUser.username %></a>
@@ -199,16 +199,19 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button id="btn-save-schedule" class="btn btn-success">Save</button>
-                    <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-danger delete-button" id="delete-appointment-button">Delete</button>
+                    <a href="#" class="btn btn-info" id="view-patient-button">View Patient Info</a>
+                    <div>
+                        <button id="btn btn-save-schedule" class="btn btn-success">Save</button>
+                        <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-danger delete-button" id="delete-appointment-button">Delete</button>
+                    </div>
                 </div>
                 <!-- Hidden input for appointment id -->
-                <input id="appointment-id" name="appointment-id" type="hidden" value="">
+                <input id="appointment-id" name="appointmentId" type="hidden" value="">
             </form>
         </div>
     </div>
-  
+
     <% include ../partials/common-scripts %>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

@@ -61,6 +61,7 @@
             // hidden field for appointment id
             document.querySelector('#appointment-id').value = e.schedule.id;
 
+            document.querySelector('#view-patient-button').style.display = 'inline-block';
             document.querySelector('.delete-button').style.display = 'inline-block';
 
             // no choice but to use JQuery, need it for TUI anyway
@@ -77,6 +78,9 @@
             document.querySelector('#apptdate').value = `${moment(e.start.toDate()).format('YYYY-MM-DD')}`;
             document.querySelector('#starttime').value = `${moment(e.start.getTime()).format('HH:mm')}`; 
             document.querySelector('#endtime').value = `${moment(e.end.getTime()).format('HH:mm')}`;
+
+            // button styling
+            document.querySelector('.modal-footer').style['justify-content'] = "end";
 
             // no choice but to use JQuery, need it for TUI anyway
             $('#appointment-modal').modal();
@@ -243,53 +247,59 @@
     
     }
 
-    const newAppointmentForm = document.querySelector('#appointment-form');
+    const appointmentForm = document.querySelector('#appointment-form');
 
-    // Post new schedule/appointment
-    newAppointmentForm.addEventListener('submit', e => {    
+    // Create new appointment else update appointment
+    appointmentForm.addEventListener('submit', e => {    
         e.preventDefault();
         const formData = new FormData(e.target);
-        const newAppointmentData = Object.fromEntries(formData.entries());    
-        fetch('/calendar/appointment', {
-            headers: { "Content-Type": "application/json" },
-            method: 'POST',
-            body: JSON.stringify(newAppointmentData)
-        }).then(response => {
-            if (response.ok) {
-                return response.json();
-            }
-            return Promise.reject(response);
-        })
-        .then(data => {
+        const appointmentData = Object.fromEntries(formData.entries());
+    
+        if (!appointmentData.appointmentId){
 
-            // fetch from db to get patient name. id and patientid can be gotten from data returned from post
-            fetch(`/patients/${data.patient}`, {
-                headers: { "X-Requested-With": "XMLHttpRequest" },
-                method: 'GET'})
-            .then(response => {
+            // Create new appointment
+            fetch('/calendar/appointment', {
+                headers: { "Content-Type": "application/json" },
+                method: 'POST',
+                body: JSON.stringify(appointmentData)
+            }).then(response => {
                 if (response.ok) {
                     return response.json();
-                 }
+                }
                 return Promise.reject(response);
-            }).then(patient => {
-                // display in calendar grid
-                cal.createSchedules([
-                    {
-                        id: `${data._id}`,
-                        calendarId: newAppointmentData.practitioner,
-                        title: `${patient.firstname} ${patient.surname}`,
-                        category: 'time',
-                        start: `${data.start}`,
-                        end: `${data.end}`,
-                        attendees: [data.patient]
-                    }
-                ]);
-                // document.querySelector('#appointment-form').reset();
-                $('#appointment-modal').modal('hide'); 
-            });
-        });
-    });
+            })
+            .then(data => {
 
+                // fetch from db to get patient name. id and patientid can be gotten from data returned from post
+                fetch(`/patients/${data.patient}`, {
+                    headers: { "X-Requested-With": "XMLHttpRequest" },
+                    method: 'GET'})
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    return Promise.reject(response);
+                }).then(patient => {
+                    // display in calendar grid
+                    cal.createSchedules([
+                        {
+                            id: `${data._id}`,
+                            calendarId: appointmentData.practitioner,
+                            title: `${patient.firstname} ${patient.surname}`,
+                            category: 'time',
+                            start: `${data.start}`,
+                            end: `${data.end}`,
+                            attendees: [data.patient]
+                        }
+                    ]);
+                    $('#appointment-modal').modal('hide'); 
+                });
+            });
+        } else {
+            console.log('update appt');
+        }
+    });
+    
     // delete appointment
     const deleteAppointmentButton = document.querySelector('.delete-button');
 
@@ -304,9 +314,15 @@
             return Promise.reject(response);
         }).then(appointment => {
             cal.deleteSchedule(appointment._id, appointment.practitioner);
-            // document.querySelector('#appointment-form').reset();
             $('#appointment-modal').modal('hide');
         });
+    });
+
+    // Change href attribute when patient selector changed (for use with view patient button)
+    const selectPatient = document.querySelector('#patient');
+
+    selectPatient.addEventListener('change', (e) => {
+      document.querySelector('#view-patient-button').href = `/patients/${e.target.value}?currentView=<%= currentView %>&showHistory=<%= showHistory %>`;
     });
 
     function onChangeNewScheduleCalendar(e) {
@@ -486,6 +502,8 @@
         // Tidy up after modal hidden
         $('#appointment-modal').on('hidden.bs.modal', e => {
             document.querySelector('.delete-button').style.display = 'none';
+            document.querySelector('#view-patient-button').style.display = 'none';
+            document.querySelector('.modal-footer').style['justify-content'] = 'space-between';
             document.querySelector('#appointment-form').reset();
             document.querySelector('#appointment-id').value = ''; //as reset() wont reset hidden input
             if (guideElement.length) guideElement[0].remove();
