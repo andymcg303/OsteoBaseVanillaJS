@@ -60,6 +60,8 @@
             document.querySelector('#endtime').value = `${moment(e.schedule.end.getTime()).format('HH:mm')}`;
             // hidden field for appointment id
             document.querySelector('#appointment-id').value = e.schedule.id;
+            // href for view patients button
+            document.querySelector('#view-patient-button').href = `/patients/${e.schedule.attendees[0]}?currentView=${currentView}&showHistory=${showHistory}`;
 
             document.querySelector('#view-patient-button').style.display = 'inline-block';
             document.querySelector('.delete-button').style.display = 'inline-block';
@@ -322,7 +324,7 @@
     const selectPatient = document.querySelector('#patient');
 
     selectPatient.addEventListener('change', (e) => {
-      document.querySelector('#view-patient-button').href = `/patients/${e.target.value}?currentView=<%= currentView %>&showHistory=<%= showHistory %>`;
+      document.querySelector('#view-patient-button').href = `/patients/${e.target.value}?currentView=${currentView}&showHistory=${showHistory}`;
     });
 
     function onChangeNewScheduleCalendar(e) {
