@@ -257,6 +257,7 @@
         e.preventDefault();
         const formData = new FormData(e.target);
         const appointmentData = Object.fromEntries(formData.entries());
+        $('#appointment-modal').modal('hide'); // hide now to prevent multiple entries
     
         if (!appointmentData.appointmentId){
 
@@ -271,10 +272,10 @@
                 }
                 return Promise.reject(response);
             })
-            .then(data => {
+            .then(appointment => {
 
                 // fetch from db to get patient name. id and patientid can be gotten from data returned from post
-                fetch(`/patients/${data.patient}`, {
+                fetch(`/patients/${appointment.patient}`, {
                     headers: { "X-Requested-With": "XMLHttpRequest" },
                     method: 'GET'})
                 .then(response => {
@@ -286,16 +287,15 @@
                     // display in calendar grid
                     cal.createSchedules([
                         {
-                            id: `${data._id}`,
+                            id: `${appointment._id}`,
                             calendarId: appointmentData.practitioner,
                             title: `${patient.firstname} ${patient.surname}`,
                             category: 'time',
-                            start: `${data.start}`,
-                            end: `${data.end}`,
-                            attendees: [data.patient]
+                            start: `${appointment.start}`,
+                            end: `${appointment.end}`,
+                            attendees: [appointment.patient]
                         }
-                    ]);
-                    $('#appointment-modal').modal('hide'); 
+                    ]); 
                 });
             });
         } else {
@@ -311,15 +311,27 @@
                 }
                 return Promise.reject(response);
             }).then(appointment => {
-                cal.updateSchedule(appointment._id, appointmentData.calendarId, {
-                    calendarId: appointment.practitioner,
-                    title: `Barry Manilow`,
-                    category: 'time',
-                    start: `${appointment.start}`,
-                    end: `${appointment.end}`,
-                    attendees: [appointment.patient]
+
+                // fetch from db to get patient name. id and patientid can be gotten from data returned from post
+                fetch(`/patients/${appointment.patient}`, {
+                    headers: { "X-Requested-With": "XMLHttpRequest" },
+                    method: 'GET'})
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    return Promise.reject(response);
+                }).then(patient => {
+
+                    cal.updateSchedule(appointment._id, appointmentData.calendarId, {
+                        calendarId: appointment.practitioner,
+                        title: `${patient.firstname} ${patient.surname}`,
+                        category: 'time',
+                        start: `${appointment.start}`,
+                        end: `${appointment.end}`,
+                        attendees: [appointment.patient]
+                    });
                 });
-                $('#appointment-modal').modal('hide');
             });
         }
     });
@@ -337,8 +349,8 @@
             }
             return Promise.reject(response);
         }).then(appointment => {
-            cal.deleteSchedule(appointment._id, appointment.practitioner);
             $('#appointment-modal').modal('hide');
+            cal.deleteSchedule(appointment._id, appointment.practitioner);
         });
     });
 
