@@ -58,8 +58,9 @@
             document.querySelector('#apptdate').value = `${moment(e.schedule.start.toDate()).format('YYYY-MM-DD')}`;
             document.querySelector('#starttime').value = `${moment(e.schedule.start.getTime()).format('HH:mm')}`; 
             document.querySelector('#endtime').value = `${moment(e.schedule.end.getTime()).format('HH:mm')}`;
-            // hidden field for appointment id
+            // hidden fields for appointment id and existing calendar id
             document.querySelector('#appointment-id').value = e.schedule.id;
+            document.querySelector('#calendar-id').value = e.schedule.calendarId;
             // href for view patients button
             document.querySelector('#view-patient-button').href = `/patients/${e.schedule.attendees[0]}?currentView=${currentView}&showHistory=${showHistory}`;
 
@@ -298,7 +299,28 @@
                 });
             });
         } else {
-            console.log('update appt');
+
+            // Update Appointment
+            fetch(`/calendar/appointment/${appointmentData.appointmentId}`, {
+                headers: { "Content-Type": "application/json" },
+                method: 'PUT',
+                body: JSON.stringify(appointmentData)
+            }).then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+                return Promise.reject(response);
+            }).then(appointment => {
+                cal.updateSchedule(appointment._id, appointmentData.calendarId, {
+                    calendarId: appointment.practitioner,
+                    title: `Barry Manilow`,
+                    category: 'time',
+                    start: `${appointment.start}`,
+                    end: `${appointment.end}`,
+                    attendees: [appointment.patient]
+                });
+                $('#appointment-modal').modal('hide');
+            });
         }
     });
     

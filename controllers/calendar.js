@@ -38,10 +38,23 @@ module.exports = {
         res.json(newAppointment);
     },
 
+    // Update Appointment
+    async updateAppointment(req, res, next){
+        const updatedAppointment = await Appointment.findByIdAndUpdate(
+            req.params.appt_id, {
+                practitioner: req.body.practitioner,
+                patient: req.body.patient,
+                type: req.body.type,
+                start: new Date(`${moment(req.body.apptdate).format('YYYY-MM-DD')} ${req.body.starttime}`),
+                end: new Date(`${moment(req.body.apptdate).format('YYYY-MM-DD')} ${req.body.endtime}`)},
+            {new: true});
+        res.json(updatedAppointment);
+    },
+
     // Delete Appointment
     async deleteAppointment(req, res, next){
         const appointment = await Appointment.findById(req.params.appt_id);
-        const deletedAppt = await appointment.deleteOne();
-        res.json(deletedAppt); 
+        const deletedAppointment = await appointment.deleteOne();
+        res.json(deletedAppointment); 
     }
 };
