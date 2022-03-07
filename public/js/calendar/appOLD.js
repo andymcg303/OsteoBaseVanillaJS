@@ -5,18 +5,15 @@
 /* global moment, tui, chance */
 /* global findCalendar, CalendarList, ScheduleList, generateSchedule */
 
-// (function(window, Calendar) {
-
-{
-    const Calendar = tui.Calendar;
-    let resizeThrottled;
-    const useCreationPopup = false;
-    const useDetailPopup = false;
-    // let selectedCalendar; // don't need
+(function(window, Calendar) {
+    var cal, resizeThrottled;
+    var useCreationPopup = false;
+    var useDetailPopup = false;
+    var datePicker, selectedCalendar;
 
     const guideElement = [];
 
-    const cal = new Calendar('#calendar', {
+    cal = new Calendar('#calendar', {
         defaultView: 'week',
         taskView: ['task'],
         scheduleView: ['time'],
@@ -364,26 +361,24 @@
       document.querySelector('#view-patient-button').href = `/patients/${e.target.value}?currentView=${currentView}&showHistory=${showHistory}`;
     });
 
-    // don't need
-    // function onChangeNewScheduleCalendar(e) {
-    //     var target = $(e.target).closest('a[role="menuitem"]')[0];
-    //     var calendarId = getDataAction(target);
-    //     changeNewScheduleCalendar(calendarId);
-    // }
+    function onChangeNewScheduleCalendar(e) {
+        var target = $(e.target).closest('a[role="menuitem"]')[0];
+        var calendarId = getDataAction(target);
+        changeNewScheduleCalendar(calendarId);
+    }
 
-    // don't need
-    // function changeNewScheduleCalendar(calendarId) {
-    //     var calendarNameElement = document.getElementById('calendarName');
-    //     var calendar = findCalendar(calendarId);
-    //     var html = [];
+    function changeNewScheduleCalendar(calendarId) {
+        var calendarNameElement = document.getElementById('calendarName');
+        var calendar = findCalendar(calendarId);
+        var html = [];
 
-    //     html.push('<span class="calendar-bar" style="background-color: ' + calendar.bgColor + '; border-color:' + calendar.borderColor + ';"></span>');
-    //     html.push('<span class="calendar-name">' + calendar.name + '</span>');
+        html.push('<span class="calendar-bar" style="background-color: ' + calendar.bgColor + '; border-color:' + calendar.borderColor + ';"></span>');
+        html.push('<span class="calendar-name">' + calendar.name + '</span>');
 
-    //     calendarNameElement.innerHTML = html.join('');
+        calendarNameElement.innerHTML = html.join('');
 
-    //     selectedCalendar = calendar;
-    // }
+        selectedCalendar = calendar;
+    }
 
     function onChangeCalendars(e) {
         var calendarId = e.target.value;
@@ -538,7 +533,7 @@
         $('#lnb-calendars').on('change', onChangeCalendars);
 
         $('#btn-new-schedule').on('click', () => $('#appointment-modal').modal());
-        // $('#dropdownMenu-calendars-list').on('click', onChangeNewScheduleCalendar); // don't need
+        $('#dropdownMenu-calendars-list').on('click', onChangeNewScheduleCalendar);
 
         // Tidy up after modal hidden
         $('#appointment-modal').on('hidden.bs.modal', e => {
@@ -568,6 +563,4 @@
     setSchedules();
     setEventListener();
 
-}
-
-// })(window, tui.Calendar);
+})(window, tui.Calendar);
