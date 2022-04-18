@@ -277,6 +277,7 @@
             })
             .then(appointment => {
 
+                // THIS MAY NOT BE NECC, CAN STORE NAME IN OPTIONS ELEMENT WITH CUSTOM ATTRIBUTE
                 // fetch from db to get patient name. id and patientid can be gotten from data returned from post
                 fetch(`/patients/${appointment.patient}`, {
                     headers: { "X-Requested-With": "XMLHttpRequest" },
@@ -315,6 +316,7 @@
                 return Promise.reject(response);
             }).then(appointment => {
 
+                // THIS MAY NOT BE NECC, CAN STORE NAME IN OPTIONS ELEMENT WITH CUSTOM ATTRIBUTE
                 // fetch from db to get patient name. id and patientid can be gotten from data returned from post
                 fetch(`/patients/${appointment.patient}`, {
                     headers: { "X-Requested-With": "XMLHttpRequest" },
@@ -364,26 +366,18 @@
       document.querySelector('#view-patient-button').href = `/patients/${e.target.value}?currentView=${currentView}&showHistory=${showHistory}`;
     });
 
-    // don't need
-    // function onChangeNewScheduleCalendar(e) {
-    //     var target = $(e.target).closest('a[role="menuitem"]')[0];
-    //     var calendarId = getDataAction(target);
-    //     changeNewScheduleCalendar(calendarId);
-    // }
+    // Changee appointment end time when appointment type selector changed
+    const selectType = document.querySelector('#type');
 
-    // don't need
-    // function changeNewScheduleCalendar(calendarId) {
-    //     var calendarNameElement = document.getElementById('calendarName');
-    //     var calendar = findCalendar(calendarId);
-    //     var html = [];
+    selectType.addEventListener('change', (e) => {
+ 
+        const startTimeVal = document.querySelector('#starttime').value;
+        const endTimeEl = document.querySelector('#endtime');
 
-    //     html.push('<span class="calendar-bar" style="background-color: ' + calendar.bgColor + '; border-color:' + calendar.borderColor + ';"></span>');
-    //     html.push('<span class="calendar-name">' + calendar.name + '</span>');
+        const endTime = moment(startTimeVal).add(selectType[selectType.selectedIndex].getAttribute('data-duration'), 's');
+        endTimeEl.value = endTime; 
 
-    //     calendarNameElement.innerHTML = html.join('');
-
-    //     selectedCalendar = calendar;
-    // }
+    });
 
     function onChangeCalendars(e) {
         var calendarId = e.target.value;
@@ -538,7 +532,6 @@
         $('#lnb-calendars').on('change', onChangeCalendars);
 
         $('#btn-new-schedule').on('click', () => $('#appointment-modal').modal());
-        // $('#dropdownMenu-calendars-list').on('click', onChangeNewScheduleCalendar); // don't need
 
         // Tidy up after modal hidden
         $('#appointment-modal').on('hidden.bs.modal', e => {

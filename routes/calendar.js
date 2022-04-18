@@ -7,7 +7,8 @@ const { getCalendar,
 		getAppointments, 
 		createAppointment,
 		deleteAppointment,
-		updateAppointment } = require('../controllers/calendar');
+		updateAppointment,
+		getApptTypes } = require('../controllers/calendar');
 
 router.get("/", isLoggedIn, viewType, asyncErrorHandler(getCalendar));
 

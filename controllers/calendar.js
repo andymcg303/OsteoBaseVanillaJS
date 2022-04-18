@@ -57,4 +57,5 @@ module.exports = {
         const deletedAppointment = await appointment.deleteOne();
         res.json(deletedAppointment); 
     }
+    
 };

@@ -179,7 +179,7 @@
                         <label for="type">Appointment Type:</label>
                         <select class="form-control" name="type" id="type" required>
                             <% appttypes.forEach(function(appttype) { %>
-                                    <option value="<%= appttype.value %>"><%= appttype.type %></option>
+                                    <option value="<%= appttype.value %>" data-duration="<%= appttype.duration %>"><%= appttype.type %></option>
                             <% }); %>    
                         </select>
                     </div>
