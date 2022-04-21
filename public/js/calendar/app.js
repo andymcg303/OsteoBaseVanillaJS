@@ -58,6 +58,7 @@
             document.querySelector('#appointment-modal-title').textContent = "Edit Appointment";
             document.querySelector('#practitioner').value = e.schedule.calendarId;
             document.querySelector('#patient').value = e.schedule.attendees[0];
+            document.querySelector('#type').value = e.schedule.raw; 
             document.querySelector('#apptdate').value = `${moment(e.schedule.start.toDate()).format('YYYY-MM-DD')}`;
             document.querySelector('#starttime').value = `${moment(e.schedule.start.getTime()).format('HH:mm')}`; 
             document.querySelector('#endtime').value = `${moment(e.schedule.end.getTime()).format('HH:mm')}`;
@@ -297,7 +298,8 @@
                             category: 'time',
                             start: `${appointment.start}`,
                             end: `${appointment.end}`,
-                            attendees: [appointment.patient]
+                            attendees: [appointment.patient],
+                            raw: `${appointment.type}`
                         }
                     ]); 
                 });
@@ -334,7 +336,8 @@
                         category: 'time',
                         start: `${appointment.start}`,
                         end: `${appointment.end}`,
-                        attendees: [appointment.patient]
+                        attendees: [appointment.patient],
+                        raw: `${appointment.type}`
                     });
                 });
             });
@@ -366,7 +369,7 @@
       document.querySelector('#view-patient-button').href = `/patients/${e.target.value}?currentView=${currentView}&showHistory=${showHistory}`;
     });
 
-    // Changee appointment end time when appointment type selector changed
+    // Change appointment end time when appointment type selector changed
     const selectType = document.querySelector('#type');
 
     selectType.addEventListener('change', (e) => {
@@ -374,7 +377,7 @@
         const startTimeVal = document.querySelector('#starttime').value;
         const endTimeEl = document.querySelector('#endtime');
 
-        const endTime = moment(startTimeVal).add(selectType[selectType.selectedIndex].getAttribute('data-duration'), 's');
+        const endTime = moment(startTimeVal, 'HH:mm:ss').add(selectType[selectType.selectedIndex].getAttribute('data-duration'), 'm').format('HH:mm');
         endTimeEl.value = endTime; 
 
     });
@@ -516,7 +519,8 @@
                         category: 'time',
                         start: appointment.start,
                         end: appointment.end,
-                        attendees: [appointment.patient]                                         
+                        attendees: [appointment.patient],
+                        raw: `${appointment.type}`              
                     }];
                     cal.createSchedules(ScheduleList);
                 });
