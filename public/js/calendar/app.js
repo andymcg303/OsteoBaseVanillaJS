@@ -57,7 +57,7 @@
             //populate edit modal form
             document.querySelector('#appointment-modal-title').textContent = "Edit Appointment";
             document.querySelector('#practitioner').value = e.schedule.calendarId;
-            document.querySelector('#patient').value = e.schedule.attendees[0];
+            $('#patient').data('selectize').setValue(e.schedule.attendees[0]); //got to use $ for selectize
             document.querySelector('#type').value = e.schedule.raw; 
             document.querySelector('#apptdate').value = `${moment(e.schedule.start.toDate()).format('YYYY-MM-DD')}`;
             document.querySelector('#starttime').value = `${moment(e.schedule.start.getTime()).format('HH:mm')}`; 
@@ -82,6 +82,7 @@
 
             //populate create modal form
             document.querySelector('#appointment-modal-title').textContent = "Create Appointment";
+            $('#patient').data('selectize').setValue(null); //got to use $ for selectize
             document.querySelector('#apptdate').value = `${moment(e.start.toDate()).format('YYYY-MM-DD')}`;
             document.querySelector('#starttime').value = `${moment(e.start.getTime()).format('HH:mm')}`; 
             document.querySelector('#endtime').value = `${moment(e.end.getTime()).format('HH:mm')}`;
@@ -254,9 +255,13 @@
     
     }
 
-    const appointmentForm = document.querySelector('#appointment-form');
+    // MODAL FORM FUNCTIONALITY
+
+    // no choice but to use JQuery, need it for TUI anyway
+    $('#patient').selectize({ maxItems: '1'});
 
     // Create new appointment else update appointment
+    const appointmentForm = document.querySelector('#appointment-form');
     appointmentForm.addEventListener('submit', e => {    
         e.preventDefault();
         const formData = new FormData(e.target);
@@ -343,10 +348,27 @@
             });
         }
     });
+
+    // Change href attribute when patient selector changed (for use with view patient button)
+    const selectPatient = document.querySelector('#patient');
+    selectPatient.addEventListener('change', (e) => {
+        document.querySelector('#view-patient-button').href = `/patients/${e.target.value}?currentView=${currentView}&showHistory=${showHistory}`;
+    });
+
+    // Change appointment end time when appointment type selector changed
+    const selectType = document.querySelector('#type');
+    selectType.addEventListener('change', (e) => {
+    
+        const startTimeVal = document.querySelector('#starttime').value;
+        const endTimeEl = document.querySelector('#endtime');
+
+        const endTime = moment(startTimeVal, 'HH:mm:ss').add(selectType[selectType.selectedIndex].getAttribute('data-duration'), 'm').format('HH:mm');
+        endTimeEl.value = endTime; 
+
+    });
     
     // delete appointment
     const deleteAppointmentButton = document.querySelector('.delete-button');
-
     deleteAppointmentButton.addEventListener('click', () => {
         const appointmentId = document.querySelector('#appointment-id').value;
         fetch(`/calendar/appointment/${appointmentId}`, {
@@ -360,26 +382,6 @@
             $('#appointment-modal').modal('hide');
             cal.deleteSchedule(appointment._id, appointment.practitioner);
         });
-    });
-
-    // Change href attribute when patient selector changed (for use with view patient button)
-    const selectPatient = document.querySelector('#patient');
-
-    selectPatient.addEventListener('change', (e) => {
-      document.querySelector('#view-patient-button').href = `/patients/${e.target.value}?currentView=${currentView}&showHistory=${showHistory}`;
-    });
-
-    // Change appointment end time when appointment type selector changed
-    const selectType = document.querySelector('#type');
-
-    selectType.addEventListener('change', (e) => {
- 
-        const startTimeVal = document.querySelector('#starttime').value;
-        const endTimeEl = document.querySelector('#endtime');
-
-        const endTime = moment(startTimeVal, 'HH:mm:ss').add(selectType[selectType.selectedIndex].getAttribute('data-duration'), 'm').format('HH:mm');
-        endTimeEl.value = endTime; 
-
     });
 
     function onChangeCalendars(e) {
