@@ -355,15 +355,18 @@
         document.querySelector('#view-patient-button').href = `/patients/${e.target.value}?currentView=${currentView}&showHistory=${showHistory}`;
     });
 
-    // Change appointment end time when appointment type selector changed
+    // Change appointment end time and abbreviation hidden field when appointment type selector changed
     const selectType = document.querySelector('#type');
     selectType.addEventListener('change', (e) => {
     
         const startTimeVal = document.querySelector('#starttime').value;
         const endTimeEl = document.querySelector('#endtime');
+        const typeAbbr = document.querySelector('#abbreviation');
 
         const endTime = moment(startTimeVal, 'HH:mm:ss').add(selectType[selectType.selectedIndex].getAttribute('data-duration'), 'm').format('HH:mm');
-        endTimeEl.value = endTime; 
+        endTimeEl.value = endTime;
+        
+        typeAbbr.value = selectType[selectType.selectedIndex].getAttribute('data-abbreviation');
 
     });
     
