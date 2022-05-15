@@ -56,6 +56,12 @@ module.exports = {
         const appointment = await Appointment.findById(req.params.appt_id);
         const deletedAppointment = await appointment.deleteOne();
         res.json(deletedAppointment); 
+    },
+
+    // Get Appointment Abbreviation
+    async getApptAbbrv(req, res, next){
+        const foundApptAbbrv = await ApptTypes.findOne({ type: `${req.params.appt_type}`} ); 
+        res.json(foundApptAbbrv);
     }
     
 };

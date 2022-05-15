@@ -8,7 +8,7 @@ const { getCalendar,
 		createAppointment,
 		deleteAppointment,
 		updateAppointment,
-		getApptTypes } = require('../controllers/calendar');
+		getApptAbbrv } = require('../controllers/calendar');
 
 router.get("/", isLoggedIn, viewType, asyncErrorHandler(getCalendar));
 
@@ -19,5 +19,7 @@ router.post("/appointment", isLoggedIn, asyncErrorHandler(createAppointment));
 router.put("/appointment/:appt_id", isLoggedIn, asyncErrorHandler(updateAppointment));
 
 router.delete("/appointment/:appt_id",  isLoggedIn, asyncErrorHandler(deleteAppointment));
+
+router.get("/appointment/abbrv/:appt_type", isLoggedIn, asyncErrorHandler(getApptAbbrv));
 
 module.exports = router;

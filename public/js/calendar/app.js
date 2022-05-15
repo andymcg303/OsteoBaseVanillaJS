@@ -507,14 +507,20 @@
         }).then(appointments => {
 
             Promise.all(appointments.map(appointment => {
-                fetch(`/patients/info/${appointment.patient}`, {
-                    headers: { "X-Requested-With": "XMLHttpRequest" },
-                    method: 'GET'})
+                Promise.all([
+                    fetch(`/patients/info/${appointment.patient}`, {
+                        headers: { "X-Requested-With": "XMLHttpRequest" },
+                        method: 'GET'}),
+                    fetch(`calendar/appointment/abbrv/${appointment.type}`, {
+                        headers: { "X-Requested-With": "XMLHttpRequest" },
+                        method: 'GET'})
+                    ])        
                 .then(response => {
                     if (response.ok) {
                         return response.json();
                     }
                     return Promise.reject(response);
+                    
                 })
                 .then(patient => {
                     const ScheduleList = [{
