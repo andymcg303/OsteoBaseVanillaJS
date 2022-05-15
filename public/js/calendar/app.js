@@ -347,10 +347,13 @@
         }
     });
 
-    // Change href attribute when patient selector changed (for use with view patient button)
-    const selectPatient = document.querySelector('#patient');
-    selectPatient.addEventListener('change', (e) => {
-        document.querySelector('#view-patient-button').href = `/patients/${e.target.value}?currentView=${currentView}&showHistory=${showHistory}`;
+
+    // Change href of view patient button and patient name hidden field when patient is changed (have to use jQuery for selectize)
+    const selectPatient = $("#patient")[0].selectize;  
+    selectPatient.on('change', function() {
+        document.querySelector('#view-patient-button').href = `/patients/${selectPatient.getValue()}?currentView=${currentView}&showHistory=${showHistory}`;
+        // document.querySelector('#patient-name') = selectPatient[selectPatient.selectedIndex].textContent;
+        // ABOVE get this through custom attribute as text content has DOB
     });
 
     // Change appointment end time and abbreviation hidden field when appointment type selector changed
