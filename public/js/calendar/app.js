@@ -5,8 +5,6 @@
 /* global moment, tui, chance */
 /* global findCalendar, CalendarList, ScheduleList, generateSchedule */
 
-// (function(window, Calendar) {
-
 {
     const Calendar = tui.Calendar;
     let resizeThrottled;
@@ -515,18 +513,19 @@
                         headers: { "X-Requested-With": "XMLHttpRequest" },
                         method: 'GET'})
                     ])        
-                .then(response => {
-                    if (response.ok) {
-                        return response.json();
+                .then(responses => {
+                    if (responses[0].ok || responses[1].ok) {
+                        return Promise.all(responses.map(response => {
+                            return response.json();
+                        }));
                     }
-                    return Promise.reject(response);
-                    
+                    return Promise.reject(responses);
                 })
-                .then(patient => {
+                .then(data => {
                     const ScheduleList = [{
                         id: appointment._id,
                         calendarId: appointment.practitioner,
-                        title: `${patient.firstname} ${patient.surname}`,
+                        title: `${data[0].firstname} ${data[0].surname} (${data[1].abbreviation})`,
                         category: 'time',
                         start: appointment.start,
                         end: appointment.end,
@@ -578,4 +577,3 @@
 
 }
 
-// })(window, tui.Calendar);

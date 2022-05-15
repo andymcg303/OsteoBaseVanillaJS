@@ -60,7 +60,7 @@ module.exports = {
 
     // Get Appointment Abbreviation
     async getApptAbbrv(req, res, next){
-        const foundApptAbbrv = await ApptTypes.findOne({ type: `${req.params.appt_type}`} ); 
+        const foundApptAbbrv = await ApptTypes.findOne({ value: `${req.params.appt_type}`} ); 
         res.json(foundApptAbbrv);
     }
     
