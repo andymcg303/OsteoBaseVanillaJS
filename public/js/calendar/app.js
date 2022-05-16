@@ -60,9 +60,10 @@
             document.querySelector('#apptdate').value = `${moment(e.schedule.start.toDate()).format('YYYY-MM-DD')}`;
             document.querySelector('#starttime').value = `${moment(e.schedule.start.getTime()).format('HH:mm')}`; 
             document.querySelector('#endtime').value = `${moment(e.schedule.end.getTime()).format('HH:mm')}`;
-            // hidden fields for appointment id and existing calendar id
+            // hidden fields for appointment id, existing calendar id, type abbreviation
             document.querySelector('#appointment-id').value = e.schedule.id;
             document.querySelector('#calendar-id').value = e.schedule.calendarId;
+            document.querySelector('#abbreviation').value = selectType[selectType.selectedIndex].getAttribute('data-abbreviation');
             // href for view patients button
             document.querySelector('#view-patient-button').href = `/patients/${e.schedule.attendees[0]}?currentView=${currentView}&showHistory=${showHistory}`;
 
@@ -84,6 +85,9 @@
             document.querySelector('#apptdate').value = `${moment(e.start.toDate()).format('YYYY-MM-DD')}`;
             document.querySelector('#starttime').value = `${moment(e.start.getTime()).format('HH:mm')}`; 
             document.querySelector('#endtime').value = `${moment(e.end.getTime()).format('HH:mm')}`;
+
+            // hidden field for type abbreviation, initialise value 
+            document.querySelector('#abbreviation').value = selectType[selectType.selectedIndex].getAttribute('data-abbreviation');
 
             // button styling
             document.querySelector('.modal-footer').style['justify-content'] = "end";
@@ -297,7 +301,7 @@
                         {
                             id: `${appointment._id}`,
                             calendarId: appointmentData.practitioner,
-                            title: `${patient.firstname} ${patient.surname}`,
+                            title: `${patient.firstname} ${patient.surname} (${appointmentData.abbreviation})`,
                             category: 'time',
                             start: `${appointment.start}`,
                             end: `${appointment.end}`,
@@ -335,7 +339,7 @@
 
                     cal.updateSchedule(appointment._id, appointmentData.calendarId, {
                         calendarId: appointment.practitioner,
-                        title: `${patient.firstname} ${patient.surname}`,
+                        title: `${patient.firstname} ${patient.surname} (${appointmentData.abbreviation})`,
                         category: 'time',
                         start: `${appointment.start}`,
                         end: `${appointment.end}`,
@@ -348,12 +352,12 @@
     });
 
 
-    // Change href of view patient button and patient name hidden field when patient is changed (have to use jQuery for selectize)
+    // Change href of view patient button when patient is changed (have to use jQuery for selectize) (Patient name hidden field NOT EASY due to selectize, may return to this)
     const selectPatient = $("#patient")[0].selectize;  
     selectPatient.on('change', function() {
         document.querySelector('#view-patient-button').href = `/patients/${selectPatient.getValue()}?currentView=${currentView}&showHistory=${showHistory}`;
         // document.querySelector('#patient-name') = selectPatient[selectPatient.selectedIndex].textContent;
-        // ABOVE get this through custom attribute as text content has DOB
+        // ABOVE get this through custom attribute as text content has DOB??? Not easy
     });
 
     // Change appointment end time and abbreviation hidden field when appointment type selector changed
