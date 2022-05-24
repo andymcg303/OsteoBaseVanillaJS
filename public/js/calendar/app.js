@@ -8,9 +8,9 @@
 {
     const Calendar = tui.Calendar;
     let resizeThrottled;
+    // Using custom modal form 
     const useCreationPopup = false;
     const useDetailPopup = false;
-    // let selectedCalendar; // don't need
 
     const guideElement = [];
 
@@ -28,28 +28,16 @@
         },
         month: {
             startDayOfWeek: 1
+        },
+        template: {
+            taskTitle: function() {
+                return '<span class="tui-full-calendar-left-content">Cxl</span>';
+            }
         }
-        // template: {
-        //     // milestone: function(model) {
-        //     //     return '<span class="calendar-font-icon ic-milestone-b"></span> <span style="background-color: ' + model.bgColor + '">' + model.title + '</span>';
-        //     // },
-        //     // allday: function(schedule) {
-        //     //     return getTimeTemplate(schedule, true);
-        //     // },
-        //     // taskTitle: function() {
-        //     //     return '<span class="tui-full-calendar-left-content">Notes</span>';
-        //     // },
-        //     // time: function(schedule) {
-        //     //     return getTimeTemplate(schedule, false);
-        //     // }
-        // }
     });
 
     // event handlers
     cal.on({
-        'clickMore': function(e) {
-            console.log('clickMore', e);
-        },
         'clickSchedule': function(e) {
 
             //populate edit modal form
@@ -74,9 +62,6 @@
             $('#appointment-modal').modal();
 
         },
-        'clickDayname': function(date) {
-            console.log('clickDayname', date);
-        },
         'beforeCreateSchedule': function(e) {
 
             //populate create modal form
@@ -98,79 +83,8 @@
             // Store guide element for clearing when hiding modal
             guideElement.push(e.guide.guideElement);
 
-        },
-        'beforeUpdateSchedule': function(e) {
-
-            // var schedule = e.schedule;
-            // var changes = e.changes;
-
-            // console.log('beforeUpdateSchedule', e);
-
-            // if (changes && !changes.isAllDay && schedule.category === 'allday') {
-            //     changes.category = 'time';
-            // }
-
-            // cal.updateSchedule(schedule.id, schedule.calendarId, changes);
-            // refreshScheduleVisibility();
-        },
-        'beforeDeleteSchedule': function(e) {
-            console.log('beforeDeleteSchedule', e);
-            cal.deleteSchedule(e.schedule.id, e.schedule.calendarId);
-        },
-        'afterRenderSchedule': function(e) {
-            var schedule = e.schedule;
-            // var element = cal.getElement(schedule.id, schedule.calendarId);
-            // console.log('afterRenderSchedule', element);
-        },
-        'clickTimezonesCollapseBtn': function(timezonesCollapsed) {
-            console.log('timezonesCollapsed', timezonesCollapsed);
-
-            if (timezonesCollapsed) {
-                cal.setTheme({
-                    'week.daygridLeft.width': '77px',
-                    'week.timegridLeft.width': '77px'
-                });
-            } else {
-                cal.setTheme({
-                    'week.daygridLeft.width': '60px',
-                    'week.timegridLeft.width': '60px'
-                });
-            }
-
-            return true;
         }
     });
-
-    // /**
-    //  * Get time template for time and all-day
-    //  * @param {Schedule} schedule - schedule
-    //  * @param {boolean} isAllDay - isAllDay or hasMultiDates
-    //  * @returns {string}
-    //  */
-    // function getTimeTemplate(schedule, isAllDay) {
-    //     var html = [];
-    //     var start = moment(schedule.start.toUTCString());
-    //     if (!isAllDay) {
-    //         html.push('<strong>' + start.format('HH:mm') + '</strong> ');
-    //     }
-    //     if (schedule.isPrivate) {
-    //         html.push('<span class="calendar-font-icon ic-lock-b"></span>');
-    //         html.push(' Private');
-    //     } else {
-    //         if (schedule.isReadOnly) {
-    //             html.push('<span class="calendar-font-icon ic-readonly-b"></span>');
-    //         } else if (schedule.recurrenceRule) {
-    //             html.push('<span class="calendar-font-icon ic-repeat-b"></span>');
-    //         } else if (schedule.attendees.length) {
-    //             html.push('<span class="calendar-font-icon ic-user-b"></span>');
-    //         } else if (schedule.location) {
-    //             html.push('<span class="calendar-font-icon ic-location-b"></span>');
-    //         }
-    //         html.push(' ' + schedule.title);
-    //     }
-
-    //     return html.join('');
-    // }
 
     /**
      * A listener for click the menu
@@ -256,141 +170,6 @@
         setRenderRangeText();
     
     }
-
-    // MODAL FORM FUNCTIONALITY
-
-    // no choice but to use JQuery, need it for TUI anyway
-    $('#patient').selectize({ maxItems: '1'});
-
-    // Create new appointment else update appointment
-    const appointmentForm = document.querySelector('#appointment-form');
-    appointmentForm.addEventListener('submit', e => {    
-        e.preventDefault();
-        const formData = new FormData(e.target);
-        const appointmentData = Object.fromEntries(formData.entries());
-        $('#appointment-modal').modal('hide'); // hide now to prevent multiple entries
-    
-        if (!appointmentData.appointmentId){
-
-            // Create new appointment
-            fetch('/calendar/appointment', {
-                headers: { "Content-Type": "application/json" },
-                method: 'POST',
-                body: JSON.stringify(appointmentData)
-            }).then(response => {
-                if (response.ok) {
-                    return response.json();
-                }
-                return Promise.reject(response);
-            })
-            .then(appointment => {
-
-                // THIS MAY NOT BE NECC, CAN STORE NAME IN OPTIONS ELEMENT WITH CUSTOM ATTRIBUTE
-                // fetch from db to get patient name. id and patientid can be gotten from data returned from post
-                fetch(`/patients/${appointment.patient}`, {
-                    headers: { "X-Requested-With": "XMLHttpRequest" },
-                    method: 'GET'})
-                .then(response => {
-                    if (response.ok) {
-                        return response.json();
-                    }
-                    return Promise.reject(response);
-                }).then(patient => {
-                    // display in calendar grid
-                    cal.createSchedules([
-                        {
-                            id: `${appointment._id}`,
-                            calendarId: appointmentData.practitioner,
-                            title: `${patient.firstname} ${patient.surname} (${appointmentData.abbreviation})`,
-                            category: 'time',
-                            start: `${appointment.start}`,
-                            end: `${appointment.end}`,
-                            attendees: [appointment.patient],
-                            raw: `${appointment.type}`
-                        }
-                    ]); 
-                });
-            });
-        } else {
-
-            // Update Appointment
-            fetch(`/calendar/appointment/${appointmentData.appointmentId}`, {
-                headers: { "Content-Type": "application/json" },
-                method: 'PUT',
-                body: JSON.stringify(appointmentData)
-            }).then(response => {
-                if (response.ok) {
-                    return response.json();
-                }
-                return Promise.reject(response);
-            }).then(appointment => {
-
-                // THIS MAY NOT BE NECC, CAN STORE NAME IN OPTIONS ELEMENT WITH CUSTOM ATTRIBUTE
-                // fetch from db to get patient name. id and patientid can be gotten from data returned from post
-                fetch(`/patients/${appointment.patient}`, {
-                    headers: { "X-Requested-With": "XMLHttpRequest" },
-                    method: 'GET'})
-                .then(response => {
-                    if (response.ok) {
-                        return response.json();
-                    }
-                    return Promise.reject(response);
-                }).then(patient => {
-
-                    cal.updateSchedule(appointment._id, appointmentData.calendarId, {
-                        calendarId: appointment.practitioner,
-                        title: `${patient.firstname} ${patient.surname} (${appointmentData.abbreviation})`,
-                        category: 'time',
-                        start: `${appointment.start}`,
-                        end: `${appointment.end}`,
-                        attendees: [appointment.patient],
-                        raw: `${appointment.type}`
-                    });
-                });
-            });
-        }
-    });
-
-
-    // Change href of view patient button when patient is changed (have to use jQuery for selectize) (Patient name hidden field NOT EASY due to selectize, may return to this)
-    const selectPatient = $("#patient")[0].selectize;  
-    selectPatient.on('change', function() {
-        document.querySelector('#view-patient-button').href = `/patients/${selectPatient.getValue()}?currentView=${currentView}&showHistory=${showHistory}`;
-        // document.querySelector('#patient-name') = selectPatient[selectPatient.selectedIndex].textContent;
-        // ABOVE get this through custom attribute as text content has DOB??? Not easy
-    });
-
-    // Change appointment end time and abbreviation hidden field when appointment type selector changed
-    const selectType = document.querySelector('#type');
-    selectType.addEventListener('change', (e) => {
-    
-        const startTimeVal = document.querySelector('#starttime').value;
-        const endTimeEl = document.querySelector('#endtime');
-        const typeAbbr = document.querySelector('#abbreviation');
-
-        const endTime = moment(startTimeVal, 'HH:mm:ss').add(selectType[selectType.selectedIndex].getAttribute('data-duration'), 'm').format('HH:mm');
-        endTimeEl.value = endTime;
-        
-        typeAbbr.value = selectType[selectType.selectedIndex].getAttribute('data-abbreviation');
-
-    });
-    
-    // delete appointment
-    const deleteAppointmentButton = document.querySelector('.delete-button');
-    deleteAppointmentButton.addEventListener('click', () => {
-        const appointmentId = document.querySelector('#appointment-id').value;
-        fetch(`/calendar/appointment/${appointmentId}`, {
-            method: 'DELETE',
-        }).then(response => {
-            if (response.ok) {
-                return response.json();
-            }
-            return Promise.reject(response);
-        }).then(appointment => {
-            $('#appointment-modal').modal('hide');
-            cal.deleteSchedule(appointment._id, appointment.practitioner);
-        });
-    });
 
     function onChangeCalendars(e) {
         var calendarId = e.target.value;
@@ -576,6 +355,138 @@
     }, 50);
 
     window.cal = cal;
+
+    // CUSTOM MODAL FORM FUNCTIONALITY
+
+    // no choice but to use JQuery, need it for TUI anyway
+    $('#patient').selectize({ maxItems: '1'});
+
+    // Create new appointment else update appointment
+    const appointmentForm = document.querySelector('#appointment-form');
+    appointmentForm.addEventListener('submit', e => {    
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const appointmentData = Object.fromEntries(formData.entries());
+        $('#appointment-modal').modal('hide'); // hide now to prevent multiple entries
+    
+        if (!appointmentData.appointmentId){
+
+            // Create new appointment
+            fetch('/calendar/appointment', {
+                headers: { "Content-Type": "application/json" },
+                method: 'POST',
+                body: JSON.stringify(appointmentData)
+            }).then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+                return Promise.reject(response);
+            })
+            .then(appointment => {
+
+                // fetch from db to get patient name. id and patientid can be gotten from data returned from post
+                fetch(`/patients/${appointment.patient}`, {
+                    headers: { "X-Requested-With": "XMLHttpRequest" },
+                    method: 'GET'})
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    return Promise.reject(response);
+                }).then(patient => {
+                    // display in calendar grid
+                    cal.createSchedules([
+                        {
+                            id: `${appointment._id}`,
+                            calendarId: appointmentData.practitioner,
+                            title: `${patient.firstname} ${patient.surname} (${appointmentData.abbreviation})`,
+                            category: 'time',
+                            start: `${appointment.start}`,
+                            end: `${appointment.end}`,
+                            attendees: [appointment.patient],
+                            raw: `${appointment.type}`
+                        }
+                    ]); 
+                });
+            });
+        } else {
+
+            // Update Appointment
+            fetch(`/calendar/appointment/${appointmentData.appointmentId}`, {
+                headers: { "Content-Type": "application/json" },
+                method: 'PUT',
+                body: JSON.stringify(appointmentData)
+            }).then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+                return Promise.reject(response);
+            }).then(appointment => {
+
+                // fetch from db to get patient name. id and patientid can be gotten from data returned from post
+                fetch(`/patients/${appointment.patient}`, {
+                    headers: { "X-Requested-With": "XMLHttpRequest" },
+                    method: 'GET'})
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    return Promise.reject(response);
+                }).then(patient => {
+
+                    cal.updateSchedule(appointment._id, appointmentData.calendarId, {
+                        calendarId: appointment.practitioner,
+                        title: `${patient.firstname} ${patient.surname} (${appointmentData.abbreviation})`,
+                        category: 'time',
+                        start: `${appointment.start}`,
+                        end: `${appointment.end}`,
+                        attendees: [appointment.patient],
+                        raw: `${appointment.type}`
+                    });
+                });
+            });
+        }
+    });
+
+    // Change href of view patient button when patient is changed (have to use jQuery for selectize)
+    const selectPatient = $("#patient")[0].selectize;  
+    selectPatient.on('change', function() {
+        document.querySelector('#view-patient-button').href = `/patients/${selectPatient.getValue()}?currentView=${currentView}&showHistory=${showHistory}`;
+    });
+
+    // Change appointment end time and abbreviation hidden field when appointment type selector changed
+    const selectType = document.querySelector('#type');
+    selectType.addEventListener('change', (e) => {
+    
+        const startTimeVal = document.querySelector('#starttime').value;
+        const endTimeEl = document.querySelector('#endtime');
+        const typeAbbr = document.querySelector('#abbreviation');
+
+        const endTime = moment(startTimeVal, 'HH:mm:ss').add(selectType[selectType.selectedIndex].getAttribute('data-duration'), 'm').format('HH:mm');
+        endTimeEl.value = endTime;
+        
+        typeAbbr.value = selectType[selectType.selectedIndex].getAttribute('data-abbreviation');
+
+    });
+    
+    // delete appointment
+    const deleteAppointmentButton = document.querySelector('.delete-button');
+    deleteAppointmentButton.addEventListener('click', () => {
+        const appointmentId = document.querySelector('#appointment-id').value;
+        fetch(`/calendar/appointment/${appointmentId}`, {
+            method: 'DELETE',
+        }).then(response => {
+            if (response.ok) {
+                return response.json();
+            }
+            return Promise.reject(response);
+        }).then(appointment => {
+            $('#appointment-modal').modal('hide');
+            cal.deleteSchedule(appointment._id, appointment.practitioner);
+        });
+    });
+
+    // END OF CUSTOM MODAL FORM
 
     setDropdownCalendarType();
     setRenderRangeText();
