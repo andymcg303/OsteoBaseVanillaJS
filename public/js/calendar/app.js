@@ -319,9 +319,17 @@
                         raw: `${appointment.type}`              
                     }];
                     cal.createSchedules(ScheduleList);
-                });
+                }).catch(err => 
+                    {
+                        displayError(err);
+                    }
+                );
             }));
-        });
+        }).catch(err => 
+            {
+                displayError(err);
+            }
+        );
 
         refreshScheduleVisibility();
     }
@@ -407,8 +415,16 @@
                             raw: `${appointment.type}`
                         }
                     ]); 
-                });
-            });
+                }).catch(err => 
+                    {
+                        displayError(err);
+                    }
+                );
+            }).catch(err => 
+                {
+                    displayError(err);
+                }
+            );
         } else {
 
             // Update Appointment
@@ -443,10 +459,27 @@
                         attendees: [appointment.patient],
                         raw: `${appointment.type}`
                     });
-                });
-            });
+                }).catch(err =>
+                    {
+                        displayError(err);
+                    });
+            }).catch(err => 
+                {
+                    displayError(err);
+                }
+            );
         }
     });
+
+    // helper function to display fetch errors in same style as server side errors
+    function displayError(err){
+        alert(err);
+        // const newHeader = document.createElement("h1");
+        // newHeader.style.cssText = "color:red";
+        // newHeader.appendChild(document.createTextNode(err));
+        // const lnb = document.querySelector('#lnb');
+        // document.body.insertBefore(newHeader, lnb);
+    }
 
     // Change href of view patient button when patient is changed (have to use jQuery for selectize)
     const selectPatient = $("#patient")[0].selectize;  
@@ -483,7 +516,11 @@
         }).then(appointment => {
             $('#appointment-modal').modal('hide');
             cal.deleteSchedule(appointment._id, appointment.practitioner);
-        });
+        }).catch(err => 
+            {
+                displayError(err);
+            }
+        );
     });
 
     // END OF CUSTOM MODAL FORM
