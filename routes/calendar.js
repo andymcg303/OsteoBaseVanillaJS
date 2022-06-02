@@ -12,14 +12,14 @@ const { getCalendar,
 
 router.get("/", isLoggedIn, viewType, asyncErrorHandler(getCalendar));
 
-router.get("/appointments", isLoggedIn, asyncErrorHandler(getAppointments));
+router.get("/appointments", getAppointments);
 
-router.post("/appointment", isLoggedIn, asyncErrorHandler(createAppointment));
+router.post("/appointment", createAppointment);
 
-router.put("/appointment/:appt_id", isLoggedIn, asyncErrorHandler(updateAppointment));
+router.put("/appointment/:appt_id", updateAppointment);
 
-router.delete("/appointment/:appt_id",  isLoggedIn, asyncErrorHandler(deleteAppointment));
+router.delete("/appointment/:appt_id", deleteAppointment);
 
-router.get("/appointment/abbrv/:appt_type", isLoggedIn, asyncErrorHandler(getApptAbbrv));
+router.get("/appointment/abbrv/:appt_type", getApptAbbrv);
 
 module.exports = router;

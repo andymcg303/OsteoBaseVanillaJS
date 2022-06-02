@@ -287,7 +287,7 @@
             if (response.ok) {
                 return response.json();
                 }
-            return Promise.reject(response);
+            return Promise.reject(response.statusText);
         }).then(appointments => {
 
             Promise.all(appointments.map(appointment => {
@@ -319,17 +319,9 @@
                         raw: `${appointment.type}`              
                     }];
                     cal.createSchedules(ScheduleList);
-                }).catch(err => 
-                    {
-                        displayError(err);
-                    }
-                );
+                }).catch(err => alert(err));
             }));
-        }).catch(err => 
-            {
-                displayError(err);
-            }
-        );
+        }).catch(err => alert(err));
 
         refreshScheduleVisibility();
     }
@@ -388,7 +380,7 @@
                 if (response.ok) {
                     return response.json();
                 }
-                return Promise.reject(response);
+                return Promise.reject(response.statusText);
             })
             .then(appointment => {
 
@@ -400,7 +392,7 @@
                     if (response.ok) {
                         return response.json();
                     }
-                    return Promise.reject(response);
+                    return Promise.reject(response.statusText);
                 }).then(patient => {
                     // display in calendar grid
                     cal.createSchedules([
@@ -415,16 +407,8 @@
                             raw: `${appointment.type}`
                         }
                     ]); 
-                }).catch(err => 
-                    {
-                        displayError(err);
-                    }
-                );
-            }).catch(err => 
-                {
-                    displayError(err);
-                }
-            );
+                }).catch(err => alert(err));
+            }).catch(err => alert(err));
         } else {
 
             // Update Appointment
@@ -436,7 +420,7 @@
                 if (response.ok) {
                     return response.json();
                 }
-                return Promise.reject(response);
+                return Promise.reject(response.statusText);
             }).then(appointment => {
 
                 // fetch from db to get patient name. id and patientid can be gotten from data returned from post
@@ -447,7 +431,7 @@
                     if (response.ok) {
                         return response.json();
                     }
-                    return Promise.reject(response);
+                    return Promise.reject(response.statusText);
                 }).then(patient => {
 
                     cal.updateSchedule(appointment._id, appointmentData.calendarId, {
@@ -459,27 +443,10 @@
                         attendees: [appointment.patient],
                         raw: `${appointment.type}`
                     });
-                }).catch(err =>
-                    {
-                        displayError(err);
-                    });
-            }).catch(err => 
-                {
-                    displayError(err);
-                }
-            );
+                }).catch(err => alert(err));
+            }).catch(err => alert(err));
         }
     });
-
-    // helper function to display fetch errors in same style as server side errors
-    function displayError(err){
-        alert(err);
-        // const newHeader = document.createElement("h1");
-        // newHeader.style.cssText = "color:red";
-        // newHeader.appendChild(document.createTextNode(err));
-        // const lnb = document.querySelector('#lnb');
-        // document.body.insertBefore(newHeader, lnb);
-    }
 
     // Change href of view patient button when patient is changed (have to use jQuery for selectize)
     const selectPatient = $("#patient")[0].selectize;  
@@ -511,16 +478,14 @@
         }).then(response => {
             if (response.ok) {
                 return response.json();
-            }
-            return Promise.reject(response);
+            } 
+            return Promise.reject(response.statusText);
         }).then(appointment => {
             $('#appointment-modal').modal('hide');
             cal.deleteSchedule(appointment._id, appointment.practitioner);
-        }).catch(err => 
-            {
-                displayError(err);
-            }
-        );
+        }).catch(err => {
+            alert(err);
+        });
     });
 
     // END OF CUSTOM MODAL FORM
