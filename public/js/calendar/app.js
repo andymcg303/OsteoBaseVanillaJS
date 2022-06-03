@@ -64,9 +64,13 @@
         },
         'beforeCreateSchedule': function(e) {
 
+            // Store guide element for clearing
+            guideElement.push(e.guide.guideElement);
+
             if (moment(e.start.toDate()).isBefore(moment())) {
                 const confirmResponse = confirm('This is in the past. Are you sure you wish to create an appointment?');
                 if (!confirmResponse) {
+                    guideElement[0].remove();
                     return;
                 }
             }
@@ -86,9 +90,6 @@
 
             // no choice but to use JQuery, need it for TUI anyway
             $('#appointment-modal').modal();
-
-            // Store guide element for clearing when hiding modal
-            guideElement.push(e.guide.guideElement);
 
         }
     });
