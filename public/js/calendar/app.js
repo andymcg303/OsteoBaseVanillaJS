@@ -64,6 +64,13 @@
         },
         'beforeCreateSchedule': function(e) {
 
+            if (moment(e.start.toDate()).isBefore(moment())) {
+                const confirmResponse = confirm('This is in the past. Are you sure you wish to create an appointment?');
+                if (!confirmResponse) {
+                    return;
+                }
+            }
+
             //populate create modal form
             document.querySelector('#appointment-modal-title').textContent = "Create Appointment";
             $('#patient').data('selectize').setValue(null); //got to use $ for selectize
