@@ -275,6 +275,10 @@ body {
 
 /* navbar end */
 
+#calendar-error-msg {
+  display: none;
+}
+
 /* Modal styling */
 .modal {
   font-size: 15px;

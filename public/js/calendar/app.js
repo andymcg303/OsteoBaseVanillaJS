@@ -319,9 +319,9 @@
                         raw: `${appointment.type}`              
                     }];
                     cal.createSchedules(ScheduleList);
-                }).catch(err => alert(err));
+                }).catch(err => displayErrorMsg(err));
             }));
-        }).catch(err => alert(err));
+        }).catch(err => displayErrorMsg(err));
 
         refreshScheduleVisibility();
     }
@@ -407,8 +407,8 @@
                             raw: `${appointment.type}`
                         }
                     ]); 
-                }).catch(err => alert(err));
-            }).catch(err => alert(err));
+                }).catch(err => displayErrorMsg(err));
+            }).catch(err => displayErrorMsg(err));
         } else {
 
             // Update Appointment
@@ -443,8 +443,8 @@
                         attendees: [appointment.patient],
                         raw: `${appointment.type}`
                     });
-                }).catch(err => alert(err));
-            }).catch(err => alert(err));
+                }).catch(err => displayErrorMsg(err));
+            }).catch(err => displayErrorMsg(err));
         }
     });
 
@@ -484,9 +484,17 @@
             $('#appointment-modal').modal('hide');
             cal.deleteSchedule(appointment._id, appointment.practitioner);
         }).catch(err => {
-            alert(err);
+            displayErrorMsg(err);
         });
     });
+
+    // Error msg helper function
+    function displayErrorMsg(err) {
+        $('#appointment-modal').modal('hide');
+        const msgElement = document.querySelector('#calendar-error-msg');
+        msgElement.style.display = 'block';
+        msgElement.textContent = err;
+    }
 
     // END OF CUSTOM MODAL FORM
 

@@ -26,10 +26,9 @@
                     <a href="/logout" class="btn logout-btn btn-sm btn-secondary">Logout <%= currentUser.username %></a>
                 <% } %>
             </div>
+            <div class="alert alert-danger" id="calendar-error-msg" role="alert" style="z-index: -1"></div>
         </div>
     </nav>
-
-    <% include ../partials/flash-messages %>
 
     <div id="lnb">
         <div class="lnb-new-schedule">
@@ -144,6 +143,7 @@
             </span>
             <span id="renderRange" class="render-range"></span>
         </div>
+
         <div id="calendar"></div>
     </div>
 
