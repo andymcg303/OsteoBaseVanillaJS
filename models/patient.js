@@ -89,7 +89,7 @@ patientSchema.pre('remove', async function(next){
     // delete from cloudinary whilst id exists in DB
     for (const document of this.documents){
       const foundDocument = await Document.findById(document);
-      await cloudinary.v2.uploader.destroy(foundDocument.public_id);      
+      await cloudinary.uploader.destroy(foundDocument.filename);      
     }
 
     await Document.deleteMany({

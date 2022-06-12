@@ -16,7 +16,7 @@ module.exports = {
         const foundPatient = await Patient.findById(req.params.id);
         
         for (const file of req.files){
-            const newDoc =  await Document.create( {url: file.secure_url, public_id: file.public_id, file_name: file.originalname} );  
+            const newDoc =  await Document.create( {path: file.path, filename: file.filename, file_name: file.originalname} );  
             foundPatient.documents.push(newDoc);
         }
         await foundPatient.save();
@@ -54,7 +54,7 @@ module.exports = {
 const destroyDocumentHelper = async (req) => {
     const patientId = req.params.id;
     const document = await Document.findById(req.params.document_id);
-    await cloudinary.v2.uploader.destroy(document.public_id);
+    await cloudinary.uploader.destroy(document.filename);
     await document.deleteOne();
     await Patient.findByIdAndUpdate(patientId,
         {

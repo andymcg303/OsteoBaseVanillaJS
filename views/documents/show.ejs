@@ -5,11 +5,11 @@
     <h1 class="mt-3"><%= patient.firstname + " " + patient.surname %></h1>
     <h3>Document: <%= document.file_name %></h3>  
 
-    <img src="<%= document.url %>" alt="uploaded document" width="500px">
+    <img src="<%= document.path %>" alt="uploaded document" width="500px">
 
     <form class="delete-form" action="/patients/<%= patient._id %>/documents/<%= document._id %>?_method=DELETE&currentView=<%= currentView %>&showHistory=<%= showHistory %>" method="POST">
         <button type="button" class="btn btn-dark export-button mt-2" onclick="printJS({
-            printable: '<%= document.url %>', 
+            printable: '<%= document.path %>', 
             type: 'image',
             imageStyle: 'width:100%'
         })">

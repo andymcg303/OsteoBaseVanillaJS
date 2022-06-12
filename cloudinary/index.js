@@ -1,14 +1,14 @@
 const crypto = require('crypto');
 
-const cloudinary = require('cloudinary');
+const cloudinary = require('cloudinary').v2;
 cloudinary.config({
     cloud_name: 'andymcg303',
     api_key: '297314977141138',
 	api_secret: process.env.CLOUDINARY_SECRET
 });
 
-const cloudinaryStorage = require('multer-storage-cloudinary');
-const storage = cloudinaryStorage({
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const storage = new CloudinaryStorage({
     cloudinary: cloudinary,
     folder: 'OsteoBase',
     allowedFormats: ['jpeg', 'jpg', 'png'],
