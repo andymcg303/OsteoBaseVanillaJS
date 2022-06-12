@@ -17,9 +17,9 @@ const storage = cloudinaryStorage({
         buf = buf.toString('hex');
         let uniqFileName = file.originalname.replace(/\.jpeg|\.jpg|\.png/ig, '');
         uniqFileName += buf;
-      cb(undefined, uniqFileName );
+        cb(undefined, uniqFileName );
     }
-  });
+});
   
   module.exports = {
       cloudinary,
