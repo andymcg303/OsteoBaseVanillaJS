@@ -32,8 +32,6 @@ mongoose.connect(process.env.DATABASEURL)
   console.log('ERROR:', err.message);
 });
 
-// mongoose.set('useFindAndModify', false); (depracated)
-
 // addresses 302 get favicon error
 app.use(favicon(path.join(__dirname, 'public/images/icons', 'favicon.ico')));
 
