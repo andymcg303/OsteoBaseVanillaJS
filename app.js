@@ -25,17 +25,14 @@ const commonRoutes = require('./routes/common-routes');
 
 const app = express();
 
-mongoose.connect(process.env.DATABASEURL, {
-  useNewUrlParser: true,
-  useCreateIndex: true,
-  useUnifiedTopology: true,
-}).then(() => {
+mongoose.connect(process.env.DATABASEURL)
+.then(() => {
   console.log('Connected to DB!');
 }).catch((err) => {
   console.log('ERROR:', err.message);
 });
 
-mongoose.set('useFindAndModify', false);
+// mongoose.set('useFindAndModify', false); (depracated)
 
 // addresses 302 get favicon error
 app.use(favicon(path.join(__dirname, 'public/images/icons', 'favicon.ico')));
