@@ -1,4 +1,4 @@
-<% include ../partials/header %>
+<%- include('../partials/header') %>
 
 <div class="container">
 
@@ -64,7 +64,7 @@
             <% if (showHistory === "true") { %>
                 <!-- common scrollable history feature -->
                 <% let scrollHeight="298px"; %>
-                <% include ../partials/history-scroll %>
+                <%- include('../partials/history-scroll', {scrollHeight: scrollHeight}) %>
             <% } %>
 
             <!-- Hidden input for signoff -->
@@ -100,6 +100,6 @@
 
 </div> 
 
-<% include ../partials/common-scripts %>
+<%- include('../partials/common-scripts') %>
 <script src="/js/history.js"></script>
-<% include ../partials/footer %>
+<%- include('../partials/footer') %>

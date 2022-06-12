@@ -1,4 +1,4 @@
-<% include ../partials/header %>
+<%- include('../partials/header') %>
 
 <div class="container">
     <h1 class="mt-3">Patient Details</h1>
@@ -264,13 +264,13 @@
             <div class="pt-details">Address: <%= patient.address %> <%= patient.postcode %></div>
             <div id="email" class="pt-details">Email: <%= patient.email %></div>    
             <% let scrollHeight="0px"; %>
-            <% include ../partials/history-scroll %>
+            <%- include('../partials/history-scroll', {scrollHeight: scrollHeight}) %>
 
         </div>
     </div>
 <% } %>
 
-<% include ../partials/common-scripts %>
+<%- include('../partials/common-scripts') %>
 <script>
      const patientId = <%- JSON.stringify(patient._id) %>;
      const userTypePass = <%- JSON.stringify(userType) %>;
@@ -280,5 +280,5 @@
     <script src="/js/log-view.js"></script>
 <% } %>
 <script src="/js/edit-patient.js"></script>
-<% include ../partials/footer %>
+<%- include('../partials/footer') %>
  
