@@ -9,6 +9,7 @@
   "author": "AMcG",
   "license": "ISC",
   "dependencies": {
+    "@ngneat/falso": "^5.7.0",
     "cloudinary": "^1.21.0",
     "debug": "^4.1.1",
     "ejs": "^3.1.8",
@@ -39,7 +40,6 @@
   },
   "homepage": "https://github.com/andymcg303/OsteoBase#readme",
   "devDependencies": {
-    "dotenv": "^16.0.1",
-    "faker": "^5.5.3"
+    "dotenv": "^16.0.1"
   }
 }
