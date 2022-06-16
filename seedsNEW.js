@@ -13,6 +13,10 @@ const Interview = require('./models/interview');
 const Clinical = require('./models/clinical');
 const Appointment = require('./models/appointment');
 
+const numPatients = 100;
+const numInterviews = 3;
+const numClinicals = 5;
+
 async function seedPatients() {
 
 console.log('Please wait, creating patients...');
@@ -24,14 +28,14 @@ console.log('Please wait, creating patients...');
     await Appointment.deleteMany({});
 
     const patients = {
-        date_created: randPastDate({length: 100}), 		
-        firstname: randFirstName({length: 100}, { withAccents: false }),
-        surname: randLastName({length: 100}, { withAccents: false }),
-        dob: randPastDate({length: 100}),
-        address: randStreetAddress({length: 100}),
-        postcode: randZipCode({length: 100}),
-        phonenumber: randPhoneNumber({length: 100}),
-        email: randEmail({length: 100})
+        date_created: randPastDate({length: numPatients}), 		
+        firstname: randFirstName({length: numPatients}, { withAccents: false }),
+        surname: randLastName({length: numPatients}, { withAccents: false }),
+        dob: randPastDate({length: numPatients}),
+        address: randStreetAddress({length: numPatients}),
+        postcode: randZipCode({length: numPatients}),
+        phonenumber: randPhoneNumber({length: numPatients}),
+        email: randEmail({length: numPatients})
     };    
 
     for (i = 0; i < patients['date_created'].length; i++){
@@ -62,15 +66,15 @@ console.log('Please wait, creating patients...');
         newPatient.medhists.push(newMedhist);
 
         const interviews = {
-            date_created: randPastDate({length: 3}),
-            CO: randWord({length: 3}),
-            onset: randWord({length: 3}),
-            reason: randWord({length: 3}),
-            agg: randWord({length: 3}),
-            rel: randWord({length: 3}),
-            dp: randWord({length: 3}),
-            ph: randWord({length: 3}),
-            invest: randWord({length: 3}),
+            date_created: randPastDate({length: numInterviews}),
+            CO: randWord({length: numInterviews}),
+            onset: randWord({length: numInterviews}),
+            reason: randWord({length: numInterviews}),
+            agg: randWord({length: numInterviews}),
+            rel: randWord({length: numInterviews}),
+            dp: randWord({length: numInterviews}),
+            ph: randWord({length: numInterviews}),
+            invest: randWord({length: numInterviews}),
             signed_off: [false, false, false]
         }
 
@@ -85,11 +89,11 @@ console.log('Please wait, creating patients...');
         }
 
         const clinicals = {
-            date_created: randPastDate({length: 5}),
-            problem: randWord({length: 5}),
-            OE: randWord({length: 5}),
-            diag: randWord({length: 5}),
-            TTT: randWord({length: 5}),
+            date_created: randPastDate({length: numClinicals}),
+            problem: randWord({length: numClinicals}),
+            OE: randWord({length: numClinicals}),
+            diag: randWord({length: numClinicals}),
+            TTT: randWord({length: numClinicals}),
             signed_off: [false, false, false, false, false]
         }
 
