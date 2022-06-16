@@ -100,9 +100,10 @@ module.exports = seedPatients;
 //     console.log('Please wait, creating appt types...');
 
 //     let type = {
-//         // date_created: faker.date.past(), 		
+//         date_created: randPastDate(), 		
 //         value: 'existing',
 //         type: 'Existing Patient',
+//         abbreviation: 'EP',
 //         duration: 30,
 //         price: 50
 //     }  
@@ -111,9 +112,10 @@ module.exports = seedPatients;
 //     newType.save();
 
 //     type = {
-//         // date_created: faker.date.past(), 		
+//         date_created: randPastDate(), 		
 //         value: 'new',
 //         type: 'New Patient',
+//         abbreviation: 'NP',
 //         duration: 60,
 //         price: 60
 //     }  
@@ -122,9 +124,10 @@ module.exports = seedPatients;
 //     newType.save();
 
 //     type = {
-//         // date_created: faker.date.past(), 		
+//         date_created: randPastDate(), 		
 //         value: 'double',
 //         type: 'Double Appointment',
+//         abbreviation: 'DP',        
 //         duration: 60,
 //         price: 100
 //     }  
